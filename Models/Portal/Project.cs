@@ -1,4 +1,5 @@
-﻿using System;
+﻿using InternalPortal.Models.Portal;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -24,7 +25,8 @@ namespace InternalPortal.Models
         public string FiscalYear { get; set; }
         public double RequestedAmount { get; set; }
         public string CorporateFileNumber { get; set; }
-        public string CommitmentItemID { get; set; }
+        public FundingOpportunity Program { get; set; }
+        public string GCIMSCommitmentItemID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public DateTime StartDate { get; set; }
@@ -45,9 +47,20 @@ namespace InternalPortal.Models
         public AccountAddress PrimaryAccountAddress { get; set; }
         public Account Account { get; set; }
         public Contact PrimaryContact { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
-        public User CreatedBy { get; set; }
-        public User UpdatedBy { get; set; }
+
+        public IEnumerable<ProjectContact> ProjectContacts { get; set; }
+        
+        public IEnumerable<ProjectBudget> BudgetItems { get; set; }
+        public IEnumerable<ProjectExpectedResult> ExpectedResults { get; set; }
+        public IEnumerable<ProjectObjective> Objectives { get; set; }
+
+        public DateTime ExternalCreatedOn { get; set; }
+        public DateTime ExternalUpdatedOn { get; set; }
+        public User ExternalCreatedBy { get; set; }
+        public User ExternalUpdatedBy { get; set; }        
+        public DateTime InternalUpdatedOn { get; set; }
+        public InternalUser InternalUpdatedBy { get; set; }
+        public InternalUser InternalCreatedBy { get; set; }
+
     }
 }

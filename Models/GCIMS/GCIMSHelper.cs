@@ -33,7 +33,7 @@ namespace InternalPortal.Models.GCIMS
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
             var RequestedAmount = new SqlParameter("@RequestedAmount", _project.RequestedAmount);
             var CorporateFileNumber = new SqlParameter("@CorporateFileNumber", _project.CorporateFileNumber);
-            var CommitmentItemID = new SqlParameter("@CommitmentItemID", _project.CommitmentItemID);
+            var CommitmentItemID = new SqlParameter("@CommitmentItemID", _project.GCIMSCommitmentItemID);
             var Title = new SqlParameter("@Title", _project.Title);
             var Description = new SqlParameter("@Description", _project.Description);
             var StartDate = new SqlParameter("@StartDate", _project.StartDate);
