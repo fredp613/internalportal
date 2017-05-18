@@ -17,7 +17,7 @@ namespace InternalPortal.Models
     public class Project
     {
         [Key]
-        public Guid ProjectID { get; set; }
+        public Guid ID { get; set; }
         public int GcimsProjectID { get; set; } 
         public string GCIMSUserName { get; set; }
         public string Lang { get; set; }
@@ -37,10 +37,14 @@ namespace InternalPortal.Models
         public string GcimsClientId { get; set; }
         public int GcimsContactId { get; set; }
         public Status ProjectStatus { get; set; }
-        public tblAddresses PrimaryContactAddress { get; set; }
-        public tblAddresses PrimaryClientAddress { get; set; }
-        public tblClients Client { get; set; }
-        public tblContacts Contact { get; set; }
+      //  public tblAddresses PrimaryContactAddress { get; set; }
+      //  public tblAddresses PrimaryClientAddress { get; set; }
+      //  public tblClients Client { get; set; }
+     //   public tblContacts Contact { get; set; }
+        public ContactAddress PrimaryContactAddress { get; set; }
+        public AccountAddress PrimaryAccountAddress { get; set; }
+        public Account Account { get; set; }
+        public Contact PrimaryContact { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public User CreatedBy { get; set; }

@@ -10,6 +10,8 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid ID { get; set; }
+        public Contact Contact { get; set; }
+        public Address Address { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public User CreatedBy { get; set; }

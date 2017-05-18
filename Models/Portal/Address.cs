@@ -16,8 +16,11 @@ namespace InternalPortal.Models
         public string AddressLine3 { get; set; }
         public string AddressLine4 { get; set; }
         public string City { get; set; }
+        public int GcimsCityID { get; set; }
         public string Province { get; set; }
+        public int GcimsProvinceID { get; set; }
         public string Country { get; set; }
+        public int GcimsCountryID { get; set; }
         public string Postal { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

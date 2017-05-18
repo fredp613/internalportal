@@ -39,7 +39,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
 
             if (project == null)
             {
@@ -58,7 +58,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
 
             if (project == null)
             {
@@ -85,7 +85,7 @@ namespace InternalPortal.Controllers
             return Ok(project.ProjectStatus);
         }
 
-        public async Task<Project> updateProject(Project project)
+        public async Task<Project> UpdateProject(Project project)
         {
             _context.Entry(project).State = EntityState.Modified;
 
@@ -96,7 +96,7 @@ namespace InternalPortal.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(project.ProjectID))
+                if (!ProjectExists(project.ID))
                 {
                     return null;
                 }
@@ -116,7 +116,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ProjectID)
+            if (id != project.ID)
             {
                 return BadRequest();
             }
@@ -126,7 +126,7 @@ namespace InternalPortal.Controllers
             if (project.SubmitGcims)
             {
                 GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
-                var newGCIMSProject = gcimsHelper.createGCIMSproject();
+                var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
                 project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
                 project.GcimsClientId = newGCIMSProject.Result.ClientID;
                 project.GcimsContactId = newGCIMSProject.Result.tblApplication.ContactID;
@@ -163,23 +163,25 @@ namespace InternalPortal.Controllers
             _context.Project.Add(project);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProject", new { id = project.ProjectID }, project);
+            return CreatedAtAction("GetProject", new { id = project.ID }, project);
         }
 
         // POST: api/Projects/PostGCIMS 
         [HttpPost]
         [Route("PostGCIMS")]
-        public async Task<IActionResult> PostGCIMS([FromBody] Project project)
+        public async Task<IActionResult> PostGCIMS([FromBody] Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
-            var newGCIMSProject = gcimsHelper.createGCIMSproject();
+            var project = _context.Project.SingleOrDefault(p => p.ID == id);
 
-            return CreatedAtAction("GetProject", new { id = project.ProjectID }, project);
+            GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
+            var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
+
+            return CreatedAtAction("GetProject", new { id = project.ID }, project);
            // return Ok(newGCIMSProject.Result);
         }
 
@@ -192,7 +194,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
             if (project == null)
             {
                 return NotFound();
@@ -206,7 +208,7 @@ namespace InternalPortal.Controllers
 
         private bool ProjectExists(Guid id)
         {
-            return _context.Project.Any(e => e.ProjectID == id);
+            return _context.Project.Any(e => e.ID == id);
         }
     }
 }

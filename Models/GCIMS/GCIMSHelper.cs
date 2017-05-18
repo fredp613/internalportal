@@ -18,10 +18,10 @@ namespace InternalPortal.Models.GCIMS
 
         }
 
-        public async Task<tblProjects> createGCIMSproject()
+        public async Task<tblProjects> CreateGCIMSproject()
         {
-            var clientId = CreateOrUpdateClient(_project.Client);
-            var contactId = CreateOrUpdateContact(_project.Contact, _project.Client.ClientID);
+            var clientId = CreateOrUpdateClient(_project.Account);
+            var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
@@ -80,14 +80,13 @@ namespace InternalPortal.Models.GCIMS
             }
             return null;
         }
-        public string CreateOrUpdateClient(tblClients Client)
+        public string CreateOrUpdateClient(Account Account)
         {
-            Client = _context.tblClients.SingleOrDefault(c => c.ClientID == Client.ClientID);
+            var GcimsClient = _context.tblClients.SingleOrDefault(c => c.ClientID == Account.GcimsClientID);
             //update
-            if (ClientExists(Client.ClientID))
+            if (ClientExists(GcimsClient.ClientID))
             {
-
-                _context.Entry(Client).State = EntityState.Modified;
+                _context.Entry(GcimsClient).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             else //create
@@ -96,19 +95,28 @@ namespace InternalPortal.Models.GCIMS
                 var clientId = new SqlParameter("@NextNum", "1");
                 clientId.Direction = System.Data.ParameterDirection.Output;
                 var newClientID = _context.Database.ExecuteSqlCommand("exec sp_GetNextClientID @NextNum OUT", clientId).ToString();
-                Client.ClientID = newClientID;
-                _context.tblClients.Add(Client);
+                Account.GcimsClientID = newClientID;
+                //update account informaiton here. before creating new.
+
+                tblClients newGcimsClient = new tblClients
+                {
+                    ClientName = Account.AccountName,
+                    ClientID = newClientID,
+                    ClientTypeID = 1                    
+                };
+                _context.tblClients.Add(newGcimsClient);
                 _context.SaveChanges();
             }
 
-            return Client.ClientID;
+            return Account.GcimsClientID;
         }
-        public int CreateOrUpdateContact(tblContacts Contact, string ClientID)
+        public int CreateOrUpdateContact(Account Account, Contact Contact, Address Address, string ClientID)
         {
+            var GcimsContact = _context.tblContacts.SingleOrDefault(c => c.ContactID == Contact.GcimsContactID);
             //update
-            if (ContactExists(Contact.ContactID))
+            if (GcimsContact != null)
             {
-                _context.Entry(Contact).State = EntityState.Modified;
+                _context.Entry(GcimsContact).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             else //create
@@ -118,13 +126,26 @@ namespace InternalPortal.Models.GCIMS
                 contactId.Direction = System.Data.ParameterDirection.Output;
                 contactId.SqlDbType = System.Data.SqlDbType.Int;
                 var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
-                Contact.ContactID = (int)contactId.Value;
-                Contact.ClientID = ClientID;
-                _context.tblContacts.Add(Contact);
+
+                Contact.GcimsContactID = (int)contactId.Value;
+                _context.Entry(Contact).State = EntityState.Modified;
+                _context.SaveChanges();
+                //Contact.GcimsClientID = ClientID;
+                tblContacts newGcimsContact = new tblContacts
+                {
+                    Firstname = Contact.FirstName,
+                    ContactID = newContactID,
+                    Lastname = Contact.LastName,
+                    SalutationID = Contact.SalutationID,
+                    LanguageID = Contact.PreferredLanguageID,
+                    ClientID = Account.GcimsClientID,
+                    CityID = Address.GcimsCityID
+                };
+                _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();
             }
 
-            return Contact.ContactID;
+            return Contact.GcimsContactID;
         }
 
         private bool ContactExists(int id)

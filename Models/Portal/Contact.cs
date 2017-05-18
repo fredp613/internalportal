@@ -10,10 +10,13 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid ID { get; set; }
+        public int GcimsContactID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
+        public string SalutationID { get; set; }
+        public string PreferredLanguageID { get; set; }
         public Address PrimaryAddress { get; set; }
         public Address PaymentAddress { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
