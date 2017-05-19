@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -9,7 +10,7 @@ namespace InternalPortal.Models
     public class Contact
     {
         [Key]
-        public Guid ID { get; set; }
+        public Guid ContactId { get; set; }
         public int GcimsContactID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -23,7 +24,14 @@ namespace InternalPortal.Models
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+        public Guid UpdatedByInternalUserId { get; set; }
+        [ForeignKey("UpdatedByInternalUserId")]
+        public InternalUser InternalUpdatedBy { get; set; }
+        public Guid CreatedByUserId { get; set; }
+        public Guid UpdatedByUserId { get; set; }
+        [ForeignKey("CreatedByUserId")]
         public User CreatedBy { get; set; }
+        [ForeignKey("UpdatedByUserId")]
         public User UpdatedBy { get; set; }
     }
 }

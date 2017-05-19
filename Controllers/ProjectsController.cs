@@ -39,7 +39,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
 
             if (project == null)
             {
@@ -58,7 +58,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
 
             if (project == null)
             {
@@ -96,7 +96,7 @@ namespace InternalPortal.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(project.ID))
+                if (!ProjectExists(project.ProjectId))
                 {
                     return null;
                 }
@@ -116,7 +116,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != project.ID)
+            if (id != project.ProjectId)
             {
                 return BadRequest();
             }
@@ -163,7 +163,7 @@ namespace InternalPortal.Controllers
             _context.Project.Add(project);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProject", new { id = project.ID }, project);
+            return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
         }
 
         // POST: api/Projects/PostGCIMS 
@@ -176,12 +176,12 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = _context.Project.SingleOrDefault(p => p.ID == id);
+            var project = _context.Project.SingleOrDefault(p => p.ProjectId == id);
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
 
-            return CreatedAtAction("GetProject", new { id = project.ID }, project);
+            return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
            // return Ok(newGCIMSProject.Result);
         }
 
@@ -194,7 +194,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ID == id);
+            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
             if (project == null)
             {
                 return NotFound();
@@ -208,7 +208,7 @@ namespace InternalPortal.Controllers
 
         private bool ProjectExists(Guid id)
         {
-            return _context.Project.Any(e => e.ID == id);
+            return _context.Project.Any(e => e.ProjectId == id);
         }
     }
 }

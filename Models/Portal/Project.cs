@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace InternalPortal.Models
     public class Project
     {
         [Key]
-        public Guid ID { get; set; }
+        public Guid ProjectId { get; set; }
         public int GcimsProjectID { get; set; } 
         public string GCIMSUserName { get; set; }
         public string Lang { get; set; }
@@ -55,12 +56,17 @@ namespace InternalPortal.Models
         public IEnumerable<ProjectObjective> Objectives { get; set; }
 
         public DateTime ExternalCreatedOn { get; set; }
-        public DateTime ExternalUpdatedOn { get; set; }
-        public User ExternalCreatedBy { get; set; }
-        public User ExternalUpdatedBy { get; set; }        
+        public DateTime ExternalUpdatedOn { get; set; }      
         public DateTime InternalUpdatedOn { get; set; }
+        public Guid UpdatedByInternalUserId { get; set; }
+        [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser InternalUpdatedBy { get; set; }
-        public InternalUser InternalCreatedBy { get; set; }
+        public Guid CreatedByUserId { get; set; }
+        public Guid UpdatedByUserId { get; set; }
+        [ForeignKey("CreatedByUserId")]
+        public User CreatedBy { get; set; }
+        [ForeignKey("UpdatedByUserId")]
+        public User UpdatedBy { get; set; }
 
     }
 }
