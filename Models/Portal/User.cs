@@ -13,14 +13,15 @@ namespace InternalPortal.Models
         public Guid UserId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid UpdatedByInternalUserId { get; set; }
-        [ForeignKey("UpdatedByInternalUserId")]
-        public InternalUser InternalUpdatedBy { get; set; }
+        [ForeignKey("InternalUpdatedBy")]
+        public Guid UpdatedByInternalUserId { get; set; }        
+        public virtual InternalUser InternalUpdatedBy { get; set; }
+        [ForeignKey("CreatedBy")]
         public Guid CreatedByUserId { get; set; }
-        public Guid UpdatedByUserId { get; set; }
-        [ForeignKey("CreatedByUserId")]
-        public User CreatedBy { get; set; }
-        [ForeignKey("UpdatedByUserId")]
-        public User UpdatedBy { get; set; }
+        [ForeignKey("UpdatedBy")]
+        public Guid UpdatedByUserId { get; set; }        
+        public virtual User CreatedBy { get; set; }
+        public virtual User UpdatedBy { get; set; }
+
     }
 }

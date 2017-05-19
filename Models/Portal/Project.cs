@@ -44,9 +44,15 @@ namespace InternalPortal.Models
       //  public tblAddresses PrimaryClientAddress { get; set; }
       //  public tblClients Client { get; set; }
      //   public tblContacts Contact { get; set; }
+        public Guid PrimaryContactAddressId { get; set; }
+        public Guid PrimaryAccountAddressId { get; set; }
+        [ForeignKey("PrimaryContactAddressId")]
         public ContactAddress PrimaryContactAddress { get; set; }
+        [ForeignKey("PrimaryAccountAddressId")]
         public AccountAddress PrimaryAccountAddress { get; set; }
+        public Guid AccountId { get; set; }
         public Account Account { get; set; }
+        public Guid ContactId { get; set; }
         public Contact PrimaryContact { get; set; }
 
         public IEnumerable<ProjectContact> ProjectContacts { get; set; }

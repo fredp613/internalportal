@@ -11,7 +11,7 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid AddressId { get; set; }
-        public tblAddresses GcimsAddress { get; set; }
+        public int GcimsAddressId { get; set; }
         public string AddressLine1 {get; set;}
         public string AddressLine2 { get; set; }
         public string AddressLine3 { get; set; }

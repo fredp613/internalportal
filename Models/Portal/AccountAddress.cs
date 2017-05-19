@@ -11,10 +11,10 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid AccountAddressId { get; set; }
-        [Required]
-        public Address Address { get; set; }
-        [Required]
-        public Account Account { get; set; }
+        public Guid AddressId { get; set; }
+        public Guid AccountId { get; set; }        
+        public  Address Address { get; set; }        
+        public  Account Account { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid UpdatedByInternalUserId { get; set; }
@@ -26,5 +26,6 @@ namespace InternalPortal.Models
         public User CreatedBy { get; set; }
         [ForeignKey("UpdatedByUserId")]
         public User UpdatedBy { get; set; }
+     
     }
 }
