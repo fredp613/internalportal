@@ -26,6 +26,7 @@ namespace InternalPortal.Models
         public string FiscalYear { get; set; }
         public double RequestedAmount { get; set; }
         public string CorporateFileNumber { get; set; }
+        public Guid? FundingOpportunityID { get; set; }
         public FundingOpportunity Program { get; set; }
         public string GCIMSCommitmentItemID { get; set; }
         public string Title { get; set; }
@@ -44,8 +45,8 @@ namespace InternalPortal.Models
       //  public tblAddresses PrimaryClientAddress { get; set; }
       //  public tblClients Client { get; set; }
      //   public tblContacts Contact { get; set; }
-        public Guid PrimaryContactAddressId { get; set; }
-        public Guid PrimaryAccountAddressId { get; set; }
+        public Guid? PrimaryContactAddressId { get; set; }
+        public Guid? PrimaryAccountAddressId { get; set; }
         [ForeignKey("PrimaryContactAddressId")]
         public ContactAddress PrimaryContactAddress { get; set; }
         [ForeignKey("PrimaryAccountAddressId")]
@@ -64,11 +65,11 @@ namespace InternalPortal.Models
         public DateTime ExternalCreatedOn { get; set; }
         public DateTime ExternalUpdatedOn { get; set; }      
         public DateTime InternalUpdatedOn { get; set; }
-        public Guid UpdatedByInternalUserId { get; set; }
+        public Guid? UpdatedByInternalUserId { get; set; }
         [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser InternalUpdatedBy { get; set; }
-        public Guid CreatedByUserId { get; set; }
-        public Guid UpdatedByUserId { get; set; }
+        public Guid? CreatedByUserId { get; set; }
+        public Guid? UpdatedByUserId { get; set; }
         [ForeignKey("CreatedByUserId")]
         public User CreatedBy { get; set; }
         [ForeignKey("UpdatedByUserId")]

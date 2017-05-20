@@ -26,8 +26,8 @@ namespace InternalPortal.Models.Portal
         public IEnumerable<EligibleCostCategory> EligibleClientTypes { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid CreatedByInternalUserId { get; set; }
-        public Guid UpdatedByInternalUserId { get; set; }
+        public Guid? CreatedByInternalUserId { get; set; }
+        public Guid? UpdatedByInternalUserId { get; set; }
         [ForeignKey("CreatedByInternalUserId")]
         public InternalUser CreatedBy { get; set; }
         [ForeignKey("UpdatedByInternalUserId")]

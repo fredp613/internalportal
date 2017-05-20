@@ -18,17 +18,21 @@ namespace InternalPortal.Models
         public string PhoneNumber { get; set; }
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
-        public Address PrimaryAddress { get; set; }
-        public Address PaymentAddress { get; set; }
+        //[ForeignKey("PrimaryAddressId")]
+        //public Guid? PrimaryAddressId { get; set; }
+        //[ForeignKey("PaymentAddressId")]
+        //public Guid? PaymentAddressId { get; set; }
+        //public Address PrimaryAddress { get; set; }
+        //public Address PaymentAddress { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid UpdatedByInternalUserId { get; set; }
+        public Guid? UpdatedByInternalUserId { get; set; }
         [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser InternalUpdatedBy { get; set; }
-        public Guid CreatedByUserId { get; set; }
-        public Guid UpdatedByUserId { get; set; }
+        public Guid? CreatedByUserId { get; set; }
+        public Guid? UpdatedByUserId { get; set; }
         [ForeignKey("CreatedByUserId")]
         public User CreatedBy { get; set; }
         [ForeignKey("UpdatedByUserId")]

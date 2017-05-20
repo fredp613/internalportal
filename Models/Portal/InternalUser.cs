@@ -14,12 +14,12 @@ namespace InternalPortal.Models
         public string Email { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid CreatedByInternalUserId { get; set; }
-        [ForeignKey("CreatedByInternalUserId")]
-        public InternalUser InternalCreatedBy { get; set; }
-        public Guid UpdatedByInternalUserId { get; set; }
-        [ForeignKey("UpdatedByInternalUserId")]
-        public InternalUser InternalUpdatedBy { get; set; }
+	    [ForeignKey("CreatedBy")]
+        public Guid? CreatedByInternalUserId { get; set; }
+	    [ForeignKey("UpdatedBy")]
+	    public Guid? UpdatedByInternalUserId { get; set; }
+        public virtual InternalUser CreatedBy { get; set; }
+        public virtual InternalUser UpdatedBy { get; set; }
         
     }
 }

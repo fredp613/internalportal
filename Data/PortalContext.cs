@@ -27,15 +27,16 @@ namespace InternalPortal.Models
                 .WithMany()
                 .HasForeignKey(b => b.UpdatedByUserId);
 
-            modelBuilder.Entity<Account>()
-               .HasOne(p => p.PrimaryAddress)
+            modelBuilder.Entity<InternalUser>()
+               .HasOne(p => p.CreatedBy)
                .WithMany()
-               .HasForeignKey(b => b.PrimaryAddressId);
-
-            modelBuilder.Entity<Account>()
-                .HasOne(p => p.PaymentAddress)
+               .HasForeignKey(b => b.CreatedByInternalUserId);
+            modelBuilder.Entity<InternalUser>()
+                .HasOne(p => p.UpdatedBy)
                 .WithMany()
-                .HasForeignKey(b => b.PaymentAddressId);
+                .HasForeignKey(b => b.UpdatedByInternalUserId);
+
+            
         }
     }
 }

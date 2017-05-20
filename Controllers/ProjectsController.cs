@@ -176,7 +176,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = _context.Project.SingleOrDefault(p => p.ProjectId == id);
+            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
