@@ -7,16 +7,12 @@ using System.Threading.Tasks;
 
 namespace InternalPortal.Models.Portal.Program
 {
-    public class CostCategory
+    public class EligibilityCriteria
     {
         [Key]
-        public Guid CostCategoryId { get; set; }
-        public string GcimsCostCategoryID { get; set; }
-        public string TitleE { get; set; }
-        public string TitleF { get; set; }
-        public string ToolTipE { get; set; }
-        public string ToolTipF { get; set; }
-        public IEnumerable<FundingOpportunity> FundingOpportunities { get; set; }
+        public Guid EligibilityCriteriaId { get; set; }
+        public string DescriptionE { get; set; }
+        public string DescriptionF { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
@@ -25,6 +21,6 @@ namespace InternalPortal.Models.Portal.Program
         public InternalUser CreatedBy { get; set; }
         [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser UpdatedBy { get; set; }
-
+        public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }
     }
 }

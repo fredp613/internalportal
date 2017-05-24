@@ -21,7 +21,10 @@ namespace InternalPortal
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
                 .AddEnvironmentVariables();
+               
             Configuration = builder.Build();
+          
+                //GlobalConfiguration.Configuration.Formatters.JsonFormatter.SerializerSettings.Re‌​ferenceLoopHandling = ReferenceLoopHandling.Ignore;
         }
 
         public IConfigurationRoot Configuration { get; }
@@ -30,7 +33,10 @@ namespace InternalPortal
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
-            services.AddMvc();
+            services.AddMvc()
+                   .AddJsonOptions(options => {
+                       options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+                   }); 
 
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
@@ -45,10 +51,7 @@ namespace InternalPortal
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            //app.UseMvc(routes =>
-            //{
-            //    routes.MapRoute("getGCIMSContactByID", "{controller=GCIMSProjectController}/{action=GetGCIMSContactByID}/{id}");
-            //});
+            
             app.UseMvc();
         }
     }

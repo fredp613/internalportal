@@ -12,7 +12,8 @@ namespace InternalPortal.Models.Portal
     {
         [Key]
         public Guid FundingOpportunityId { get; set; }
-        public string Title { get; set; }
+        public string TitleE { get; set; }
+        public string TitleF { get; set; }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }
         public string AdditionalInformationE { get; set; }
@@ -23,7 +24,8 @@ namespace InternalPortal.Models.Portal
         public IEnumerable<FundingOpportunityExpectedResult> ExpectedResults { get; set;}
         public IEnumerable<FundingOpportunityObjective> Objectives { get; set; }
         public IEnumerable<EligibleCostCategory> EligibleCostCategories { get; set; }
-        public IEnumerable<EligibleCostCategory> EligibleClientTypes { get; set; }
+        public IEnumerable<EligibleClientType> EligibleClientTypes { get; set; }
+        public IEnumerable<EligibilityCriteria> EligilityCriterias{ get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

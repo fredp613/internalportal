@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using InternalPortal.Models.Portal;
+using InternalPortal.Models.Portal.Program;
 
 namespace InternalPortal.Models
 {
@@ -38,5 +40,11 @@ namespace InternalPortal.Models
 
             
         }
+
+        public DbSet<InternalPortal.Models.Portal.FundingOpportunity> FundingOpportunity { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.EligibilityCriteria> EligibilityCriteria { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriteria { get; set; }
     }
 }
