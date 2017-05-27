@@ -18,12 +18,8 @@ namespace InternalPortal.Models
         public string PhoneNumber { get; set; }
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
-        //[ForeignKey("PrimaryAddressId")]
-        //public Guid? PrimaryAddressId { get; set; }
-        //[ForeignKey("PaymentAddressId")]
-        //public Guid? PaymentAddressId { get; set; }
-        //public Address PrimaryAddress { get; set; }
-        //public Address PaymentAddress { get; set; }
+        public Guid PrimaryAccountAddressId { get; set; }
+        public Guid PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
         public DateTime CreatedOn { get; set; }

@@ -32,6 +32,10 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("LegalName");
 
+                    b.Property<Guid>("PaymentAccountAddressId");
+
+                    b.Property<Guid>("PrimaryAccountAddressId");
+
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
                     b.Property<Guid?>("UpdatedByUserId");
@@ -184,9 +188,13 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("LastName");
 
+                    b.Property<Guid>("PaymentAccountAddressId");
+
                     b.Property<string>("PhoneNumber");
 
                     b.Property<string>("PreferredLanguageID");
+
+                    b.Property<Guid>("PrimaryAccountAddressId");
 
                     b.Property<string>("SalutationID");
 
@@ -834,7 +842,7 @@ namespace InternalPortal.Migrations
             modelBuilder.Entity("InternalPortal.Models.AccountAddress", b =>
                 {
                     b.HasOne("InternalPortal.Models.Account", "Account")
-                        .WithMany()
+                        .WithMany("AccountAddresses")
                         .HasForeignKey("AccountId")
                         .OnDelete(DeleteBehavior.Cascade);
 
