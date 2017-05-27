@@ -32,12 +32,21 @@ namespace InternalPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            // Add CORS support
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
             // Add framework services.
             services.AddMvc()
                    .AddJsonOptions(options => {
                        options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
-                   }); 
-
+                   });
+            
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
@@ -51,7 +60,7 @@ namespace InternalPortal
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            
+            app.UseCors("CorsPolicy");
             app.UseMvc();
         }
     }

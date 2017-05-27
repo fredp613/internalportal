@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Portal;
+using System.Diagnostics;
 
 namespace InternalPortal.Controllers
 {
@@ -36,14 +37,15 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            var language = RouteData.Values["lang"] as string;
+            Debug.WriteLine(language);
             var fundingOpportunity = await _context.FundingOpportunity.SingleOrDefaultAsync(m => m.FundingOpportunityId == id);
 
             if (fundingOpportunity == null)
             {
                 return NotFound();
             }
-
+            
             return Ok(fundingOpportunity);
         }
 

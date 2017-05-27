@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models.Portal;
 using InternalPortal.Models.Portal.Program;
+using InternalPortal.Models;
 
 namespace InternalPortal.Models
 {
@@ -46,5 +47,9 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Program.EligibilityCriteria> EligibilityCriteria { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriteria { get; set; }
+
+        public DbSet<InternalPortal.Models.Account> Account { get; set; }
+
+        public DbSet<InternalPortal.Models.Contact> Contact { get; set; }
     }
 }

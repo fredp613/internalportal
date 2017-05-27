@@ -139,7 +139,15 @@ namespace InternalPortal.Models.GCIMS
                     SalutationID = Contact.SalutationID,
                     LanguageID = Contact.PreferredLanguageID,
                     ClientID = Account.GcimsClientID,
-                    CityID = Address.GcimsCityID
+                    CityID = Address.GcimsCityID,
+                    AddressLine1 = Address.AddressLine1,
+                    AddressLine2 = Address.AddressLine2,
+                    AddressLine3 = Address.AddressLine3,
+                    AddressLine4 = Address.AddressLine4,
+                    Email = Contact.Email,
+                    PostalCode = Address.Postal,
+                    CreatedBy = "GCIMSUnit",
+                    UpdatedBy = "GCIMSUnit"
                 };
                 _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();

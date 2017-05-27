@@ -1,0 +1,23 @@
+Plan:
+seed data
+
+-Create project in portal draft state
+
+-update project in portal with all fields to make it submit (create validation rules)
+
+-when submitted, take project guid (query results) and postGCIMS route, make sure to include dependencies such as client id, contact id, addresses, program etc. 
+-query active commitment items, pras structure route, map to portal program
+
+-query clients to allow users to map
+
+-query attributes to allow users to map (map to existing)
+
+-query budget categories to allow users to map (create new ones prefixed by web_)
+
+
+
+
+
+
+
+

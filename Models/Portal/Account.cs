@@ -21,7 +21,8 @@ namespace InternalPortal.Models
         //[ForeignKey("PaymentAddressId")]
         //public virtual AccountAddress PaymentAddress { get; set; }
         //public List<AccountAddress> AccountAdresses { get; set; }
-        public List<AccountContact> AccountContacts { get; set; }
+        public IEnumerable<AccountContact> AccountContacts { get; set; }
+        
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }     
         public Guid? UpdatedByInternalUserId { get; set; }        

@@ -11,10 +11,10 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid AccountContactId { get; set; }
-        [Required]
+        public Guid AccountId { get; set; }
         public Account Account { get; set; }
-        [Required]
-        public Contact Contact { get; set; }
+        public Guid ContactId { get; set; }
+        public Contact Contact { get; set; }    
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }

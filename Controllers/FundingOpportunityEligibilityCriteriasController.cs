@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Portal.Program;
 using System.Diagnostics;
+using InternalPortal.Models.Portal;
+using Microsoft.AspNetCore.Cors;
 
 namespace InternalPortal.Controllers
 {
@@ -52,12 +54,24 @@ namespace InternalPortal.Controllers
         //[HttpGet("{id}")]
         [Route("GetByFundingOpportunity/{FundingOpportunityId}")]
         [HttpGet]
-        public async Task<IEnumerable<FundingOpportunityEligibilityCriteria>> GetByFundingOpportunity(Guid FundingOpportunityId)
-        {
-
-            IList<FundingOpportunityEligibilityCriteria> fundingOpportunityEligibilityCriterias = await _context.
-                FundingOpportunityEligibilityCriteria.Where(m => m.FundingOpportunityId == FundingOpportunityId).Include(ec => ec.EligibilityCriteria).Include(fo => fo.FundingOpportunity).ToListAsync();         
-
+        public async Task<IEnumerable<object>> GetByFundingOpportunity(Guid FundingOpportunityId)
+        {         
+            var fundingOpportunityEligibilityCriterias = await _context.
+                FundingOpportunityEligibilityCriteria.Where(m => m.FundingOpportunityId == FundingOpportunityId)
+                .Include(ec => ec.EligibilityCriteria)
+                 .Include(fo => fo.FundingOpportunity)
+                 .Select(c=> new {
+                     FundingOpportunityEligibilityCriteriaID = c.FundingOpportunityEligibilityCriteriaId,
+                     FundingOpportunityId = c.FundingOpportunityId,
+                     EligibilityCriteriaId = c.EligibilityCriteriaId,
+                     FundingOpportunityTitleE =c.FundingOpportunity.TitleE,
+                     FundingOpportunityTitleF =c.FundingOpportunity.TitleF,
+                     FundingOpportunityDescriptionE = c.FundingOpportunity.DescriptionE,
+                     FundingOpportunityDescriptionF = c.FundingOpportunity.DescriptionF,
+                     EligibilityCriteriaDescriptionE = c.EligibilityCriteria.DescriptionE,
+                     EligibilityCriteriaDescriptionF = c.EligibilityCriteria.DescriptionF
+                 })
+                .ToListAsync();         
             return fundingOpportunityEligibilityCriterias;
         }
 
