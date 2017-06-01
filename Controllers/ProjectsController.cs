@@ -159,7 +159,11 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            FiscalYear fiscalYear = new FiscalYear
+            {
+                DateToProcess = project.ExternalCreatedOn
+            };
+            project.FiscalYear = fiscalYear.getFiscalYear();
             _context.Project.Add(project);
             await _context.SaveChangesAsync();
 
