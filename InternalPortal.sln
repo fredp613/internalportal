@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternalPortal", "InternalPortal.csproj", "{482BCF7D-202D-4866-84AB-A774D5C5957A}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InternalPortal.Tests", "..\InternalPortal.Tests\InternalPortal.Tests.csproj", "{9FB80132-593B-4427-BE58-BE9858845CC9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,10 +17,10 @@ Global
 		{482BCF7D-202D-4866-84AB-A774D5C5957A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{482BCF7D-202D-4866-84AB-A774D5C5957A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{482BCF7D-202D-4866-84AB-A774D5C5957A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6AAECE3E-86A7-40C3-9549-5C41062E9AE6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6AAECE3E-86A7-40C3-9549-5C41062E9AE6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6AAECE3E-86A7-40C3-9549-5C41062E9AE6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6AAECE3E-86A7-40C3-9549-5C41062E9AE6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9FB80132-593B-4427-BE58-BE9858845CC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9FB80132-593B-4427-BE58-BE9858845CC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9FB80132-593B-4427-BE58-BE9858845CC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9FB80132-593B-4427-BE58-BE9858845CC9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
