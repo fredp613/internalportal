@@ -15,6 +15,11 @@ namespace InternalPortal.Models
             : base(options)
         {
         }
+
+        public PortalContext()
+        {
+        }
+
         public DbSet<InternalPortal.Models.Project> Project { get; set; }
         public DbSet<InternalPortal.Models.User> User { get; set; }
         public DbSet<InternalPortal.Models.User> InternalUser { get; set; }

@@ -7,6 +7,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.GCIMS;
+using InternalPortal.Models.Helpers;
+using InternalPortal.Models.Portal.Implementations;
+using InternalPortal.Models.Portal.Interfaces;
 
 namespace InternalPortal.Controllers
 {
@@ -16,18 +19,25 @@ namespace InternalPortal.Controllers
     {
         private readonly PortalContext _context;
         private readonly GcimsContext _gcimsContext;
+        private UnitOfWork _unitOfWork;
 
-        public ProjectsController(PortalContext context, GcimsContext gcimsContext)
+        //public ProjectsController(PortalContext context, GcimsContext gcimsContext)
+        //{
+        //    _context = context;
+        //    _gcimsContext = gcimsContext;
+        //    _unitOfWork = new UnitOfWork(_context);
+        //}
+        public ProjectsController()
         {
-            _context = context;
-            _gcimsContext = gcimsContext;
+            _unitOfWork = new UnitOfWork(_context);
+
         }
 
         // GET: api/Projects
         [HttpGet]
         public IEnumerable<Project> GetProject()
         {
-            return _context.Project;
+            return _unitOfWork.Projects.GetAll();
         }
 
         // GET: api/Projects/5
@@ -39,7 +49,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
+            // var project = await _unitOfWork.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
+            var project = await _unitOfWork.Projects.GetAwaiter(id);
 
             if (project == null)
             {
@@ -58,7 +69,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
+            var project = await _unitOfWork.Projects.GetAwaiter(id);
 
             if (project == null)
             {
@@ -91,7 +102,7 @@ namespace InternalPortal.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
                 return project;
             }
             catch (DbUpdateConcurrencyException)
@@ -158,14 +169,11 @@ namespace InternalPortal.Controllers
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-            FiscalYear fiscalYear = new FiscalYear
-            {
-                DateToProcess = project.ExternalCreatedOn
-            };
-            project.FiscalYear = fiscalYear.getFiscalYear();
-            _context.Project.Add(project);
-            await _context.SaveChangesAsync();
+            }           
+            FiscalYear.GetFiscalYearByDateTime(project.ExternalCreatedOn);
+            _unitOfWork.Projects.Add(project);
+
+            await _unitOfWork.SaveChangesAsync();
 
             return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
         }
@@ -180,7 +188,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
+           // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
+            var project = await _unitOfWork.Projects.GetAwaiter(id);
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
@@ -198,21 +207,23 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _context.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
+            var project = await _unitOfWork.Projects.GetAwaiter(id);
             if (project == null)
             {
                 return NotFound();
             }
 
-            _context.Project.Remove(project);
-            await _context.SaveChangesAsync();
+            // _context.Project.Remove(project);
+            _unitOfWork.Projects.Remove(project);
+
+            await _unitOfWork.SaveChangesAsync();
 
             return Ok(project);
         }
 
         private bool ProjectExists(Guid id)
         {
-            return _context.Project.Any(e => e.ProjectId == id);
+            return _unitOfWork.Projects.ProjectExists(id);
         }
     }
 }
