@@ -25,7 +25,7 @@ namespace InternalPortal.Models
         public string Lang { get; set; }
         public string FiscalYear { get; set; }
         public double RequestedAmount { get; set; }
-        public string CorporateFileNumber { get; set; }
+        public string CorporateFileNumber { get; set; }      
         public Guid? FundingOpportunityID { get; set; }
         public FundingOpportunity Program { get; set; }
         public string GCIMSCommitmentItemID { get; set; }

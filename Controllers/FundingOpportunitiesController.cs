@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Portal;
 using System.Diagnostics;
+using InternalPortal.Models.Portal.Program;
 
 namespace InternalPortal.Controllers
 {
@@ -27,6 +28,38 @@ namespace InternalPortal.Controllers
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()
         {
             return _context.FundingOpportunity;
+        }
+
+        // GET: api/FundingOpportunities/GetActiveFundingOpportunities
+        [HttpGet]
+        [Route("GetActiveFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
+        {
+            
+            var fos = _context.FundingOpportunity.Where(f => f.ActivationStartDate <= DateTime.Now.Date).ToList();
+
+            foreach (var x in fos)
+            {
+                var test = new List<object>();
+                string test1 = "";
+                var criterias = new List<EligibilityCriteria>();
+                var foec = _context.FundingOpportunityEligibilityCriteria.Where(g => g.FundingOpportunityId == x.FundingOpportunityId)
+                                        .Include(y=>y.EligibilityCriteria).ToList();
+                foreach (var y in foec)
+                {
+                    //criterias.Add(y.EligibilityCriteria);
+                    test.Add(new {
+                        DescriptionE = y.EligibilityCriteria.DescriptionE
+                    });
+                    test1 += y.EligibilityCriteria.DescriptionE + ";&#010;&#013;&#010;";
+                }
+                x.Criterias1 = test1;
+                x.Criterias = test;
+                
+            }            
+
+
+            return fos;
         }
 
         // GET: api/FundingOpportunities/5

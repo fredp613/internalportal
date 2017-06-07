@@ -16,6 +16,10 @@ namespace InternalPortal.Models.Portal
         public string TitleF { get; set; }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }
+        [NotMapped]
+        public IEnumerable<object> Criterias { get; set; }
+        [NotMapped]
+        public string Criterias1 { get; set; }
         public string AdditionalInformationE { get; set; }
         public string AdditionalInformationF { get; set; }
         public DateTime ActivationStartDate { get; set; }
