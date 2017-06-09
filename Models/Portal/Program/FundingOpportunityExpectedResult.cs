@@ -11,6 +11,8 @@ namespace InternalPortal.Models.Portal.Program
     {
         [Key]
         public Guid FundingOpportunityExpectedResultId { get; set; }
+        public Guid ExpectedResultId { get; set; }
+        public Guid FundingOpportunityId { get; set; }
         public ExpectedResult ExpectedResult { get; set; }
         public FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }

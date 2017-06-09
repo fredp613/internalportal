@@ -1,0 +1,232 @@
+﻿{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Funding Opportunities Meta Data",
+    "description": ""
+  },
+  "host": "172.23.48.56:81",
+  "basePath": "/api/",
+  "schemes": [
+    "http"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json",
+    "text/html"
+  ],
+  "paths": {
+    "/FundingOpportunities/GetActiveFundingOpportunities": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets active funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityWithCriterias"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FundingOpportunityEligibilityCriterias/GetByFundingOpportunity/{fundingOpportunityId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "fundingOpportunityId",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the funding opportunity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Sends the eligiblity criterias for the funding opportunity",
+            "schema": {
+              "title": "Eligibility Criterias",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityEligibilityCriteria"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/FundingOpportunities/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the funding opportunity"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the funding opportunity information",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunity"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "FundingOpportunityEligibilityCriteria": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityEligibilityCriteriaId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "eligibilityCriteriaId": {
+          "type": "string"
+        },
+        "fundingOpportunityTitleE": {
+          "type": "string"
+        },
+        "fundingOpportunityTitleF": {
+          "type": "string"
+        },
+        "fundingOpportunityDescriptionE": {
+          "type": "string"
+        },
+        "fundingOpportunityDescriptionF": {
+          "type": "string"
+        },
+        "eligibilityCriteriaDescriptionE": {
+          "type": "string"
+        },
+        "eligibilityCriteriaDescriptionF": {
+          "type": "string"
+        }
+
+      }
+    },
+    "FundingOpportunity": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "activationStartDate": {
+          "type": "string"
+        },
+        "activationEndDate": {
+          "type": "string"
+        }
+
+      }
+    },
+    "FundingOpportunityWithCriterias": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "activationStartDate": {
+          "type": "string"
+        },
+        "activationEndDate": {
+          "type": "string"
+        },
+        "eligibilityCriterias": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EligibilityCriteria"
+          }
+        },
+        "EligibleClientTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EligibleClientType"
+          }
+        },
+        "ExpectedResults": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/ExpectedResult"
+          }
+        },
+        "Objectives": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Objective"
+          }
+        }
+
+      }
+    },
+    "EligibilityCriteria": {
+      "type": "object",
+      "properties": {
+        "descriptionE": {
+          "type": "string"
+        }
+      }
+    },
+    "ExpectedResult": {
+      "type": "object",
+      "properties": {
+        "descriptionE": {
+          "type": "string"
+        }
+      }
+    },
+    "Objective": {
+      "type": "object",
+      "properties": {
+        "descriptionE": {
+          "type": "string"
+        }
+      }
+    },
+    "EligibleClientType": {
+      "type": "object",
+      "properties": {
+        "descriptionE": {
+          "type": "string"
+        }
+      }
+    }
+
+  }
+}

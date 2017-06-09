@@ -53,8 +53,18 @@ namespace InternalPortal.Models
 
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriteria { get; set; }
 
+        public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityExpectedResult> FundingOpportunityExpectedResult { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityObjective> FundingOpportunityObjective { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.EligibleClientType> EligibleClientType { get; set; }
+
         public DbSet<InternalPortal.Models.Account> Account { get; set; }
 
         public DbSet<InternalPortal.Models.Contact> Contact { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.ExpectedResult> ExpectedResult { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.Objective> Objective { get; set; }
     }
 }

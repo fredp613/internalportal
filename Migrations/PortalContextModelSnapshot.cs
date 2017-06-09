@@ -446,6 +446,8 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
+                    b.Property<Guid?>("FundingOpportunityId");
+
                     b.Property<string>("GcimsAttributeID");
 
                     b.Property<string>("TitleE");
@@ -459,6 +461,8 @@ namespace InternalPortal.Migrations
                     b.HasKey("ExpectedResultId");
 
                     b.HasIndex("CreatedByInternalUserId");
+
+                    b.HasIndex("FundingOpportunityId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
@@ -504,9 +508,9 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<Guid?>("ExpectedResultId");
+                    b.Property<Guid>("ExpectedResultId");
 
-                    b.Property<Guid?>("FundingOpportunityId");
+                    b.Property<Guid>("FundingOpportunityId");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
@@ -534,7 +538,9 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<Guid?>("FundingOpportunityId");
+                    b.Property<Guid>("FundingOpportunityId");
+
+                    b.Property<Guid>("ObjectiveId");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
@@ -546,6 +552,8 @@ namespace InternalPortal.Migrations
 
                     b.HasIndex("FundingOpportunityId");
 
+                    b.HasIndex("ObjectiveId");
+
                     b.HasIndex("UpdatedByInternalUserId");
 
                     b.ToTable("FundingOpportunityObjective");
@@ -553,25 +561,30 @@ namespace InternalPortal.Migrations
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.Objective", b =>
                 {
-                    b.Property<Guid>("FundingOpportunityObjectiveId");
+                    b.Property<Guid>("ObjectiveId")
+                        .ValueGeneratedOnAdd();
 
                     b.Property<Guid?>("CreatedByInternalUserId");
 
                     b.Property<DateTime>("CreatedOn");
 
+                    b.Property<string>("DescriptionE");
+
+                    b.Property<string>("DescriptionF");
+
+                    b.Property<Guid?>("FundingOpportunityId");
+
                     b.Property<string>("GcimsAttributeID");
-
-                    b.Property<string>("TitleE");
-
-                    b.Property<string>("TitleF");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
                     b.Property<DateTime>("UpdatedOn");
 
-                    b.HasKey("FundingOpportunityObjectiveId");
+                    b.HasKey("ObjectiveId");
 
                     b.HasIndex("CreatedByInternalUserId");
+
+                    b.HasIndex("FundingOpportunityId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
@@ -986,7 +999,7 @@ namespace InternalPortal.Migrations
                         .HasForeignKey("CreatedByInternalUserId");
 
                     b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
-                        .WithMany("EligilityCriterias")
+                        .WithMany("EligibilityCriterias")
                         .HasForeignKey("FundingOpportunityId");
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
@@ -1037,6 +1050,10 @@ namespace InternalPortal.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
 
+                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
+                        .WithMany("ExpectedResults")
+                        .HasForeignKey("FundingOpportunityId");
+
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedByInternalUserId");
@@ -1071,11 +1088,13 @@ namespace InternalPortal.Migrations
 
                     b.HasOne("InternalPortal.Models.Portal.Program.ExpectedResult", "ExpectedResult")
                         .WithMany()
-                        .HasForeignKey("ExpectedResultId");
+                        .HasForeignKey("ExpectedResultId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
-                        .WithMany("ExpectedResults")
-                        .HasForeignKey("FundingOpportunityId");
+                        .WithMany("FundingOpportunityExpectedResults")
+                        .HasForeignKey("FundingOpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()
@@ -1089,8 +1108,14 @@ namespace InternalPortal.Migrations
                         .HasForeignKey("CreatedByInternalUserId");
 
                     b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
-                        .WithMany("Objectives")
-                        .HasForeignKey("FundingOpportunityId");
+                        .WithMany("FundingOpportunityObjectives")
+                        .HasForeignKey("FundingOpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternalPortal.Models.Portal.Program.Objective", "Objective")
+                        .WithMany()
+                        .HasForeignKey("ObjectiveId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()
@@ -1103,10 +1128,9 @@ namespace InternalPortal.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
 
-                    b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunityObjective")
-                        .WithOne("ExpectedResult")
-                        .HasForeignKey("InternalPortal.Models.Portal.Program.Objective", "FundingOpportunityObjectiveId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
+                        .WithMany("Objectives")
+                        .HasForeignKey("FundingOpportunityId");
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()

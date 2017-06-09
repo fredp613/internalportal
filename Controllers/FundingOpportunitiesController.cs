@@ -40,24 +40,44 @@ namespace InternalPortal.Controllers
 
             foreach (var x in fos)
             {
-                var test = new List<object>();
-                string test1 = "";
-                var criterias = new List<EligibilityCriteria>();
+                
+                var eligibilityCriterias = new List<EligibilityCriteria>();
+                var expectedResults = new List<ExpectedResult>();
+                var eligibleClientTypes = new List<EligibleClientType>();
+                var objectives = new List<Objective>();
+
                 var foec = _context.FundingOpportunityEligibilityCriteria.Where(g => g.FundingOpportunityId == x.FundingOpportunityId)
                                         .Include(y=>y.EligibilityCriteria).ToList();
                 foreach (var y in foec)
                 {
                     //criterias.Add(y.EligibilityCriteria);
-                    test.Add(new {
-                        DescriptionE = y.EligibilityCriteria.DescriptionE
-                    });
-                    test1 += y.EligibilityCriteria.DescriptionE + ";&#010;&#013;&#010;";
+                    eligibilityCriterias.Add(y.EligibilityCriteria);
+                                            
                 }
-                x.Criterias1 = test1;
-                x.Criterias = test;
-                
-            }            
+                foreach(var foer in _context.FundingOpportunityExpectedResult.Where(r => r.FundingOpportunityId == x.FundingOpportunityId)
+                                        .Include(y => y.ExpectedResult).ToList())
+                {
+                    expectedResults.Add(foer.ExpectedResult);
+                }
 
+                foreach(var foect in _context.EligibleClientType.Where(c=>c.FundingOpportunityId == x.FundingOpportunityId).ToList())
+                {
+                    eligibleClientTypes.Add(foect);
+                }
+
+                foreach(var obj in _context.FundingOpportunityObjective.Where(o=>o.FundingOpportunityId == x.FundingOpportunityId)
+                                    .Include(oo=>oo.Objective).ToList())
+                {
+                    objectives.Add(obj.Objective);
+                }
+
+                
+                x.EligibilityCriterias = eligibilityCriterias;
+                x.ExpectedResults = expectedResults;
+                x.EligibleClientTypes = eligibleClientTypes;
+                x.Objectives = objectives;
+
+            }            
 
             return fos;
         }

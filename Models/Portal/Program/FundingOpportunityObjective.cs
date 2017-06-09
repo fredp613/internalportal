@@ -11,7 +11,9 @@ namespace InternalPortal.Models.Portal.Program
     {
         [Key]
         public Guid FundingOpportunityObjectiveId { get; set; }
-        public Objective ExpectedResult { get; set; }
+        public Guid FundingOpportunityId { get; set; }
+        public Guid ObjectiveId { get; set; }
+        public Objective Objective { get; set; }
         public FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
@@ -21,5 +23,6 @@ namespace InternalPortal.Models.Portal.Program
         public InternalUser CreatedBy { get; set; }
         [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser UpdatedBy { get; set; }
+        
     }
 }

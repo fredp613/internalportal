@@ -10,10 +10,10 @@ namespace InternalPortal.Models.Portal.Program
     public class Objective
     {
         [Key]
-        public Guid FundingOpportunityObjectiveId { get; set; }
+        public Guid ObjectiveId { get; set; }
         public string GcimsAttributeID { get; set; }
-        public string TitleE { get; set; }
-        public string TitleF { get; set; }
+        public string DescriptionE { get; set; }
+        public string DescriptionF { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
