@@ -14,6 +14,22 @@ namespace InternalPortal.Models.Portal.Program
         public string GcimsCostCategoryID { get; set; }
         public string TitleE { get; set; }
         public string TitleF { get; set; }
+        [NotMapped]
+        public string Lang { get; set; }
+
+        [NotMapped]
+        public string Title
+        {
+            get { return Lang == "EN" ? TitleE : TitleF; }
+            set { Title = Lang == "EN" ? TitleE : TitleF; }
+        }
+
+        [NotMapped]
+        public string ToolTip
+        {
+            get { return Lang == "EN" ? ToolTipE : ToolTipF; }
+            set { ToolTip = Lang == "EN" ? ToolTipE : ToolTipF; }
+        }
         public string ToolTipE { get; set; }
         public string ToolTipF { get; set; }
         public IEnumerable<FundingOpportunity> FundingOpportunities { get; set; }

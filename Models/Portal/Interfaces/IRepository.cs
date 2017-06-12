@@ -9,7 +9,7 @@ namespace InternalPortal.Models.Portal.Interfaces
     public interface IRepository<TEntity> where TEntity : class
     {
         TEntity Get(Guid id);
-        Task<TEntity> GetAwaiter(Guid id);
+        Task<TEntity> GetAsync(Guid id);
         IEnumerable<TEntity> GetAll();
         IEnumerable<TEntity> Find(Expression<Func<TEntity, bool>> predicate);
         void Add(TEntity entity);

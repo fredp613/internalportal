@@ -14,12 +14,13 @@ using InternalPortal.Models.Portal.Interfaces;
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
-    [Route("api/Projects")]
+    [Route("api/{lang}/Projects")]
     public class ProjectsController : Controller
     {
         private readonly PortalContext _context;
         private readonly GcimsContext _gcimsContext;
         private UnitOfWork _unitOfWork;
+       
 
         //public ProjectsController(PortalContext context, GcimsContext gcimsContext)
         //{
@@ -27,9 +28,12 @@ namespace InternalPortal.Controllers
         //    _gcimsContext = gcimsContext;
         //    _unitOfWork = new UnitOfWork(_context);
         //}
-        public ProjectsController()
+        public ProjectsController(PortalContext context)
         {
-            _unitOfWork = new UnitOfWork(_context);
+            _context = context;
+            
+          //  _Language = this.RouteData.Values["lang"].ToString().ToUpper();
+            _unitOfWork = new UnitOfWork(_context, "EN");
 
         }
 
@@ -50,7 +54,7 @@ namespace InternalPortal.Controllers
             }
 
             // var project = await _unitOfWork.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
-            var project = await _unitOfWork.Projects.GetAwaiter(id);
+            var project = await _unitOfWork.Projects.GetAsync(id);
 
             if (project == null)
             {
@@ -60,8 +64,8 @@ namespace InternalPortal.Controllers
             return Ok(project);
         }
 
-        // GET: api/Projects/5
-        [HttpGet("{id}")]
+        // GET: api/Projects/GetProjectStatus5
+        [HttpGet("GetProjectStatus/{id}")]
         public async Task<IActionResult> GetProjectStatus([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -69,7 +73,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _unitOfWork.Projects.GetAwaiter(id);
+            var project = await _unitOfWork.Projects.GetAsync(id);
 
             if (project == null)
             {
@@ -107,7 +111,7 @@ namespace InternalPortal.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(project.ProjectId))
+                if (!_unitOfWork.Projects.ProjectExists(project.ProjectId))
                 {
                     return null;
                 }
@@ -149,7 +153,7 @@ namespace InternalPortal.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ProjectExists(id))
+                if (!_unitOfWork.Projects.ProjectExists(id))
                 {
                     return NotFound();
                 }
@@ -189,7 +193,7 @@ namespace InternalPortal.Controllers
             }
 
            // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
-            var project = await _unitOfWork.Projects.GetAwaiter(id);
+            var project = await _unitOfWork.Projects.GetAsync(id);
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
@@ -207,7 +211,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var project = await _unitOfWork.Projects.GetAwaiter(id);
+            var project = await _unitOfWork.Projects.GetAsync(id);
             if (project == null)
             {
                 return NotFound();
@@ -221,9 +225,6 @@ namespace InternalPortal.Controllers
             return Ok(project);
         }
 
-        private bool ProjectExists(Guid id)
-        {
-            return _unitOfWork.Projects.ProjectExists(id);
-        }
+      
     }
 }

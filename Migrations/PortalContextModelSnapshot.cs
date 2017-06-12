@@ -286,8 +286,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("AdditionalInformationF");
 
-                    b.Property<Guid?>("CostCategoryId");
-
                     b.Property<Guid?>("CreatedByInternalUserId");
 
                     b.Property<DateTime>("CreatedOn");
@@ -308,45 +306,11 @@ namespace InternalPortal.Migrations
 
                     b.HasKey("FundingOpportunityId");
 
-                    b.HasIndex("CostCategoryId");
-
                     b.HasIndex("CreatedByInternalUserId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
                     b.ToTable("FundingOpportunity");
-                });
-
-            modelBuilder.Entity("InternalPortal.Models.Portal.Program.CostCategory", b =>
-                {
-                    b.Property<Guid>("CostCategoryId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("CreatedByInternalUserId");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("GcimsCostCategoryID");
-
-                    b.Property<string>("TitleE");
-
-                    b.Property<string>("TitleF");
-
-                    b.Property<string>("ToolTipE");
-
-                    b.Property<string>("ToolTipF");
-
-                    b.Property<Guid?>("UpdatedByInternalUserId");
-
-                    b.Property<DateTime>("UpdatedOn");
-
-                    b.HasKey("CostCategoryId");
-
-                    b.HasIndex("CreatedByInternalUserId");
-
-                    b.HasIndex("UpdatedByInternalUserId");
-
-                    b.ToTable("CostCategory");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.EligibilityCriteria", b =>
@@ -362,8 +326,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("DescriptionF");
 
-                    b.Property<Guid?>("FundingOpportunityId");
-
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
                     b.Property<DateTime>("UpdatedOn");
@@ -371,8 +333,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("EligibilityCriteriaId");
 
                     b.HasIndex("CreatedByInternalUserId");
-
-                    b.HasIndex("FundingOpportunityId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
@@ -407,36 +367,6 @@ namespace InternalPortal.Migrations
                     b.ToTable("EligibleClientType");
                 });
 
-            modelBuilder.Entity("InternalPortal.Models.Portal.Program.EligibleCostCategory", b =>
-                {
-                    b.Property<Guid>("EligibleCostCategoryId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("CostCategoryId");
-
-                    b.Property<Guid?>("CreatedByInternalUserId");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<Guid>("FundingOpportunityId");
-
-                    b.Property<Guid?>("UpdatedByInternalUserId");
-
-                    b.Property<DateTime>("UpdatedOn");
-
-                    b.HasKey("EligibleCostCategoryId");
-
-                    b.HasIndex("CostCategoryId");
-
-                    b.HasIndex("CreatedByInternalUserId");
-
-                    b.HasIndex("FundingOpportunityId");
-
-                    b.HasIndex("UpdatedByInternalUserId");
-
-                    b.ToTable("EligibleCostCategory");
-                });
-
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.ExpectedResult", b =>
                 {
                     b.Property<Guid>("ExpectedResultId")
@@ -446,13 +376,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<Guid?>("FundingOpportunityId");
+                    b.Property<string>("DescriptionE");
+
+                    b.Property<string>("DescriptionF");
 
                     b.Property<string>("GcimsAttributeID");
-
-                    b.Property<string>("TitleE");
-
-                    b.Property<string>("TitleF");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
@@ -461,8 +389,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("ExpectedResultId");
 
                     b.HasIndex("CreatedByInternalUserId");
-
-                    b.HasIndex("FundingOpportunityId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
@@ -572,8 +498,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("DescriptionF");
 
-                    b.Property<Guid?>("FundingOpportunityId");
-
                     b.Property<string>("GcimsAttributeID");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
@@ -583,8 +507,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("ObjectiveId");
 
                     b.HasIndex("CreatedByInternalUserId");
-
-                    b.HasIndex("FundingOpportunityId");
 
                     b.HasIndex("UpdatedByInternalUserId");
 
@@ -968,21 +890,6 @@ namespace InternalPortal.Migrations
 
             modelBuilder.Entity("InternalPortal.Models.Portal.FundingOpportunity", b =>
                 {
-                    b.HasOne("InternalPortal.Models.Portal.Program.CostCategory")
-                        .WithMany("FundingOpportunities")
-                        .HasForeignKey("CostCategoryId");
-
-                    b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByInternalUserId");
-
-                    b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedByInternalUserId");
-                });
-
-            modelBuilder.Entity("InternalPortal.Models.Portal.Program.CostCategory", b =>
-                {
                     b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
@@ -997,10 +904,6 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
-
-                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
-                        .WithMany("EligibilityCriterias")
-                        .HasForeignKey("FundingOpportunityId");
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()
@@ -1023,36 +926,11 @@ namespace InternalPortal.Migrations
                         .HasForeignKey("UpdatedByInternalUserId");
                 });
 
-            modelBuilder.Entity("InternalPortal.Models.Portal.Program.EligibleCostCategory", b =>
-                {
-                    b.HasOne("InternalPortal.Models.Portal.Program.CostCategory", "CostCategory")
-                        .WithMany()
-                        .HasForeignKey("CostCategoryId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
-                        .WithMany()
-                        .HasForeignKey("CreatedByInternalUserId");
-
-                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
-                        .WithMany("EligibleCostCategories")
-                        .HasForeignKey("FundingOpportunityId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
-                        .WithMany()
-                        .HasForeignKey("UpdatedByInternalUserId");
-                });
-
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.ExpectedResult", b =>
                 {
                     b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
-
-                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
-                        .WithMany("ExpectedResults")
-                        .HasForeignKey("FundingOpportunityId");
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()
@@ -1071,7 +949,7 @@ namespace InternalPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
-                        .WithMany()
+                        .WithMany("FundingOpportunityEligibilityCriterias")
                         .HasForeignKey("FundingOpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -1127,10 +1005,6 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
-
-                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity")
-                        .WithMany("Objectives")
-                        .HasForeignKey("FundingOpportunityId");
 
                     b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
                         .WithMany()

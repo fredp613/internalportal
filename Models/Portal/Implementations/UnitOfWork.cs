@@ -11,12 +11,18 @@ namespace InternalPortal.Models.Portal.Implementations
     public class UnitOfWork : IUnitOfWork
     {
         public readonly PortalContext _context;
+   
         public IProjectRepository Projects { get; private set; }
+        public IFundingOpportunity FundingOpportunities { get; private set; }
+        public string Language { get; set; }
 
-        public UnitOfWork(PortalContext context)
+        public UnitOfWork(PortalContext context, string language)
         {
             _context = context;
-            Projects = new ProjectRepository(_context);
+            Language = language;
+            Projects = new ProjectRepository(_context, language);
+            FundingOpportunities = new FundingOpportunityRepository(_context, language);
+
         }
 
         public int SaveChanges()

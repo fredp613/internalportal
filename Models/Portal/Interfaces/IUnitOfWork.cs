@@ -7,6 +7,7 @@ namespace InternalPortal.Models.Portal.Interfaces
 {
     public interface IUnitOfWork
     {
+        string Language { get; set; }
         IProjectRepository Projects { get;  }
         int SaveChanges();
         Task<int> SaveChangesAsync();

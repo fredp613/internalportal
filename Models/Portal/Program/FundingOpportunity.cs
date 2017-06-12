@@ -12,11 +12,31 @@ namespace InternalPortal.Models.Portal
     {
         [Key]
         public Guid FundingOpportunityId { get; set; }
+       
+        
+
         public string TitleE { get; set; }
         public string TitleF { get; set; }
+
+        [NotMapped]
+        public string Lang { get; set; }
+
+        [NotMapped]
+        public string Title
+        {
+            get { return Lang == "EN" ? TitleE : TitleF; }
+            set { Title = Lang == "EN" ? TitleE : TitleF; }
+        }
+
+        [NotMapped]
+        public string Description
+        {
+            get { return Lang == "EN" ? DescriptionE : DescriptionF; }
+            set { Description = Lang == "EN" ? DescriptionE : DescriptionF; }
+        }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }
-      
+       
         public string AdditionalInformationE { get; set; }
         public string AdditionalInformationF { get; set; }
         public DateTime ActivationStartDate { get; set; }
@@ -24,15 +44,12 @@ namespace InternalPortal.Models.Portal
         public bool OnHold {get; set;}
         public IEnumerable<FundingOpportunityExpectedResult> FundingOpportunityExpectedResults { get; set;}
         public IEnumerable<FundingOpportunityObjective> FundingOpportunityObjectives { get; set; }
-        public IEnumerable<EligibleCostCategory> EligibleCostCategories { get; set; }
-        public IEnumerable<Objective> Objectives { get; set; }
+        public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }      
         public IEnumerable<EligibleClientType> EligibleClientTypes { get; set; }
-        public IEnumerable<EligibilityCriteria> EligibilityCriterias { get; set; }
-        public IEnumerable<ExpectedResult> ExpectedResults { get; set; }
+        //public IEnumerable<EligibilityCriteria> EligibilityCriterias { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        [NotMapped]
-        public string Lang { get; set; }
+
         public Guid? CreatedByInternalUserId { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
 

@@ -9,25 +9,36 @@ using InternalPortal.Models;
 using InternalPortal.Models.Portal;
 using System.Diagnostics;
 using InternalPortal.Models.Portal.Program;
+using InternalPortal.Models.Portal.Implementations;
 
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
-    [Route("api/FundingOpportunities")]
+    [Route("api/{lang}/FundingOpportunities")]
     public class FundingOpportunitiesController : Controller
     {
         private readonly PortalContext _context;
+        private UnitOfWork _unitOfWork;
+
+       
+
+        //public FundingOpportunitiesController(PortalContext context)
+        //{
+        //    _context = context;
+        //}
 
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
+            //var lang = this.RouteData.Values["lang"].ToString().ToUpper();
+            _unitOfWork = new UnitOfWork(_context, "EN");
         }
 
         // GET: api/FundingOpportunities
         [HttpGet]
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()
         {
-            return _context.FundingOpportunity;
+            return _unitOfWork.FundingOpportunities.GetAll();
         }
 
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
@@ -35,70 +46,29 @@ namespace InternalPortal.Controllers
         [Route("GetActiveFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
-            
-            var fos = _context.FundingOpportunity.Where(f => f.ActivationStartDate <= DateTime.Now.Date).ToList();
 
-            foreach (var x in fos)
-            {
-                
-                var eligibilityCriterias = new List<EligibilityCriteria>();
-                var expectedResults = new List<ExpectedResult>();
-                var eligibleClientTypes = new List<EligibleClientType>();
-                var objectives = new List<Objective>();
+            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();
+           
 
-                var foec = _context.FundingOpportunityEligibilityCriteria.Where(g => g.FundingOpportunityId == x.FundingOpportunityId)
-                                        .Include(y=>y.EligibilityCriteria).ToList();
-                foreach (var y in foec)
-                {
-                    //criterias.Add(y.EligibilityCriteria);
-                    eligibilityCriterias.Add(y.EligibilityCriteria);
-                                            
-                }
-                foreach(var foer in _context.FundingOpportunityExpectedResult.Where(r => r.FundingOpportunityId == x.FundingOpportunityId)
-                                        .Include(y => y.ExpectedResult).ToList())
-                {
-                    expectedResults.Add(foer.ExpectedResult);
-                }
-
-                foreach(var foect in _context.EligibleClientType.Where(c=>c.FundingOpportunityId == x.FundingOpportunityId).ToList())
-                {
-                    eligibleClientTypes.Add(foect);
-                }
-
-                foreach(var obj in _context.FundingOpportunityObjective.Where(o=>o.FundingOpportunityId == x.FundingOpportunityId)
-                                    .Include(oo=>oo.Objective).ToList())
-                {
-                    objectives.Add(obj.Objective);
-                }
-
-                
-                x.EligibilityCriterias = eligibilityCriterias;
-                x.ExpectedResults = expectedResults;
-                x.EligibleClientTypes = eligibleClientTypes;
-                x.Objectives = objectives;
-
-            }            
-
-            return fos;
         }
 
         // GET: api/FundingOpportunities/5
         [HttpGet("{id}")]
+     
         public async Task<IActionResult> GetFundingOpportunity([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var language = RouteData.Values["lang"] as string;
-            Debug.WriteLine(language);
-            var fundingOpportunity = await _context.FundingOpportunity.SingleOrDefaultAsync(m => m.FundingOpportunityId == id);
+
+            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
 
             if (fundingOpportunity == null)
             {
                 return NotFound();
             }
-            
+
             return Ok(fundingOpportunity);
         }
 
@@ -120,11 +90,11 @@ namespace InternalPortal.Controllers
 
             try
             {
-                await _context.SaveChangesAsync();
+                await _unitOfWork.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!FundingOpportunityExists(id))
+                if (!_unitOfWork.FundingOpportunities.FundingOpportunityExists(id))
                 {
                     return NotFound();
                 }
@@ -146,8 +116,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.FundingOpportunity.Add(fundingOpportunity);
-            await _context.SaveChangesAsync();
+            _unitOfWork.FundingOpportunities.Add(fundingOpportunity);
+            await _unitOfWork.SaveChangesAsync();
 
             return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
         }
@@ -161,21 +131,18 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingOpportunity = await _context.FundingOpportunity.SingleOrDefaultAsync(m => m.FundingOpportunityId == id);
+            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
             if (fundingOpportunity == null)
             {
                 return NotFound();
             }
 
             _context.FundingOpportunity.Remove(fundingOpportunity);
-            await _context.SaveChangesAsync();
+            await _unitOfWork.SaveChangesAsync();
 
             return Ok(fundingOpportunity);
         }
 
-        private bool FundingOpportunityExists(Guid id)
-        {
-            return _context.FundingOpportunity.Any(e => e.FundingOpportunityId == id);
-        }
+      
     }
 }

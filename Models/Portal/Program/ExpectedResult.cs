@@ -12,8 +12,18 @@ namespace InternalPortal.Models.Portal.Program
         [Key]
         public Guid ExpectedResultId { get; set; }
         public string GcimsAttributeID { get; set; }
-        public string TitleE {get; set;}
-        public string TitleF { get; set; }
+        [NotMapped]
+        public string Lang { get; set; }
+       
+        [NotMapped]
+        public string Description
+        {
+            get { return Lang == "EN" ? DescriptionE : DescriptionF; }
+            set { Description = Lang == "EN" ? DescriptionE : DescriptionF; }
+        }
+        public string DescriptionE {get; set;}
+        public string DescriptionF { get; set; }
+
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
