@@ -36,7 +36,14 @@ namespace InternalPortal.Models.Portal
         }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }
-       
+
+        [NotMapped]
+        public string Objectives { get; set; }
+        [NotMapped]
+        public string ExpectedResults { get; set; }
+        [NotMapped]
+        public string EligibilityCriterias { get; set; }
+
         public string AdditionalInformationE { get; set; }
         public string AdditionalInformationF { get; set; }
         public DateTime ActivationStartDate { get; set; }

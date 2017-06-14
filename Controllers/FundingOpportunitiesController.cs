@@ -30,7 +30,7 @@ namespace InternalPortal.Controllers
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
-            //var lang = this.RouteData.Values["lang"].ToString().ToUpper();
+           // string Lang = RouteData.Values["lang"].ToString();
             _unitOfWork = new UnitOfWork(_context, "EN");
         }
 
@@ -46,9 +46,7 @@ namespace InternalPortal.Controllers
         [Route("GetActiveFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
-
-            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();
-           
+            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();           
 
         }
 
@@ -62,7 +60,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
+            //var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
+            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetActiveFundingOpportunitiesCollapsedRelationships(id);
 
             if (fundingOpportunity == null)
             {

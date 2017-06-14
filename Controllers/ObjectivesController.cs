@@ -78,7 +78,6 @@ namespace InternalPortal.Controllers
                     throw;
                 }
             }
-
             return NoContent();
         }
 

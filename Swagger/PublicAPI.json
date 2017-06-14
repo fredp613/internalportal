@@ -35,7 +35,7 @@
               "title": "Funding Opportunities",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/ActiveFundingOpportunities"
+                "$ref": "#/definitions/FundingOpportunity"
               }
             }
           }
@@ -69,29 +69,8 @@
       }
     }
   },
-  "definitions": {
+  "definitions": {   
     "FundingOpportunity": {
-      "type": "object",
-      "properties": {
-        "fundingOpportunityId": {
-          "type": "string"
-        },
-        "titleLocalized": {
-          "type": "string"
-        },
-        "descriptionLocalized": {
-          "type": "string"
-        },       
-        "activationStartDate": {
-          "type": "string"
-        },
-        "activationEndDate": {
-          "type": "string"
-        }
-
-      }
-    },
-    "ActiveFundingOpportunities": {
       "type": "object",
       "properties": {
         "fundingOpportunityId": {
@@ -101,6 +80,15 @@
           "type": "string"
         },
         "description": {
+          "type": "string"
+        },
+        "objectives": {
+          "type": "string"
+        },
+        "expectedResults": {
+          "type": "string"
+        },
+        "eligibilityCriterias": {
           "type": "string"
         },
         "activationStartDate": {

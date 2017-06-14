@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using InternalPortal.Models.Portal.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
+using InternalPortal.Models.Helpers;
 
 namespace InternalPortal.Models.Portal.Implementations
 {
@@ -26,7 +27,7 @@ namespace InternalPortal.Models.Portal.Implementations
            
             return entity;
         }
-        public async Task<TEntity> GetAsync(Guid id)
+        public virtual async Task<TEntity> GetAsync(Guid id)
         {
             var entity = await Context.Set<TEntity>().FindAsync(id);
             if (entity != null)
@@ -89,7 +90,7 @@ namespace InternalPortal.Models.Portal.Implementations
         {
             var prop = obj.GetType().GetProperty(v, BindingFlags.Public | BindingFlags.Instance);
             if (prop != null && prop.CanWrite)
-                 prop.SetValue(obj, value, null);
+                prop.SetValue(obj, value, null);
         }
 
 
