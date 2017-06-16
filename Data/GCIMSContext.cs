@@ -18,5 +18,6 @@ namespace InternalPortal.Models
         public DbSet<tblContacts> tblContacts { get; set; }
         public DbSet<tblAddresses> tblAddresses { get; set; }
         public DbSet<tblClients> tblClients { get; set; }
+        public DbSet<luCommitmentItems> luCommitmentItems { get; set; }
     }
 }

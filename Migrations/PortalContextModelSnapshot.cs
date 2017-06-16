@@ -294,6 +294,8 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("DescriptionF");
 
+                    b.Property<string>("GcimsCommitmentItemId");
+
                     b.Property<bool>("OnHold");
 
                     b.Property<string>("TitleE");

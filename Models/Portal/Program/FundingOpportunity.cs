@@ -13,8 +13,6 @@ namespace InternalPortal.Models.Portal
         [Key]
         public Guid FundingOpportunityId { get; set; }
        
-        
-
         public string TitleE { get; set; }
         public string TitleF { get; set; }
 
@@ -54,6 +52,8 @@ namespace InternalPortal.Models.Portal
         public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }      
         public IEnumerable<EligibleClientType> EligibleClientTypes { get; set; }
         //public IEnumerable<EligibilityCriteria> EligibilityCriterias { get; set; }
+
+        public string GcimsCommitmentItemId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
 

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 public class tblContacts
 {
@@ -299,6 +299,13 @@ public class luCommitmentItems
     public string CommitmentItemDescriptionE { get; set; }
 
     public string CommitmentItemDescriptionF { get; set; }
+    
+    [NotMapped]
+    public string CommitmentItemBillingual
+    {
+        get { return CommitmentItemBillingual = (CommitmentItemDescriptionE + " - "  + CommitmentItemDescriptionF); }
+        set { }
+    }
 
     public string SummaryCommitmentID { get; set; }
 

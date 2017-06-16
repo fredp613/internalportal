@@ -50,11 +50,11 @@ namespace InternalPortal
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
-            //services.AddDbContext<PortalContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+            services.AddDbContext<PortalContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
 
-		    services.AddDbContext<PortalContext>(options =>
-					options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
+	//	    services.AddDbContext<PortalContext>(options =>
+	//				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

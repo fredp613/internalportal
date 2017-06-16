@@ -24,7 +24,7 @@ namespace InternalPortal.Models.Portal.Implementations
         {
             var entity = Context.Set<TEntity>().Find(id);
             TrySetProperty(entity, "Lang", _language);
-           
+
             return entity;
         }
         public virtual async Task<TEntity> GetAsync(Guid id)
@@ -32,10 +32,10 @@ namespace InternalPortal.Models.Portal.Implementations
             var entity = await Context.Set<TEntity>().FindAsync(id);
             if (entity != null)
             {
-                TrySetPropertyAsync(entity, "Lang", _language);                
+                TrySetPropertyAsync(entity, "Lang", _language);
             }
-            return entity;     
-           
+            return entity;
+
         }
 
 
@@ -60,7 +60,26 @@ namespace InternalPortal.Models.Portal.Implementations
         public void Add(TEntity entity)
         {
             Context.Set<TEntity>().Add(entity);
-        
+
+        }
+
+        public void Upsert(TEntity entity, bool isNew)
+        {
+
+            if (isNew)
+            {
+                Context.Set<TEntity>().Add(entity);
+            } else
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+            }
+
+
+        }
+
+        public void Update(TEntity entity)
+        {
+            Context.Entry(entity).State = EntityState.Modified;
         }
 
         public void AddRange(IEnumerable<TEntity> entities)

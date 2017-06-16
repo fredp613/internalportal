@@ -50,7 +50,7 @@ namespace InternalPortal.Controllers
 
         }
 
-        // GET: api/FundingOpportunities/5
+        // GET: api/en/FundingOpportunities/5
         [HttpGet("{id}")]
      
         public async Task<IActionResult> GetFundingOpportunity([FromRoute] Guid id)
@@ -85,7 +85,8 @@ namespace InternalPortal.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(fundingOpportunity).State = EntityState.Modified;
+            _unitOfWork.FundingOpportunities.Update(fundingOpportunity);
+           
 
             try
             {
@@ -110,6 +111,8 @@ namespace InternalPortal.Controllers
         [HttpPost]
         public async Task<IActionResult> PostFundingOpportunity([FromBody] FundingOpportunity fundingOpportunity)
         {
+            
+           
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -118,7 +121,11 @@ namespace InternalPortal.Controllers
             _unitOfWork.FundingOpportunities.Add(fundingOpportunity);
             await _unitOfWork.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
+           
+            //  return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
+            //return Ok(fundingOpportunity);
+           
+            return Ok(fundingOpportunity);
         }
 
         // DELETE: api/FundingOpportunities/5

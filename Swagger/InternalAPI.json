@@ -2,13 +2,14 @@
   "swagger": "2.0",
   "info": {
     "version": "1.0.0",
-    "title": "Funding Opportunities Meta Data",
+    "title": "Internal API",
     "description": ""
   },
   "host": "172.23.48.56:81",
   "basePath": "/api/",
   "schemes": [
-    "http"
+    "http",
+    "https"
   ],
   "consumes": [
     "application/json"
@@ -42,6 +43,22 @@
         }
       }
     },
+    "/luCommitmentItems": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets commitment items from GCIMS",
+            "schema": {
+              "title": "Commitment Items",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CommitmentItem"
+              }
+            }
+          }
+        }
+      }
+    },
     "/{lang}/FundingOpportunities/{id}": {
       "get": {
         "parameters": [
@@ -66,10 +83,118 @@
             }
           }
         }
+      },
+      "put": {
+        "summary": "Updates funding opportunity",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingOpportunityUpdate",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "fundingopportunity",
+            "in": "body",
+            "description": "The funding app JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityCreate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated funding opportunity"            
+          }
+        }
       }
-    }    
+    },
+    "/{lang}/FundingOpportunities/": {
+      "post": {
+        "summary": "Returns the newly created funding opportunity",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingOpportunityCreate",
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "fundingopportunity",
+            "in": "body",
+            "description": "The funding app JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityCreate"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity",
+            "type":  "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityCreate"
+            }
+          }
+        }
+      }
+    }
   },
-  "definitions": {    
+  "definitions": {
+    "FundingOpportunityCreate": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "activationStartDate": {
+          "type": "string"          
+        },
+        "activationEndDate": {
+          "type": "string"          
+        },
+        "onHold": {
+          "type": "boolean"
+        },
+        "gcimsCommitmentItemId": {
+          "type": "string"
+        }
+      }
+    },
     "FundingOpportunity": {
       "type": "object",
       "properties": {
@@ -86,14 +211,15 @@
           "type": "string"
         },
         "activationStartDate": {
-          "type": "string",
-          "format": "date"
+          "type": "string"
         },
         "activationEndDate": {
-          "type": "string",
-          "format": "date"
+          "type": "string"
         },
         "onHold": {
+          "type": "string"
+        },
+        "gcimsCommitmentItemId": {
           "type": "string"
         },
         "fundingOpportunityObjectives": {
@@ -193,6 +319,17 @@
       "type": "object",
       "properties": {
         "description": {
+          "type": "string"
+        }
+      }
+    },
+    "CommitmentItem": {
+      "type": "object",
+      "properties": {
+        "commitmentItemID": {
+          "type": "string"
+        },
+        "commitmentItemBillingual": {
           "type": "string"
         }
       }
