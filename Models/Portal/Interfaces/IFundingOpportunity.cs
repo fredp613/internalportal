@@ -9,7 +9,8 @@ namespace InternalPortal.Models.Portal.Interfaces
     {
         IEnumerable<FundingOpportunity> GetActiveFundingOpportunities();
 
-        Task<FundingOpportunity> GetActiveFundingOpportunitiesCollapsedRelationships(Guid id);
+        IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesCollapsedRelationships();
+        Task<FundingOpportunity> GetActiveFundingOpportunityCollapsedRelationships(Guid id);
         bool FundingOpportunityExists(Guid fundingOpportunityId);
 
     }

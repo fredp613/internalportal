@@ -59,6 +59,447 @@
         }
       }
     },
+    "/luExpenseCategories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets expense categories from GCIMS",
+            "schema": {
+              "title": "Expense Categories",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpenseCategory"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/eligibilitycriterias": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets eligibility criterias",
+            "schema": {
+              "title": "Eligibility Criterias",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EligibilityCriteria"
+              }
+            }
+          }
+        }
+      }
+    },
+    "expectedResults/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the expected result"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the expected result id",
+            "schema": {
+              "$ref": "#/definitions/ExpectedResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates expected result",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "expectedResultUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "expectedresult",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/ExpectedResult"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated expected result"
+          }
+        }
+      }
+    },
+    "/expectedResults": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets expected results",
+            "schema": {
+              "title": "expectedresults",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ExpectedResult"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created expected result",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "expectedResultCreate",
+        "parameters": [
+          {
+            "name": "create_expectedresult",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/ExpectedResult"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new expected result",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/ExpectedResult"
+            }
+          }
+        }
+      }
+    },
+    "/objectives": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets objectvies",
+            "schema": {
+              "title": "objectives",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Objective"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created objective",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "objectiveCreate",
+        "parameters": [
+          {
+            "name": "create_objective",
+            "in": "body",
+            "description": "The objective JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/Objective"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new objective",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Objective"
+            }
+          }
+        }
+      }
+    },
+    "/objectives/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the objective"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the objective id",
+            "schema": {
+              "$ref": "#/definitions/Objective"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates objective",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "objectiveUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "objective",
+            "in": "body",
+            "description": "The objective JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/Objective"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated objective"
+          }
+        }
+      }
+    },
+    "/costcategories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets cost categories",
+            "schema": {
+              "title": "cost categories",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CostCategory"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created cost categories",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "costCategoryCreate",
+        "parameters": [
+          {
+            "name": "create_cost_categories",
+            "in": "body",
+            "description": "The objective JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/CostCategory"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new cost categories",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/CostCategory"
+            }
+          }
+        }
+      }
+    },
+    "/costcategories/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the cost category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the cost category id",
+            "schema": {
+              "$ref": "#/definitions/CostCategory"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the cost category",
+        "operationId": "costCategoryDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the cost category"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates Cost Category",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "CostCategoryUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "CostCategory",
+            "in": "body",
+            "description": "The objective JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/CostCategory"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated Cost Category"
+          }
+        }
+      }
+    },
+    "/eligibilityCriterias": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets eligibility criterias",
+            "schema": {
+              "title": "eligibility criterias",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EligibilityCriteria"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created eligibility criterias",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "eligibilityCriteriaCreate",
+        "parameters": [
+          {
+            "name": "create_eligibility_criterias",
+            "in": "body",
+            "description": "The objective JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCriteria"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new eligibility criterias",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCriteria"
+            }
+          }
+        }
+      }
+    },
+    "/eligibilityCriterias/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the Eligibility Criteria"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Eligibility Criteria id",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCriteria"
+            }
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates Eligibility Criteria",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "EligibilityCriteriaUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "EligibilityCriteria",
+            "in": "body",
+            "description": "The objective JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/EligibilityCriteria"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated Eligibility Criteria"
+          }
+        }
+      }
+    },
     "/{lang}/FundingOpportunities/{id}": {
       "get": {
         "parameters": [
@@ -118,7 +559,7 @@
         ],
         "responses": {
           "204": {
-            "description": "no content response code 204 - updated funding opportunity"            
+            "description": "no content response code 204 - updated funding opportunity"
           }
         }
       }
@@ -153,15 +594,169 @@
         "responses": {
           "200": {
             "description": "Make a new funding opportunity",
-            "type":  "object",
+            "type": "object",
             "schema": {
               "$ref": "#/definitions/FundingOpportunityCreate"
             }
           }
         }
       }
+    },
+    "fundingOpportunityExpectedResults": {
+      "post": {
+        "summary": "Returns the newly funding opp expected result",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingOpportunityExpectedResultsCreate",
+        "parameters": [
+          {
+            "name": "fundingopportunityexpectedresult",
+            "in": "body",
+            "description": "The foer JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityExpectedResult"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity expected result",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityExpectedResult"
+            }
+          }
+        }
+      }
+    },
+    "/fundingOpportunityObjectives": {
+      "post": {
+        "summary": "Returns the newly funding opp objective",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingOpportunityObjectiveCreate",
+        "parameters": [
+          {
+            "name": "fundingopportunityobjective",
+            "in": "body",
+            "description": "The funding app JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityObjective"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity objective",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityObjective"
+            }
+          }
+        }
+      }
+    },
+    "/fundingOpportunityEligibilityCriterias": {
+      "post": {
+        "summary": "Returns the newly funding opp eligibility criteria",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingOpportunityEligibilityCriteriaCreate",
+        "parameters": [
+          {
+            "name": "fundingopportunityEligibilityCriteria",
+            "in": "body",
+            "description": "The funding app JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityEligibilityCriteria"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity Eligibility Criteria",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityEligibilityCriteria"
+            }
+          }
+        }
+      }
+    },
+    "/fundingOpportunityObjectives/{id}": {
+      "delete": {
+        "summary": "Returns the newly funding opp objective",
+        "operationId": "fundingOpportunityObjectiveDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity objective"
+          }
+        }
+      }
+    },
+    "/fundingOpportunityEligibilityCriterias/{id}": {
+      "delete": {
+        "summary": "Returns the newly funding opp eligibility criteria",
+        "operationId": "fundingOpportunityEligibilityCriteriaDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity eligibility criteria"
+          }
+        }
+      }
+    },
+    "/fundingOpportunityExpectedResults/{id}": {
+      "delete": {
+        "summary": "deletes fo expected results",
+        "operationId": "fundingOpportunityExpectedResultDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delets a funding opportunity expected result"
+          }
+        }
+      }
     }
   },
+
   "definitions": {
     "FundingOpportunityCreate": {
       "type": "object",
@@ -182,10 +777,10 @@
           "type": "string"
         },
         "activationStartDate": {
-          "type": "string"          
+          "type": "string"
         },
         "activationEndDate": {
-          "type": "string"          
+          "type": "string"
         },
         "onHold": {
           "type": "boolean"
@@ -204,7 +799,19 @@
         "title": {
           "type": "string"
         },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
         "description": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
           "type": "string"
         },
         "objectives": {
@@ -302,6 +909,15 @@
     "EligibilityCriteria": {
       "type": "object",
       "properties": {
+        "eligibilityCriteriaId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         }
@@ -310,6 +926,15 @@
     "ExpectedResult": {
       "type": "object",
       "properties": {
+        "expectedResultId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         }
@@ -318,6 +943,15 @@
     "Objective": {
       "type": "object",
       "properties": {
+        "objectiveId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
         "description": {
           "type": "string"
         }
@@ -333,8 +967,48 @@
           "type": "string"
         }
       }
+    },
+    "ExpenseCategory": {
+      "type": "object",
+      "properties": {
+        "expenseCategoryID": {
+          "type": "string"
+        },
+        "expenseCategoryBillingual": {
+          "type": "string"
+        }
+      }
+    },
+    "CostCategory": {
+      "type": "object",
+      "properties": {
+        "costCategoryId": {
+          "type": "string"
+        },
+        "gcimsCostCategoryID": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "tooltipE": {
+          "type": "string"
+        },
+        "tooltipF": {
+          "type": "string"
+        },
+        "tooltip": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        }
+      }
     }
 
 
   }
-}
+  }

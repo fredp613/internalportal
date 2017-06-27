@@ -50,6 +50,14 @@ namespace InternalPortal.Controllers
 
         }
 
+        [HttpGet]
+        [Route("GetActiveFundingOpportunitiesWithRelationshipsCollapsed")]
+        public IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesWithRelationshipsCollapsed()
+        {
+            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunitiesCollapsedRelationships();
+
+        }
+
         // GET: api/en/FundingOpportunities/5
         [HttpGet("{id}")]
      
@@ -61,7 +69,7 @@ namespace InternalPortal.Controllers
             }
 
             //var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
-            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetActiveFundingOpportunitiesCollapsedRelationships(id);
+            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetActiveFundingOpportunityCollapsedRelationships(id);
 
             if (fundingOpportunity == null)
             {

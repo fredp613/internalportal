@@ -66,5 +66,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Program.ExpectedResult> ExpectedResult { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.Program.Objective> Objective { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Program.CostCategory> CostCategory { get; set; }
     }
 }

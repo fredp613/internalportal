@@ -82,19 +82,19 @@ namespace InternalPortal.Models.Portal.Implementations
 
         }
 
-        public async Task<FundingOpportunity> GetActiveFundingOpportunitiesCollapsedRelationships(Guid id)
+        public async Task<FundingOpportunity> GetActiveFundingOpportunityCollapsedRelationships(Guid id)
         {
             var entity = await PortalContext.Set<FundingOpportunity>()
-                .Include(o => o.FundingOpportunityObjectives)
-                         .ThenInclude(fo => fo.Objective)
-                .Include(foer => foer.FundingOpportunityExpectedResults)
-                        .ThenInclude(er => er.ExpectedResult)
-                .Include(foec => foec.FundingOpportunityEligibilityCriterias)
-                        .ThenInclude(ec => ec.EligibilityCriteria)
-                .Include(fas => fas.EligibleClientTypes)
-                .SingleOrDefaultAsync(i => i.FundingOpportunityId == id);
+               .Include(o => o.FundingOpportunityObjectives)
+                        .ThenInclude(fo => fo.Objective)
+               .Include(foer => foer.FundingOpportunityExpectedResults)
+                       .ThenInclude(er => er.ExpectedResult)
+               .Include(foec => foec.FundingOpportunityEligibilityCriterias)
+                       .ThenInclude(ec => ec.EligibilityCriteria)
+               .Include(fas => fas.EligibleClientTypes)
+               .SingleOrDefaultAsync(i => i.FundingOpportunityId == id);
 
-            foreach(var x in entity.FundingOpportunityEligibilityCriterias)
+            foreach (var x in entity.FundingOpportunityEligibilityCriterias)
             {
                 entity.EligibilityCriterias += x.EligibilityCriteria.Description + "\n \n";
             }
@@ -108,6 +108,44 @@ namespace InternalPortal.Models.Portal.Implementations
             }
 
             return entity;
+
+        }
+
+        public IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesCollapsedRelationships()
+        {
+
+            var fos = PortalContext.FundingOpportunity.Where(f => f.ActivationStartDate <= DateTime.Now.Date)
+                                  .Include(o => o.FundingOpportunityObjectives)
+                                          .ThenInclude(fo => fo.Objective)
+                                  .Include(foer => foer.FundingOpportunityExpectedResults)
+                                           .ThenInclude(er => er.ExpectedResult)
+                                  .Include(foec => foec.FundingOpportunityEligibilityCriterias)
+                                           .ThenInclude(ec => ec.EligibilityCriteria)
+                                  .Include(fas => fas.EligibleClientTypes)
+                                  .ToList();
+
+            foreach (var x in fos)
+            {
+                x.Lang = _Language;
+                foreach (var y in x.FundingOpportunityEligibilityCriterias)
+                {
+                    y.EligibilityCriteria.Lang = _Language;
+                    x.EligibilityCriterias += y.EligibilityCriteria.Description + "\n \n";
+                }
+                foreach (var y in x.FundingOpportunityExpectedResults)
+                {
+                    y.ExpectedResult.Lang = _Language;
+                    x.ExpectedResults += y.ExpectedResult.Description + "\n \n";
+                }
+                foreach (var y in x.FundingOpportunityObjectives)
+                {
+                    y.Objective.Lang = _Language;
+                    x.Objectives += y.Objective.Description + "\n \n";
+                }
+            }
+
+            return fos;
+           
         }
     }
 }

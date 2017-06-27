@@ -3,6 +3,33 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+public class luExpenseCategories
+{
+    [Key]
+    public int ExpenseCategoryID { get; set; }
+
+    public string ExpenseCategoryDescriptionE { get; set; }
+
+    public string ExpenseCategoryDescriptionF { get; set; }
+    [NotMapped]
+    public string ExpenseCategoryBillingual
+    {
+        get { return ExpenseCategoryBillingual = (ExpenseCategoryDescriptionE + " - " + ExpenseCategoryDescriptionF); }
+        set { }
+    }
+
+    public short? Active { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public string UpdatedBy { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+}
+
 public class tblContacts
 {
     [Key]
