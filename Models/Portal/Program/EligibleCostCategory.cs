@@ -14,6 +14,25 @@ namespace InternalPortal.Models.Portal.Program
         public Guid CostCategoryId { get; set; }
         public Guid FundingOpportunityId { get; set; }
         public CostCategory CostCategory { get; set; }
+
+        public string TitleE { get; set; }
+        public string TitleF { get; set; }
+        public string TooltipE { get; set; }
+        public string TooltipF { get; set; }
+        [NotMapped]
+        public string Lang { get; set; }
+        [NotMapped]
+        public string Title
+        {
+            get { return Lang == "EN" ? TitleE : TitleF; }
+            set { Title = Lang == "EN" ? TitleE : TitleF; }
+        }
+        [NotMapped]
+        public string ToolTip
+        {
+            get { return Lang == "EN" ? TooltipE : TooltipF; }
+            set { ToolTip = Lang == "EN" ? TooltipE : TooltipF; }
+        }
         public FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

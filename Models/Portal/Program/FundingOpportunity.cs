@@ -51,7 +51,7 @@ namespace InternalPortal.Models.Portal
         public IEnumerable<FundingOpportunityObjective> FundingOpportunityObjectives { get; set; }
         public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }      
         public IEnumerable<EligibleClientType> EligibleClientTypes { get; set; }
-        //public IEnumerable<EligibilityCriteria> EligibilityCriterias { get; set; }
+        public IEnumerable<EligibleCostCategory> EligibleCostCategories { get; set; }
 
         public string GcimsCommitmentItemId { get; set; }
         public DateTime CreatedOn { get; set; }

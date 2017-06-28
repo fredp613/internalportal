@@ -32,6 +32,7 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                                             .ThenInclude(ec => ec.EligibilityCriteria)
                                    .Include(fas => fas.EligibleClientTypes)
+                                   .Include(c => c.EligibleCostCategories)
                                    .ToList();
 
             foreach (var x in fos)
@@ -92,6 +93,7 @@ namespace InternalPortal.Models.Portal.Implementations
                .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                        .ThenInclude(ec => ec.EligibilityCriteria)
                .Include(fas => fas.EligibleClientTypes)
+               .Include(c => c.EligibleCostCategories)
                .SingleOrDefaultAsync(i => i.FundingOpportunityId == id);
 
             foreach (var x in entity.FundingOpportunityEligibilityCriterias)
@@ -122,6 +124,7 @@ namespace InternalPortal.Models.Portal.Implementations
                                   .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                                            .ThenInclude(ec => ec.EligibilityCriteria)
                                   .Include(fas => fas.EligibleClientTypes)
+                                  .Include(c => c.EligibleCostCategories)
                                   .ToList();
 
             foreach (var x in fos)

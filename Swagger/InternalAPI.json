@@ -402,6 +402,121 @@
         }
       }
     },
+    "/eligiblecostcategories": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets eligible cost categories",
+            "schema": {
+              "title": "eligible cost categories",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EligibleCostCategory"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created eligible cost categories",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "eligibleCostCategoryCreate",
+        "parameters": [
+          {
+            "name": "create_eligible_cost_categories",
+            "in": "body",
+            "description": "The eligible cost category JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/EligibleCostCategory"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new eligible cost category",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/EligibleCostCategory"
+            }
+          }
+        }
+      }
+    },
+    "/eligiblecostcategories/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the eligible cost category"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the eligible cost category id",
+            "schema": {
+              "$ref": "#/definitions/EligibleCostCategory"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the eligible cost category",
+        "operationId": "eligibleCostCategoryDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the eligible cost category"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates Eligible Cost Category",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "EligibleCostCategoryUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "EligibleCostCategory",
+            "in": "body",
+            "description": "The eligible cost category JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/EligibleCostCategory"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated Eligible Cost Category"
+          }
+        }
+      }
+    },
     "/eligibilityCriterias": {
       "get": {
         "responses": {
@@ -849,6 +964,13 @@
             "type": "object",
             "$ref": "#/definitions/FundingOpportunityExpectedResult"
           }
+        },
+        "eligibleCostCategories": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EligibleCostCategory"
+          }
         }
       }
     },
@@ -903,6 +1025,42 @@
         "eligibilityCriteria": {
           "type": "object",
           "$ref": "#/definitions/EligibilityCriteria"
+        }
+      }
+    },
+    "EligibleCostCategory": {
+      "type": "object",
+      "properties": {
+        "eligibleCostCategoryId": {
+          "type": "string"
+        },
+        "costCategoryId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "tooltipE": {
+          "type": "string"
+        },
+        "tooltipF": {
+          "type": "string"
+        },
+        "tooltip": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "costCategory": {
+          "type": "object",
+          "$ref": "#/definitions/CostCategory"
         }
       }
     },
@@ -994,10 +1152,10 @@
         "titleF": {
           "type": "string"
         },
-        "tooltipE": {
+        "toolTipE": {
           "type": "string"
         },
-        "tooltipF": {
+        "toolTipF": {
           "type": "string"
         },
         "tooltip": {

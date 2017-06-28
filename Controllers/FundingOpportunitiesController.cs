@@ -59,8 +59,7 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/en/FundingOpportunities/5
-        [HttpGet("{id}")]
-     
+        [HttpGet("{id}")]     
         public async Task<IActionResult> GetFundingOpportunity([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

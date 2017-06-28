@@ -405,6 +405,44 @@ namespace InternalPortal.Migrations
                     b.ToTable("EligibleClientType");
                 });
 
+            modelBuilder.Entity("InternalPortal.Models.Portal.Program.EligibleCostCategory", b =>
+                {
+                    b.Property<Guid>("EligibleCostCategoryId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("CostCategoryId");
+
+                    b.Property<Guid?>("CreatedByInternalUserId");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<Guid>("FundingOpportunityId");
+
+                    b.Property<string>("TitleE");
+
+                    b.Property<string>("TitleF");
+
+                    b.Property<string>("TooltipE");
+
+                    b.Property<string>("TooltipF");
+
+                    b.Property<Guid?>("UpdatedByInternalUserId");
+
+                    b.Property<DateTime>("UpdatedOn");
+
+                    b.HasKey("EligibleCostCategoryId");
+
+                    b.HasIndex("CostCategoryId");
+
+                    b.HasIndex("CreatedByInternalUserId");
+
+                    b.HasIndex("FundingOpportunityId");
+
+                    b.HasIndex("UpdatedByInternalUserId");
+
+                    b.ToTable("EligibleCostCategory");
+                });
+
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.ExpectedResult", b =>
                 {
                     b.Property<Guid>("ExpectedResultId")
@@ -971,6 +1009,27 @@ namespace InternalPortal.Migrations
 
                     b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
                         .WithMany("EligibleClientTypes")
+                        .HasForeignKey("FundingOpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternalPortal.Models.InternalUser", "UpdatedBy")
+                        .WithMany()
+                        .HasForeignKey("UpdatedByInternalUserId");
+                });
+
+            modelBuilder.Entity("InternalPortal.Models.Portal.Program.EligibleCostCategory", b =>
+                {
+                    b.HasOne("InternalPortal.Models.Portal.Program.CostCategory", "CostCategory")
+                        .WithMany()
+                        .HasForeignKey("CostCategoryId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InternalPortal.Models.InternalUser", "CreatedBy")
+                        .WithMany()
+                        .HasForeignKey("CreatedByInternalUserId");
+
+                    b.HasOne("InternalPortal.Models.Portal.FundingOpportunity", "FundingOpportunity")
+                        .WithMany("EligibleCostCategories")
                         .HasForeignKey("FundingOpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
