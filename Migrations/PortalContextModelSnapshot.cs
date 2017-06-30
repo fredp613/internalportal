@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using InternalPortal.Models;
-using InternalPortal.Models.Portal.Program;
 
 namespace InternalPortal.Migrations
 {
@@ -382,13 +381,19 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("EligibleClientTypeId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("ClientType");
-
                     b.Property<Guid?>("CreatedByInternalUserId");
 
                     b.Property<DateTime>("CreatedOn");
 
+                    b.Property<string>("DescriptionE");
+
+                    b.Property<string>("DescriptionF");
+
                     b.Property<Guid>("FundingOpportunityId");
+
+                    b.Property<string>("TitleE");
+
+                    b.Property<string>("TitleF");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 

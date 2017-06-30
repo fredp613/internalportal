@@ -97,6 +97,7 @@ namespace InternalPortal.Models.Portal.Implementations
             Context.Set<TEntity>().RemoveRange(entities);
         }
 
+      
         private void TrySetProperty(object obj, string property, object value)
         {
             var prop = obj.GetType().GetProperty(property, BindingFlags.Public | BindingFlags.Instance);

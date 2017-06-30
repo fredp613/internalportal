@@ -18,10 +18,29 @@ namespace InternalPortal.Models.Portal.Program
     public class EligibleClientType
     {
         [Key]
-        public Guid EligibleClientTypeId { get; set; }
-        public ClientType ClientType { get; set; }
+        public Guid EligibleClientTypeId { get; set; }        
         public Guid FundingOpportunityId { get; set; }
         public FundingOpportunity FundingOpportunity { get; set; }
+        public string TitleE { get; set; }
+        public string TitleF { get; set; }
+        public string DescriptionE { get; set; }
+        public string DescriptionF { get; set; }
+        [NotMapped]
+        public string Lang { get; set; }
+        [NotMapped]
+        public string Description { get {
+                return Lang == "EN" ? DescriptionE : DescriptionF;
+        } set { } }
+        [NotMapped]
+        public string Title
+        {
+            get
+            {
+                return Lang == "EN" ? TitleE : TitleE;
+            }
+            set { }
+        }
+
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

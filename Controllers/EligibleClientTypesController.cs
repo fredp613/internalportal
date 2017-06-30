@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Portal.Program;
+using InternalPortal.Models.Portal.Implementations;
 
 namespace InternalPortal.Controllers
 {
@@ -14,18 +15,35 @@ namespace InternalPortal.Controllers
     [Route("api/EligibleClientTypes")]
     public class EligibleClientTypesController : Controller
     {
+        //private readonly PortalContext _context;
+
+        //public EligibleClientTypesController(PortalContext context)
+        //{
+        //    _context = context;
+        //}
+
         private readonly PortalContext _context;
+        private UnitOfWork _unitOfWork;
 
         public EligibleClientTypesController(PortalContext context)
         {
             _context = context;
+            // string Lang = RouteData.Values["lang"].ToString();
+            _unitOfWork = new UnitOfWork(_context, "EN");
         }
 
         // GET: api/EligibleClientTypes
         [HttpGet]
         public IEnumerable<EligibleClientType> GetEligibleClientType()
         {
-            return _context.EligibleClientType;
+            return _unitOfWork.EligibleClientTypes.GetAll();
+        }
+
+        [HttpGet]
+        [Route("GetEligibleClientTypeList")]
+        public IEnumerable<object> GetEligibleClientTypeList()
+        {
+            return _unitOfWork.EligibleClientTypes.GetEligibleClientTypeList();
         }
 
         // GET: api/EligibleClientTypes/5
@@ -37,7 +55,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var eligibleClientType = await _context.EligibleClientType.SingleOrDefaultAsync(m => m.EligibleClientTypeId == id);
+            var eligibleClientType = await _unitOfWork.EligibleClientTypes.GetAsync(id);
 
             if (eligibleClientType == null)
             {
@@ -62,6 +80,7 @@ namespace InternalPortal.Controllers
             }
 
             _context.Entry(eligibleClientType).State = EntityState.Modified;
+            
 
             try
             {
@@ -91,8 +110,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            _context.EligibleClientType.Add(eligibleClientType);
-            await _context.SaveChangesAsync();
+            _unitOfWork.EligibleClientTypes.Add(eligibleClientType);
+            await _unitOfWork.SaveChangesAsync();
 
             return CreatedAtAction("GetEligibleClientType", new { id = eligibleClientType.EligibleClientTypeId }, eligibleClientType);
         }
@@ -112,8 +131,8 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            _context.EligibleClientType.Remove(eligibleClientType);
-            await _context.SaveChangesAsync();
+            _unitOfWork.EligibleClientTypes.Remove(eligibleClientType);
+            await _unitOfWork.SaveChangesAsync();
 
             return Ok(eligibleClientType);
         }

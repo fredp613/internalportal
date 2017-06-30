@@ -75,6 +75,22 @@
         }
       }
     },
+    "/eligibleClientTypes/getEligibleClientTypeList": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets eligible client types",
+            "schema": {
+              "title": "Eligible Client Type",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EligibleClientTypeStatic"
+              }
+            }
+          }
+        }
+      }
+    },
     "/eligibilitycriterias": {
       "get": {
         "responses": {
@@ -91,6 +107,122 @@
         }
       }
     },
+    "eligibleclienttypes/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the eligible client type"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the eligible client type id",
+            "schema": {
+              "$ref": "#/definitions/EligibleClientType"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the eligible client type",
+        "operationId": "eligibleClientTypeDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the eligible client type"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates eligible client type",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "eligibleClientTypeUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "eligibleclienttype",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/EligibleClientType"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated eligible client type result"
+          }
+        }
+      }
+    },
+    "/eligibleclienttypes": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets eligible client types",
+            "schema": {
+              "title": "eligibleclienttype",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EligibleClientType"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created eligible client type",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "eligibleClientTypeCreate",
+        "parameters": [
+          {
+            "name": "create_eligibleclienttype",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/EligibleClientType"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new eligible client type",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/EligibleClientType"
+            }
+          }
+        }
+      }
+    },
+
     "expectedResults/{id}": {
       "get": {
         "parameters": [
@@ -1025,6 +1157,46 @@
         "eligibilityCriteria": {
           "type": "object",
           "$ref": "#/definitions/EligibilityCriteria"
+        }
+      }
+    },
+    "EligibleClientType": {
+      "type": "object",
+      "properties": {
+        "eligibleClientTypeId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "EligibleClientTypeStatic": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
         }
       }
     },

@@ -14,6 +14,7 @@ namespace InternalPortal.Models.Portal.Implementations
    
         public IProjectRepository Projects { get; private set; }
         public IFundingOpportunity FundingOpportunities { get; private set; }
+        public IEligibleClientType EligibleClientTypes { get; private set; }
         public string Language { get; set; }
 
         public UnitOfWork(PortalContext context, string language)
@@ -22,6 +23,7 @@ namespace InternalPortal.Models.Portal.Implementations
             Language = language;
             Projects = new ProjectRepository(_context, language);
             FundingOpportunities = new FundingOpportunityRepository(_context, language);
+            EligibleClientTypes = new EligibleClientTypeRepository(_context, language);
 
         }
 
