@@ -91,6 +91,26 @@
         }
       }
     },
+    "/eligibleClientTypes/getEligibleClientType/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "integer",
+            "description": "bilingual title of the eligible client type static"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the eligible client type static",
+            "schema": {
+              "$ref": "#/definitions/EligibleClientTypeStatic"
+            }
+          }
+        }
+      }
+    },
     "/eligibilitycriterias": {
       "get": {
         "responses": {
@@ -1103,6 +1123,13 @@
             "type": "object",
             "$ref": "#/definitions/EligibleCostCategory"
           }
+        },
+        "eligibleClientTypes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/EligibleClientType"
+          }
         }
       }
     },
@@ -1177,12 +1204,21 @@
         },
         "description": {
           "type": "string"
-        }
+        },
+        "eligibleClientTypeBilingualTitle": {
+          "type": "string"
+        },
+        "eligibleClientTypeStaticId": {
+          "type": "integer"
+        }        
       }
     },
     "EligibleClientTypeStatic": {
       "type": "object",
       "properties": {
+        "id": {
+          "type": "integer"
+        },
         "title": {
           "type": "string"
         },

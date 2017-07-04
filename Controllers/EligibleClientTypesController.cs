@@ -41,9 +41,16 @@ namespace InternalPortal.Controllers
 
         [HttpGet]
         [Route("GetEligibleClientTypeList")]
-        public IEnumerable<object> GetEligibleClientTypeList()
+        public IEnumerable<ClientTypeStatic> GetEligibleClientTypeList()
         {
             return _unitOfWork.EligibleClientTypes.GetEligibleClientTypeList();
+        }
+
+        [HttpGet]
+        [Route("GetEligibleClientType/{id}")]
+        public ClientTypeStatic GetEligibleClientTypeStatic([FromRoute] int id)
+        {
+            return _unitOfWork.EligibleClientTypes.GetEligibleClientType(id);
         }
 
         // GET: api/EligibleClientTypes/5

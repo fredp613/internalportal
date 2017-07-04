@@ -1,4 +1,5 @@
-﻿using InternalPortal.Models.Portal.Program;
+﻿using InternalPortal.Models.Portal.Implementations;
+using InternalPortal.Models.Portal.Program;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,7 @@ namespace InternalPortal.Models.Portal.Interfaces
 {
     public interface IEligibleClientType : IRepository<EligibleClientType>
     {
-        IEnumerable<object> GetEligibleClientTypeList(); 
+        IEnumerable<ClientTypeStatic> GetEligibleClientTypeList();
+        ClientTypeStatic GetEligibleClientType(int id);
     }
 }

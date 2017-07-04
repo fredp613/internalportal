@@ -21,6 +21,8 @@ namespace InternalPortal.Models.Portal.Program
         public Guid EligibleClientTypeId { get; set; }        
         public Guid FundingOpportunityId { get; set; }
         public FundingOpportunity FundingOpportunity { get; set; }
+        public string EligibleClientTypeBilingualTitle { get; set; }
+        public int EligibleClientTypeStaticId { get; set; }
         public string TitleE { get; set; }
         public string TitleF { get; set; }
         public string DescriptionE { get; set; }

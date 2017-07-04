@@ -7,6 +7,15 @@ using System.Threading.Tasks;
 
 namespace InternalPortal.Models.Portal.Implementations
 {
+    public class ClientTypeStatic
+    {
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public string TitleE { get; set; }
+        public string TitleF { get; set; }
+        public string DescriptionE { get; set; }
+        public string DescriptionF { get; set; }
+    }
     public class EligibleClientTypeRepository : Repository<EligibleClientType>, IEligibleClientType
     {
 
@@ -20,52 +29,62 @@ namespace InternalPortal.Models.Portal.Implementations
             _Language = language;
         }
 
-        public IEnumerable<object> GetEligibleClientTypeList()
+        public IEnumerable<ClientTypeStatic> GetEligibleClientTypeList()
         {
-            var objs = new List<object>();
+            var objs = new List<ClientTypeStatic>();
 
-            var ngo = new
+            var ngo = new ClientTypeStatic
             {
-                Title = "f / f",
-                TitleE = "f",
-                TitleF = "f",
-                DescriptionE = "f",
-                DescriptionF = "f"
+                Id = 1,
+                Title = "ngo / ngo",
+                TitleE = "ngo",
+                TitleF = "ngo",
+                DescriptionE = "ngo",
+                DescriptionF = "ngo"
             };
-            var pt = new
+            var pt = new ClientTypeStatic
             {
-                Title = "f / f",
-                TitleE = "f",
-                TitleF = "f",
-                DescriptionE = "f",
-                DescriptionF = "f"
+                Id = 2,
+                Title = "pt / pt",
+                TitleE = "pt",
+                TitleF = "pt",
+                DescriptionE = "pt",
+                DescriptionF = "pt"
             };
-            var priv = new
+            var priv = new ClientTypeStatic
             {
-                Title = "f / f",
-                TitleE = "f",
-                TitleF = "f",
-                DescriptionE = "f",
-                DescriptionF = "f"
+                Id = 3,
+                Title = "for profit / for profit",
+                TitleE = "for profit",
+                TitleF = "for profit",
+                DescriptionE = "for profit",
+                DescriptionF = "for profit"
             };
-            var ind = new
+            var ind = new ClientTypeStatic
             {
-                Title = "f / f",
-                TitleE = "f",
-                TitleF = "f",
-                DescriptionE = "f",
-                DescriptionF = "f"
+                Id = 4,
+                Title = "individual / individual",
+                TitleE = "individual",
+                TitleF = "individual",
+                DescriptionE = "individual",
+                DescriptionF = "individual"
             };
-            var indig = new
+            var indig = new ClientTypeStatic
             {
-                Title = "f / f",
-                TitleE = "f",
-                TitleF = "f",
-                DescriptionE = "f",
-                DescriptionF = "f"
+                Id = 5,
+                Title = "Indigenous / Indigenous",
+                TitleE = "Indigenous",
+                TitleF = "Indigenous",
+                DescriptionE = "Indigenous",
+                DescriptionF = "Indigenous"
             };
-            objs.AddRange(new List<object>() { ngo, pt, priv, ind, indig });            
+            objs.AddRange(new List<ClientTypeStatic>() { ngo, pt, priv, ind, indig });            
             return objs;
+        }
+
+        public ClientTypeStatic GetEligibleClientType(int id)
+        {           
+            return GetEligibleClientTypeList().FirstOrDefault(o => o.Id == id);       
         }
 
         //public enum ClientType

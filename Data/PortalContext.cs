@@ -22,7 +22,7 @@ namespace InternalPortal.Models
 
         public DbSet<InternalPortal.Models.Project> Project { get; set; }
         public DbSet<InternalPortal.Models.User> User { get; set; }
-        public DbSet<InternalPortal.Models.User> InternalUser { get; set; }
+        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -47,6 +47,8 @@ namespace InternalPortal.Models
             
         }
 
+  
+
         public DbSet<InternalPortal.Models.Portal.FundingOpportunity> FundingOpportunity { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.Program.EligibilityCriteria> EligibilityCriteria { get; set; }
@@ -69,5 +71,6 @@ namespace InternalPortal.Models
 
         public DbSet<InternalPortal.Models.Portal.Program.CostCategory> CostCategory { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.EligibleCostCategory> EligibleCostCategory { get; set; }
+        public DbSet<InternalPortal.Models.InternalUser> InternalUser { get; set; }
     }
 }

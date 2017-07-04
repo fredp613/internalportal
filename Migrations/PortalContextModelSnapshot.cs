@@ -389,6 +389,10 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("DescriptionF");
 
+                    b.Property<string>("EligibleClientTypeBilingualTitle");
+
+                    b.Property<int>("EligibleClientTypeStaticId");
+
                     b.Property<Guid>("FundingOpportunityId");
 
                     b.Property<string>("TitleE");
