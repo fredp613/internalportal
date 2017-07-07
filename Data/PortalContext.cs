@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models.Portal;
 using InternalPortal.Models.Portal.Program;
 using InternalPortal.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace InternalPortal.Models
 {
@@ -26,6 +27,7 @@ namespace InternalPortal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<User>()
                 .HasOne(p => p.CreatedBy)
                 .WithMany()

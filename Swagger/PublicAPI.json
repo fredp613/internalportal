@@ -18,6 +18,15 @@
     "text/html"
   ],
   "paths": {
+    "/values": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "test"            
+          }
+        }
+      }
+    },
     "/{lang}/FundingOpportunities/GetActiveFundingOpportunities": {
       "get": {
         "parameters": [
@@ -67,7 +76,7 @@
           }
         }
       }
-    }    
+    }
   },
   "definitions": {    
     "FundingOpportunity": {

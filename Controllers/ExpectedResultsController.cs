@@ -25,6 +25,7 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<ExpectedResult> GetExpectedResult()
         {
+       
             return _context.ExpectedResult;
         }
 

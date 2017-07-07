@@ -10,11 +10,15 @@ using InternalPortal.Models.Portal;
 using System.Diagnostics;
 using InternalPortal.Models.Portal.Program;
 using InternalPortal.Models.Portal.Implementations;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.Net.Http.Headers;
+using System.Net.Http;
 
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
     [Route("api/{lang}/FundingOpportunities")]
+    //[Authorize(Policy = "InternalUser")]
     public class FundingOpportunitiesController : Controller
     {
         private readonly PortalContext _context;
@@ -41,11 +45,13 @@ namespace InternalPortal.Controllers
             return _unitOfWork.FundingOpportunities.GetAll();
         }
 
+       
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
         [HttpGet]
         [Route("GetActiveFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
+            //this.Response.Cookies.Append("asdf", "asdf");
             return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();           
 
         }

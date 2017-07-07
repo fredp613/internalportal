@@ -257,11 +257,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<string>("Email");
-
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
                     b.Property<DateTime>("UpdatedOn");
+
+                    b.Property<string>("UserName");
 
                     b.HasKey("InternalUserId");
 

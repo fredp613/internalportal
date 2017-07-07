@@ -9,6 +9,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
+using InternalPortal.Models.Helpers;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace InternalPortal
 {
@@ -53,18 +56,31 @@ namespace InternalPortal
             services.AddDbContext<PortalContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
 
-	//	    services.AddDbContext<PortalContext>(options =>
-	//				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
-        }
+            //	    services.AddDbContext<PortalContext>(options =>
+            //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
 
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy(
+                    "InternalUser",
+                    policy => policy.Requirements.Add(new InternalUserRequirement()));
+            });
+            services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
+          //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
+            services.AddMvc();
+        
+
+        }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            app.UseCors("CorsPolicy");
+            app.UseCors("CorsPolicy");            
             app.UseMvc();
         }
+
+        
     }
 }
