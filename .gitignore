@@ -28,5 +28,8 @@ msbuild.log
 msbuild.err
 msbuild.wrn
 Migrations/
+packages/
+obj/
+bin/
 # Visual Studio 2015
 .vs/
