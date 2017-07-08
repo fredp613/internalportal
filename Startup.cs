@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +11,10 @@ using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Helpers;
 using Microsoft.AspNetCore.Authorization;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using System.IdentityModel.Tokens;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace InternalPortal
 {
@@ -53,8 +56,12 @@ namespace InternalPortal
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
+            //services.AddDbContext<PortalContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+
             services.AddDbContext<PortalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext1")));
+
 
             //	    services.AddDbContext<PortalContext>(options =>
             //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
@@ -67,7 +74,7 @@ namespace InternalPortal
             });
             services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
           //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
-            services.AddMvc();
+          //  services.AddMvc();
         
 
         }
@@ -76,7 +83,19 @@ namespace InternalPortal
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-
+	        app.UseJwtBearerAuthentication(new JwtBearerOptions
+	        {
+	            AutomaticAuthenticate = true,
+	            AutomaticChallenge = true,
+	            TokenValidationParameters = new TokenValidationParameters
+	            {
+		            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
+		            ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
+		            ValidateIssuerSigningKey = true,
+		            ValidateLifetime = true,
+		            ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
+	                }
+	        });
             app.UseCors("CorsPolicy");            
             app.UseMvc();
         }
