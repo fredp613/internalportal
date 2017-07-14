@@ -56,23 +56,23 @@ namespace InternalPortal
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
-            //services.AddDbContext<PortalContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
-
             services.AddDbContext<PortalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext1")));
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+
+            //services.AddDbContext<PortalContext>(options =>
+            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext1")));
 
 
             //	    services.AddDbContext<PortalContext>(options =>
             //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
 
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy(
-                    "InternalUser",
-                    policy => policy.Requirements.Add(new InternalUserRequirement()));
-            });
-            services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
+           // services.AddAuthorization(options =>
+           // {
+           //     options.AddPolicy(
+           //         "InternalUser",
+           //         policy => policy.Requirements.Add(new InternalUserRequirement()));
+           // });
+           // services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
           //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
           //  services.AddMvc();
         
@@ -83,19 +83,19 @@ namespace InternalPortal
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-	        app.UseJwtBearerAuthentication(new JwtBearerOptions
-	        {
-	            AutomaticAuthenticate = true,
-	            AutomaticChallenge = true,
-	            TokenValidationParameters = new TokenValidationParameters
-	            {
-		            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
-		            ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
-		            ValidateIssuerSigningKey = true,
-		            ValidateLifetime = true,
-		            ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
-	                }
-	        });
+	      //  app.UseJwtBearerAuthentication(new JwtBearerOptions
+	      //  {
+	      //      AutomaticAuthenticate = true,
+	      //      AutomaticChallenge = true,
+	      //      TokenValidationParameters = new TokenValidationParameters
+	      //      {
+		  //          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
+		  //          ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
+		  //          ValidateIssuerSigningKey = true,
+		  //          ValidateLifetime = true,
+		  //          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
+	      //          }
+	      //  });
             app.UseCors("CorsPolicy");            
             app.UseMvc();
         }

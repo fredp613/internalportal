@@ -9,7 +9,6 @@ namespace InternalPortal.Controllers
 {
    
     [Route("api/[controller]")]
-    [Authorize(Policy ="InternalUser")]
     public class ValuesController : Controller
     {
         // GET api/values

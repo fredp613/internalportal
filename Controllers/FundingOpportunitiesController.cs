@@ -18,7 +18,6 @@ namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
     [Route("api/{lang}/FundingOpportunities")]
-    //[Authorize(Policy = "InternalUser")]
     public class FundingOpportunitiesController : Controller
     {
         private readonly PortalContext _context;
