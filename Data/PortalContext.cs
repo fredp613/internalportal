@@ -51,7 +51,8 @@ namespace InternalPortal.Models
 
   
 
-        public DbSet<InternalPortal.Models.Portal.FundingOpportunity> FundingOpportunity { get; set; }
+        public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunity> FundingOpportunity { get; set; }
+        public DbSet<InternalPortal.Models.Portal.Program.FundingProgram> FundingProgram { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.Program.EligibilityCriteria> EligibilityCriteria { get; set; }
 
@@ -63,7 +64,7 @@ namespace InternalPortal.Models
 
         public DbSet<InternalPortal.Models.Portal.Program.EligibleClientType> EligibleClientType { get; set; }
 
-        public DbSet<InternalPortal.Models.Account> Account { get; set; }
+        public DbSet<InternalPortal.Models.Portal.Account> Account { get; set; }
 
         public DbSet<InternalPortal.Models.Contact> Contact { get; set; }
 
@@ -73,6 +74,6 @@ namespace InternalPortal.Models
 
         public DbSet<InternalPortal.Models.Portal.Program.CostCategory> CostCategory { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.EligibleCostCategory> EligibleCostCategory { get; set; }
-        public DbSet<InternalPortal.Models.InternalUser> InternalUser { get; set; }
+        public DbSet<InternalPortal.Models.Portal.InternalUser> InternalUser { get; set; }
     }
 }

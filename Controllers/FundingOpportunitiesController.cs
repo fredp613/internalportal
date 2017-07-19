@@ -52,7 +52,24 @@ namespace InternalPortal.Controllers
         {
             //this.Response.Cookies.Append("asdf", "asdf");
             return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();           
-
+        }
+        [HttpGet]
+        [Route("GetAwaitingPublishedFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunities()
+        {            
+            return _unitOfWork.FundingOpportunities.GetAwaitingPublishedFundingOpportunities();
+        }
+        [HttpGet]
+        [Route("GetDraftFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetDraftFundingOpportunities()
+        {           
+            return _unitOfWork.FundingOpportunities.GetDraftFundingOpportunities();
+        }
+        [HttpGet]
+        [Route("GetInactiveFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetInactiveFundingOpportunities()
+        {
+            return _unitOfWork.FundingOpportunities.GetInactiveFundingOpportunities();
         }
 
         [HttpGet]

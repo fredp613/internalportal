@@ -1,4 +1,5 @@
 ﻿using InternalPortal.Models.Portal;
+using InternalPortal.Models.Portal.Program;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

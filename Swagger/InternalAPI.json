@@ -43,6 +43,193 @@
         }
       }
     },
+    "/{lang}/FundingOpportunities/GetDraftFundingOpportunities": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets active funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetAwaitingPublishedFundingOpportunities": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets active funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetInactiveFundingOpportunities": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets active funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/fundingprograms": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets funding programs",
+            "schema": {
+              "title": "Funding Programs",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingProgram"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created funding program",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingProgramCreate",
+        "parameters": [
+          {
+            "name": "fundingprogram",
+            "in": "body",
+            "description": "The funding program JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingProgram"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding program",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingProgram"
+            }
+          }
+        }
+      }
+    },
+    "fundingprograms/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the funding program"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the funding program id",
+            "schema": {
+              "$ref": "#/definitions/FundingProgram"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the funding progrm",
+        "operationId": "fundingprogramdelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the funding program"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates funding program",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingProgramUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "fundingprogram",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingProgram"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated funding program result"
+          }
+        }
+      }
+    },
     "/luCommitmentItems": {
       "get": {
         "responses": {
@@ -354,6 +541,7 @@
               }
             }
           }
+
         }
       },
       "post": {
@@ -383,6 +571,12 @@
             "schema": {
               "$ref": "#/definitions/Objective"
             }
+          }
+        },
+        "400": {
+          "description": "error",
+          "schema": {
+            "$ref": "#/definitions/ObjectiveErrorResponse"
           }
         }
       }
@@ -829,6 +1023,23 @@
             "description": "no content response code 204 - updated funding opportunity"
           }
         }
+      },
+      "delete": {
+        "summary": "Deletes",
+        "operationId": "fundingOpportunityDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deletes a funding opportunity"
+          }
+        }
       }
     },
     "/{lang}/FundingOpportunities/": {
@@ -1025,10 +1236,39 @@
   },
 
   "definitions": {
+    "FundingProgram": {
+      "type": "object",
+      "properties": {
+        "fundingProgramId": {
+          "type": "string"
+        },       
+        "titleE": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "startDate": {
+          "type": "string"
+        },
+        "endDate": {
+          "type": "string"
+        }       
+      }
+    },
     "FundingOpportunityCreate": {
       "type": "object",
       "properties": {
         "fundingOpportunityId": {
+          "type": "string"
+        },
+        "fundingProgramId": {
           "type": "string"
         },
         "titleE": {
@@ -1054,6 +1294,12 @@
         },
         "gcimsCommitmentItemId": {
           "type": "string"
+        },
+        "formName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
         }
       }
     },
@@ -1061,6 +1307,9 @@
       "type": "object",
       "properties": {
         "fundingOpportunityId": {
+          "type": "string"
+        },
+        "fundingProgramId": {
           "type": "string"
         },
         "title": {
@@ -1094,6 +1343,9 @@
           "type": "string"
         },
         "gcimsCommitmentItemId": {
+          "type": "string"
+        },
+        "formName": {
           "type": "string"
         },
         "fundingOpportunityObjectives": {
@@ -1130,6 +1382,9 @@
             "type": "object",
             "$ref": "#/definitions/EligibleClientType"
           }
+        },
+        "status": {
+          "type": "string"
         }
       }
     },
@@ -1210,7 +1465,7 @@
         },
         "eligibleClientTypeStaticId": {
           "type": "integer"
-        }        
+        }
       }
     },
     "EligibleClientTypeStatic": {
@@ -1331,6 +1586,9 @@
         },
         "commitmentItemBillingual": {
           "type": "string"
+        },
+        "commitmentItemID_DescriptionBilingual": {
+          "type": "string"
         }
       }
     },
@@ -1370,6 +1628,17 @@
           "type": "string"
         },
         "title": {
+          "type": "string"
+        }
+      }
+    },
+    "ObjectiveErrorResponse": {
+      "type": "object",
+      "properties": {
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
           "type": "string"
         }
       }

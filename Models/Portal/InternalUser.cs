@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace InternalPortal.Models
+namespace InternalPortal.Models.Portal
 {
     public class InternalUser
     {

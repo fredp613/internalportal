@@ -66,16 +66,18 @@ namespace InternalPortal
             //	    services.AddDbContext<PortalContext>(options =>
             //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
 
-           // services.AddAuthorization(options =>
-           // {
-           //     options.AddPolicy(
-           //         "InternalUser",
-           //         policy => policy.Requirements.Add(new InternalUserRequirement()));
-           // });
-           // services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
-          //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
-          //  services.AddMvc();
-        
+            // services.AddAuthorization(options =>
+            // {
+            //     options.AddPolicy(
+            //         "InternalUser",
+            //         policy => policy.Requirements.Add(new InternalUserRequirement()));
+            // });
+            // services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
+            //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
+            //  services.AddMvc();
+            
+            //services.Configure<IISOptions>(options => options.AutomaticAuthentication = true);
+
 
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

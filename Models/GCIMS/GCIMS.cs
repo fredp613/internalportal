@@ -333,6 +333,12 @@ public class luCommitmentItems
         get { return CommitmentItemBillingual = (CommitmentItemDescriptionE + " - "  + CommitmentItemDescriptionF); }
         set { }
     }
+    [NotMapped]
+    public string CommitmentItemID_DescriptionBilingual
+    {
+        get { return CommitmentItemID_DescriptionBilingual = (CommitmentItemID + " - " + (CommitmentItemDescriptionE + "/" + CommitmentItemDescriptionF)); }
+        set { }
+    }
 
     public string SummaryCommitmentID { get; set; }
 
