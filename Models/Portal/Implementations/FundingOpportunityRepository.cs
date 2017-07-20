@@ -82,6 +82,7 @@ namespace InternalPortal.Models.Portal.Implementations
             foreach (var x in fos)
             {
                 x.Lang = _Language;
+
                 foreach (var y in x.FundingOpportunityEligibilityCriterias)
                 {
                     y.EligibilityCriteria.Lang = _Language;
@@ -235,16 +236,20 @@ namespace InternalPortal.Models.Portal.Implementations
                .Include(c => c.EligibleCostCategories)
                .SingleOrDefaultAsync(i => i.FundingOpportunityId == id);
 
+            entity.Lang = _Language;
             foreach (var x in entity.FundingOpportunityEligibilityCriterias)
             {
+                x.EligibilityCriteria.Lang = _Language;
                 entity.EligibilityCriterias += x.EligibilityCriteria.Description + "\n \n";
             }
             foreach (var x in entity.FundingOpportunityExpectedResults)
             {
+                x.ExpectedResult.Lang = _Language;
                 entity.ExpectedResults += x.ExpectedResult.Description + "\n \n";
             }
             foreach (var x in entity.FundingOpportunityObjectives)
             {
+                x.Objective.Lang = _Language;
                 entity.Objectives += x.Objective.Description + "\n \n";
             }
 

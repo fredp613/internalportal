@@ -1300,6 +1300,9 @@
         },
         "status": {
           "type": "string"
+        },
+        "statusDesc": {
+          "type": "string"
         }
       }
     },
@@ -1384,6 +1387,9 @@
           }
         },
         "status": {
+          "type": "string"
+        },
+        "statusDesc": {
           "type": "string"
         }
       }

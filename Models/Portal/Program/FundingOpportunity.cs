@@ -51,6 +51,50 @@ namespace InternalPortal.Models.Portal.Program
         public DateTime ActivationEndDate { get; set; }
         public bool OnHold {get; set;}
         public FOStatus Status { get; set; }
+        [NotMapped]
+        public string StatusDesc { get {
+                if (ActivationStartDate <= DateTime.Now && Status == FOStatus.Published)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Active";
+                    } 
+                    return StatusDesc = "Actif";
+                }
+                else if (ActivationStartDate > DateTime.Now && Status == FOStatus.Published)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Awaiting publish";
+                    }
+                    return StatusDesc = "En attente de publication";
+                }
+                else if (Status == FOStatus.Draft)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Draft";
+                    }
+                    return StatusDesc = "Brouillon";
+                }
+                else if (Status == FOStatus.Hold)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "On Hold";
+                    }
+                    return StatusDesc = "En entente";
+                }
+                else
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Expired";
+                    }
+                    return StatusDesc = "Expiré";
+                }
+            } set { }
+        }
         public IEnumerable<FundingOpportunityExpectedResult> FundingOpportunityExpectedResults { get; set;}
         public IEnumerable<FundingOpportunityObjective> FundingOpportunityObjectives { get; set; }
         public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }      
