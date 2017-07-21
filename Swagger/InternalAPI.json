@@ -1303,6 +1303,15 @@
         },
         "statusDesc": {
           "type": "string"
+        },
+        "termsConditionsUrlEn": {
+          "type": "string"
+        },
+        "termsConditionsUrlFr": {
+          "type": "string"
+        },
+        "contactEmail": {
+          "type": "string"
         }
       }
     },
@@ -1390,6 +1399,15 @@
           "type": "string"
         },
         "statusDesc": {
+          "type": "string"
+        },
+        "termsConditionsUrlEn": {
+          "type": "string"
+        },
+        "termsConditionsUrlFr": {
+          "type": "string"
+        },
+        "contactEmail": {
           "type": "string"
         }
       }

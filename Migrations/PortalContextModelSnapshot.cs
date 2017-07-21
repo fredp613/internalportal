@@ -440,13 +440,17 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("FundingOpportunityId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("ActivationEndDate");
+                    b.Property<DateTime>("ActivationEndDate")
+                        .HasColumnType("Date");
 
-                    b.Property<DateTime>("ActivationStartDate");
+                    b.Property<DateTime>("ActivationStartDate")
+                        .HasColumnType("Date");
 
                     b.Property<string>("AdditionalInformationE");
 
                     b.Property<string>("AdditionalInformationF");
+
+                    b.Property<string>("ContactEmail");
 
                     b.Property<Guid?>("CostCategoryId");
 
@@ -467,6 +471,10 @@ namespace InternalPortal.Migrations
                     b.Property<bool>("OnHold");
 
                     b.Property<int>("Status");
+
+                    b.Property<string>("TermsConditionsUrlEN");
+
+                    b.Property<string>("TermsConditionsUrlFR");
 
                     b.Property<string>("TitleE");
 

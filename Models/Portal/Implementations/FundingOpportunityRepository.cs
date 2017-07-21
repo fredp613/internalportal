@@ -82,6 +82,7 @@ namespace InternalPortal.Models.Portal.Implementations
             foreach (var x in fos)
             {
                 x.Lang = _Language;
+               
 
                 foreach (var y in x.FundingOpportunityEligibilityCriterias)
                 {

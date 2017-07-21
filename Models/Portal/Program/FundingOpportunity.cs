@@ -1,4 +1,7 @@
-﻿using InternalPortal.Models.Portal.Program;
+﻿using InternalPortal.Models.Helpers;
+using InternalPortal.Models.Portal.Program;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,6 +18,7 @@ namespace InternalPortal.Models.Portal.Program
         Expired = 2,
         Hold = 3
     }
+   
     public class FundingOpportunity
     {
         [Key]
@@ -47,7 +51,11 @@ namespace InternalPortal.Models.Portal.Program
         public string EligibilityCriterias { get; set; }
         public string AdditionalInformationE { get; set; }
         public string AdditionalInformationF { get; set; }
+        [Column(TypeName = "Date")]
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime ActivationStartDate { get; set; }
+        [Column(TypeName = "Date")]
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime ActivationEndDate { get; set; }
         public bool OnHold {get; set;}
         public FOStatus Status { get; set; }
@@ -102,6 +110,9 @@ namespace InternalPortal.Models.Portal.Program
         public IEnumerable<EligibleCostCategory> EligibleCostCategories { get; set; }
         public string GcimsCommitmentItemId { get; set; }
         public string FormName { get; set; }
+        public string TermsConditionsUrlEN { get; set; }
+        public string TermsConditionsUrlFR { get; set; }
+        public string ContactEmail { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
