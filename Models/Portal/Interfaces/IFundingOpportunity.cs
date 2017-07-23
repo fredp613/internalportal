@@ -12,6 +12,7 @@ namespace InternalPortal.Models.Portal.Interfaces
         IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunities();
         IEnumerable<FundingOpportunity> GetDraftFundingOpportunities();
         IEnumerable<FundingOpportunity> GetInactiveFundingOpportunities();
+        IEnumerable<FundingOpportunity> GetArchivedFundingOpportunities();
         IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesCollapsedRelationships();
         Task<FundingOpportunity> GetActiveFundingOpportunityCollapsedRelationships(Guid id);
         bool FundingOpportunityExists(Guid fundingOpportunityId);

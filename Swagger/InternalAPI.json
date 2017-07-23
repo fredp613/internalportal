@@ -55,7 +55,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets active funding opportunities",
+            "description": "Gets draft funding opportunities",
             "schema": {
               "title": "Funding Opportunities",
               "type": "array",
@@ -79,7 +79,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets active funding opportunities",
+            "description": "Gets awaiting published funding opportunities",
             "schema": {
               "title": "Funding Opportunities",
               "type": "array",
@@ -103,7 +103,31 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets active funding opportunities",
+            "description": "Gets inactive funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetArchivedFundingOpportunities": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
             "schema": {
               "title": "Funding Opportunities",
               "type": "array",

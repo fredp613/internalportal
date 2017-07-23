@@ -155,7 +155,50 @@ namespace InternalPortal.Models.Portal.Implementations
 
         public IEnumerable<FundingOpportunity> GetInactiveFundingOpportunities()
         {
-            var fos = PortalContext.FundingOpportunity.Where(f => f.ActivationStartDate >= DateTime.Now.Date).Where(x => x.ActivationEndDate <= DateTime.Now && (x.Status == FOStatus.Hold || x.Status == FOStatus.Expired))
+            var fos = PortalContext.FundingOpportunity.Where(f => f.ActivationEndDate < DateTime.Now.Date && f.Status == FOStatus.Published || (f.Status == FOStatus.Closed))
+                                   .Include(o => o.FundingOpportunityObjectives)
+                                           .ThenInclude(fo => fo.Objective)
+                                   .Include(foer => foer.FundingOpportunityExpectedResults)
+                                            .ThenInclude(er => er.ExpectedResult)
+                                   .Include(foec => foec.FundingOpportunityEligibilityCriterias)
+                                            .ThenInclude(ec => ec.EligibilityCriteria)
+                                   .Include(fas => fas.EligibleClientTypes)
+                                   .Include(c => c.EligibleCostCategories)
+                                            .ThenInclude(cc => cc.CostCategory)
+                                   .ToList();
+
+            foreach (var x in fos)
+            {
+                x.Lang = _Language;
+                foreach (var y in x.FundingOpportunityEligibilityCriterias)
+                {
+                    y.EligibilityCriteria.Lang = _Language;
+                }
+                foreach (var y in x.FundingOpportunityExpectedResults)
+                {
+                    y.ExpectedResult.Lang = _Language;
+                }
+                foreach (var y in x.FundingOpportunityObjectives)
+                {
+                    y.Objective.Lang = _Language;
+                }
+                foreach (var y in x.EligibleCostCategories)
+                {
+                    y.CostCategory.Lang = _Language;
+                    y.Lang = _Language;
+                }
+                foreach (var y in x.EligibleClientTypes)
+                {
+                    y.Lang = _Language;
+                }
+            }
+
+            return fos;
+        }
+
+        public IEnumerable<FundingOpportunity> GetArchivedFundingOpportunities()
+        {
+            var fos = PortalContext.FundingOpportunity.Where(x => x.ActivationEndDate <= DateTime.Now || (x.Status == FOStatus.Archived))
                                    .Include(o => o.FundingOpportunityObjectives)
                                            .ThenInclude(fo => fo.Objective)
                                    .Include(foer => foer.FundingOpportunityExpectedResults)

@@ -71,6 +71,12 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetInactiveFundingOpportunities();
         }
+        [HttpGet]
+        [Route("GetArchivedFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetArchivedFundingOpportunities()
+        {
+            return _unitOfWork.FundingOpportunities.GetArchivedFundingOpportunities();
+        }
 
         [HttpGet]
         [Route("GetActiveFundingOpportunitiesWithRelationshipsCollapsed")]

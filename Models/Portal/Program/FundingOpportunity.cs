@@ -15,8 +15,8 @@ namespace InternalPortal.Models.Portal.Program
     {
         Draft = 0,
         Published = 1,
-        Expired = 2,
-        Hold = 3
+        Archived = 2,
+        Closed = 3
     }
    
     public class FundingOpportunity
@@ -85,11 +85,11 @@ namespace InternalPortal.Models.Portal.Program
                     }
                     return StatusDesc = "Brouillon";
                 }
-                else if (Status == FOStatus.Hold)
+                else if (Status == FOStatus.Closed)
                 {
                     if (Lang == "EN")
                     {
-                        return StatusDesc = "On Hold";
+                        return StatusDesc = "Closed";
                     }
                     return StatusDesc = "En entente";
                 }
@@ -97,7 +97,7 @@ namespace InternalPortal.Models.Portal.Program
                 {
                     if (Lang == "EN")
                     {
-                        return StatusDesc = "Expired";
+                        return StatusDesc = "Archived";
                     }
                     return StatusDesc = "Expiré";
                 }
