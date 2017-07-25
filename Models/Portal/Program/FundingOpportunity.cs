@@ -61,7 +61,7 @@ namespace InternalPortal.Models.Portal.Program
         public FOStatus Status { get; set; }
         [NotMapped]
         public string StatusDesc { get {
-                if (ActivationStartDate <= DateTime.Now && Status == FOStatus.Published)
+                if (Status == FOStatus.Published && ActivationStartDate <= DateTime.Now && ActivationEndDate >= DateTime.Now)
                 {
                     if (Lang == "EN")
                     {
@@ -85,13 +85,29 @@ namespace InternalPortal.Models.Portal.Program
                     }
                     return StatusDesc = "Brouillon";
                 }
-                else if (Status == FOStatus.Closed)
+                else if (Status == FOStatus.Closed && ActivationStartDate <= DateTime.Now && ActivationEndDate >= DateTime.Now)
                 {
                     if (Lang == "EN")
                     {
                         return StatusDesc = "Closed";
                     }
-                    return StatusDesc = "En entente";
+                    return StatusDesc = "Fermé";
+                }
+                else if (Status == FOStatus.Closed && (ActivationStartDate > DateTime.Now || ActivationEndDate < DateTime.Now))
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Closed-Expired";
+                    }
+                    return StatusDesc = "Fermé-Expiré";
+                }
+                else if (Status == FOStatus.Published && (ActivationStartDate > DateTime.Now || ActivationEndDate < DateTime.Now))
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = "Closed-Expired";
+                    }
+                    return StatusDesc = "Fermé-Expiré";
                 }
                 else
                 {
@@ -108,6 +124,9 @@ namespace InternalPortal.Models.Portal.Program
         public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }      
         public IEnumerable<EligibleClientType> EligibleClientTypes { get; set; }
         public IEnumerable<EligibleCostCategory> EligibleCostCategories { get; set; }
+        public IEnumerable<FundingOpportunityConsideration> FundingOpportunityConsiderations { get; set; }
+        public IEnumerable<FundingOpportunityFrequentlyAskedQuestion> FundingOpportunityFrequentlyAskedQuestions { get; set; }
+        public IEnumerable<FundingOpportunityResource> FundingOpportunityResources { get; set; }
         public string GcimsCommitmentItemId { get; set; }
         public string FormName { get; set; }
         public string TermsConditionsUrlEN { get; set; }

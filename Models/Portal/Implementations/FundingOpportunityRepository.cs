@@ -34,6 +34,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                             .ThenInclude(cc => cc.CostCategory)
+                                   .Include(c => c.FundingProgram)  
+                                   .Include(c=>c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec=>ec.Consideration)
+                                   .Include(c=>c.FundingOpportunityResources)
+                                   .Include(c=>c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec=>ec.FrequentlyAskedQuestion)
                                    .ToList();
 
             foreach (var x in fos)
@@ -77,6 +83,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                             .ThenInclude(cc => cc.CostCategory)
+                                   .Include(c => c.FundingProgram)
+                                   .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                                    .ToList();
 
             foreach (var x in fos)
@@ -122,6 +134,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                             .ThenInclude(cc => cc.CostCategory)
+                                   .Include(c => c.FundingProgram)
+                                   .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                                    .ToList();
 
             foreach (var x in fos)
@@ -165,6 +183,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                             .ThenInclude(cc => cc.CostCategory)
+                                    .Include(c => c.FundingProgram)
+                                    .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                                    .ToList();
 
             foreach (var x in fos)
@@ -208,6 +232,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                             .ThenInclude(cc => cc.CostCategory)
+                                   .Include(c => c.FundingProgram)
+                                   .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                                    .ToList();
 
             foreach (var x in fos)
@@ -256,6 +286,12 @@ namespace InternalPortal.Models.Portal.Implementations
                 .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                         .ThenInclude(ec => ec.EligibilityCriteria)
                 .Include(fas => fas.EligibleClientTypes)
+                .Include(c => c.FundingProgram)
+                .Include(c => c.FundingOpportunityConsiderations)
+                        .ThenInclude(ec => ec.Consideration)
+                .Include(c => c.FundingOpportunityResources)
+                .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                        .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                 .SingleOrDefaultAsync(i=>i.FundingOpportunityId == id);
 
 
@@ -278,6 +314,12 @@ namespace InternalPortal.Models.Portal.Implementations
                        .ThenInclude(ec => ec.EligibilityCriteria)
                .Include(fas => fas.EligibleClientTypes)
                .Include(c => c.EligibleCostCategories)
+               .Include(c => c.FundingProgram)
+               .Include(c => c.FundingOpportunityConsiderations)
+                    .ThenInclude(ec => ec.Consideration)
+                .Include(c => c.FundingOpportunityResources)
+                .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                .SingleOrDefaultAsync(i => i.FundingOpportunityId == id);
 
             entity.Lang = _Language;
@@ -313,6 +355,12 @@ namespace InternalPortal.Models.Portal.Implementations
                                            .ThenInclude(ec => ec.EligibilityCriteria)
                                   .Include(fas => fas.EligibleClientTypes)
                                   .Include(c => c.EligibleCostCategories)
+                                  .Include(c => c.FundingProgram)
+                                  .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
                                   .ToList();
 
             foreach (var x in fos)

@@ -338,6 +338,581 @@
         }
       }
     },
+    "fundingopportunityresources/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the funding opportunity resource"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns thefunding opportunity resource id",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityResource"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the funding opportunity resource",
+        "operationId": "fundingopportunityresourceDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the funding opportunity resource"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates funding opportunity resource",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingopportunityresourceUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "fundingopportunityresource",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityResource"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated funding opportunity resource result"
+          }
+        }
+      }
+    },
+    "/fundingopportunityresources": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets funding opportunity resource",
+            "schema": {
+              "title": "fundingopportunityresource",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityResource"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created funding opportunity resource",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "fundingopportunityresourceCreate",
+        "parameters": [
+          {
+            "name": "create_fundingopportunityresource",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityResource"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new funding opportunity resource",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityResource"
+            }
+          }
+        }
+      }
+    },
+    "considerations/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the consideration"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the consideration id",
+            "schema": {
+              "$ref": "#/definitions/Consideration"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the consideration",
+        "operationId": "considerationDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the consideration"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates consideration",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "considerationUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "considerationresource",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/Consideration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated consideration result"
+          }
+        }
+      }
+    },
+    "/considerations": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets consideration",
+            "schema": {
+              "title": "consideration",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Consideration"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created consideration",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "considerationCreate",
+        "parameters": [
+          {
+            "name": "create_consideration",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/Consideration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new consideration",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/Consideration"
+            }
+          }
+        }
+      }
+    },
+    "fundingopportunityconsiderations/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the fundingopportunityconsiderations"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the fundingopportunityconsiderations id",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityConsideration"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the FundingOpportunityConsideration",
+        "operationId": "FundingOpportunityConsiderationDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the FundingOpportunityConsideration"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates FundingOpportunityConsideration",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityConsiderationUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "FundingOpportunityConsideration",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityConsideration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated FundingOpportunityConsideration result"
+          }
+        }
+      }
+    },
+    "/fundingopportunityconsiderations": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets FundingOpportunityConsideration",
+            "schema": {
+              "title": "consideration",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityConsideration"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created FundingOpportunityConsideration",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityConsiderationCreate",
+        "parameters": [
+          {
+            "name": "create_FundingOpportunityConsideration",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityConsideration"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new FundingOpportunityConsideration",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityConsideration"
+            }
+          }
+        }
+      }
+    },
+    "frequentlyaskedquestions/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the frequentlyaskedquestions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the consideration id",
+            "schema": {
+              "$ref": "#/definitions/FrequentlyAskedQuestion"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the frequentlyAskedQuestion",
+        "operationId": "frequentlyAskedQuestionDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the FrequentlyAskedQuestion"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates FrequentlyAskedQuestion",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FrequentlyAskedQuestionUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "FrequentlyAskedQuestion",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FrequentlyAskedQuestion"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated FrequentlyAskedQuestion"
+          }
+        }
+      }
+    },
+    "/frequentlyaskedquestions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets FrequentlyAskedQuestion",
+            "schema": {
+              "title": "FrequentlyAskedQuestion",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FrequentlyAskedQuestion"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created FrequentlyAskedQuestion",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FrequentlyAskedQuestionCreate",
+        "parameters": [
+          {
+            "name": "create_FrequentlyAskedQuestion",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FrequentlyAskedQuestion"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new FrequentlyAskedQuestion",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FrequentlyAskedQuestion"
+            }
+          }
+        }
+      }
+    },
+    "fundingopportunityfrequentlyaskedquestions/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the fundingopportunityfrequentlyaskedquestions"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the fundingopportunityfrequentlyaskedquestions id",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the FundingOpportunityFrequentlyAskedQuestion",
+        "operationId": "FundingOpportunityFrequentlyAskedQuestionDelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the FundingOpportunityFrequentlyAskedQuestion"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates FundingOpportunityFrequentlyAskedQuestion",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityFrequentlyAskedQuestionUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "FundingOpportunityFrequentlyAskedQuestion",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated FundingOpportunityFrequentlyAskedQuestion result"
+          }
+        }
+      }
+    },
+    "/fundingopportunityfrequentlyaskedquestions": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets FundingOpportunityFrequentlyAskedQuestion",
+            "schema": {
+              "title": "FundingOpportunityFrequentlyAskedQuestion",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created FundingOpportunityFrequentlyAskedQuestion",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityFrequentlyAskedQuestionCreate",
+        "parameters": [
+          {
+            "name": "create_FundingOpportunityFrequentlyAskedQuestion",
+            "in": "body",
+            "description": "The expected result JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new FundingOpportunityFrequentlyAskedQuestion",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+            }
+          }
+        }
+      }
+    },
     "eligibleclienttypes/{id}": {
       "get": {
         "parameters": [
@@ -1265,7 +1840,7 @@
       "properties": {
         "fundingProgramId": {
           "type": "string"
-        },       
+        },
         "titleE": {
           "type": "string"
         },
@@ -1283,7 +1858,7 @@
         },
         "endDate": {
           "type": "string"
-        }       
+        }
       }
     },
     "FundingOpportunityCreate": {
@@ -1328,10 +1903,10 @@
         "statusDesc": {
           "type": "string"
         },
-        "termsConditionsUrlEn": {
+        "termsConditionsUrlEN": {
           "type": "string"
         },
-        "termsConditionsUrlFr": {
+        "termsConditionsUrlFR": {
           "type": "string"
         },
         "contactEmail": {
@@ -1384,6 +1959,10 @@
         "formName": {
           "type": "string"
         },
+        "fundingProgram": {
+          "type": "object",
+          "$ref": "#/definitions/FundingProgram"
+        },
         "fundingOpportunityObjectives": {
           "type": "array",
           "items": {
@@ -1419,19 +1998,133 @@
             "$ref": "#/definitions/EligibleClientType"
           }
         },
+        "fundingOpportunityResources": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityResource"
+          }
+        },
+        "fundingOpportunityConsiderations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityConsideration"
+          }
+        },
+        "fundingOpportunityFrequentlyAskedQuestions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+          }
+        },
         "status": {
           "type": "string"
         },
         "statusDesc": {
           "type": "string"
         },
-        "termsConditionsUrlEn": {
+        "termsConditionsUrlEN": {
           "type": "string"
         },
-        "termsConditionsUrlFr": {
+        "termsConditionsUrlFR": {
           "type": "string"
         },
         "contactEmail": {
+          "type": "string"
+        }
+      }
+    },
+    "FundingOpportunityResource": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityResourceId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "urlE": {
+          "type": "string"
+        },
+        "urlF": {
+          "type": "string"
+        }
+      }
+    },
+    "FundingOpportunityConsideration": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityConsiderationId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "considerationId": {
+          "type": "string"
+        },
+        "consideration": {
+          "type": "object",
+          "$ref": "#/definitions/Consideration"
+        }
+      }
+    },
+    "Consideration": {
+      "type": "object",
+      "properties": {
+        "considerationId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        }
+      }
+    },
+    "FundingOpportunityFrequentlyAskedQuestion": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityFrequentlyAskedQuestionId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "frequentlyAskedQuestionId": {
+          "type": "string"
+        },
+        "frequentlyAskedQuestion": {
+          "type": "object",
+          "$ref": "#/definitions/FrequentlyAskedQuestion"
+        }
+      }
+    },
+    "FrequentlyAskedQuestion": {
+      "type": "object",
+      "properties": {
+        "frequentlyAskedQuestionId": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "answerE": {
+          "type": "string"
+        },
+        "answerF": {
           "type": "string"
         }
       }
