@@ -10,7 +10,7 @@ namespace InternalPortal.Models.Portal.Program
     public class FundingOpportunityConsideration
     {
         [Key]
-        public Guid FundingOpportunityConsiderationConsiderationId { get; set; }
+        public Guid FundingOpportunityConsiderationId { get; set; }
         public Guid ConsiderationId { get; set; }
         public Guid FundingOpportunityId { get; set; }
         public Consideration Consideration { get; set; }

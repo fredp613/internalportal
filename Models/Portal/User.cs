@@ -12,6 +12,7 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid UserId { get; set; }
+        public string PAI { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         [ForeignKey("InternalUpdatedBy")]

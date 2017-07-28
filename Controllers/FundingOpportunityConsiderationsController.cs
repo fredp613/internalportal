@@ -37,7 +37,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingOpportunityConsideration = await _context.FundingOpportunityConsideration.SingleOrDefaultAsync(m => m.FundingOpportunityConsiderationConsiderationId == id);
+            var fundingOpportunityConsideration = await _context.FundingOpportunityConsideration.SingleOrDefaultAsync(m => m.FundingOpportunityConsiderationId == id);
 
             if (fundingOpportunityConsideration == null)
             {
@@ -56,7 +56,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            if (id != fundingOpportunityConsideration.FundingOpportunityConsiderationConsiderationId)
+            if (id != fundingOpportunityConsideration.FundingOpportunityConsiderationId)
             {
                 return BadRequest();
             }
@@ -94,7 +94,7 @@ namespace InternalPortal.Controllers
             _context.FundingOpportunityConsideration.Add(fundingOpportunityConsideration);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunityConsideration", new { id = fundingOpportunityConsideration.FundingOpportunityConsiderationConsiderationId }, fundingOpportunityConsideration);
+            return CreatedAtAction("GetFundingOpportunityConsideration", new { id = fundingOpportunityConsideration.FundingOpportunityConsiderationId }, fundingOpportunityConsideration);
         }
 
         // DELETE: api/FundingOpportunityConsiderations/5
@@ -106,7 +106,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingOpportunityConsideration = await _context.FundingOpportunityConsideration.SingleOrDefaultAsync(m => m.FundingOpportunityConsiderationConsiderationId == id);
+            var fundingOpportunityConsideration = await _context.FundingOpportunityConsideration.SingleOrDefaultAsync(m => m.FundingOpportunityConsiderationId == id);
             if (fundingOpportunityConsideration == null)
             {
                 return NotFound();
@@ -120,7 +120,7 @@ namespace InternalPortal.Controllers
 
         private bool FundingOpportunityConsiderationExists(Guid id)
         {
-            return _context.FundingOpportunityConsideration.Any(e => e.FundingOpportunityConsiderationConsiderationId == id);
+            return _context.FundingOpportunityConsideration.Any(e => e.FundingOpportunityConsiderationId == id);
         }
     }
 }

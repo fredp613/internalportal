@@ -555,7 +555,7 @@ namespace InternalPortal.Migrations
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.FundingOpportunityConsideration", b =>
                 {
-                    b.Property<Guid>("FundingOpportunityConsiderationConsiderationId")
+                    b.Property<Guid>("FundingOpportunityConsiderationId")
                         .ValueGeneratedOnAdd();
 
                     b.Property<Guid>("ConsiderationId");
@@ -570,7 +570,7 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("UpdatedOn");
 
-                    b.HasKey("FundingOpportunityConsiderationConsiderationId");
+                    b.HasKey("FundingOpportunityConsiderationId");
 
                     b.HasIndex("ConsiderationId");
 
@@ -712,7 +712,7 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<Guid?>("FundingOpportunityId");
+                    b.Property<Guid>("FundingOpportunityId");
 
                     b.Property<string>("TitleE");
 
@@ -1031,6 +1031,8 @@ namespace InternalPortal.Migrations
                     b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("PAI");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
@@ -1401,9 +1403,10 @@ namespace InternalPortal.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedByInternalUserId");
 
-                    b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunity")
+                    b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunity", "FundingOpportunity")
                         .WithMany("FundingOpportunityResources")
-                        .HasForeignKey("FundingOpportunityId");
+                        .HasForeignKey("FundingOpportunityId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("InternalPortal.Models.Portal.InternalUser", "UpdatedBy")
                         .WithMany()
