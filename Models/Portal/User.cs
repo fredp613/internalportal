@@ -10,6 +10,7 @@ namespace InternalPortal.Models
 {
     public class User
     {
+        
         [Key]
         public Guid UserId { get; set; }
         public string PAI { get; set; }
@@ -24,6 +25,8 @@ namespace InternalPortal.Models
         public Guid? UpdatedByUserId { get; set; }        
         public virtual User CreatedBy { get; set; }
         public virtual User UpdatedBy { get; set; }
+
+      
 
     }
 }

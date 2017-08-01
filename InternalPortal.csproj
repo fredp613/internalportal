@@ -25,4 +25,5 @@
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="1.1.0" />
     <PackageReference Include="System.Net.Http" Version="4.3.2" />
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties Swagger_4InternalAPI_1json__JSONSchema="http://json.schemastore.org/commands" /></VisualStudio></ProjectExtensions>
 </Project>

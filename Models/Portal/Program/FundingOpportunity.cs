@@ -127,6 +127,7 @@ namespace InternalPortal.Models.Portal.Program
         public IEnumerable<FundingOpportunityConsideration> FundingOpportunityConsiderations { get; set; }
         public IEnumerable<FundingOpportunityFrequentlyAskedQuestion> FundingOpportunityFrequentlyAskedQuestions { get; set; }
         public IEnumerable<FundingOpportunityResource> FundingOpportunityResources { get; set; }
+        public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }       
         public string GcimsCommitmentItemId { get; set; }
         public string FormName { get; set; }
         public string TermsConditionsUrlEN { get; set; }

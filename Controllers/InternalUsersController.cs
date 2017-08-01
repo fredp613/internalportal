@@ -25,7 +25,10 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<InternalUser> GetInternalUser()
         {
-            return _context.InternalUser;
+            return _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
+                                                    .ThenInclude(fo => fo.FundingOpportunity)
+                                           .Include(iu => iu.FundingProgramInternalUsers)
+                                                 .ThenInclude(fp => fp.FundingProgram);
         }
 
         // GET: api/InternalUsers/5
@@ -37,7 +40,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await _context.InternalUser.SingleOrDefaultAsync(m => m.InternalUserId == id);
+            var internalUser = await _context.InternalUser.Include(iu => iu.FundingProgramInternalUsers).SingleOrDefaultAsync(m => m.InternalUserId == id);
 
             if (internalUser == null)
             {

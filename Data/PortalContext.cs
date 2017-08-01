@@ -45,8 +45,8 @@ namespace InternalPortal.Models
                 .HasOne(p => p.UpdatedBy)
                 .WithMany()
                 .HasForeignKey(b => b.UpdatedByInternalUserId);
+          
 
-            
         }
 
   
@@ -80,5 +80,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Program.Consideration> Consideration { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityConsideration> FundingOpportunityConsideration { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityResource> FundingOpportunityResource { get; set; }
+        public DbSet<InternalPortal.Models.Portal.FundingProgramInternalUser> FundingProgramInternalUser { get; set; }
+        public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityInternalUser> FundingOpportunityInternalUser { get; set; }
     }
 }

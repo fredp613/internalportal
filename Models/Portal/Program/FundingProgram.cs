@@ -45,5 +45,6 @@ namespace InternalPortal.Models.Portal.Program
         [ForeignKey("UpdatedByInternalUserId")]
         public InternalUser UpdatedBy { get; set; }
         public IEnumerable<FundingOpportunity> FundingOpportunities { get; set; }
+        public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
     }
 }

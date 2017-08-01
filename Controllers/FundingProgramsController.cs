@@ -25,7 +25,8 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<FundingProgram> GetFundingProgram()
         {
-            return _context.FundingProgram;
+            return _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
+                                            .ThenInclude(ec => ec.InternalUser);
         }
 
         // GET: api/FundingPrograms/5
@@ -37,7 +38,8 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingProgram = await _context.FundingProgram.SingleOrDefaultAsync(m => m.FundingProgramId == id);
+            var fundingProgram = await _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
+                                            .ThenInclude(ec => ec.InternalUser).SingleOrDefaultAsync(m => m.FundingProgramId == id);
 
             if (fundingProgram == null)
             {

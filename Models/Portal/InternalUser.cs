@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using InternalPortal.Models.Portal.Program;
 
 namespace InternalPortal.Models.Portal
 {
@@ -14,6 +15,9 @@ namespace InternalPortal.Models.Portal
         [Key]
         public Guid InternalUserId { get; set; }      
         public string UserName { get; set; }
+        public string Role { get; set; }
+        public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
+        public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
 	    [ForeignKey("CreatedBy")]

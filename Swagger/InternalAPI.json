@@ -5,7 +5,7 @@
     "title": "Internal API",
     "description": ""
   },
-  "host": "172.23.48.56:81",
+  "host": "172.16.11.134:81",
   "basePath": "/api/",
   "schemes": [
     "http",
@@ -185,7 +185,7 @@
         }
       }
     },
-    "fundingprograms/{id}": {
+    "/fundingprograms/{id}": {
       "get": {
         "parameters": [
           {
@@ -250,6 +250,351 @@
         "responses": {
           "204": {
             "description": "no content response code 204 - updated funding program result"
+          }
+        }
+      }
+    },
+    "/internalusers": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets internalusers",
+            "schema": {
+              "title": "InternalUser",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InternalUser"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created InternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "InternalUserCreate",
+        "parameters": [
+          {
+            "name": "Internaluser",
+            "in": "body",
+            "description": "The InternalUser JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/InternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new InternalUser",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/InternalUser"
+            }
+          }
+        }
+      }
+    },
+    "internalusers/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the InternalUser"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the InternalUser id",
+            "schema": {
+              "$ref": "#/definitions/InternalUser"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the InternalUser",
+        "operationId": "InternalUserdelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the InternalUser"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates InternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "InternalUserUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "InternalUser",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/InternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated InternalUser result"
+          }
+        }
+      }
+    },
+    "/fundingopportunityinternalusers": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets fundingopportunityinternalusers",
+            "schema": {
+              "title": "fundingopportunityinternaluser",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunityInternalUser"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created FundingOpportunityInternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityInternalUserCreate",
+        "parameters": [
+          {
+            "name": "FundingOpportunityInternalUser",
+            "in": "body",
+            "description": "The FundingOpportunityInternalUser JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityInternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new FundingOpportunityInternalUser",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityInternalUser"
+            }
+          }
+        }
+      }
+    },
+    "fundingopportunityinternalusers/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the FundingOpportunityInternalUser"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the FundingOpportunityInternalUser id",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityInternalUser"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the FundingOpportunityInternalUser",
+        "operationId": "FundingOpportunityInternalUserdelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the FundingOpportunityInternalUser"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates FundingOpportunityInternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingOpportunityInternalUserUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "FundingOpportunityInternalUser",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingOpportunityInternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated FundingOpportunityInternalUser result"
+          }
+        }
+      }
+    },
+    "/fundingprograminternalusers": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets fundingprograminternalusers",
+            "schema": {
+              "title": "fundingprograminternal users",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingProgramInternalUser"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created FundingProgramInternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingProgramInternalUserCreate",
+        "parameters": [
+          {
+            "name": "FundingProgramInternalUser",
+            "in": "body",
+            "description": "The FundingProgramInternalUser JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/FundingProgramInternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new FundingProgramInternalUser",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/FundingProgramInternalUser"
+            }
+          }
+        }
+      }
+    },
+    "fundingprograminternalusers/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the FundingProgramInternalUser"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the FundingProgramInternalUser id",
+            "schema": {
+              "$ref": "#/definitions/FundingProgramInternalUser"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the FundingProgramInternalUser",
+        "operationId": "FundingProgramInternalUserdelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the FundingProgramInternalUser"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates FundingProgramInternalUser",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "FundingProgramInternalUserUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "FundingProgramInternalUser",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/FundingProgramInternalUser"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated FundingProgramInternalUser result"
           }
         }
       }
@@ -1858,7 +2203,15 @@
         },
         "endDate": {
           "type": "string"
+        },
+        "fundingProgramInternalUsers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingProgramInternalUser"
+          }
         }
+
       }
     },
     "FundingOpportunityCreate": {
@@ -2017,6 +2370,13 @@
           "items": {
             "type": "object",
             "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+          }
+        },
+        "fundingOpportunityInternalUsers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityInternalUser"
           }
         },
         "status": {
@@ -2383,8 +2743,64 @@
           "type": "string"
         }
       }
+    },
+    "InternalUser": {
+      "type": "object",
+      "properties": {
+        "internalUserId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "fundingOpportunityInternalUsers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityInternalUser"
+          }
+        },
+        "fundingProgramInternalUsers": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingProgramInternalUser"
+          }
+        }
+      }
+    },
+    "FundingOpportunityInternalUser": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityInternalUserId": {
+          "type": "string"
+        },
+        "internalUserId": {
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "type": "string"
+        }
+      }
+    },
+    "FundingProgramInternalUser": {
+      "type": "object",
+      "properties": {
+        "fundingProgramInternalUserId": {
+          "type": "string"
+        },
+        "internalUserId": {
+          "type": "string"
+        },
+        "fundingProgramId": {
+          "type": "string"
+        }
+      }
     }
 
 
   }
-  }
+}
