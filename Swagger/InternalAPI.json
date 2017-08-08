@@ -5,7 +5,7 @@
     "title": "Internal API",
     "description": ""
   },
-  "host": "172.16.11.134:81",
+  "host": "172.16.11.134:83",
   "basePath": "/api/",
   "schemes": [
     "http",
@@ -365,6 +365,26 @@
         "responses": {
           "204": {
             "description": "no content response code 204 - updated InternalUser result"
+          }
+        }
+      }
+    },
+    "internalusers/getByUserName/{username}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "username",
+            "in": "path",
+            "type": "string",
+            "description": "User Name of the InternalUser"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the InternalUser object",
+            "schema": {
+              "$ref": "#/definitions/InternalUser"
+            }
           }
         }
       }
@@ -1373,7 +1393,6 @@
         }
       }
     },
-
     "expectedResults/{id}": {
       "get": {
         "parameters": [
