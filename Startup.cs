@@ -56,11 +56,11 @@ namespace InternalPortal
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
-            services.AddDbContext<PortalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
-
             //services.AddDbContext<PortalContext>(options =>
-            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext2")));
+            //        options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+
+            services.AddDbContext<PortalContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext2")));
 
 
             //	    services.AddDbContext<PortalContext>(options =>

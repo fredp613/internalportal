@@ -1218,7 +1218,7 @@ namespace InternalPortal.Migrations
             modelBuilder.Entity("InternalPortal.Models.Portal.FundingProgramInternalUser", b =>
                 {
                     b.HasOne("InternalPortal.Models.Portal.Program.FundingProgram", "FundingProgram")
-                        .WithMany()
+                        .WithMany("FundingProgramInternalUsers")
                         .HasForeignKey("FundingProgramId")
                         .OnDelete(DeleteBehavior.Cascade);
 
@@ -1438,7 +1438,7 @@ namespace InternalPortal.Migrations
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.FundingOpportunityInternalUser", b =>
                 {
                     b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunity", "FundingOpportunity")
-                        .WithMany()
+                        .WithMany("FundingOpportunityInternalUsers")
                         .HasForeignKey("FundingOpportunityId")
                         .OnDelete(DeleteBehavior.Cascade);
 
