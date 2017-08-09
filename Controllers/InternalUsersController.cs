@@ -40,7 +40,10 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await _context.InternalUser.Include(iu => iu.FundingProgramInternalUsers).SingleOrDefaultAsync(m => m.InternalUserId == id);
+            var internalUser = await _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
+                                                    .ThenInclude(fo => fo.FundingOpportunity)
+                                           .Include(iu => iu.FundingProgramInternalUsers)
+                                                 .ThenInclude(fp => fp.FundingProgram).SingleOrDefaultAsync(m => m.InternalUserId == id);
 
             if (internalUser == null)
             {
@@ -58,7 +61,12 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await _context.InternalUser.Include(iu => iu.FundingProgramInternalUsers).SingleOrDefaultAsync(m => m.UserName == username);
+            var internalUser = await _context.InternalUser
+                                           .Include(iu => iu.FundingOpportunityInternalUsers)
+                                                    .ThenInclude(fo => fo.FundingOpportunity)
+                                           .Include(iu => iu.FundingProgramInternalUsers)
+                                                 .ThenInclude(fp => fp.FundingProgram)
+                                            .SingleOrDefaultAsync(m => m.UserName == username);
 
             if (internalUser == null)
             {

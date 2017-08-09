@@ -26,7 +26,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<FundingOpportunityInternalUser> GetFundingOpportunityInternalUser()
         {
 
-            return _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser);
+            return _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).Include(fo => fo.FundingOpportunity);
         }
 
         // GET: api/FundingOpportunityInternalUsers/5
@@ -38,7 +38,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingOpportunityInternalUser = await _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).SingleOrDefaultAsync(m => m.FundingOpportunityInternalUserId == id);
+            var fundingOpportunityInternalUser = await _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).Include(fo => fo.FundingOpportunity).SingleOrDefaultAsync(m => m.FundingOpportunityInternalUserId == id);
 
             if (fundingOpportunityInternalUser == null)
             {

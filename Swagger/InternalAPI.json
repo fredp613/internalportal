@@ -2802,6 +2802,14 @@
         },
         "fundingOpportunityId": {
           "type": "string"
+        },
+        "fundingOpportunity": {
+          "type": "object",
+          "$ref": "#/definitions/FundingOpportunity"
+        },
+        "internalUser": {
+          "type": "object",
+          "$ref": "#/definitions/InternalUser"
         }
       }
     },
@@ -2816,10 +2824,16 @@
         },
         "fundingProgramId": {
           "type": "string"
+        },
+        "fundingProgram": {
+          "type": "object",
+          "$ref": "#/definitions/FundingProgram"
+        },
+        "internalUser": {
+          "type": "object",
+          "$ref": "#/definitions/InternalUser"
         }
       }
     }
-
-
   }
 }
