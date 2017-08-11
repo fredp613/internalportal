@@ -19,6 +19,30 @@
     "text/html"
   ],
   "paths": {
+    "/{lang}/FundingOpportunities/getAllFundingOpportunities": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets all funding opportunities except archived",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
     "/{lang}/FundingOpportunities/GetActiveFundingOpportunities": {
       "get": {
         "parameters": [
@@ -2802,14 +2826,6 @@
         },
         "fundingOpportunityId": {
           "type": "string"
-        },
-        "fundingOpportunity": {
-          "type": "object",
-          "$ref": "#/definitions/FundingOpportunity"
-        },
-        "internalUser": {
-          "type": "object",
-          "$ref": "#/definitions/InternalUser"
         }
       }
     },
@@ -2824,15 +2840,8 @@
         },
         "fundingProgramId": {
           "type": "string"
-        },
-        "fundingProgram": {
-          "type": "object",
-          "$ref": "#/definitions/FundingProgram"
-        },
-        "internalUser": {
-          "type": "object",
-          "$ref": "#/definitions/InternalUser"
         }
+
       }
     }
   }

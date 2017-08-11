@@ -44,7 +44,12 @@ namespace InternalPortal.Controllers
             return _unitOfWork.FundingOpportunities.GetAll();
         }
 
-       
+        public IEnumerable<FundingOpportunity> GetAllFundingOpportunities()
+        {
+            return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities();
+        }
+
+
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
         [HttpGet]
         [Route("GetActiveFundingOpportunities")]
