@@ -43,7 +43,8 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetAll();
         }
-
+        [HttpGet]
+        [Route("GetAllFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetAllFundingOpportunities()
         {
             return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities();
