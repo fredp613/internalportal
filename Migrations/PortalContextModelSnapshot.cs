@@ -284,6 +284,8 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<string>("Language");
+
                     b.Property<string>("LastName");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
