@@ -90,6 +90,12 @@ namespace InternalPortal.Controllers
             }
 
             _context.Entry(internalUser).State = EntityState.Modified;
+           
+            foreach (var ur in internalUser.InternalUserRoles)
+            {
+                _context.InternalUserRole.Remove(ur);
+                _context.InternalUserRole.Add(ur);
+            }
 
             try
             {
@@ -109,7 +115,7 @@ namespace InternalPortal.Controllers
 
             return NoContent();
         }
-
+      
         // POST: api/InternalUsers
         [HttpPost]
         public async Task<IActionResult> PostInternalUser([FromBody] InternalUser internalUser)
@@ -120,6 +126,10 @@ namespace InternalPortal.Controllers
             }
 
             _context.InternalUser.Add(internalUser);
+            foreach (var ur in internalUser.InternalUserRoles)
+            {
+                _context.InternalUserRole.Add(ur);
+            }
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetInternalUser", new { id = internalUser.InternalUserId }, internalUser);
