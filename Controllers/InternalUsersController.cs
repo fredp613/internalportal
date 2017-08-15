@@ -90,13 +90,7 @@ namespace InternalPortal.Controllers
             }
 
             _context.Entry(internalUser).State = EntityState.Modified;
-           
-            //foreach (var ur in internalUser.InternalUserRoles)
-            //{
-            //    _context.InternalUserRole.Remove(ur);
-            //    _context.InternalUserRole.Add(ur);
-            //}
-
+                      
             try
             {
                 await _context.SaveChangesAsync();

@@ -25,7 +25,8 @@ namespace InternalPortal.Models.Portal
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-	public IEnumerable<InternalUserRole> InternalUserRoles {get; set;}
+        public string Language { get; set; }
+	    public IEnumerable<InternalUserRole> InternalUserRoles {get; set;}
         public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
         public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
         public DateTime CreatedOn { get; set; }

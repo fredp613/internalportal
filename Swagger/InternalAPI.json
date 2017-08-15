@@ -2787,7 +2787,34 @@
         }
       }
     },
-    "InternalUser": {
+    "InternalUserCreateUpdate": {
+       "type": "object",
+      "properties": {
+        "internalUserId": {
+          "type": "string"
+        },
+        "userName": {
+          "type": "string"
+        },      
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "internalUserRoles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/InternalUserRole"
+          }
+        }       
+      }
+    },
+    "InternalUser" : {
       "type": "object",
       "properties": {
         "internalUserId": {
@@ -2796,7 +2823,16 @@
         "userName": {
           "type": "string"
         },
-        "role": {
+        "email": {
+          "type": "string"
+        },
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "language": {
           "type": "string"
         },
         "internalUserRoles": {
