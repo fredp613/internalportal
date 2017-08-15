@@ -280,7 +280,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<string>("Role");
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
 
@@ -295,6 +299,24 @@ namespace InternalPortal.Migrations
                     b.HasIndex("UpdatedByInternalUserId");
 
                     b.ToTable("InternalUser");
+                });
+
+            modelBuilder.Entity("InternalPortal.Models.Portal.InternalUserRole", b =>
+                {
+                    b.Property<Guid>("InternalUserRoleId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<Guid>("InternalUserId");
+
+                    b.Property<string>("Role");
+
+                    b.HasKey("InternalUserRoleId");
+
+                    b.HasIndex("InternalUserId");
+
+                    b.ToTable("InternalUserRole");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.Consideration", b =>
@@ -1237,6 +1259,14 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.Portal.InternalUser", "UpdatedBy")
                         .WithMany()
                         .HasForeignKey("UpdatedByInternalUserId");
+                });
+
+            modelBuilder.Entity("InternalPortal.Models.Portal.InternalUserRole", b =>
+                {
+                    b.HasOne("InternalPortal.Models.Portal.InternalUser", "InternalUser")
+                        .WithMany("InternalUserRoles")
+                        .HasForeignKey("InternalUserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Program.Consideration", b =>

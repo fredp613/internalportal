@@ -25,10 +25,7 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<InternalUser> GetInternalUser()
         {
-            return _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
-                                                    .ThenInclude(fo => fo.FundingOpportunity)
-                                           .Include(iu => iu.FundingProgramInternalUsers)
-                                                 .ThenInclude(fp => fp.FundingProgram);
+            return _context.InternalUser.Include(ur=>ur.InternalUserRoles);
         }
 
         // GET: api/InternalUsers/5
@@ -43,7 +40,8 @@ namespace InternalPortal.Controllers
             var internalUser = await _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
-                                                 .ThenInclude(fp => fp.FundingProgram).SingleOrDefaultAsync(m => m.InternalUserId == id);
+                                                 .ThenInclude(fp => fp.FundingProgram)
+       					 .Include(ur => ur.InternalUserRoles).SingleOrDefaultAsync(m => m.InternalUserId == id);
 
             if (internalUser == null)
             {
@@ -62,6 +60,7 @@ namespace InternalPortal.Controllers
             }
 
             var internalUser = await _context.InternalUser
+                                           .Include(ur => ur.InternalUserRoles)
                                            .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)

@@ -8,6 +8,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using InternalPortal.Models.Portal.Program;
 
+/**
+  1.FP manager
+  2.SR
+  3.FO Admin
+  4.Portal Admin
+  **/
+
 namespace InternalPortal.Models.Portal
 {
     public class InternalUser
@@ -15,7 +22,10 @@ namespace InternalPortal.Models.Portal
         [Key]
         public Guid InternalUserId { get; set; }      
         public string UserName { get; set; }
-        public string Role { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+	public IEnumerable<InternalUserRole> InternalUserRoles {get; set;}
         public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
         public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
         public DateTime CreatedOn { get; set; }

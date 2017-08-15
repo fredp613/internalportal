@@ -75,6 +75,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Program.CostCategory> CostCategory { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.EligibleCostCategory> EligibleCostCategory { get; set; }
         public DbSet<InternalPortal.Models.Portal.InternalUser> InternalUser { get; set; }
+        public DbSet<InternalPortal.Models.Portal.InternalUserRole> InternalUserRole { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FrequentlyAskedQuestion> FrequentlyAskedQuestion { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityFrequentlyAskedQuestion> FundingOpportunityFrequentlyAskedQuestion { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.Consideration> Consideration { get; set; }

@@ -2787,6 +2787,17 @@
         }
       }
     },
+    "InternalUserRole": {
+      "type": "object",
+      "properties": {
+        "internalUserRoleId": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        }
+      }
+    },
     "InternalUser": {
       "type": "object",
       "properties": {
@@ -2796,8 +2807,12 @@
         "userName": {
           "type": "string"
         },
-        "role": {
-          "type": "string"
+        "internalUserRoles": {
+          "type": "array", 
+	  "items": {
+	  	"type":"object",
+		"$ref":"#/definitions/InternalUserRole"
+	  }
         },
         "fundingOpportunityInternalUsers": {
           "type": "array",
