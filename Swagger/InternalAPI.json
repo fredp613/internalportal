@@ -278,6 +278,121 @@
         }
       }
     },
+    "/internaluserroles": {
+      "get": {
+        "responses": {
+          "200": {
+            "description": "Gets internaluserroles",
+            "schema": {
+              "title": "internaluserroles",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InternalUserRole"
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Returns the newly created InternalUserRole",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "InternalUserRoleCreate",
+        "parameters": [
+          {
+            "name": "InternalUserRole",
+            "in": "body",
+            "description": "The InternalUserRole JSON you want to post",
+            "schema": {
+              "$ref": "#/definitions/InternalUserRole"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Make a new InternalUserRole",
+            "type": "object",
+            "schema": {
+              "$ref": "#/definitions/InternalUserRole"
+            }
+          }
+        }
+      }
+    },
+    "internaluserroles/{id}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "ID of the InternalUserRole"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the InternalUserRole id",
+            "schema": {
+              "$ref": "#/definitions/InternalUserRole"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "deletes the InternalUserRole",
+        "operationId": "InternalUserRoledelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the InternalUserRole"
+          }
+        }
+      },
+      "put": {
+        "summary": "Updates InternalUserRole",
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "operationId": "InternalUserRoleUpdate",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          },
+          {
+            "name": "InternalUserRole",
+            "in": "body",
+            "description": "The expected JSON you want to put",
+            "schema": {
+              "$ref": "#/definitions/InternalUserRole"
+            },
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content response code 204 - updated InternalUserRole result"
+          }
+        }
+      }
+    },
     "/internalusers": {
       "get": {
         "responses": {
@@ -2863,10 +2978,13 @@
       "properties": {
         "internalUserRoleId": {
           "type": "string"
-        },        
+        },
+        "internalUserId": {
+          "type": "string"
+        },
         "role": {
           "type": "string"
-        }        
+        }
       }
     },
     "FundingOpportunityInternalUser": {
