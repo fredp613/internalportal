@@ -126,10 +126,7 @@ namespace InternalPortal.Controllers
             }
 
             _context.InternalUser.Add(internalUser);
-            foreach (var ur in internalUser.InternalUserRoles)
-            {
-                _context.InternalUserRole.Add(ur);
-            }
+           
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetInternalUser", new { id = internalUser.InternalUserId }, internalUser);
