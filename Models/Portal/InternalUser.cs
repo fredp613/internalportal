@@ -27,7 +27,7 @@ namespace InternalPortal.Models.Portal
         public string Email { get; set; }
         public string Language { get; set; }
         [NotMapped]
-        public string FullName { get { return FirstName + " " + LastName } set { } }
+        public string FullName { get { return FirstName + " " + LastName; } set { } }
 	    public IEnumerable<InternalUserRole> InternalUserRoles {get; set;}
         public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
         public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
