@@ -2947,6 +2947,9 @@
         "lastName": {
           "type": "string"
         },
+        "fullName": {
+          "type": "string"
+        },
         "language": {
           "type": "string"
         },
