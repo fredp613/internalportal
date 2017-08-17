@@ -78,7 +78,7 @@ namespace InternalPortal.Controllers
                     roles += x + ", ";
 
                 }
-
+                Console.WriteLine("asdfsdfsfd");
                 Console.WriteLine(roles);
                 internalUser.Roles = roles;                
             }
