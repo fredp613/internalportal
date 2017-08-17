@@ -67,15 +67,16 @@ namespace InternalPortal.Controllers
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
                                             .SingleOrDefaultAsync(m => m.UserName == username);
-            var internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).ToList();
+            List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.Role).ToList();
             string roles = "";
-         
+            Console.WriteLine(internalUserRoles);
             if (internalUserRoles != null)
             {
+                Console.WriteLine(internalUserRoles.Count());
                 foreach(var x in internalUserRoles)
                 {
                     Console.WriteLine("its me");
-                    Console.WriteLine(x.Role.ToString());
+                    Console.WriteLine(x);
                     roles += x + ", ";
 
                 }
