@@ -59,13 +59,13 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await _context.InternalUser
+            var internalUser =  _context.InternalUser
                                            .Include(ur => ur.InternalUserRoles)
                                            .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-                                            .SingleOrDefaultAsync(m => m.UserName == username);
+                                            .SingleOrDefault(m => m.UserName == username);
             var internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.Role);
             if (internalUserRoles != null)
             {                
