@@ -68,21 +68,11 @@ namespace InternalPortal.Controllers
                                                  .ThenInclude(fp => fp.FundingProgram)
                                             .SingleOrDefault(m => m.UserName == username);
             List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.Role).ToList();
-            string roles = "";
-            Console.WriteLine(internalUserRoles);
             if (internalUserRoles != null)
             {
-                Console.WriteLine(internalUserRoles.Count());
-                foreach(var x in internalUserRoles)
-                {
-                    Console.WriteLine("its me");
-                    Console.WriteLine(x);
-                    roles += x + ", ";
-
-                }
-                Console.WriteLine("asdfsdfsfd");
-                Console.WriteLine(roles);
-                internalUser.Roles = roles;                
+                Console.WriteLine(string.Join(", ", internalUserRoles));
+                internalUser.Roles = string.Join(", ",internalUserRoles);
+                
             }
             
 
