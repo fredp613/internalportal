@@ -28,6 +28,8 @@ namespace InternalPortal.Models.Portal
         public string Language { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } set { } }
+        [NotMapped]
+        public string Roles { get; set; }
 	    public IEnumerable<InternalUserRole> InternalUserRoles {get; set;}
         public IEnumerable<FundingProgramInternalUser> FundingProgramInternalUsers { get; set; }
         public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
