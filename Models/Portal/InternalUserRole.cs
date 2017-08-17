@@ -20,10 +20,28 @@ namespace InternalPortal.Models.Portal
     public class InternalUserRole
     {
         [Key]
-	public Guid InternalUserRoleId {get; set;}
+	    public Guid InternalUserRoleId {get; set;}
         public Guid InternalUserId { get; set; }      
-	public InternalUser InternalUser {get; set;}
+	    public InternalUser InternalUser {get; set;}
         public string Role { get; set; }
+        [NotMapped]
+        public string RoleDesc { get {
+                if (Role == "1")
+                {
+                    return "Workload Manager";
+                }
+                else if (Role == "2")
+                {
+                    return "Submission Reviewer";
+                }
+                else if (Role == "3")
+                {
+                    return "Funding Opportunities Administrator";
+                }
+                else {
+                    return "Portal Administrator";
+                }
+            } set { } }
         public DateTime CreatedOn { get; set; }
         
     }
