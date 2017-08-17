@@ -29,11 +29,15 @@ namespace InternalPortal.Controllers
             var users = _context.InternalUser.Include(ur=>ur.InternalUserRoles);
 
             foreach (var internalUser in users) {
-                List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
-                if (internalUserRoles != null)
+               
+                if (internalUser.InternalUserRoles != null)
                 {
-                    Console.WriteLine(string.Join(", ", internalUserRoles));
-                    internalUser.Roles = string.Join(", ", internalUserRoles);
+                    foreach (var role in internalUser.InternalUserRoles)
+                    {
+                        Console.WriteLine(string.Join(", ", role.RoleDesc));
+                        internalUser.Roles = string.Join(", ", role.RoleDesc);
+                    }
+                    
 
                 }
             }
