@@ -2953,6 +2953,9 @@
         "language": {
           "type": "string"
         },
+        "roles": {
+          "type":  "string"
+        },
         "internalUserRoles": {
           "type": "array",
           "items": {
@@ -2986,6 +2989,9 @@
           "type": "string"
         },
         "role": {
+          "type": "string"
+        },
+        "roleDesc": {
           "type": "string"
         }
       }
