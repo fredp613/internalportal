@@ -32,13 +32,9 @@ namespace InternalPortal.Controllers
                
                 if (internalUser.InternalUserRoles != null)
                 {
-                    foreach (var role in internalUser.InternalUserRoles)
-                    {
-                        Console.WriteLine(string.Join(", ", role.RoleDesc));
-                        internalUser.Roles = string.Join(", ", role.RoleDesc);
-                    }
-                    
-
+                   
+                    Console.WriteLine(string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc)));
+                    internalUser.Roles = string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc));
                 }
             }
 
