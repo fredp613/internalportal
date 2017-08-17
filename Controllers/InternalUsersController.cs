@@ -26,7 +26,20 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<InternalUser> GetInternalUser()
         {
-            return _context.InternalUser.Include(ur=>ur.InternalUserRoles);
+            var users = _context.InternalUser.Include(ur=>ur.InternalUserRoles);
+
+            foreach (var internalUser in users) {
+                List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
+                if (internalUserRoles != null)
+                {
+                    Console.WriteLine(string.Join(", ", internalUserRoles));
+                    internalUser.Roles = string.Join(", ", internalUserRoles);
+
+                }
+            }
+
+            return users;
+           
         }
 
         // GET: api/InternalUsers/5
