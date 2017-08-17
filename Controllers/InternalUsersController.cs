@@ -60,21 +60,22 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser =  _context.InternalUser
+            var internalUser =  await _context.InternalUser
                                            .Include(ur => ur.InternalUserRoles)
                                            .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-                                            .SingleOrDefault(m => m.UserName == username);
+                                            .SingleOrDefaultAsync(m => m.UserName == username);
             var internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.Role).ToList();
             string roles = "";
+            Console.WriteLine(internalUserRoles);
             if (internalUserRoles != null)
             {
                 foreach(var x in internalUserRoles)
                 {
                     Console.WriteLine("its me");
-                    Console.WriteLine(x);
+                    Console.WriteLine(x.ToString());
                     roles += x + ", ";
 
                 }
