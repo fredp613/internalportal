@@ -73,6 +73,7 @@ namespace InternalPortal.Controllers
             {
                 foreach(var x in internalUserRoles)
                 {
+                    Console.WriteLine("its me");
                     Console.WriteLine(x);
                     roles += x + ", ";
 
