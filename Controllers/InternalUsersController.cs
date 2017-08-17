@@ -70,6 +70,7 @@ namespace InternalPortal.Controllers
             if (internalUserRoles != null)
             {                
                 internalUser.Roles = string.Join(", ",internalUserRoles.ToList());
+                internalUser.Roles = "Its Fred";
             }
             
 
