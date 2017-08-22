@@ -45,7 +45,7 @@ namespace InternalPortal.Controllers
             {
                 return NotFound();
             }
-            var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Archived));
+            var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Draft));
             fundingProgram.DraftFundingOpportunities = relatedDraftFO;
 
             var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));

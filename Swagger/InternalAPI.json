@@ -2548,6 +2548,41 @@
             "type": "object",
             "$ref": "#/definitions/FundingProgramInternalUser"
           }
+        },
+        "draftFundingOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityClean"
+          }
+        },
+        "scheduledFundingOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityClean"
+          }
+        },
+        "openFundingOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityClean"
+          }
+        },
+        "closedFundingOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunityClean"
+          }
+        },
+        "archivedFundingOpportunities": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/FundingOpportunity"
+          }
         }
 
       }
@@ -2600,6 +2635,50 @@
         "termsConditionsUrlFR": {
           "type": "string"
         },
+        "contactEmail": {
+          "type": "string"
+        }
+      }
+    },
+    "FundingOpportunityClean": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityId": {
+          "type": "string"
+        },
+        "fundingProgramId": {
+          "type": "string"
+        },
+        "titleE": {
+          "type": "string"
+        },
+        "descriptionE": {
+          "type": "string"
+        },
+        "titleF": {
+          "type": "string"
+        },
+        "descriptionF": {
+          "type": "string"
+        },
+        "activationStartDate": {
+          "type": "string"
+        },
+        "activationEndDate": {
+          "type": "string"
+        },
+        "gcimsCommitmentItemId": {
+          "type": "string"
+        },
+        "formName": {
+          "type": "string"
+        },
+        "status": {
+          "type": "string"
+        },
+        "statusDesc": {
+          "type": "string"
+        },      
         "contactEmail": {
           "type": "string"
         }
@@ -3083,14 +3162,14 @@
       }
     },
     "InternalUserCreateUpdate": {
-       "type": "object",
+      "type": "object",
       "properties": {
         "internalUserId": {
           "type": "string"
         },
         "userName": {
           "type": "string"
-        },      
+        },
         "email": {
           "type": "string"
         },
@@ -3106,10 +3185,10 @@
             "type": "object",
             "$ref": "#/definitions/InternalUserRole"
           }
-        }       
+        }
       }
     },
-    "InternalUser" : {
+    "InternalUser": {
       "type": "object",
       "properties": {
         "internalUserId": {
@@ -3134,7 +3213,7 @@
           "type": "string"
         },
         "roles": {
-          "type":  "string"
+          "type": "string"
         },
         "internalUserRoles": {
           "type": "array",
