@@ -25,27 +25,28 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<FundingProgram> GetFundingProgram()
         {
-            var fundingPrograms = _context.FundingProgram;
+            var fundingPrograms = _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
+                                            .ThenInclude(ec => ec.InternalUser);
 
             foreach(var fp in fundingPrograms)
             {
                 var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Draft));
-                fp.DraftFundingOpportunities = relatedDraftFO;
+                fp.DraftFundingOpportunities = relatedDraftFO.ToList();
 
                 var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
-                fp.OpenFundingOpportunities = relatedOpenFO;
+                fp.OpenFundingOpportunities = relatedOpenFO.ToList();
 
                 var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
-                fp.ScheduledFundingOpportunities = relatedScheduledFO;
+                fp.ScheduledFundingOpportunities = relatedScheduledFO.ToList();
 
                 var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
-                fp.ClosedFundingOpportunities = relatedClosedFO;
+                fp.ClosedFundingOpportunities = relatedClosedFO.ToList();
 
                 var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Archived));
-                fp.ArchivedFundingOpportunities = relatedArchivedFO;
+                fp.ArchivedFundingOpportunities = relatedArchivedFO.ToList();
             }
 
-            return fundingPrograms;
+            return fundingPrograms.ToList();
         }
 
         // GET: api/FundingPrograms/5
