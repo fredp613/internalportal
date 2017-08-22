@@ -163,6 +163,186 @@
         }
       }
     },
+    "/{lang}/FundingOpportunities/GetAllFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetActiveFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetDraftFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetAwaitingPublishedFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetInactiveFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/{lang}/FundingOpportunities/GetArchivedFundingOpportunitiesByProgram/{programId}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "programId",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets archived funding opportunities",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
     "/fundingprograms": {
       "get": {
         "responses": {
