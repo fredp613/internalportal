@@ -106,7 +106,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUserRole = await _context.InternalUserRole.SingleOrDefaultAsync(m => m.InternalUserId == id);
+            var internalUserRole = await _context.InternalUserRole.SingleOrDefaultAsync(m => m.InternalUserRoleId == id);
             if (internalUserRole == null)
             {
                 return NotFound();
@@ -120,7 +120,7 @@ namespace InternalPortal.Controllers
 
         private bool InternalUserRoleExists(Guid id)
         {
-            return _context.InternalUserRole.Any(e => e.InternalUserId == id);
+            return _context.InternalUserRole.Any(e => e.InternalUserRoleId == id);
         }
     }
 }
