@@ -30,19 +30,19 @@ namespace InternalPortal.Controllers
 
             foreach(var fp in fundingPrograms)
             {
-                var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Draft));
+                var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Draft));
                 fp.DraftFundingOpportunities = relatedDraftFO;
 
-                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
+                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
                 fp.OpenFundingOpportunities = relatedOpenFO;
 
-                var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
+                var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
                 fp.ScheduledFundingOpportunities = relatedScheduledFO;
 
-                var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
+                var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
                 fp.ClosedFundingOpportunities = relatedClosedFO;
 
-                var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Archived));
+                var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Archived));
                 fp.ArchivedFundingOpportunities = relatedArchivedFO;
             }
 
