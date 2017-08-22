@@ -45,6 +45,20 @@ namespace InternalPortal.Controllers
             {
                 return NotFound();
             }
+            var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Archived));
+            fundingProgram.DraftFundingOpportunities = relatedDraftFO;
+
+            var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
+            fundingProgram.OpenFundingOpportunities = relatedOpenFO;
+
+            var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
+            fundingProgram.ScheduledFundingOpportunities = relatedScheduledFO;
+
+            var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
+            fundingProgram.ClosedFundingOpportunities = relatedClosedFO;
+
+            var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Archived));
+            fundingProgram.ArchivedFundingOpportunities = relatedArchivedFO;
 
             return Ok(fundingProgram);
         }
