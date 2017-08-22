@@ -82,7 +82,7 @@ namespace InternalPortal.Controllers
             return _unitOfWork.FundingOpportunities.GetArchivedFundingOpportunities();
         }
 
-        [HttpGet]
+        [HttpGet("{programId}")]
         [Route("GetAllFundingOpportunitiesByProgram")]
         public IEnumerable<FundingOpportunity> GetAllFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
