@@ -49,23 +49,25 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
+            var internalUser = _context.InternalUser
+                                           .Include(ur => ur.InternalUserRoles)
+                                           .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-       					 .Include(ur => ur.InternalUserRoles).SingleOrDefault(m => m.InternalUserId == id);
-
-            if (internalUser == null)
-            {
-                return NotFound();
-            }
-
+                                            .SingleOrDefault(m => m.InternalUserId == id);
             List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
             if (internalUserRoles != null)
             {
                 Console.WriteLine(string.Join(", ", internalUserRoles));
                 internalUser.Roles = string.Join(", ", internalUserRoles);
 
+            }
+
+
+            if (internalUser == null)
+            {
+                return NotFound();
             }
 
             return Ok(internalUser);
