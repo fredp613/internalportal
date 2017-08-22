@@ -25,8 +25,28 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<FundingProgram> GetFundingProgram()
         {
-            return _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
+            var fundingPrograms = _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
                                             .ThenInclude(ec => ec.InternalUser);
+
+            foreach(var fp in fundingPrograms)
+            {
+                var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Draft));
+                fp.DraftFundingOpportunities = relatedDraftFO;
+
+                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
+                fp.OpenFundingOpportunities = relatedOpenFO;
+
+                var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
+                fp.ScheduledFundingOpportunities = relatedScheduledFO;
+
+                var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
+                fp.ClosedFundingOpportunities = relatedClosedFO;
+
+                var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Archived));
+                fp.ArchivedFundingOpportunities = relatedArchivedFO;
+            }
+
+            return fundingPrograms;
         }
 
         // GET: api/FundingPrograms/5

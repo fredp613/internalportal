@@ -2581,7 +2581,7 @@
           "type": "array",
           "items": {
             "type": "object",
-            "$ref": "#/definitions/FundingOpportunity"
+            "$ref": "#/definitions/FundingOpportunityClean"
           }
         }
 
