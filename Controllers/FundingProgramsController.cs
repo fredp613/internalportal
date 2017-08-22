@@ -26,7 +26,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<FundingProgram> GetFundingProgram()
         {
             var fundingPrograms = _context.FundingProgram.Include(c => c.FundingProgramInternalUsers)
-                                            .ThenInclude(ec => ec.InternalUser);
+                                            .ThenInclude(ec => ec.InternalUser).ToList();
 
             foreach(var fp in fundingPrograms)
             {
@@ -46,7 +46,7 @@ namespace InternalPortal.Controllers
                 fp.ArchivedFundingOpportunities = relatedArchivedFO.ToList();
             }
 
-            return fundingPrograms.ToList();
+            return fundingPrograms;
         }
 
         // GET: api/FundingPrograms/5
