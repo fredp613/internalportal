@@ -89,32 +89,27 @@ namespace InternalPortal.Controllers
             return _unitOfWork.FundingOpportunities.GetAllFundingOpportunitiesByProgram(programId);
         }
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
-        [HttpGet("{programId}")]
-        [Route("GetActiveFundingOpportunitiesByProgram")]
+        [HttpGet("GetActiveFundingOpportunitiesByProgram/{programId}")]
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
             return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunitiesByProgram(programId);
         }
-        [HttpGet("{programId}")]
-        [Route("GetAwaitingPublishedFundingOpportunitiesByProgram")]
+        [HttpGet("GetAwaitingPublishedFundingOpportunitiesByProgram/{programId}")]
         public IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
             return _unitOfWork.FundingOpportunities.GetAwaitingPublishedFundingOpportunitiesByProgram(programId);
         }
-        [HttpGet("{programId}")]
-        [Route("GetDraftFundingOpportunitiesByProgram")]
+        [HttpGet("GetDraftFundingOpportunitiesByProgram/{programId}")]
         public IEnumerable<FundingOpportunity> GetDraftFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
             return _unitOfWork.FundingOpportunities.GetDraftFundingOpportunitiesByProgram(programId);
         }
-        [HttpGet("{programId}")]
-        [Route("GetInactiveFundingOpportunitiesByProgram")]
+        [HttpGet("GetInactiveFundingOpportunitiesByProgram/{programId}")]
         public IEnumerable<FundingOpportunity> GetInactiveFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
             return _unitOfWork.FundingOpportunities.GetInactiveFundingOpportunitiesByProgram(programId);
         }
-        [HttpGet("{programId}")]
-        [Route("GetArchivedFundingOpportunitiesByProgram")]
+        [HttpGet("GetArchivedFundingOpportunitiesByProgra/{programId}")]
         public IEnumerable<FundingOpportunity> GetArchivedFundingOpportunitiesByProgram([FromRoute] Guid programId)
         {
             return _unitOfWork.FundingOpportunities.GetArchivedFundingOpportunitiesByProgram(programId);
