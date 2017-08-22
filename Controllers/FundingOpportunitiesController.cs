@@ -23,7 +23,7 @@ namespace InternalPortal.Controllers
         private readonly PortalContext _context;
         private UnitOfWork _unitOfWork;
 
-       
+
 
         //public FundingOpportunitiesController(PortalContext context)
         //{
@@ -33,7 +33,7 @@ namespace InternalPortal.Controllers
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
-           // string Lang = RouteData.Values["lang"].ToString();
+            // string Lang = RouteData.Values["lang"].ToString();
             _unitOfWork = new UnitOfWork(_context, "EN");
         }
 
@@ -49,26 +49,24 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities();
         }
-
-
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
         [HttpGet]
         [Route("GetActiveFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
             //this.Response.Cookies.Append("asdf", "asdf");
-            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();           
+            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunities();
         }
         [HttpGet]
         [Route("GetAwaitingPublishedFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunities()
-        {            
+        {
             return _unitOfWork.FundingOpportunities.GetAwaitingPublishedFundingOpportunities();
         }
         [HttpGet]
         [Route("GetDraftFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetDraftFundingOpportunities()
-        {           
+        {
             return _unitOfWork.FundingOpportunities.GetDraftFundingOpportunities();
         }
         [HttpGet]
@@ -83,6 +81,45 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetArchivedFundingOpportunities();
         }
+
+        [HttpGet]
+        [Route("GetAllFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetAllFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetAllFundingOpportunitiesByProgram(programId);
+        }
+        // GET: api/FundingOpportunities/GetActiveFundingOpportunities
+        [HttpGet("{programId}")]
+        [Route("GetActiveFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetActiveFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetActiveFundingOpportunitiesByProgram(programId);
+        }
+        [HttpGet("{programId}")]
+        [Route("GetAwaitingPublishedFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetAwaitingPublishedFundingOpportunitiesByProgram(programId);
+        }
+        [HttpGet("{programId}")]
+        [Route("GetDraftFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetDraftFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetDraftFundingOpportunitiesByProgram(programId);
+        }
+        [HttpGet("{programId}")]
+        [Route("GetInactiveFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetInactiveFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetInactiveFundingOpportunitiesByProgram(programId);
+        }
+        [HttpGet("{programId}")]
+        [Route("GetArchivedFundingOpportunitiesByProgram")]
+        public IEnumerable<FundingOpportunity> GetArchivedFundingOpportunitiesByProgram([FromRoute] Guid programId)
+        {
+            return _unitOfWork.FundingOpportunities.GetArchivedFundingOpportunitiesByProgram(programId);
+        }
+
 
         [HttpGet]
         [Route("GetActiveFundingOpportunitiesWithRelationshipsCollapsed")]
