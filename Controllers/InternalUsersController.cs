@@ -37,9 +37,7 @@ namespace InternalPortal.Controllers
                     internalUser.Roles = string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc));
                 }
             }
-
-            return users;
-           
+            return users;           
         }
 
         // GET: api/InternalUsers/5
@@ -51,11 +49,11 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
+            var internalUser = _context.InternalUser.Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-       					 .Include(ur => ur.InternalUserRoles).SingleOrDefaultAsync(m => m.InternalUserId == id);
+       					 .Include(ur => ur.InternalUserRoles).SingleOrDefault(m => m.InternalUserId == id);
 
             if (internalUser == null)
             {
