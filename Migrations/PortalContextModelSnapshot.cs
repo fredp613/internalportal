@@ -732,6 +732,10 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid>("InternalUserId");
 
+                    b.Property<bool>("IsSubmissionReviewer");
+
+                    b.Property<bool>("IsWorkloadManager");
+
                     b.Property<DateTime>("UpdatedOn");
 
                     b.HasKey("FundingOpportunityInternalUserId");
