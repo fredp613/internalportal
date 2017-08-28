@@ -33,7 +33,7 @@ namespace InternalPortal.Controllers
                 var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Draft));
                 fp.DraftFundingOpportunities = relatedDraftFO.ToList();
 
-                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
+                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationEndDate >= DateTime.Now));
                 fp.OpenFundingOpportunities = relatedOpenFO.ToList();
 
                 var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
@@ -68,7 +68,7 @@ namespace InternalPortal.Controllers
             var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Draft));
             fundingProgram.DraftFundingOpportunities = relatedDraftFO;
 
-            var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationStartDate >= DateTime.Now));
+            var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationEndDate <= DateTime.Now && p.ActivationEndDate >= DateTime.Now));
             fundingProgram.OpenFundingOpportunities = relatedOpenFO;
 
             var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fundingProgram.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate < DateTime.Now));
