@@ -26,6 +26,8 @@ namespace InternalPortal.Models.Portal
         public string LastName { get; set; }
         public string Email { get; set; }
         public string Language { get; set; }
+        public bool IsPortalAdministrator { get; set; }
+        public bool IsFundingOpportunityAdministrator { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } set { } }
         [NotMapped]
