@@ -3212,6 +3212,12 @@
         "language": {
           "type": "string"
         },
+        "isPortalAdministrator": {
+          "type": "boolean"
+        },
+        "isFundingOpportunityAdministrator": {
+          "type": "boolean"
+        },
         "roles": {
           "type": "string"
         },
