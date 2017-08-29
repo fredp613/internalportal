@@ -26,7 +26,8 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<InternalUser> GetInternalUser()
         {
-            var users = _context.InternalUser.Include(ur=>ur.InternalUserRoles);
+            var users = _context.InternalUser;
+                /**.Include(ur=>ur.InternalUserRoles);
 
             foreach (var internalUser in users) {
                
@@ -36,7 +37,7 @@ namespace InternalPortal.Controllers
                     Console.WriteLine(string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc)));
                     internalUser.Roles = string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc));
                 }
-            }
+            } **/
             return users;           
         }
 
@@ -49,20 +50,20 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = _context.InternalUser
+            var internalUser = await _context.InternalUser
                                            .Include(ur => ur.InternalUserRoles)
                                            .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-                                            .SingleOrDefault(m => m.InternalUserId == id);
-            List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
-            if (internalUserRoles != null)
-            {
-                Console.WriteLine(string.Join(", ", internalUserRoles));
-                internalUser.Roles = string.Join(", ", internalUserRoles);
+                                            .SingleOrDefaultAsync(m => m.InternalUserId == id);
+            //List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
+            //if (internalUserRoles != null)
+            //{
+            //    Console.WriteLine(string.Join(", ", internalUserRoles));
+            //    internalUser.Roles = string.Join(", ", internalUserRoles);
 
-            }
+            //}
 
 
             if (internalUser == null)
@@ -81,20 +82,20 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser =  _context.InternalUser
+            var internalUser = await  _context.InternalUser
                                            .Include(ur => ur.InternalUserRoles)
                                            .Include(iu => iu.FundingOpportunityInternalUsers)
                                                     .ThenInclude(fo => fo.FundingOpportunity)
                                            .Include(iu => iu.FundingProgramInternalUsers)
                                                  .ThenInclude(fp => fp.FundingProgram)
-                                            .SingleOrDefault(m => m.UserName == username);
-            List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
-            if (internalUserRoles != null)
-            {
-                Console.WriteLine(string.Join(", ", internalUserRoles));
-                internalUser.Roles = string.Join(", ",internalUserRoles);
+                                            .SingleOrDefaultAsync(m => m.UserName == username);
+            //List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
+            //if (internalUserRoles != null)
+            //{
+            //    Console.WriteLine(string.Join(", ", internalUserRoles));
+            //    internalUser.Roles = string.Join(", ",internalUserRoles);
                 
-            }
+            //}
             
 
 
@@ -121,12 +122,12 @@ namespace InternalPortal.Controllers
             }
 
             _context.Entry(internalUser).State = EntityState.Modified;
-            if (internalUser.InternalUserRoles != null) {
-                foreach (var ur in internalUser.InternalUserRoles)
-                {
-                    _context.InternalUserRole.Add(ur);
-                }
-            }
+            //if (internalUser.InternalUserRoles != null) {
+            //    foreach (var ur in internalUser.InternalUserRoles)
+            //    {
+            //        _context.InternalUserRole.Add(ur);
+            //    }
+            //}
            
             try
             {
