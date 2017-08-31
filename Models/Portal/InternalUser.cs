@@ -28,6 +28,8 @@ namespace InternalPortal.Models.Portal
         public string Language { get; set; }
         public bool IsPortalAdministrator { get; set; }
         public bool IsFundingOpportunityAdministrator { get; set; }
+        public bool IsWorkloadManager { get; set; }
+        public bool IsSubmissionReviewer { get; set; }
         [NotMapped]
         public string FullName { get { return FirstName + " " + LastName; } set { } }
         [NotMapped]

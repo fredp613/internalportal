@@ -9,14 +9,13 @@ namespace InternalPortal.Models.Portal.Program
 {
     public class FundingOpportunityInternalUser
     {
-       
+
         [Key]
         public Guid FundingOpportunityInternalUserId { get; set; }
         public Guid FundingOpportunityId { get; set; }
         public FundingOpportunity FundingOpportunity { get; set; }
         public Guid InternalUserId { get; set; }
-        public bool IsSubmissionReviewer { get; set; }
-        public bool IsWorkloadManager { get; set; }
+        public bool HasFullAccess { get; set; }
         public InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

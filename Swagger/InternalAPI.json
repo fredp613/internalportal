@@ -3218,6 +3218,12 @@
         "isFundingOpportunityAdministrator": {
           "type": "boolean"
         },
+        "isWorkloadManager": {
+          "type": "boolean"
+        },
+        "isSubmissionReviewer": {
+          "type": "boolean"
+        },
         "roles": {
           "type": "string"
         },
@@ -3273,10 +3279,7 @@
         "fundingOpportunityId": {
           "type": "string"
         },
-        "isSubmissionReviewer": {
-          "type": "boolean"
-        },
-        "isWorkloadManager": {
+        "hasFullAccess": {
           "type": "boolean"
         }
       }
