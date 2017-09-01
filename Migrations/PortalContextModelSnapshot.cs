@@ -284,6 +284,14 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("FirstName");
 
+                    b.Property<bool>("IsFundingOpportunityAdministrator");
+
+                    b.Property<bool>("IsPortalAdministrator");
+
+                    b.Property<bool>("IsSubmissionReviewer");
+
+                    b.Property<bool>("IsWorkloadManager");
+
                     b.Property<string>("Language");
 
                     b.Property<string>("LastName");
@@ -730,11 +738,9 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid>("FundingOpportunityId");
 
+                    b.Property<bool>("HasFullAccess");
+
                     b.Property<Guid>("InternalUserId");
-
-                    b.Property<bool>("IsSubmissionReviewer");
-
-                    b.Property<bool>("IsWorkloadManager");
 
                     b.Property<DateTime>("UpdatedOn");
 
