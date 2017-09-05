@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
+using System.IO;
+using Microsoft.Extensions.PlatformAbstractions;
 
 namespace InternalPortal
 {
@@ -38,6 +40,8 @@ namespace InternalPortal
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            var pathToDoc = Configuration["Swagger:FileName"];
             // Add CORS support
             services.AddCors(options =>
             {
@@ -47,6 +51,22 @@ namespace InternalPortal
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1",
+                    new Swashbuckle.AspNetCore.Swagger.Info
+                    {
+                        Title = "API", 
+                        Version = "v1", 
+                        Description = "API for Portal System in AEM", 
+                        TermsOfService = "None"
+                    });
+                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
+                options.IncludeXmlComments(filePath);
+                options.DescribeAllEnumsAsStrings();
+            });
+      
+
             // Add framework services.
             services.AddMvc()
                    .AddJsonOptions(options => {
@@ -80,11 +100,16 @@ namespace InternalPortal
 
 
         }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
+           
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
+           
+            
 	      //  app.UseJwtBearerAuthentication(new JwtBearerOptions
 	      //  {
 	      //      AutomaticAuthenticate = true,
@@ -100,6 +125,16 @@ namespace InternalPortal
 	      //  });
             app.UseCors("CorsPolicy");            
             app.UseMvc();
+
+            app.UseSwagger(c =>
+            {
+                c.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value);
+            });
+
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
+            });
         }
 
         
