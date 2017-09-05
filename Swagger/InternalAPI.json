@@ -3268,7 +3268,7 @@
       }
     },
     "FundingOpportunityInternalUser": {
-      "type": "object",
+      "type": "object",1
       "properties": {
         "fundingOpportunityInternalUserId": {
           "type": "string"

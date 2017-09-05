@@ -17,6 +17,8 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace InternalPortal
 {
@@ -51,9 +53,11 @@ namespace InternalPortal
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
+            
             services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1",
+                
+                options.SwaggerDoc("v1",                     
                     new Swashbuckle.AspNetCore.Swagger.Info
                     {
                         Title = "API", 
@@ -61,10 +65,13 @@ namespace InternalPortal
                         Description = "API for Portal System in AEM", 
                         TermsOfService = "None"
                     });
+                options.DocumentFilter<TestFilter>();
                 //var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
                 //options.IncludeXmlComments(filePath);
                 //options.DescribeAllEnumsAsStrings();
+                
             });
+            
       
 
             // Add framework services.
@@ -138,5 +145,12 @@ namespace InternalPortal
         }
 
         
+    } 
+    public class TestFilter : IDocumentFilter
+    {
+       public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        {
+            swaggerDoc.Schemes = new string[] { "http", "https" };
+        }
     }
 }
