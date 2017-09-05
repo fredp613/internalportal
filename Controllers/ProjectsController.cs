@@ -100,27 +100,27 @@ namespace InternalPortal.Controllers
             return Ok(project.ProjectStatus);
         }
 
-        public async Task<Project> UpdateProject(Project project)
-        {
-            _context.Entry(project).State = EntityState.Modified;
+        //public async Task<Project> UpdateProject(Project project)
+        //{
+        //    _context.Entry(project).State = EntityState.Modified;
 
-            try
-            {
-                await _unitOfWork.SaveChangesAsync();
-                return project;
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!_unitOfWork.Projects.ProjectExists(project.ProjectId))
-                {
-                    return null;
-                }
-                else
-                {
-                    throw;
-                }
-            }
-        }
+        //    try
+        //    {
+        //        await _unitOfWork.SaveChangesAsync();
+        //        return project;
+        //    }
+        //    catch (DbUpdateConcurrencyException)
+        //    {
+        //        if (!_unitOfWork.Projects.ProjectExists(project.ProjectId))
+        //        {
+        //            return null;
+        //        }
+        //        else
+        //        {
+        //            throw;
+        //        }
+        //    }
+        //}
 
         // PUT: api/Projects/5
         [HttpPut("{id}")]
