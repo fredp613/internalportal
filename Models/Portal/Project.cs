@@ -67,7 +67,7 @@ namespace InternalPortal.Models
         public DateTime ExternalUpdatedOn { get; set; }      
         public DateTime InternalUpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
-        [ForeignKey("UpdatedByInternalUserId")]
+        
         public InternalUser InternalUpdatedBy { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }

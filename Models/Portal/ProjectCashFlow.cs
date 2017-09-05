@@ -16,7 +16,7 @@ namespace InternalPortal.Models.Portal
         public string FiscalYear { get; set; }
         public double Amount { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
-        [ForeignKey("UpdatedByInternalUserId")]
+        
         public InternalUser InternalUpdatedBy { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
