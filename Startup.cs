@@ -61,9 +61,9 @@ namespace InternalPortal
                         Description = "API for Portal System in AEM", 
                         TermsOfService = "None"
                     });
-                var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
-                options.IncludeXmlComments(filePath);
-                options.DescribeAllEnumsAsStrings();
+                //var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
+                //options.IncludeXmlComments(filePath);
+                //options.DescribeAllEnumsAsStrings();
             });
       
 
