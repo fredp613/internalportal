@@ -12,7 +12,7 @@ namespace InternalPortal.Models.Portal.Program
         [Key]
         public Guid FundingOpportunityEligibilityCriteriaId { get; set; }
         public Guid FundingOpportunityId { get; set; }
-        internal FundingOpportunity FundingOpportunity { get; set; }
+        public FundingOpportunity FundingOpportunity { get; set; }
         public Guid EligibilityCriteriaId { get; set; }
         internal EligibilityCriteria EligibilityCriteria { get; set; }
         public DateTime CreatedOn { get; set; }

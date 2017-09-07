@@ -33,7 +33,7 @@ namespace InternalPortal.Models.Portal.Program
             get { return Lang == "EN" ? TooltipE : TooltipF; }
             set { ToolTip = Lang == "EN" ? TooltipE : TooltipF; }
         }
-        internal FundingOpportunity FundingOpportunity { get; set; }
+        public FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

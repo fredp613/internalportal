@@ -20,7 +20,7 @@ namespace InternalPortal.Models.Portal.Program
         [Key]
         public Guid EligibleClientTypeId { get; set; }        
         public Guid FundingOpportunityId { get; set; }
-        internal FundingOpportunity FundingOpportunity { get; set; }
+        public FundingOpportunity FundingOpportunity { get; set; }
         public string EligibleClientTypeBilingualTitle { get; set; }
         public int EligibleClientTypeStaticId { get; set; }
         public string TitleE { get; set; }
