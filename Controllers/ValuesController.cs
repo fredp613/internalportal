@@ -18,6 +18,12 @@ namespace InternalPortal.Controllers
            // this.Response.Cookies.Append("asdf", "asdf");
             return "fred";
         }
+        [HttpGet("fred")]
+        public string GetFred()
+        {
+            // this.Response.Cookies.Append("asdf", "asdf");
+            return "getting Fred";
+        }
 
         // GET api/values/5
         [HttpGet("{id}")]
