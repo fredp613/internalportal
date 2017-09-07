@@ -16,7 +16,7 @@ namespace InternalPortal.Models.Portal.Program
         [Required]
         public Guid ObjectiveId { get; set; }
         public Objective Objective { get; set; }
-        public FundingOpportunity FundingOpportunity { get; set; }
+        internal FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

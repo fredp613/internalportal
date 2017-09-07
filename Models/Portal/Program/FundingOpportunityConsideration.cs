@@ -14,7 +14,7 @@ namespace InternalPortal.Models.Portal.Program
         public Guid ConsiderationId { get; set; }
         public Guid FundingOpportunityId { get; set; }
         public Consideration Consideration { get; set; }
-        public FundingOpportunity FundingOpportunity { get; set; }
+        internal FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

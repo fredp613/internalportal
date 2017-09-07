@@ -19,9 +19,6 @@ namespace InternalPortal.Models.Portal.Program
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
-        
-       
-        
        
     }
 }

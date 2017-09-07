@@ -13,7 +13,7 @@ namespace InternalPortal.Models.Portal
         [Key]
         public Guid FundingProgramInternalUserId { get; set; }
         public Guid FundingProgramId { get; set; }
-        public FundingProgram FundingProgram { get; set; }
+        internal FundingProgram FundingProgram { get; set; }
         public Guid InternalUserId { get; set; }
         public InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }

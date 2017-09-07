@@ -11,7 +11,7 @@ namespace InternalPortal.Models.Portal.Program
     {
         public Guid FundingOpportunityResourceId { get; set; }
         public Guid FundingOpportunityId { get; set; }
-        public FundingOpportunity FundingOpportunity { get; set; }
+        internal FundingOpportunity FundingOpportunity { get; set; }
         public string TitleE { get; set; }
         public string TitleF { get; set; }
         public string UrlE { get; set; }
