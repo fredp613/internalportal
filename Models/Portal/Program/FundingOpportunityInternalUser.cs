@@ -16,7 +16,7 @@ namespace InternalPortal.Models.Portal.Program
         internal FundingOpportunity FundingOpportunity { get; set; }
         public Guid InternalUserId { get; set; }
         public bool HasFullAccess { get; set; }
-        public InternalUser InternalUser { get; set; }
+        internal InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         //public Guid? CreatedByInternalUserId { get; set; }

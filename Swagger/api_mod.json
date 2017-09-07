@@ -5063,11 +5063,254 @@
             "toolTipF":{
                "type":"string"
             },
-            "fundingOpportunities":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/FundingOpportunity"
-               }
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            }
+         }
+      },
+      "EligibilityCriteria":{
+         "type":"object",
+         "properties":{
+            "eligibilityCriteriaId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "lang":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            },
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            }
+         }
+      },
+      "EligibleClientType":{
+         "type":"object",
+         "properties":{
+            "eligibleClientTypeId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "fundingOpportunityId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "eligibleClientTypeBilingualTitle":{
+               "type":"string"
+            },
+            "eligibleClientTypeStaticId":{
+               "format":"int32",
+               "type":"integer"
+            },
+            "titleE":{
+               "type":"string"
+            },
+            "titleF":{
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            },
+            "lang":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            },
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            }
+         }
+      },
+      "ClientTypeStatic":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "format":"int32",
+               "type":"integer"
+            },
+            "title":{
+               "type":"string"
+            },
+            "titleE":{
+               "type":"string"
+            },
+            "titleF":{
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            }
+         }
+      },
+      "EligibleCostCategory":{
+         "type":"object",
+         "properties":{
+            "eligibleCostCategoryId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "costCategoryId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "fundingOpportunityId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "titleE":{
+               "type":"string"
+            },
+            "titleF":{
+               "type":"string"
+            },
+            "tooltipE":{
+               "type":"string"
+            },
+            "tooltipF":{
+               "type":"string"
+            },
+            "lang":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            },
+            "toolTip":{
+               "type":"string"
+            },
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            }
+         }
+      },
+      "ExpectedResult":{
+         "type":"object",
+         "properties":{
+            "expectedResultId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "gcimsAttributeID":{
+               "type":"string"
+            },
+            "lang":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            },
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            }
+         }
+      },
+      "FrequentlyAskedQuestion":{
+         "type":"object",
+         "properties":{
+            "frequentlyAskedQuestionId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            },
+            "answerE":{
+               "type":"string"
+            },
+            "answerF":{
+               "type":"string"
             },
             "createdOn":{
                "format":"date-time",
@@ -5089,138 +5332,161 @@
       },
       "FundingOpportunity":{
          "type":"object",
-         "properties":{
-            "fundingOpportunityId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "fundingProgramId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "titleE":{
-               "type":"string"
-            },
-            "titleF":{
-               "type":"string"
-            },
-            "lang":{
-               "type":"string"
-            },
-            "title":{
-               "type":"string"
-            },
-            "description":{
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
-               "type":"string"
-            },
-            "objectives":{
-               "type":"string"
-            },
-            "expectedResults":{
-               "type":"string"
-            },
-            "eligibilityCriterias":{
-               "type":"string"
-            },
-            "additionalInformationE":{
-               "type":"string"
-            },
-            "additionalInformationF":{
-               "type":"string"
-            },
-            "activationStartDate":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "activationEndDate":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "onHold":{
-               "type":"boolean"
-            },
-            "status":{
-               "format":"int32",
-               "enum":[
-                  0,
-                  1,
-                  2,
-                  3
-               ],
-               "type":"integer"
-            },
-            "statusDesc":{
-               "type":"string"
-            },
-            "fundingOpportunityExpectedResults":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/FundingOpportunityExpectedResult"
-               }
-            },
-            "fundingOpportunityObjectives":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/FundingOpportunityObjective"
-               }
-            },
-            "fundingOpportunityEligibilityCriterias":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/FundingOpportunityEligibilityCriteria"
-               }
-            },
-            "eligibleClientTypes":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/EligibleClientType"
-               }
-            },
-            "eligibleCostCategories":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/EligibleCostCategory"
-               }
-            },
-           
-            "gcimsCommitmentItemId":{
-               "type":"string"
-            },
-            "formName":{
-               "type":"string"
-            },
-            "termsConditionsUrlEN":{
-               "type":"string"
-            },
-            "termsConditionsUrlFR":{
-               "type":"string"
-            },
-            "contactEmail":{
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
+        "properties": {
+          "fundingOpportunityId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "fundingProgramId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "titleE": {
+            "type": "string"
+          },
+          "titleF": {
+            "type": "string"
+          },
+          "lang": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "descriptionE": {
+            "type": "string"
+          },
+          "descriptionF": {
+            "type": "string"
+          },
+          "objectives": {
+            "type": "string"
+          },
+          "expectedResults": {
+            "type": "string"
+          },
+          "eligibilityCriterias": {
+            "type": "string"
+          },
+          "additionalInformationE": {
+            "type": "string"
+          },
+          "additionalInformationF": {
+            "type": "string"
+          },
+          "activationStartDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "activationEndDate": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "onHold": {
+            "type": "boolean"
+          },
+          "status": {
+            "format": "int32",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "type": "integer"
+          },
+          "statusDesc": {
+            "type": "string"
+          },
+          "fundingOpportunityExpectedResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityExpectedResult"
             }
-         }
+          },
+          "fundingOpportunityObjectives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityObjective"
+            }
+          },
+          "fundingOpportunityEligibilityCriterias": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityEligibilityCriteria"
+            }
+          },
+          "eligibleClientTypes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EligibleClientType"
+            }
+          },
+          "eligibleCostCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EligibleCostCategory"
+            }
+          },
+          "fundingOpportunityConsiderations": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityConsideration"
+            }
+          },
+          "fundingOpportunityFrequentlyAskedQuestions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+            }
+          },
+          "fundingOpportunityResources": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityResource"
+            }
+          },
+          "fundingOpportunityInternalUsers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/FundingOpportunityInternalUser"
+            }
+          },
+          "gcimsCommitmentItemId": {
+            "type": "string"
+          },
+          "formName": {
+            "type": "string"
+          },
+          "termsConditionsUrlEN": {
+            "type": "string"
+          },
+          "termsConditionsUrlFR": {
+            "type": "string"
+          },
+          "contactEmail": {
+            "type": "string"
+          },
+          "createdOn": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "updatedOn": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "createdByInternalUserId": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "updatedByInternalUserId": {
+            "format": "uuid",
+            "type": "string"
+          }
+        }
       },
       "FundingOpportunityExpectedResult":{
          "type":"object",
@@ -5311,120 +5577,6 @@
             },
             "eligibilityCriteriaId":{
                "format":"uuid",
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
-      "EligibleClientType":{
-         "type":"object",
-         "properties":{
-            "eligibleClientTypeId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "fundingOpportunityId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "eligibleClientTypeBilingualTitle":{
-               "type":"string"
-            },
-            "eligibleClientTypeStaticId":{
-               "format":"int32",
-               "type":"integer"
-            },
-            "titleE":{
-               "type":"string"
-            },
-            "titleF":{
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
-               "type":"string"
-            },
-            "lang":{
-               "type":"string"
-            },
-            "description":{
-               "type":"string"
-            },
-            "title":{
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
-      "EligibleCostCategory":{
-         "type":"object",
-         "properties":{
-            "eligibleCostCategoryId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "costCategoryId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "fundingOpportunityId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "costCategory":{
-               "$ref":"#/definitions/CostCategory"
-            },
-            "titleE":{
-               "type":"string"
-            },
-          "titleF": {
-            "type": "string"
-          },
-            "tooltipE":{
-               "type":"string"
-            },
-            "tooltipF":{
-               "type":"string"
-            },
-            "lang":{
-               "type":"string"
-            },
-            "title":{
-               "type":"string"
-            },
-            "toolTip":{
                "type":"string"
             },
             "createdOn":{
@@ -5558,46 +5710,6 @@
             }
          }
       },
-      "ExpectedResult":{
-         "type":"object",
-         "properties":{
-            "expectedResultId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "gcimsAttributeID":{
-               "type":"string"
-            },
-            "lang":{
-               "type":"string"
-            },
-            "description":{
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
       "Objective":{
          "required":[
             "descriptionE",
@@ -5638,104 +5750,6 @@
             },
             "updatedByInternalUserId":{
                "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
-      "FrequentlyAskedQuestion":{
-         "type":"object",
-         "properties":{
-            "frequentlyAskedQuestionId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
-               "type":"string"
-            },
-            "answerE":{
-               "type":"string"
-            },
-            "answerF":{
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
-      "EligibilityCriteria":{
-         "type":"object",
-         "properties":{
-            "eligibilityCriteriaId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "lang":{
-               "type":"string"
-            },
-            "description":{
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
-               "type":"string"
-            },
-            "createdOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
-            "createdByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            }
-         }
-      },
-      "ClientTypeStatic":{
-         "type":"object",
-         "properties":{
-            "id":{
-               "format":"int32",
-               "type":"integer"
-            },
-            "title":{
-               "type":"string"
-            },
-            "titleE":{
-               "type":"string"
-            },
-            "titleF":{
-               "type":"string"
-            },
-            "descriptionE":{
-               "type":"string"
-            },
-            "descriptionF":{
                "type":"string"
             }
          }
@@ -6255,10 +6269,10 @@
                "format":"date-time",
                "type":"string"
             },
-            "updatedByInternalUserId":{
-               "format":"uuid",
-               "type":"string"
-            },
+          "updatedByInternalUserId": {
+            "format": "uuid",
+            "type": "string"
+          },
             "internalUpdatedBy":{
                "$ref":"#/definitions/InternalUser"
             },
