@@ -83,7 +83,7 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(fas => fas.EligibleClientTypes)
                                    .Include(c => c.EligibleCostCategories)
                                           //  .ThenInclude(cc => cc.CostCategory)
-                                   .Include(c => c.FundingProgram)  
+                                  // .Include(c => c.FundingProgram)  
                                    .Include(c=>c.FundingOpportunityConsiderations)
                                           //  .ThenInclude(ec=>ec.Consideration)
                                    .Include(c=>c.FundingOpportunityResources)
