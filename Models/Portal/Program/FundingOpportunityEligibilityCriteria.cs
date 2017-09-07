@@ -14,7 +14,7 @@ namespace InternalPortal.Models.Portal.Program
         public Guid FundingOpportunityId { get; set; }
         internal FundingOpportunity FundingOpportunity { get; set; }
         public Guid EligibilityCriteriaId { get; set; }
-        public EligibilityCriteria EligibilityCriteria { get; set; }
+        internal EligibilityCriteria EligibilityCriteria { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }
