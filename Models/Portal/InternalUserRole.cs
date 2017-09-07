@@ -22,7 +22,7 @@ namespace InternalPortal.Models.Portal
         [Key]
 	    public Guid InternalUserRoleId {get; set;}
         public Guid InternalUserId { get; set; }      
-	    public InternalUser InternalUser {get; set;}
+	    internal InternalUser InternalUser {get; set;}
         public string Role { get; set; }
         [NotMapped]
         public string RoleDesc { get {

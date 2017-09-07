@@ -4634,12 +4634,7 @@
             "roles":{
                "type":"string"
             },
-            "internalUserRoles":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/InternalUserRole"
-               }
-            },
+            
             "fundingProgramInternalUsers":{
                "type":"array",
                "items":{
@@ -4667,13 +4662,8 @@
             "updatedByInternalUserId":{
                "format":"uuid",
                "type":"string"
-            },
-            "createdBy":{
-               "$ref":"#/definitions/InternalUser"
-            },
-            "updatedBy":{
-               "$ref":"#/definitions/InternalUser"
             }
+          
          }
       },
       "User":{
@@ -4943,9 +4933,6 @@
             },
             "hasFullAccess":{
                "type":"boolean"
-            },
-            "internalUser":{
-               "$ref":"#/definitions/InternalUser"
             },
             "createdOn":{
                "format":"date-time",
@@ -5332,161 +5319,161 @@
       },
       "FundingOpportunity":{
          "type":"object",
-        "properties": {
-          "fundingOpportunityId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "fundingProgramId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "titleE": {
-            "type": "string"
-          },
-          "titleF": {
-            "type": "string"
-          },
-          "lang": {
-            "type": "string"
-          },
-          "title": {
-            "type": "string"
-          },
-          "description": {
-            "type": "string"
-          },
-          "descriptionE": {
-            "type": "string"
-          },
-          "descriptionF": {
-            "type": "string"
-          },
-          "objectives": {
-            "type": "string"
-          },
-          "expectedResults": {
-            "type": "string"
-          },
-          "eligibilityCriterias": {
-            "type": "string"
-          },
-          "additionalInformationE": {
-            "type": "string"
-          },
-          "additionalInformationF": {
-            "type": "string"
-          },
-          "activationStartDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "activationEndDate": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "onHold": {
-            "type": "boolean"
-          },
-          "status": {
-            "format": "int32",
-            "enum": [
-              0,
-              1,
-              2,
-              3
-            ],
-            "type": "integer"
-          },
-          "statusDesc": {
-            "type": "string"
-          },
-          "fundingOpportunityExpectedResults": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityExpectedResult"
+         "properties":{
+            "fundingOpportunityId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "fundingProgramId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "titleE":{
+               "type":"string"
+            },
+            "titleF":{
+               "type":"string"
+            },
+            "lang":{
+               "type":"string"
+            },
+            "title":{
+               "type":"string"
+            },
+            "description":{
+               "type":"string"
+            },
+            "descriptionE":{
+               "type":"string"
+            },
+            "descriptionF":{
+               "type":"string"
+            },
+            "objectives":{
+               "type":"string"
+            },
+            "expectedResults":{
+               "type":"string"
+            },
+            "eligibilityCriterias":{
+               "type":"string"
+            },
+            "additionalInformationE":{
+               "type":"string"
+            },
+            "additionalInformationF":{
+               "type":"string"
+            },
+            "activationStartDate":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "activationEndDate":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "onHold":{
+               "type":"boolean"
+            },
+            "status":{
+               "format":"int32",
+               "enum":[
+                  0,
+                  1,
+                  2,
+                  3
+               ],
+               "type":"integer"
+            },
+            "statusDesc":{
+               "type":"string"
+            },
+            "fundingOpportunityExpectedResults":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityExpectedResult"
+               }
+            },
+            "fundingOpportunityObjectives":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityObjective"
+               }
+            },
+            "fundingOpportunityEligibilityCriterias":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityEligibilityCriteria"
+               }
+            },
+            "eligibleClientTypes":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EligibleClientType"
+               }
+            },
+            "eligibleCostCategories":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EligibleCostCategory"
+               }
+            },
+            "fundingOpportunityConsiderations":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityConsideration"
+               }
+            },
+            "fundingOpportunityFrequentlyAskedQuestions":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityFrequentlyAskedQuestion"
+               }
+            },
+            "fundingOpportunityResources":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityResource"
+               }
+            },
+            "fundingOpportunityInternalUsers":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/FundingOpportunityInternalUser"
+               }
+            },
+            "gcimsCommitmentItemId":{
+               "type":"string"
+            },
+            "formName":{
+               "type":"string"
+            },
+            "termsConditionsUrlEN":{
+               "type":"string"
+            },
+            "termsConditionsUrlFR":{
+               "type":"string"
+            },
+            "contactEmail":{
+               "type":"string"
+            },
+            "createdOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "updatedOn":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "createdByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
             }
-          },
-          "fundingOpportunityObjectives": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityObjective"
-            }
-          },
-          "fundingOpportunityEligibilityCriterias": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityEligibilityCriteria"
-            }
-          },
-          "eligibleClientTypes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/EligibleClientType"
-            }
-          },
-          "eligibleCostCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/EligibleCostCategory"
-            }
-          },
-          "fundingOpportunityConsiderations": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityConsideration"
-            }
-          },
-          "fundingOpportunityFrequentlyAskedQuestions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion"
-            }
-          },
-          "fundingOpportunityResources": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityResource"
-            }
-          },
-          "fundingOpportunityInternalUsers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/FundingOpportunityInternalUser"
-            }
-          },
-          "gcimsCommitmentItemId": {
-            "type": "string"
-          },
-          "formName": {
-            "type": "string"
-          },
-          "termsConditionsUrlEN": {
-            "type": "string"
-          },
-          "termsConditionsUrlFR": {
-            "type": "string"
-          },
-          "contactEmail": {
-            "type": "string"
-          },
-          "createdOn": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "updatedOn": {
-            "format": "date-time",
-            "type": "string"
-          },
-          "createdByInternalUserId": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "updatedByInternalUserId": {
-            "format": "uuid",
-            "type": "string"
-          }
-        }
+         }
       },
       "FundingOpportunityExpectedResult":{
          "type":"object",
@@ -6269,10 +6256,10 @@
                "format":"date-time",
                "type":"string"
             },
-          "updatedByInternalUserId": {
-            "format": "uuid",
-            "type": "string"
-          },
+            "updatedByInternalUserId":{
+               "format":"uuid",
+               "type":"string"
+            },
             "internalUpdatedBy":{
                "$ref":"#/definitions/InternalUser"
             },
@@ -6284,9 +6271,9 @@
                "format":"uuid",
                "type":"string"
             },
-            "createdBy":{
-               "$ref":"#/definitions/User"
-            },
+          "createdBy": {
+            "$ref": "#/definitions/User"
+          },
             "updatedBy":{
                "$ref":"#/definitions/User"
             }
