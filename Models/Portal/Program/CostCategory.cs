@@ -32,7 +32,7 @@ namespace InternalPortal.Models.Portal.Program
         }
         public string ToolTipE { get; set; }
         public string ToolTipF { get; set; }
-        public IEnumerable<FundingOpportunity> FundingOpportunities { get; set; }
+        internal IEnumerable<FundingOpportunity> FundingOpportunities { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? CreatedByInternalUserId { get; set; }

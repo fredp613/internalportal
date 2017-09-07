@@ -13,7 +13,7 @@ namespace InternalPortal.Models.Portal.Program
         public Guid EligibleCostCategoryId { get; set; }
         public Guid CostCategoryId { get; set; }
         public Guid FundingOpportunityId { get; set; }
-        public CostCategory CostCategory { get; set; }
+        internal CostCategory CostCategory { get; set; }
 
         public string TitleE { get; set; }
         public string TitleF { get; set; }
