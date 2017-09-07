@@ -51,21 +51,9 @@ namespace InternalPortal.Controllers
             }
 
             var internalUser = await _context.InternalUser
-                                           .Include(ur => ur.InternalUserRoles)
-                                           .Include(iu => iu.FundingOpportunityInternalUsers)
-                                                    .ThenInclude(fo => fo.FundingOpportunity)
-                                           .Include(iu => iu.FundingProgramInternalUsers)
-                                                 .ThenInclude(fp => fp.FundingProgram)
+                                           .Include(iu => iu.FundingOpportunityInternalUsers)                                             
                                             .SingleOrDefaultAsync(m => m.InternalUserId == id);
-            //List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
-            //if (internalUserRoles != null)
-            //{
-            //    Console.WriteLine(string.Join(", ", internalUserRoles));
-            //    internalUser.Roles = string.Join(", ", internalUserRoles);
-
-            //}
-
-
+          
             if (internalUser == null)
             {
                 return NotFound();
@@ -82,22 +70,10 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var internalUser = await  _context.InternalUser
-                                           //.Include(ur => ur.InternalUserRoles)
-                                           //.Include(iu => iu.FundingOpportunityInternalUsers)
-                                           //         .ThenInclude(fo => fo.FundingOpportunity)
-                                           //.Include(iu => iu.FundingProgramInternalUsers)
-                                           //      .ThenInclude(fp => fp.FundingProgram)
+            var internalUser = await  _context.InternalUser                                           
+                                           .Include(iu => iu.FundingOpportunityInternalUsers)                                           
                                             .SingleOrDefaultAsync(m => m.UserName == username);
-            //List<string> internalUserRoles = _context.InternalUserRole.Where(iur => iur.InternalUserId == internalUser.InternalUserId).Select(u => u.RoleDesc).ToList();
-            //if (internalUserRoles != null)
-            //{
-            //    Console.WriteLine(string.Join(", ", internalUserRoles));
-            //    internalUser.Roles = string.Join(", ",internalUserRoles);
-                
-            //}
-            
-
+         
 
             if (internalUser == null)
             {
