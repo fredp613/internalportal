@@ -25,7 +25,7 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<FundingProgram> GetFundingProgram()
         {
-            var fundingPrograms = _context.FundingProgram;
+            var fundingPrograms = _context.FundingProgram.ToList();
                 
                 //.Include(c => c.FundingProgramInternalUsers)
                                             //.ThenInclude(ec => ec.InternalUser).ToList();
