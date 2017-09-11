@@ -253,6 +253,36 @@
         }
       }
     },
+    "/{lang}/FundingOpportunities/GetByNameAsync/{title}": {
+      "get": {
+        "parameters": [
+          {
+            "name": "lang",
+            "in": "path",
+            "type": "string",
+            "description": "language"
+          },
+          {
+            "name": "title",
+            "in": "path",
+            "type": "string",
+            "description": "title"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Gets fo by name",
+            "schema": {
+              "title": "Funding Opportunities",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/FundingOpportunity"
+              }
+            }
+          }
+        }
+      }
+    },
     "/{lang}/FundingOpportunities/GetAwaitingPublishedFundingOpportunitiesByProgram/{programId}": {
       "get": {
         "parameters": [

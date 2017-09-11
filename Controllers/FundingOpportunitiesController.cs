@@ -37,6 +37,11 @@ namespace InternalPortal.Controllers
             _unitOfWork = new UnitOfWork(_context, "EN");
         }
 
+        [HttpGet("GetByNameAsync/{title}")]
+        public Task<FundingOpportunity> GetByNameAsync([FromRoute] string name)
+        {
+            return _unitOfWork.FundingOpportunities.GetByNameAsync(name);
+        }
         // GET: api/FundingOpportunities
         [HttpGet]
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()

@@ -21,6 +21,11 @@ namespace InternalPortal.Models.Portal.Implementations
         {
             _Language = language;
         }
+
+        public async Task<FundingOpportunity> GetByNameAsync(string name)
+        {
+            return await PortalContext.FundingOpportunity.SingleAsync(c => c.TitleE == name || c.TitleF == name);
+        }
         public IEnumerable<FundingOpportunity> GetAllFundingOpportunities()
         {
             var fos = PortalContext.FundingOpportunity.Where(f => f.Status != FOStatus.Archived)

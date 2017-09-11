@@ -8,6 +8,7 @@ namespace InternalPortal.Models.Portal.Interfaces
 {
     public interface IFundingOpportunity : IRepository<FundingOpportunity>
     {
+        Task<FundingOpportunity> GetByNameAsync(string fundingOpportunityName);
         IEnumerable<FundingOpportunity> GetAllFundingOpportunities();
         IEnumerable<FundingOpportunity> GetActiveFundingOpportunities();
         IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunities();
