@@ -26,7 +26,7 @@ namespace InternalPortal.Models.Portal.Implementations
         public Task<FundingOpportunity> GetByNameAsync(string name)
         {
             var entity = PortalContext.Set<FundingOpportunity>()              
-               .SingleOrDefaultAsync(i => i.TitleE == name);
+               .SingleOrDefaultAsync(i => i.TitleE == name || i.TitleF == name);
 
 
             if (entity != null)

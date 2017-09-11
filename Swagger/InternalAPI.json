@@ -271,13 +271,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Gets fo by name",
+            "description": "Returns the funding opportunity information",
             "schema": {
-              "title": "Funding Opportunities",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/FundingOpportunity"
-              }
+              "$ref": "#/definitions/FundingOpportunity"
             }
           }
         }
@@ -3298,7 +3294,7 @@
       }
     },
     "FundingOpportunityInternalUser": {
-      "type": "object",1
+      "type": "object",
       "properties": {
         "fundingOpportunityInternalUserId": {
           "type": "string"
