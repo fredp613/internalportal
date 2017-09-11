@@ -28,7 +28,6 @@ namespace InternalPortal.Models.Portal.Implementations
             var entity = PortalContext.Set<FundingOpportunity>()              
                .SingleOrDefaultAsync(i => i.TitleE == name || i.TitleF == name);
 
-
             if (entity != null)
             {
                 GetProperty.TrySetProperty(entity, "Lang", _Language);
