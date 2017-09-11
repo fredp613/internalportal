@@ -22,26 +22,9 @@ namespace InternalPortal.Models.Portal.Implementations
             _Language = language;
         }
 
-        public async Task<FundingOpportunity> GetByNameAsync(string name)
+        public Task<FundingOpportunity> GetByNameAsync(string name)
         {
-            var entity = await PortalContext.Set<FundingOpportunity>()
-               .Include(o => o.FundingOpportunityObjectives)
-                                  // .ThenInclude(fo => fo.Objective)
-                                  .Include(foer => foer.FundingOpportunityExpectedResults)
-                                  //  .ThenInclude(er => er.ExpectedResult)
-                                  .Include(foec => foec.FundingOpportunityEligibilityCriterias)
-                                  //  .ThenInclude(ec => ec.EligibilityCriteria)
-                                  .Include(fas => fas.EligibleClientTypes)
-                                  .Include(c => c.EligibleCostCategories)
-                                  //  .ThenInclude(cc => cc.CostCategory)
-                                  // .Include(c => c.FundingProgram)  
-                                  .Include(c => c.FundingOpportunityConsiderations)
-                                  //  .ThenInclude(ec=>ec.Consideration)
-                                  .Include(c => c.FundingOpportunityResources)
-                                  .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
-                                  //  .ThenInclude(ec=>ec.FrequentlyAskedQuestion)
-                                  .Include(c => c.FundingOpportunityInternalUsers)
-               // .ThenInclude(ec => ec.InternalUser) 
+            var entity = PortalContext.Set<FundingOpportunity>()              
                .SingleOrDefaultAsync(i => i.TitleE == name);
 
 
