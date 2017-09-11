@@ -22,6 +22,7 @@ namespace InternalPortal.Models.Portal.Implementations
             _Language = language;
         }
 
+
         public Task<FundingOpportunity> GetByNameAsync(string name)
         {
             var entity = PortalContext.Set<FundingOpportunity>()              

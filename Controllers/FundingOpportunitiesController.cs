@@ -38,9 +38,9 @@ namespace InternalPortal.Controllers
         }
 
         [HttpGet("GetByNameAsync/{title}")]
-        public Task<FundingOpportunity> GetByNameAsync([FromRoute] string name)
+        public Task<FundingOpportunity> GetByNameAsync([FromRoute] string title)
         {
-            return _unitOfWork.FundingOpportunities.GetByNameAsync(name);
+            return _unitOfWork.FundingOpportunities.GetByNameAsync(title);
         }
         // GET: api/FundingOpportunities
         [HttpGet]
