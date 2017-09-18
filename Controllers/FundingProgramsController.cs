@@ -60,7 +60,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var fundingProgram = await _context.FundingProgram;
+            var fundingProgram = await _context.FundingProgram.SingleOrDefaultAsync(p => p.FundingProgramId == id);
 		    //.Include(c => c.FundingProgramInternalUsers)
                       //                      .ThenInclude(ec => ec.InternalUser).SingleOrDefaultAsync(m => m.FundingProgramId == id);
 
