@@ -138,7 +138,7 @@ namespace InternalPortal.Controllers
             }
 
             //var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
-            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetActiveFundingOpportunityCollapsedRelationships(id);
+            var fundingOpportunity = await _unitOfWork.FundingOpportunities.GetAsync(id);
 
             if (fundingOpportunity == null)
             {
