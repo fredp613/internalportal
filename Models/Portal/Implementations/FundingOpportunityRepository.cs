@@ -42,8 +42,8 @@ namespace InternalPortal.Models.Portal.Implementations
                                    //        .ThenInclude(fo => fo.Objective)
                                    //.Include(foer => foer.FundingOpportunityExpectedResults)
                                    //         .ThenInclude(er => er.ExpectedResult)
-                                   //.Include(foec => foec.FundingOpportunityEligibilityCriterias)
-                                   //         .ThenInclude(ec => ec.EligibilityCriteria)
+                                   .Include(foec => foec.FundingOpportunityEligibilityCriterias)
+                                            .ThenInclude(ec => ec.EligibilityCriteria)
                                    //.Include(fas => fas.EligibleClientTypes)
                                    //.Include(c => c.EligibleCostCategories)
                                    //         .ThenInclude(cc => cc.CostCategory)
@@ -57,31 +57,31 @@ namespace InternalPortal.Models.Portal.Implementations
                                    //         .ThenInclude(ec => ec.InternalUser)
                                    .ToList();
 
-            //foreach (var x in fos)
-            //{
-            //    x.Lang = _Language;
-            //    foreach (var y in x.FundingOpportunityEligibilityCriterias)
-            //    {
-            //        y.EligibilityCriteria.Lang = _Language;
-            //    }
-            //    foreach (var y in x.FundingOpportunityExpectedResults)
-            //    {
-            //        y.ExpectedResult.Lang = _Language;
-            //    }
-            //    foreach (var y in x.FundingOpportunityObjectives)
-            //    {
-            //        y.Objective.Lang = _Language;
-            //    }
-            //    foreach (var y in x.EligibleCostCategories)
-            //    {
-            //        y.CostCategory.Lang = _Language;
-            //        y.Lang = _Language;
-            //    }
-            //    foreach (var y in x.EligibleClientTypes)
-            //    {
-            //        y.Lang = _Language;
-            //    }
-            //}
+            foreach (var x in fos)
+            {
+                x.Lang = _Language;
+                foreach (var y in x.FundingOpportunityEligibilityCriterias)
+                {
+                    y.EligibilityCriteria.Lang = _Language;
+                }
+                //foreach (var y in x.FundingOpportunityExpectedResults)
+                //{
+                //    y.ExpectedResult.Lang = _Language;
+                //}
+                //foreach (var y in x.FundingOpportunityObjectives)
+                //{
+                //    y.Objective.Lang = _Language;
+                //}
+                //foreach (var y in x.EligibleCostCategories)
+                //{
+                //    y.CostCategory.Lang = _Language;
+                //    y.Lang = _Language;
+                //}
+                //foreach (var y in x.EligibleClientTypes)
+                //{
+                //    y.Lang = _Language;
+                //}
+            }
 
             return fos;
         }
