@@ -87,6 +87,7 @@ namespace InternalPortal.Models.Portal.Implementations
         }
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
+            //test
             var fos = PortalContext.FundingOpportunity.Where(f => f.ActivationStartDate <= DateTime.Now.Date && f.Status == FOStatus.Published)
                                    .Include(o => o.FundingOpportunityObjectives)
                                            .ThenInclude(fo => fo.Objective)
