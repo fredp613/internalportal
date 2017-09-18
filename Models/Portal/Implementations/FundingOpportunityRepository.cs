@@ -57,31 +57,31 @@ namespace InternalPortal.Models.Portal.Implementations
                                    //         .ThenInclude(ec => ec.InternalUser)
                                    .ToList();
 
-            foreach (var x in fos)
-            {
-                x.Lang = _Language;
-                foreach (var y in x.FundingOpportunityEligibilityCriterias)
-                {
-                    y.EligibilityCriteria.Lang = _Language;
-                }
-                foreach (var y in x.FundingOpportunityExpectedResults)
-                {
-                    y.ExpectedResult.Lang = _Language;
-                }
-                foreach (var y in x.FundingOpportunityObjectives)
-                {
-                    y.Objective.Lang = _Language;
-                }
-                foreach (var y in x.EligibleCostCategories)
-                {
-                    y.CostCategory.Lang = _Language;
-                    y.Lang = _Language;
-                }
-                foreach (var y in x.EligibleClientTypes)
-                {
-                    y.Lang = _Language;
-                }
-            }
+            //foreach (var x in fos)
+            //{
+            //    x.Lang = _Language;
+            //    foreach (var y in x.FundingOpportunityEligibilityCriterias)
+            //    {
+            //        y.EligibilityCriteria.Lang = _Language;
+            //    }
+            //    foreach (var y in x.FundingOpportunityExpectedResults)
+            //    {
+            //        y.ExpectedResult.Lang = _Language;
+            //    }
+            //    foreach (var y in x.FundingOpportunityObjectives)
+            //    {
+            //        y.Objective.Lang = _Language;
+            //    }
+            //    foreach (var y in x.EligibleCostCategories)
+            //    {
+            //        y.CostCategory.Lang = _Language;
+            //        y.Lang = _Language;
+            //    }
+            //    foreach (var y in x.EligibleClientTypes)
+            //    {
+            //        y.Lang = _Language;
+            //    }
+            //}
 
             return fos;
         }
