@@ -40,7 +40,7 @@ namespace InternalPortal.Models.Portal.Implementations
             var fos = PortalContext.FundingOpportunity.Where(f => f.Status != FOStatus.Archived)
                                    .Include(o => o.FundingOpportunityObjectives)
                                            .ThenInclude(fo => fo.Objective)
-                                   .include(foer => foer.fundingopportunityexpectedresults)
+                                   .Include(foer => foer.FundingOpportunityExpectedResults)
                                             .ThenInclude(er => er.ExpectedResult)
                                    .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                                             .ThenInclude(ec => ec.EligibilityCriteria)
