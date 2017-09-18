@@ -27,6 +27,6 @@ namespace InternalPortal.Models.Portal.Program
         public Guid? CreatedByInternalUserId { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
        
-        internal IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }
+        public IEnumerable<FundingOpportunityEligibilityCriteria> FundingOpportunityEligibilityCriterias { get; set; }
     }
 }
