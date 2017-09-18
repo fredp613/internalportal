@@ -40,8 +40,8 @@ namespace InternalPortal.Models.Portal.Implementations
             var fos = PortalContext.FundingOpportunity.Where(f => f.Status != FOStatus.Archived)
                                    .Include(o => o.FundingOpportunityObjectives)
                                            .ThenInclude(fo => fo.Objective)
-                                   //.Include(foer => foer.FundingOpportunityExpectedResults)
-                                   //         .ThenInclude(er => er.ExpectedResult)
+                                   .include(foer => foer.fundingopportunityexpectedresults)
+                                            .ThenInclude(er => er.ExpectedResult)
                                    .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                                             .ThenInclude(ec => ec.EligibilityCriteria)
                                    //.Include(fas => fas.EligibleClientTypes)
@@ -64,10 +64,10 @@ namespace InternalPortal.Models.Portal.Implementations
                 {
                     y.EligibilityCriteria.Lang = _Language;
                 }
-                //foreach (var y in x.FundingOpportunityExpectedResults)
-                //{
-                //    y.ExpectedResult.Lang = _Language;
-                //}
+                foreach (var y in x.FundingOpportunityExpectedResults)
+                {
+                    y.ExpectedResult.Lang = _Language;
+                }
                 foreach (var y in x.FundingOpportunityObjectives)
                 {
                     y.Objective.Lang = _Language;
