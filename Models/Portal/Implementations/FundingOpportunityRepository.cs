@@ -53,8 +53,8 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(c => c.FundingOpportunityResources)
                                    .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
                                             .ThenInclude(ec => ec.FrequentlyAskedQuestion)
-                                   .Include(c => c.FundingOpportunityInternalUsers)
-                                            .ThenInclude(ec => ec.InternalUser)
+                                  // .Include(c => c.FundingOpportunityInternalUsers)
+                                   //         .ThenInclude(ec => ec.InternalUser)
                                    .ToList();
 
             foreach (var x in fos)
