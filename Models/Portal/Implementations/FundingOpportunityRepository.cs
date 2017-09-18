@@ -44,9 +44,9 @@ namespace InternalPortal.Models.Portal.Implementations
                                             .ThenInclude(er => er.ExpectedResult)
                                    .Include(foec => foec.FundingOpportunityEligibilityCriterias)
                                             .ThenInclude(ec => ec.EligibilityCriteria)
-                                   //.Include(fas => fas.EligibleClientTypes)
-                                   //.Include(c => c.EligibleCostCategories)
-                                   //         .ThenInclude(cc => cc.CostCategory)
+                                  .Include(fas => fas.EligibleClientTypes)
+                                   .Include(c => c.EligibleCostCategories)
+                                            .ThenInclude(cc => cc.CostCategory)
                                    //.Include(c => c.FundingProgram)
                                    //.Include(c => c.FundingOpportunityConsiderations)
                                    //         .ThenInclude(ec => ec.Consideration)
@@ -72,15 +72,15 @@ namespace InternalPortal.Models.Portal.Implementations
                 {
                     y.Objective.Lang = _Language;
                 }
-                //foreach (var y in x.EligibleCostCategories)
-                //{
-                //    y.CostCategory.Lang = _Language;
-                //    y.Lang = _Language;
-                //}
-                //foreach (var y in x.EligibleClientTypes)
-                //{
-                //    y.Lang = _Language;
-                //}
+                foreach (var y in x.EligibleCostCategories)
+                {
+                    y.CostCategory.Lang = _Language;
+                    y.Lang = _Language;
+                }
+                foreach (var y in x.EligibleClientTypes)
+                {
+                    y.Lang = _Language;
+                }
             }
 
             return fos;
