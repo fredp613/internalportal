@@ -23,13 +23,7 @@ namespace InternalPortal.Controllers
         private readonly PortalContext _context;
         private UnitOfWork _unitOfWork;
 
-
-
-        //public FundingOpportunitiesController(PortalContext context)
-        //{
-        //    _context = context;
-        //}
-
+     
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
