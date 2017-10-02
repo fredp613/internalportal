@@ -16,17 +16,20 @@ namespace InternalPortal.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; }     
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string ShareSecretQuestion { get; set; }
+        public string SharedSecretAnswer { get; set; }
+        public bool IsPrimary { get; set; }
         public Guid PrimaryAccountAddressId { get; set; }
-        public Guid PaymentAccountAddressId { get; set; }
+        public Guid PaymentAccountAddressId { get; set; }        
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid? UpdatedByInternalUserId { get; set; }
-        
+        public Guid? UpdatedByInternalUserId { get; set; }        
         public InternalUser InternalUpdatedBy { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
