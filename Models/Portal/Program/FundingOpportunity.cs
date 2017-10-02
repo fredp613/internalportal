@@ -24,6 +24,7 @@ namespace InternalPortal.Models.Portal.Program
         [Key]
         public Guid FundingOpportunityId { get; set; }
         public Guid FundingProgramId { get; set; }
+        [JsonIgnore]
         public FundingProgram FundingProgram { get; set; }       
         public string TitleE { get; set; }
         public string TitleF { get; set; }
