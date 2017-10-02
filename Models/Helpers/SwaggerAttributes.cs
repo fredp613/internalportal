@@ -9,43 +9,43 @@ using System.Threading.Tasks;
 
 namespace InternalPortal.Models.Helpers
 {
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SwaggerConsumesAttribute : Attribute
-    {
-        public SwaggerConsumesAttribute(params string[] contentTypes)
-        {
-            this.ContentTypes = contentTypes;
-        }
+    //[AttributeUsage(AttributeTargets.Method)]
+    //public class SwaggerConsumesAttribute : Attribute
+    //{
+    //    public SwaggerConsumesAttribute(params string[] contentTypes)
+    //    {
+    //        this.ContentTypes = contentTypes;
+    //    }
 
-        public IEnumerable<string> ContentTypes { get; }
-    }
+    //    public IEnumerable<string> ContentTypes { get; }
+    //}
 
-    [AttributeUsage(AttributeTargets.Method)]
-    public class SwaggerProducesAttribute : Attribute
-    {
-        public SwaggerProducesAttribute(params string[] contentTypes)
-        {
-            this.ContentTypes = contentTypes;
-        }
+    //[AttributeUsage(AttributeTargets.Method)]
+    //public class SwaggerProducesAttribute : Attribute
+    //{
+    //    public SwaggerProducesAttribute(params string[] contentTypes)
+    //    {
+    //        this.ContentTypes = contentTypes;
+    //    }
 
-        public IEnumerable<string> ContentTypes { get; }
-    }
+    //    public IEnumerable<string> ContentTypes { get; }
+    //}
 
-    public class ComsumesOperationFilter : IOperationFilter
-    {
-        public void Apply(Operation operation, OperationFilterContext context)
-        {
-            var consumes = context.ApiDescription.ActionDescriptor.ActionConstraints.OfType<ConsumesAttribute>().FirstOrDefault();
-            if (consumes != null)
-            {
-                operation.Consumes.Clear();
-                foreach (var contentType in consumes.ContentTypes)
-                {
-                    operation.Consumes.Add(contentType);
-                }
-            }
-        }
-    }
+    //public class ComsumesOperationFilter : IOperationFilter
+    //{
+    //    public void Apply(Operation operation, OperationFilterContext context)
+    //    {
+    //        var consumes = context.ApiDescription.ActionDescriptor.ActionConstraints.OfType<ConsumesAttribute>().FirstOrDefault();
+    //        if (consumes != null)
+    //        {
+    //            operation.Consumes.Clear();
+    //            foreach (var contentType in consumes.ContentTypes)
+    //            {
+    //                operation.Consumes.Add(contentType);
+    //            }
+    //        }
+    //    }
+    //}
 
 
 }
