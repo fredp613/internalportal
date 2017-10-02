@@ -135,11 +135,12 @@ namespace InternalPortal
 
             app.UseSwagger(c =>
             {
+                c.PreSerializeFilters.Clear();
                // c.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value);
             });
 
             app.UseSwaggerUI(c =>
-            {
+            {                
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "V1 Docs");
             });
         }
@@ -154,6 +155,7 @@ namespace InternalPortal
             swaggerDoc.Consumes = new string[] { "application/json", "text/json" };
             swaggerDoc.Produces = new string[] { "application/json", "text/json" };
             swaggerDoc.BasePath = "/api/";
+ 
             //swaggerDoc.
 
             // "consumes":[
