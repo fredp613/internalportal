@@ -1,4 +1,5 @@
 ﻿using InternalPortal.Models.Portal.Program;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,7 +14,8 @@ namespace InternalPortal.Models.Portal
         [Key]
         public Guid FundingProgramInternalUserId { get; set; }
         public Guid FundingProgramId { get; set; }
-        internal FundingProgram FundingProgram { get; set; }
+        [JsonIgnore]
+        public FundingProgram FundingProgram { get; set; }
         public Guid InternalUserId { get; set; }
         internal InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }

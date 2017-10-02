@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,6 +14,7 @@ namespace InternalPortal.Models.Portal.Program
         public Guid EligibleCostCategoryId { get; set; }
         public Guid CostCategoryId { get; set; }
         public Guid FundingOpportunityId { get; set; }
+        [JsonIgnore]
         public CostCategory CostCategory { get; set; }
 
         public string TitleE { get; set; }
@@ -33,6 +35,7 @@ namespace InternalPortal.Models.Portal.Program
             get { return Lang == "EN" ? TooltipE : TooltipF; }
             set { ToolTip = Lang == "EN" ? TooltipE : TooltipF; }
         }
+        [JsonIgnore]
         public FundingOpportunity FundingOpportunity { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -20,6 +21,7 @@ namespace InternalPortal.Models.Portal.Program
         [Key]
         public Guid EligibleClientTypeId { get; set; }        
         public Guid FundingOpportunityId { get; set; }
+        [JsonIgnore]
         public FundingOpportunity FundingOpportunity { get; set; }
         public string EligibleClientTypeBilingualTitle { get; set; }
         public int EligibleClientTypeStaticId { get; set; }
