@@ -12,6 +12,7 @@ using InternalPortal.Models.Helpers;
 
 namespace InternalPortal.Controllers
 {
+  
     [Produces("application/json")]
     [Route("api/InternalUsers")]
     public class InternalUsersController : Controller
@@ -54,7 +55,8 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUsers/GetByUserName/admin
-        [Produces("application/json")]
+      
+        [Consumes("application/json")]
         [HttpGet]
         [Route("GetByUserName/{username}")]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
