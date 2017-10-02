@@ -39,9 +39,7 @@ namespace InternalPortal.Models.Portal
         public IEnumerable<FundingOpportunityInternalUser> FundingOpportunityInternalUsers { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-	    [ForeignKey("CreatedBy")]
         public Guid? CreatedByInternalUserId { get; set; }
-	    [ForeignKey("UpdatedBy")]
 	    public Guid? UpdatedByInternalUserId { get; set; }
         
     }
