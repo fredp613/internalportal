@@ -129,7 +129,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/InternalUsers/5
         [HttpDelete("{id}")]
-        [SwaggerProduces("application/json")]
+        [Produces("application/json")]
         public async Task<IActionResult> DeleteInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

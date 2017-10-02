@@ -7,10 +7,18 @@
       "termsOfService":"None"
    },
    "host":"otvcrm01:83",
-   "basePath":"/",
+   "basePath":"/api/",
    "schemes":[
       "http",
       "https"
+   ],
+   "consumes":[
+      "application/json",
+      "text/json"
+   ],
+   "produces":[
+      "application/json",
+      "text/json"
    ],
    "paths":{
       "/api/Accounts":{
@@ -130,14 +138,18 @@
                }
             }
          },
-         "delete":{           
-            "operationId":"ApiAccountsByIdDelete",          
+         "delete":{
+            "tags":[
+               "Accounts"
+            ],
+            "operationId":"ApiAccountsByIdDelete",           
             "parameters":[
                {
                   "name":"id",
                   "in":"path",
                   "required":true,
-                  "type":"string"
+                  "type":"string",
+                  "format":"uuid"
                }
             ],
             "responses":{
@@ -268,13 +280,7 @@
             "tags":[
                "Considerations"
             ],
-            "operationId":"ApiConsiderationsByIdDelete",
-            "consumes":[
-
-            ],
-            "produces":[
-
-            ],
+            "operationId":"ApiConsiderationsByIdDelete",          
             "parameters":[
                {
                   "name":"id",
@@ -3381,114 +3387,123 @@
             }
          }
       },
-    "/api/FundingPrograms/{id}": {
-      "delete": {
-        "summary": "deletes the funding progrm",
-        "operationId": "fundingprogramdelete",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "type": "string",
-            "description": "id"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "delete the funding program"
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "FundingPrograms"
-        ],
-        "operationId": "ApiFundingProgramsByIdGet",
-        "consumes": [
+      "/api/FundingPrograms/{id}":{
+         "get":{
+            "tags":[
+               "FundingPrograms"
+            ],
+            "operationId":"ApiFundingProgramsByIdGet",
+            "consumes":[
 
-        ],
-        "produces": [
+            ],
+            "produces":[
 
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      },
-      "put": {
-        "tags": [
-          "FundingPrograms"
-        ],
-        "operationId": "ApiFundingProgramsByIdPut",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/json-patch+json"
-        ],
-        "produces": [
-
-        ],
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
-          },
-          {
-            "name": "fundingProgram",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/FundingProgram"
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "type":"string",
+                  "format":"uuid"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Success"
+               }
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success"
-          }
-        }
-      }
-    },
+         },
+         "put":{
+            "tags":[
+               "FundingPrograms"
+            ],
+            "operationId":"ApiFundingProgramsByIdPut",
+            "consumes":[
+               "application/json",
+               "text/json",
+               "application/json-patch+json"
+            ],
+            "produces":[
+
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "type":"string",
+                  "format":"uuid"
+               },
+               {
+                  "name":"fundingProgram",
+                  "in":"body",
+                  "required":false,
+                  "schema":{
+                     "$ref":"#/definitions/FundingProgram"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Success"
+               }
+            }
+         },
+         "delete":{
+            "tags":[
+               "FundingPrograms"
+            ],
+            "operationId":"ApiFundingProgramsByIdDelete",
+            "consumes":[
+
+            ],
+            "produces":[
+
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "type":"string",
+                  "format":"uuid"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Success"
+               }
+            }
+         }
+      },
       "/api/GCIMSProject/GetContactByID/{id}":{
-        "get": {
-          "tags": [
-            "GCIMSProject"
-          ],
-          "operationId": "ApiGCIMSProjectGetContactByIDByIdGet",
-          "consumes": [
+         "get":{
+            "tags":[
+               "GCIMSProject"
+            ],
+            "operationId":"ApiGCIMSProjectGetContactByIDByIdGet",
+            "consumes":[
 
-          ],
-          "produces": [
+            ],
+            "produces":[
 
-          ],
-          "parameters": [
-            {
-              "name": "id",
-              "in": "path",
-              "required": true,
-              "type": "integer",
-              "format": "int32"
+            ],
+            "parameters":[
+               {
+                  "name":"id",
+                  "in":"path",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Success"
+               }
             }
-          ],
-          "responses": {
-            "200": {
-              "description": "Success"
-            }
-          }
-        }
+         }
       },
       "/api/InternalUserRoles":{
          "get":{
@@ -3756,12 +3771,12 @@
                "InternalUsers"
             ],
             "operationId":"ApiInternalUsersByIdDelete",
-          "consumes": [
-            "application/json"            
-          ],
-          "produces": [
-            "application/json"
-          ],
+            "consumes":[
+
+            ],
+            "produces":[
+
+            ],
             "parameters":[
                {
                   "name":"id",
@@ -3784,9 +3799,11 @@
                "InternalUsers"
             ],
             "operationId":"ApiInternalUsersGetByUserNameByUsernameGet",
-            "consumes":[
-
-            ],
+          "consumes": [
+            "application/json",
+            "text/json",
+            "application/json-patch+json"
+          ],
             "produces":[
 
             ],
@@ -6401,10 +6418,10 @@
                "format":"date-time",
                "type":"string"
             },
-            "updatedOn":{
-               "format":"date-time",
-               "type":"string"
-            },
+          "updatedOn": {
+            "format": "date-time",
+            "type": "string"
+          },
             "updatedByInternalUserId":{
                "format":"uuid",
                "type":"string"
@@ -6429,7 +6446,7 @@
          }
       }
    },
-  "securityDefinitions": {
+   "securityDefinitions":{
 
-  }
+   }
 }
