@@ -63,7 +63,7 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUsers/5
-        [HttpGet("/fred/{id}")]
+        [HttpGet("fred/{id}")]
         public async Task<IActionResult> GetInternalUserFred([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
