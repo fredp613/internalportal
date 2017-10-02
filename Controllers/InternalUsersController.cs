@@ -54,6 +54,7 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUsers/GetByUserName/admin
+        [Produces("application/json")]
         [HttpGet]
         [Route("GetByUserName/{username}")]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
@@ -128,8 +129,7 @@ namespace InternalPortal.Controllers
         }
 
         // DELETE: api/InternalUsers/5
-        [HttpDelete("{id}")]
-        [Produces("application/json")]
+        [HttpDelete("{id}")]        
         public async Task<IActionResult> DeleteInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
