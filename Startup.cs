@@ -66,6 +66,7 @@ namespace InternalPortal
                         TermsOfService = "None"
                     });
                 options.DocumentFilter<TestFilter>();
+                
                 //var filePath = Path.Combine(PlatformServices.Default.Application.ApplicationBasePath, pathToDoc);
                 //options.IncludeXmlComments(filePath);
                 //options.DescribeAllEnumsAsStrings();
@@ -115,28 +116,28 @@ namespace InternalPortal
            
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
-           
-            
-	      //  app.UseJwtBearerAuthentication(new JwtBearerOptions
-	      //  {
-	      //      AutomaticAuthenticate = true,
-	      //      AutomaticChallenge = true,
-	      //      TokenValidationParameters = new TokenValidationParameters
-	      //      {
-		  //          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
-		  //          ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
-		  //          ValidateIssuerSigningKey = true,
-		  //          ValidateLifetime = true,
-		  //          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
-	      //          }
-	      //  });
+
+          
+
+            //  app.UseJwtBearerAuthentication(new JwtBearerOptions
+            //  {
+            //      AutomaticAuthenticate = true,
+            //      AutomaticChallenge = true,
+            //      TokenValidationParameters = new TokenValidationParameters
+            //      {
+            //          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
+            //          ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
+            //          ValidateIssuerSigningKey = true,
+            //          ValidateLifetime = true,
+            //          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
+            //          }
+            //  });
             app.UseCors("CorsPolicy");            
             app.UseMvc();
 
             app.UseSwagger(c =>
-            {
-                c.PreSerializeFilters.Clear();
-               // c.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value);
+            {             
+               c.PreSerializeFilters.Add((swagger, httpReq) => swagger.Host = httpReq.Host.Value);
             });
 
             app.UseSwaggerUI(c =>
