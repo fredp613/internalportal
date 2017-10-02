@@ -17,6 +17,7 @@ namespace InternalPortal.Models.Portal
         [JsonIgnore]
         public FundingProgram FundingProgram { get; set; }
         public Guid InternalUserId { get; set; }
+        [JsonIgnore]
         internal InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

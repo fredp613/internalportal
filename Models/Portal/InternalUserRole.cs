@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using InternalPortal.Models.Portal.Program;
+using Newtonsoft.Json;
 
 /**
   1.FP manager
@@ -21,8 +22,9 @@ namespace InternalPortal.Models.Portal
     {
         [Key]
 	    public Guid InternalUserRoleId {get; set;}
-        public Guid InternalUserId { get; set; }      
-	    internal InternalUser InternalUser {get; set;}
+        public Guid InternalUserId { get; set; }    
+        [JsonIgnore]
+	    public InternalUser InternalUser {get; set;}
         public string Role { get; set; }
         [NotMapped]
         public string RoleDesc { get {
