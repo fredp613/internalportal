@@ -61,7 +61,28 @@ namespace InternalPortal.Controllers
 
             return Ok(internalUser);
         }
-              
+
+        // GET: api/InternalUsers/5
+        [HttpGet("/fred/{id}")]
+        public async Task<IActionResult> GetInternalUserFred([FromRoute] Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var internalUser = await _context.InternalUser
+                                           .Include(iu => iu.FundingOpportunityInternalUsers)
+                                            .SingleOrDefaultAsync(m => m.InternalUserId == id);
+
+            if (internalUser == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(internalUser);
+        }
+
         [HttpGet]
         [Route("GetByUserName/{username}")]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
