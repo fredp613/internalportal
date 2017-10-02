@@ -61,8 +61,8 @@ namespace InternalPortal.Controllers
 
             return Ok(internalUser);
         }
-        // GET: api/InternalUsers/5
-        [HttpGet("getByUserName/{username}")]
+      
+        [HttpGet("GetByUserName/{username}")]
         public async Task<IActionResult> GetInternalUserByUserName([FromRoute] string username)
         {
             if (!ModelState.IsValid)
