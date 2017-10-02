@@ -82,7 +82,7 @@ namespace InternalPortal.Controllers
 
             return Ok(internalUser);
         }
-
+        // GET: api/InternalUsers/GetByUserName/admin
         [HttpGet]
         [Route("GetByUserName/{username}")]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
