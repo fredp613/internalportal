@@ -27,17 +27,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<InternalUser> GetInternalUser()
         {
             var users = _context.InternalUser;
-                /**.Include(ur=>ur.InternalUserRoles);
-
-            foreach (var internalUser in users) {
-               
-                if (internalUser.InternalUserRoles != null)
-                {
-                   
-                    Console.WriteLine(string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc)));
-                    internalUser.Roles = string.Join(", ", internalUser.InternalUserRoles.Select(r => r.RoleDesc));
-                }
-            } **/
+             
             return users;           
         }
 
@@ -62,26 +52,6 @@ namespace InternalPortal.Controllers
             return Ok(internalUser);
         }
 
-        // GET: api/InternalUsers/5
-        [HttpGet("fred/{id}")]
-        public async Task<IActionResult> GetInternalUserFred([FromRoute] Guid id)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
-
-            var internalUser = await _context.InternalUser
-                                           .Include(iu => iu.FundingOpportunityInternalUsers)
-                                            .SingleOrDefaultAsync(m => m.InternalUserId == id);
-
-            if (internalUser == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(internalUser);
-        }
         // GET: api/InternalUsers/GetByUserName/admin
         [HttpGet]
         [Route("GetByUserName/{username}")]
@@ -120,12 +90,6 @@ namespace InternalPortal.Controllers
             }
 
             _context.Entry(internalUser).State = EntityState.Modified;
-            //if (internalUser.InternalUserRoles != null) {
-            //    foreach (var ur in internalUser.InternalUserRoles)
-            //    {
-            //        _context.InternalUserRole.Add(ur);
-            //    }
-            //}
            
             try
             {

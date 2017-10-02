@@ -130,24 +130,14 @@
                }
             }
          },
-         "delete":{
-            "tags":[
-               "Accounts"
-            ],
-            "operationId":"ApiAccountsByIdDelete",
-            "consumes":[
-
-            ],
-            "produces":[
-
-            ],
+         "delete":{           
+            "operationId":"ApiAccountsByIdDelete",          
             "parameters":[
                {
                   "name":"id",
                   "in":"path",
                   "required":true,
-                  "type":"string",
-                  "format":"uuid"
+                  "type":"string"
                }
             ],
             "responses":{
@@ -3391,123 +3381,114 @@
             }
          }
       },
-      "/api/FundingPrograms/{id}":{
-         "get":{
-            "tags":[
-               "FundingPrograms"
-            ],
-            "operationId":"ApiFundingProgramsByIdGet",
-            "consumes":[
-
-            ],
-            "produces":[
-
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "required":true,
-                  "type":"string",
-                  "format":"uuid"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Success"
-               }
-            }
-         },
-         "put":{
-            "tags":[
-               "FundingPrograms"
-            ],
-            "operationId":"ApiFundingProgramsByIdPut",
-            "consumes":[
-               "application/json",
-               "text/json",
-               "application/json-patch+json"
-            ],
-            "produces":[
-
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "required":true,
-                  "type":"string",
-                  "format":"uuid"
-               },
-               {
-                  "name":"fundingProgram",
-                  "in":"body",
-                  "required":false,
-                  "schema":{
-                     "$ref":"#/definitions/FundingProgram"
-                  }
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Success"
-               }
-            }
-         },
-         "delete":{
-            "tags":[
-               "FundingPrograms"
-            ],
-            "operationId":"ApiFundingProgramsByIdDelete",
-            "consumes":[
-
-            ],
-            "produces":[
-
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "required":true,
-                  "type":"string",
-                  "format":"uuid"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Success"
-               }
-            }
-         }
+    "/api/FundingPrograms/{id}": {
+      "delete": {
+        "summary": "deletes the funding progrm",
+        "operationId": "fundingprogramdelete",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "id"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "delete the funding program"
+          }
+        }
       },
-      "/api/GCIMSProject/GetContactByID/{id}":{
-         "get":{
-            "tags":[
-               "GCIMSProject"
-            ],
-            "operationId":"ApiGCIMSProjectGetContactByIDByIdGet",
-            "consumes":[
+      "get": {
+        "tags": [
+          "FundingPrograms"
+        ],
+        "operationId": "ApiFundingProgramsByIdGet",
+        "consumes": [
 
-            ],
-            "produces":[
+        ],
+        "produces": [
 
-            ],
-            "parameters":[
-               {
-                  "name":"id",
-                  "in":"path",
-                  "required":true,
-                  "type":"integer",
-                  "format":"int32"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"Success"
-               }
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "FundingPrograms"
+        ],
+        "operationId": "ApiFundingProgramsByIdPut",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/json-patch+json"
+        ],
+        "produces": [
+
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "fundingProgram",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/FundingProgram"
             }
-         }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+      "/api/GCIMSProject/GetContactByID/{id}":{
+        "get": {
+          "tags": [
+            "GCIMSProject"
+          ],
+          "operationId": "ApiGCIMSProjectGetContactByIDByIdGet",
+          "consumes": [
+
+          ],
+          "produces": [
+
+          ],
+          "parameters": [
+            {
+              "name": "id",
+              "in": "path",
+              "required": true,
+              "type": "integer",
+              "format": "int32"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success"
+            }
+          }
+        }
       },
       "/api/InternalUserRoles":{
          "get":{
@@ -3775,12 +3756,12 @@
                "InternalUsers"
             ],
             "operationId":"ApiInternalUsersByIdDelete",
-            "consumes":[
-
-            ],
-            "produces":[
-
-            ],
+          "consumes": [
+            "application/json"            
+          ],
+          "produces": [
+            "application/json"
+          ],
             "parameters":[
                {
                   "name":"id",
