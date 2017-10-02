@@ -37,14 +37,7 @@ namespace InternalPortal.Models
                 .WithMany()
                 .HasForeignKey(b => b.UpdatedByUserId);
 
-            modelBuilder.Entity<InternalUser>()
-               .HasOne(p => p.CreatedBy)
-               .WithMany()
-               .HasForeignKey(b => b.CreatedByInternalUserId);
-            modelBuilder.Entity<InternalUser>()
-                .HasOne(p => p.UpdatedBy)
-                .WithMany()
-                .HasForeignKey(b => b.UpdatedByInternalUserId);
+       
           
 
         }
