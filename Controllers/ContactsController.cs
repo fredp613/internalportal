@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
+using System.Collections;
 
 namespace InternalPortal.Controllers
 {
@@ -26,6 +27,63 @@ namespace InternalPortal.Controllers
         {
             return _context.Contact;
         }
+        [HttpGet("getbyemail/{id}/{email}")]
+        public async Task<IActionResult> GetContactByEmail([FromRoute] string email, [FromRoute] Guid id)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var existingContacts = await _context.Contact.Where(m => m.Email == email && m.ContactId != id).ToListAsync();
+            if (existingContacts == null)
+            {
+                return NotFound();
+            }
+            return Ok(existingContacts);
+        }
+
+        [HttpGet("answer/{id}/{answer}")]
+        public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer, [FromRoute] DateTime dob)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id); 
+           
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            if (contact.SharedSecretAnswer == answer)
+            {
+                return Ok(contact); 
+            }
+            return NotFound();
+        }
+        [HttpGet("dob/{id}/{dob}")]
+        public async Task<IActionResult> ConfirmDob([FromRoute] Guid id, [FromRoute] DateTime dob)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            if (contact.DateOfBirth == dob)
+            {
+                return Ok(contact);
+            }
+            return NotFound();
+        }
+
+
 
         // GET: api/Contacts/5
         [HttpGet("{id}")]
@@ -45,6 +103,9 @@ namespace InternalPortal.Controllers
 
             return Ok(contact);
         }
+
+    
+       
 
         // PUT: api/Contacts/5
         [HttpPut("{id}")]

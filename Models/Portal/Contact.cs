@@ -1,4 +1,6 @@
-﻿using InternalPortal.Models.Portal;
+﻿using InternalPortal.Models.Helpers;
+using InternalPortal.Models.Portal;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,10 +17,20 @@ namespace InternalPortal.Models
         public int GcimsContactID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
+        [NotMapped]
+        public string FullName
+        {
+            get {
+                return FirstName + " " + LastName;
+            }
+            set { }
+        }
+        
         public string Email { get; set; }
         public string PhoneNumber { get; set; }     
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime DateOfBirth { get; set; }
         public string ShareSecretQuestion { get; set; }
         public string SharedSecretAnswer { get; set; }
