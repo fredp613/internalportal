@@ -43,8 +43,6 @@ namespace InternalPortal.Models.Portal
         public Guid? CreatedByInternalUserId { get; set; }
 	    [ForeignKey("UpdatedBy")]
 	    public Guid? UpdatedByInternalUserId { get; set; }
-        public virtual InternalUser CreatedBy { get; set; }
-        public virtual InternalUser UpdatedBy { get; set; }
         
     }
 }
