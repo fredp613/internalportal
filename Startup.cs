@@ -153,9 +153,7 @@ namespace InternalPortal
        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
         {
             swaggerDoc.Schemes = new string[] { "http", "https" };
-            swaggerDoc.Consumes = new string[] { "application/json", "text/json" };
-            swaggerDoc.Produces = new string[] { "application/json", "text/json" };
-            swaggerDoc.BasePath = "/api/";
+          
  
             //swaggerDoc.
 
