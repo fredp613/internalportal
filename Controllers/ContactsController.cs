@@ -43,7 +43,7 @@ namespace InternalPortal.Controllers
         }
 
         [HttpGet("answer/{id}/{answer}")]
-        public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer, [FromRoute] DateTime dob)
+        public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer)
         {
             if (!ModelState.IsValid)
             {
