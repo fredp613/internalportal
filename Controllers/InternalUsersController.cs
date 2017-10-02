@@ -55,8 +55,7 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUsers/GetByUserName/admin
-      
-        [Consumes("application/json")]
+    
         [HttpGet]
         [Route("GetByUserName/{username}")]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
