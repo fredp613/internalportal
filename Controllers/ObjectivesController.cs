@@ -84,6 +84,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Objectives
         [HttpPost]
+        [ProducesResponseType(typeof(Objective), 200)]
         public async Task<IActionResult> PostObjective([FromBody] Objective objective)
         {
             if (!ModelState.IsValid)
