@@ -152,7 +152,7 @@ namespace InternalPortal
         {
             swaggerDoc.Schemes = new string[] { "http", "https" };
             swaggerDoc.Consumes = new string[] { "application/json" };
-            swaggerDoc.Produces = new string[] { "application/json " };
+            swaggerDoc.Produces = new string[] { "application/json" };
 
         }
     }
