@@ -87,7 +87,7 @@ namespace InternalPortal
              //       options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
 
             services.AddDbContext<PortalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext2")));
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext3")));
 
 
             //	    services.AddDbContext<PortalContext>(options =>
