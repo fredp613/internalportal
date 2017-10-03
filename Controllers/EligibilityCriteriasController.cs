@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/EligibilityCriterias/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(EligibilityCriteria), 200)]
         public async Task<IActionResult> GetEligibilityCriteria([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -86,6 +87,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibilityCriterias
         [HttpPost]
+        [ProducesResponseType(typeof(EligibilityCriteria), 201)]
         public async Task<IActionResult> PostEligibilityCriteria([FromBody] EligibilityCriteria eligibilityCriteria)
         {
             if (!ModelState.IsValid)
@@ -101,6 +103,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/EligibilityCriterias/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(EligibilityCriteria), 200)]
         public async Task<IActionResult> DeleteEligibilityCriteria([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

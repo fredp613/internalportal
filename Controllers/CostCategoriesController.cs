@@ -23,6 +23,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/CostCategories
         [HttpGet]
+        
         public IEnumerable<CostCategory> GetCostCategory()
         {
             return _context.CostCategory;
@@ -30,6 +31,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/CostCategories/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(CostCategory), 200)]
         public async Task<IActionResult> GetCostCategory([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +86,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/CostCategories
         [HttpPost]
+        [ProducesResponseType(typeof(CostCategory), 201)]
         public async Task<IActionResult> PostCostCategory([FromBody] CostCategory costCategory)
         {
             if (!ModelState.IsValid)
@@ -99,6 +102,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/CostCategories/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(CostCategory), 200)]
         public async Task<IActionResult> DeleteCostCategory([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

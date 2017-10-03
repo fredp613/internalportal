@@ -31,6 +31,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/ExpectedResults/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(ExpectedResult), 200)]
         public async Task<IActionResult> GetExpectedResult([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -85,6 +86,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/ExpectedResults
         [HttpPost]
+        [ProducesResponseType(typeof(ExpectedResult), 201)]
         public async Task<IActionResult> PostExpectedResult([FromBody] ExpectedResult expectedResult)
         {
             if (!ModelState.IsValid)
@@ -100,6 +102,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/ExpectedResults/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(ExpectedResult), 200)]
         public async Task<IActionResult> DeleteExpectedResult([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

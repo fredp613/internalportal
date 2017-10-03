@@ -34,7 +34,8 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUsers/5
-        [HttpGet("{id}")]        
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(InternalUser), 200)]
         public async Task<IActionResult> GetInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -58,6 +59,7 @@ namespace InternalPortal.Controllers
     
         [HttpGet]
         [Route("GetByUserName/{username}")]
+        [ProducesResponseType(typeof(InternalUser), 200)]
         public async Task<IActionResult> GetByUserName([FromRoute] string username)
         {
             if (!ModelState.IsValid)
@@ -115,6 +117,7 @@ namespace InternalPortal.Controllers
       
         // POST: api/InternalUsers
         [HttpPost]
+        [ProducesResponseType(typeof(InternalUser), 201)]
         public async Task<IActionResult> PostInternalUser([FromBody] InternalUser internalUser)
         {
             if (!ModelState.IsValid)
@@ -130,7 +133,8 @@ namespace InternalPortal.Controllers
         }
 
         // DELETE: api/InternalUsers/5
-        [HttpDelete("{id}")]        
+        [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(InternalUser), 200)]
         public async Task<IActionResult> DeleteInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

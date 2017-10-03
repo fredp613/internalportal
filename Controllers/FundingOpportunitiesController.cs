@@ -123,7 +123,8 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/en/FundingOpportunities/5
-        [HttpGet("{id}")]     
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunity), 200)]
         public async Task<IActionResult> GetFundingOpportunity([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -180,6 +181,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunities
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunity), 201)]
         public async Task<IActionResult> PostFundingOpportunity([FromBody] FundingOpportunity fundingOpportunity)
         {
             
@@ -201,6 +203,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingOpportunities/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunity), 200)]
         public async Task<IActionResult> DeleteFundingOpportunity([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

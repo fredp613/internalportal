@@ -53,6 +53,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/FundingPrograms/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FundingProgram), 200)]
         public async Task<IActionResult> GetFundingProgram([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -123,6 +124,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingPrograms
         [HttpPost]
+        [ProducesResponseType(typeof(FundingProgram), 201)]
         public async Task<IActionResult> PostFundingProgram([FromBody] FundingProgram fundingProgram)
         {
             if (!ModelState.IsValid)
@@ -138,6 +140,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingPrograms/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingProgram), 200)]
         public async Task<IActionResult> DeleteFundingProgram([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

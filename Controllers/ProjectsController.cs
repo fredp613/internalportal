@@ -46,6 +46,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Project), 200)]
         public async Task<IActionResult> GetProject([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -168,6 +169,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Projects 
         [HttpPost]
+        [ProducesResponseType(typeof(Project), 201)]
         public async Task<IActionResult> PostProject([FromBody] Project project)
         {
             if (!ModelState.IsValid)
@@ -204,6 +206,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/Projects/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Project), 200)]
         public async Task<IActionResult> DeleteProject([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

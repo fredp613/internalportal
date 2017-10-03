@@ -29,7 +29,8 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/InternalUserRoles/5
-        [HttpGet("{id}")]        
+        [HttpGet("{id}")]
+        [ProducesResponseType(typeof(InternalUserRole), 200)]
         public async Task<IActionResult> GetInternalUserRole([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/InternalUserRoles
         [HttpPost]
+        [ProducesResponseType(typeof(InternalUserRole), 201)]
         public async Task<IActionResult> PostInternalUserRole([FromBody] InternalUserRole internalUserRole)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/InternalUserRoles/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(InternalUserRole), 200)]
         public async Task<IActionResult> DeleteInternalUserRole([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

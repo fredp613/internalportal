@@ -55,6 +55,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/EligibleClientTypes/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(EligibleClientType), 200)]
         public async Task<IActionResult> GetEligibleClientType([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -110,6 +111,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleClientTypes
         [HttpPost]
+        [ProducesResponseType(typeof(EligibleClientType), 201)]
         public async Task<IActionResult> PostEligibleClientType([FromBody] EligibleClientType eligibleClientType)
         {
             if (!ModelState.IsValid)
@@ -125,6 +127,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/EligibleClientTypes/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(EligibleClientType), 200)]
         public async Task<IActionResult> DeleteEligibleClientType([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

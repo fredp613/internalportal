@@ -33,6 +33,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/FundingOpportunityEligibilityCriterias/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 200)]
         public async Task<IActionResult> GetFundingOpportunityEligibilityCriteria([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -54,6 +55,7 @@ namespace InternalPortal.Controllers
         //[HttpGet("{id}")]
         [Route("GetByFundingOpportunity/{FundingOpportunityId}")]
         [HttpGet]
+        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 200)]
         public async Task<IEnumerable<object>> GetByFundingOpportunity(Guid FundingOpportunityId)
         {         
             var fundingOpportunityEligibilityCriterias = await _context.
@@ -112,6 +114,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityEligibilityCriterias
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 201)]
         public async Task<IActionResult> PostFundingOpportunityEligibilityCriteria([FromBody] FundingOpportunityEligibilityCriteria fundingOpportunityEligibilityCriteria)
         {
             if (!ModelState.IsValid)
@@ -127,6 +130,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingOpportunityEligibilityCriterias/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 200)]
         public async Task<IActionResult> DeleteFundingOpportunityEligibilityCriteria([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

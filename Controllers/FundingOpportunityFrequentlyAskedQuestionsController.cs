@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/FundingOpportunityFrequentlyAskedQuestions/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunityFrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> GetFundingOpportunityFrequentlyAskedQuestion([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityFrequentlyAskedQuestions
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityFrequentlyAskedQuestion), 201)]
         public async Task<IActionResult> PostFundingOpportunityFrequentlyAskedQuestion([FromBody] FundingOpportunityFrequentlyAskedQuestion fundingOpportunityFrequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingOpportunityFrequentlyAskedQuestions/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunityFrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> DeleteFundingOpportunityFrequentlyAskedQuestion([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

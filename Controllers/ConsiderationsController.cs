@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/Considerations/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Consideration), 200)]
         public async Task<IActionResult> GetConsideration([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Considerations
         [HttpPost]
+        [ProducesResponseType(typeof(Consideration), 201)]
         public async Task<IActionResult> PostConsideration([FromBody] Consideration consideration)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/Considerations/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Consideration), 200)]
         public async Task<IActionResult> DeleteConsideration([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/FrequentlyAskedQuestions/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> GetFrequentlyAskedQuestion([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FrequentlyAskedQuestions
         [HttpPost]
+        [ProducesResponseType(typeof(FrequentlyAskedQuestion), 201)]
         public async Task<IActionResult> PostFrequentlyAskedQuestion([FromBody] FrequentlyAskedQuestion frequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FrequentlyAskedQuestions/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> DeleteFrequentlyAskedQuestion([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

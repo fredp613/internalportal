@@ -32,6 +32,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/FundingProgramInternalUsers/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(FundingProgramInternalUser), 200)]
         public async Task<IActionResult> GetFundingProgramInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -89,6 +90,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingProgramInternalUsers
         [HttpPost]
+        [ProducesResponseType(typeof(FundingProgramInternalUser), 201)]
         public async Task<IActionResult> PostFundingProgramInternalUser([FromBody] FundingProgramInternalUser fundingProgramInternalUser)
         {
             if (!ModelState.IsValid)
@@ -104,6 +106,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingProgramInternalUsers/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingProgramInternalUser), 200)]
         public async Task<IActionResult> DeleteFundingProgramInternalUser([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/EligibleCostCategories/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(EligibleCostCategory), 200)]
         public async Task<IActionResult> GetEligibleCostCategory([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleCostCategories
         [HttpPost]
+        [ProducesResponseType(typeof(EligibleCostCategory), 201)]
         public async Task<IActionResult> PostEligibleCostCategory([FromBody] EligibleCostCategory eligibleCostCategory)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/EligibleCostCategories/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(EligibleCostCategory), 200)]
         public async Task<IActionResult> DeleteEligibleCostCategory([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

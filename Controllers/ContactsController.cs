@@ -28,6 +28,7 @@ namespace InternalPortal.Controllers
             return _context.Contact;
         }
         [HttpGet("getbyemail/{id}/{email}")]
+        [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> GetContactByEmail([FromRoute] string email, [FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -43,6 +44,7 @@ namespace InternalPortal.Controllers
         }
 
         [HttpGet("answer/{id}/{answer}")]
+        [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer)
         {
             if (!ModelState.IsValid)
@@ -63,6 +65,7 @@ namespace InternalPortal.Controllers
             return NotFound();
         }
         [HttpGet("dob/{id}/{dob}")]
+        [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> ConfirmDob([FromRoute] Guid id, [FromRoute] DateTime dob)
         {
             if (!ModelState.IsValid)
@@ -87,6 +90,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/Contacts/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> GetContact([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -108,7 +112,7 @@ namespace InternalPortal.Controllers
        
 
         // PUT: api/Contacts/5
-        [HttpPut("{id}")]
+        [HttpPut("{id}")]        
         public async Task<IActionResult> PutContact([FromRoute] Guid id, [FromBody] Contact contact)
         {
             if (!ModelState.IsValid)
@@ -144,6 +148,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Contacts
         [HttpPost]
+        [ProducesResponseType(typeof(Contact), 201)]
         public async Task<IActionResult> PostContact([FromBody] Contact contact)
         {
             if (!ModelState.IsValid)
@@ -159,6 +164,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/Contacts/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> DeleteContact([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

@@ -30,6 +30,7 @@ namespace InternalPortal.Controllers
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(Account), 200)]
         public async Task<IActionResult> GetAccount([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
@@ -84,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Accounts
         [HttpPost]
+        [ProducesResponseType(typeof(Account), 201)]
         public async Task<IActionResult> PostAccount([FromBody] Account account)
         {
             if (!ModelState.IsValid)
@@ -99,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/Accounts/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(Account), 200)]
         public async Task<IActionResult> DeleteAccount([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
