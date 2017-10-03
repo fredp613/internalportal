@@ -111,7 +111,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleClientTypes
         [HttpPost]
-        [ProducesResponseType(typeof(EligibleClientType), 201)]
         public async Task<IActionResult> PostEligibleClientType([FromBody] EligibleClientType eligibleClientType)
         {
             if (!ModelState.IsValid)

@@ -124,7 +124,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingPrograms
         [HttpPost]
-        [ProducesResponseType(typeof(FundingProgram), 201)]
         public async Task<IActionResult> PostFundingProgram([FromBody] FundingProgram fundingProgram)
         {
             if (!ModelState.IsValid)

@@ -169,7 +169,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/Projects 
         [HttpPost]
-        [ProducesResponseType(typeof(Project), 201)]
         public async Task<IActionResult> PostProject([FromBody] Project project)
         {
             if (!ModelState.IsValid)

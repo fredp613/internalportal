@@ -86,7 +86,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/ExpectedResults
         [HttpPost]
-        [ProducesResponseType(typeof(ExpectedResult), 201)]
         public async Task<IActionResult> PostExpectedResult([FromBody] ExpectedResult expectedResult)
         {
             if (!ModelState.IsValid)

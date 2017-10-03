@@ -84,7 +84,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/Objectives
         [HttpPost]
-        [ProducesResponseType(typeof(Objective), 201)]
         public async Task<IActionResult> PostObjective([FromBody] Objective objective)
         {
             if (!ModelState.IsValid)
@@ -100,7 +99,6 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/Objectives/5
         [HttpDelete("{id}")]
-        [ProducesResponseType(typeof(Objective), 201)]
         public async Task<IActionResult> DeleteObjective([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)

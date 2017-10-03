@@ -85,7 +85,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityExpectedResults
         [HttpPost]
-        [ProducesResponseType(typeof(FundingOpportunityExpectedResult), 201)]
         public async Task<IActionResult> PostFundingOpportunityExpectedResult([FromBody] FundingOpportunityExpectedResult fundingOpportunityExpectedResult)
         {
             if (!ModelState.IsValid)

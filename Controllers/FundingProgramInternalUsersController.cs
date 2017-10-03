@@ -90,8 +90,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingProgramInternalUsers
         [HttpPost]
-        [ProducesResponseType(typeof(FundingProgramInternalUser), 201)]
-        public async Task<IActionResult> PostFundingProgramInternalUser([FromBody] FundingProgramInternalUser fundingProgramInternalUser)
+         public async Task<IActionResult> PostFundingProgramInternalUser([FromBody] FundingProgramInternalUser fundingProgramInternalUser)
         {
             if (!ModelState.IsValid)
             {

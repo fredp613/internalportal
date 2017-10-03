@@ -181,7 +181,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunities
         [HttpPost]
-        [ProducesResponseType(typeof(FundingOpportunity), 201)]
         public async Task<IActionResult> PostFundingOpportunity([FromBody] FundingOpportunity fundingOpportunity)
         {
             

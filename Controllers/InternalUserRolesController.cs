@@ -85,7 +85,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/InternalUserRoles
         [HttpPost]
-        [ProducesResponseType(typeof(InternalUserRole), 201)]
         public async Task<IActionResult> PostInternalUserRole([FromBody] InternalUserRole internalUserRole)
         {
             if (!ModelState.IsValid)

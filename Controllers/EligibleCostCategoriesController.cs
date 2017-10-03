@@ -85,7 +85,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleCostCategories
         [HttpPost]
-        [ProducesResponseType(typeof(EligibleCostCategory), 201)]
         public async Task<IActionResult> PostEligibleCostCategory([FromBody] EligibleCostCategory eligibleCostCategory)
         {
             if (!ModelState.IsValid)

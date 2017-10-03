@@ -85,7 +85,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FrequentlyAskedQuestions
         [HttpPost]
-        [ProducesResponseType(typeof(FrequentlyAskedQuestion), 201)]
         public async Task<IActionResult> PostFrequentlyAskedQuestion([FromBody] FrequentlyAskedQuestion frequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)

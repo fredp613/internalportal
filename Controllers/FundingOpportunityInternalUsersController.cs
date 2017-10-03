@@ -86,7 +86,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityInternalUsers
         [HttpPost]
-        [ProducesResponseType(typeof(FundingOpportunityInternalUser), 201)]
         public async Task<IActionResult> PostFundingOpportunityInternalUser([FromBody] FundingOpportunityInternalUser fundingOpportunityInternalUser)
         {
             if (!ModelState.IsValid)

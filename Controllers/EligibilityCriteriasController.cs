@@ -87,7 +87,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibilityCriterias
         [HttpPost]
-      //  [ProducesResponseType(typeof(EligibilityCriteria), 201)]
         public async Task<IActionResult> PostEligibilityCriteria([FromBody] EligibilityCriteria eligibilityCriteria)
         {
             if (!ModelState.IsValid)

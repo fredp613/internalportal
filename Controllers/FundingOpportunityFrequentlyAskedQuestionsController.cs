@@ -85,7 +85,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityFrequentlyAskedQuestions
         [HttpPost]
-        [ProducesResponseType(typeof(FundingOpportunityFrequentlyAskedQuestion), 201)]
         public async Task<IActionResult> PostFundingOpportunityFrequentlyAskedQuestion([FromBody] FundingOpportunityFrequentlyAskedQuestion fundingOpportunityFrequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)

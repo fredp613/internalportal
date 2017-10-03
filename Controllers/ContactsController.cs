@@ -148,7 +148,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Contacts
         [HttpPost]
-        [ProducesResponseType(typeof(Contact), 201)]
+       
         public async Task<IActionResult> PostContact([FromBody] Contact contact)
         {
             if (!ModelState.IsValid)

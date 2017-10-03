@@ -114,7 +114,6 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityEligibilityCriterias
         [HttpPost]
-        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 201)]
         public async Task<IActionResult> PostFundingOpportunityEligibilityCriteria([FromBody] FundingOpportunityEligibilityCriteria fundingOpportunityEligibilityCriteria)
         {
             if (!ModelState.IsValid)
