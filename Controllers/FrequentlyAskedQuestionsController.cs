@@ -85,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FrequentlyAskedQuestions
         [HttpPost]
+        [ProducesResponseType(typeof(FrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> PostFrequentlyAskedQuestion([FromBody] FrequentlyAskedQuestion frequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.FrequentlyAskedQuestion.Add(frequentlyAskedQuestion);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFrequentlyAskedQuestion", new { id = frequentlyAskedQuestion.FrequentlyAskedQuestionId }, frequentlyAskedQuestion);
+            return Ok(frequentlyAskedQuestion);
         }
 
         // DELETE: api/FrequentlyAskedQuestions/5

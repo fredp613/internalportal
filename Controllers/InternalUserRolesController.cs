@@ -85,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/InternalUserRoles
         [HttpPost]
+        [ProducesResponseType(typeof(InternalUserRole), 200)]
         public async Task<IActionResult> PostInternalUserRole([FromBody] InternalUserRole internalUserRole)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.InternalUserRole.Add(internalUserRole);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInternalUserRole", new { id = internalUserRole.InternalUserRoleId }, internalUserRole);
+            return Ok(internalUserRole);
         }
 
         // DELETE: api/InternalUserRoles/5

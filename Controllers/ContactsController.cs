@@ -148,7 +148,8 @@ namespace InternalPortal.Controllers
 
         // POST: api/Contacts
         [HttpPost]
-       
+        [ProducesResponseType(typeof(Contact), 200)]
+
         public async Task<IActionResult> PostContact([FromBody] Contact contact)
         {
             if (!ModelState.IsValid)
@@ -159,7 +160,7 @@ namespace InternalPortal.Controllers
             _context.Contact.Add(contact);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetContact", new { id = contact.ContactId }, contact);
+            return Ok(contact);
         }
 
         // DELETE: api/Contacts/5

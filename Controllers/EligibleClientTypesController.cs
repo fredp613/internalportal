@@ -111,6 +111,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleClientTypes
         [HttpPost]
+        [ProducesResponseType(typeof(EligibleClientType), 200)]
         public async Task<IActionResult> PostEligibleClientType([FromBody] EligibleClientType eligibleClientType)
         {
             if (!ModelState.IsValid)
@@ -121,7 +122,7 @@ namespace InternalPortal.Controllers
             _unitOfWork.EligibleClientTypes.Add(eligibleClientType);
             await _unitOfWork.SaveChangesAsync();
 
-            return CreatedAtAction("GetEligibleClientType", new { id = eligibleClientType.EligibleClientTypeId }, eligibleClientType);
+            return Ok(eligibleClientType);
         }
 
         // DELETE: api/EligibleClientTypes/5

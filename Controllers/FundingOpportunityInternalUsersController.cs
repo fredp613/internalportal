@@ -86,6 +86,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityInternalUsers
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityInternalUser), 200)]
         public async Task<IActionResult> PostFundingOpportunityInternalUser([FromBody] FundingOpportunityInternalUser fundingOpportunityInternalUser)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace InternalPortal.Controllers
             _context.FundingOpportunityInternalUser.Add(fundingOpportunityInternalUser);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunityInternalUser", new { id = fundingOpportunityInternalUser.FundingOpportunityInternalUserId }, fundingOpportunityInternalUser);
+            return Ok(fundingOpportunityInternalUser);
         }
 
         // DELETE: api/FundingOpportunityInternalUsers/5

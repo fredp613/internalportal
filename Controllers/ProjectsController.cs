@@ -169,6 +169,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Projects 
         [HttpPost]
+        [ProducesResponseType(typeof(Project), 200)]
         public async Task<IActionResult> PostProject([FromBody] Project project)
         {
             if (!ModelState.IsValid)
@@ -180,7 +181,7 @@ namespace InternalPortal.Controllers
 
             await _unitOfWork.SaveChangesAsync();
 
-            return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
+            return Ok(project);
         }
 
         // POST: api/Projects/PostGCIMS 

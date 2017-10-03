@@ -87,6 +87,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibilityCriterias
         [HttpPost]
+        [ProducesResponseType(typeof(EligibilityCriteria), 200)]
         public async Task<IActionResult> PostEligibilityCriteria([FromBody] EligibilityCriteria eligibilityCriteria)
         {
             if (!ModelState.IsValid)
@@ -97,7 +98,7 @@ namespace InternalPortal.Controllers
             _context.EligibilityCriteria.Add(eligibilityCriteria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEligibilityCriteria", new { id = eligibilityCriteria.EligibilityCriteriaId }, eligibilityCriteria);
+            return Ok(eligibilityCriteria);
         }
 
         // DELETE: api/EligibilityCriterias/5

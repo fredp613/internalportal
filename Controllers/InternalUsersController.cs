@@ -117,6 +117,7 @@ namespace InternalPortal.Controllers
       
         // POST: api/InternalUsers
         [HttpPost]
+        [ProducesResponseType(typeof(InternalUser), 200)]
         public async Task<IActionResult> PostInternalUser([FromBody] InternalUser internalUser)
         {
             if (!ModelState.IsValid)
@@ -128,7 +129,7 @@ namespace InternalPortal.Controllers
            
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInternalUser", new { id = internalUser.InternalUserId }, internalUser);
+            return Ok(internalUser);
         }
 
         // DELETE: api/InternalUsers/5

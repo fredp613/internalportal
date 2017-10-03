@@ -86,6 +86,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/ExpectedResults
         [HttpPost]
+        [ProducesResponseType(typeof(ExpectedResult), 200)]
         public async Task<IActionResult> PostExpectedResult([FromBody] ExpectedResult expectedResult)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace InternalPortal.Controllers
             _context.ExpectedResult.Add(expectedResult);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetExpectedResult", new { id = expectedResult.ExpectedResultId }, expectedResult);
+            return Ok(expectedResult);
         }
 
         // DELETE: api/ExpectedResults/5

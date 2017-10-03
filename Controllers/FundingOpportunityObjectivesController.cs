@@ -85,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityObjectives
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityObjective), 200)]
         public async Task<IActionResult> PostFundingOpportunityObjective([FromBody] FundingOpportunityObjective fundingOpportunityObjective)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.FundingOpportunityObjective.Add(fundingOpportunityObjective);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunityObjective", new { id = fundingOpportunityObjective.FundingOpportunityObjectiveId }, fundingOpportunityObjective);
+            return Ok(fundingOpportunityObjective);
         }
 
         // DELETE: api/FundingOpportunityObjectives/5

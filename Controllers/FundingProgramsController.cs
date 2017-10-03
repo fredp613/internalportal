@@ -124,6 +124,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingPrograms
         [HttpPost]
+        [ProducesResponseType(typeof(FundingProgram), 200)]
         public async Task<IActionResult> PostFundingProgram([FromBody] FundingProgram fundingProgram)
         {
             if (!ModelState.IsValid)
@@ -134,7 +135,7 @@ namespace InternalPortal.Controllers
             _context.FundingProgram.Add(fundingProgram);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingProgram", new { id = fundingProgram.FundingProgramId }, fundingProgram);
+            return Ok(fundingProgram);
         }
 
         // DELETE: api/FundingPrograms/5

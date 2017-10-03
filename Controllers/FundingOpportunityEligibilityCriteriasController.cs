@@ -114,6 +114,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityEligibilityCriterias
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityEligibilityCriteria), 200)]
         public async Task<IActionResult> PostFundingOpportunityEligibilityCriteria([FromBody] FundingOpportunityEligibilityCriteria fundingOpportunityEligibilityCriteria)
         {
             if (!ModelState.IsValid)
@@ -124,7 +125,7 @@ namespace InternalPortal.Controllers
             _context.FundingOpportunityEligibilityCriteria.Add(fundingOpportunityEligibilityCriteria);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunityEligibilityCriteria", new { id = fundingOpportunityEligibilityCriteria.FundingOpportunityEligibilityCriteriaId }, fundingOpportunityEligibilityCriteria);
+            return Ok(fundingOpportunityEligibilityCriteria);
         }
 
         // DELETE: api/FundingOpportunityEligibilityCriterias/5

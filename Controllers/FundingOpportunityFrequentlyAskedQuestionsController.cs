@@ -85,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/FundingOpportunityFrequentlyAskedQuestions
         [HttpPost]
+        [ProducesResponseType(typeof(FundingOpportunityFrequentlyAskedQuestion), 200)]
         public async Task<IActionResult> PostFundingOpportunityFrequentlyAskedQuestion([FromBody] FundingOpportunityFrequentlyAskedQuestion fundingOpportunityFrequentlyAskedQuestion)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.FundingOpportunityFrequentlyAskedQuestion.Add(fundingOpportunityFrequentlyAskedQuestion);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetFundingOpportunityFrequentlyAskedQuestion", new { id = fundingOpportunityFrequentlyAskedQuestion.FundingOpportunityFrequentlyAskedQuestionId }, fundingOpportunityFrequentlyAskedQuestion);
+            return Ok(fundingOpportunityFrequentlyAskedQuestion);
         }
 
         // DELETE: api/FundingOpportunityFrequentlyAskedQuestions/5

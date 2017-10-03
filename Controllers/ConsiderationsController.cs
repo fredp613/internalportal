@@ -85,7 +85,8 @@ namespace InternalPortal.Controllers
 
         // POST: api/Considerations
         [HttpPost]
-        //[ProducesResponseType(typeof(Consideration), 201)]
+        [ProducesResponseType(typeof(Consideration), 200)]
+        //
         public async Task<IActionResult> PostConsideration([FromBody] Consideration consideration)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace InternalPortal.Controllers
             _context.Consideration.Add(consideration);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetConsideration", new { id = consideration.ConsiderationId }, consideration);
+            return Ok(consideration);
         }
 
         // DELETE: api/Considerations/5

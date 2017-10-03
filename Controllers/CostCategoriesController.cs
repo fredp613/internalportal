@@ -86,6 +86,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/CostCategories
         [HttpPost]
+        [ProducesResponseType(typeof(CostCategory), 200)]
         public async Task<IActionResult> PostCostCategory([FromBody] CostCategory costCategory)
         {
             if (!ModelState.IsValid)
@@ -96,7 +97,7 @@ namespace InternalPortal.Controllers
             _context.CostCategory.Add(costCategory);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetCostCategory", new { id = costCategory.CostCategoryId }, costCategory);
+            return Ok(costCategory);
         }
 
         // DELETE: api/CostCategories/5

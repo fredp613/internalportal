@@ -85,6 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/EligibleCostCategories
         [HttpPost]
+        [ProducesResponseType(typeof(EligibleCostCategory), 200)]
         public async Task<IActionResult> PostEligibleCostCategory([FromBody] EligibleCostCategory eligibleCostCategory)
         {
             if (!ModelState.IsValid)
@@ -95,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.EligibleCostCategory.Add(eligibleCostCategory);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetEligibleCostCategory", new { id = eligibleCostCategory.EligibleCostCategoryId }, eligibleCostCategory);
+            return Ok(eligibleCostCategory);
         }
 
         // DELETE: api/EligibleCostCategories/5

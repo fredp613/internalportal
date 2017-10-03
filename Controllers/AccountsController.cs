@@ -85,7 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Accounts
         [HttpPost]
-        [ProducesResponseType(typeof(Account), 201)]
+        [ProducesResponseType(typeof(Account), 200)]
         public async Task<IActionResult> PostAccount([FromBody] Account account)
         {
             if (!ModelState.IsValid)
@@ -96,7 +96,7 @@ namespace InternalPortal.Controllers
             _context.Account.Add(account);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAccount", new { id = account.AccountId }, account);
+            return Ok( account);
         }
 
         // DELETE: api/Accounts/5
