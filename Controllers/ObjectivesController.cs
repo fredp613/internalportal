@@ -94,8 +94,8 @@ namespace InternalPortal.Controllers
 
             _context.Objective.Add(objective);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetObjective", new { id = objective.ObjectiveId }, objective);
+            return Ok(objective);
+            //return CreatedAtAction("GetObjective", new { id = objective.ObjectiveId }, objective);
         }
 
         // DELETE: api/Objectives/5
