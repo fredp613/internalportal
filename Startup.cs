@@ -148,9 +148,12 @@ namespace InternalPortal
     } 
     public class TestFilter : IDocumentFilter
     {
-       public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
+        public void Apply(SwaggerDocument swaggerDoc, DocumentFilterContext context)
         {
             swaggerDoc.Schemes = new string[] { "http", "https" };
+            swaggerDoc.Consumes = new string[] { "application/json" };
+            swaggerDoc.Produces = new string[] { "application/json " };
+
         }
     }
 }
