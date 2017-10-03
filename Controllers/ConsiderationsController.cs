@@ -85,7 +85,7 @@ namespace InternalPortal.Controllers
 
         // POST: api/Considerations
         [HttpPost]
-        [ProducesResponseType(typeof(Consideration), 201)]
+        //[ProducesResponseType(typeof(Consideration), 201)]
         public async Task<IActionResult> PostConsideration([FromBody] Consideration consideration)
         {
             if (!ModelState.IsValid)
