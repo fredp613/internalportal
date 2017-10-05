@@ -30,7 +30,7 @@ namespace InternalPortal.Models
   
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
-        [ForeignKey("CreatedByUserId")]
+      
       
     }
 }
