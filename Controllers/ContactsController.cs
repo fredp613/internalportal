@@ -29,7 +29,7 @@ namespace InternalPortal.Controllers
         }
         [HttpGet("getbyemail/{id}/{email}")]
         [ProducesResponseType(typeof(Contact), 200)]
-        public async Task<IActionResult> GetContactByEmail([FromRoute] string email, [FromRoute] Guid id)
+        public async Task<IActionResult> GetContactEmail([FromRoute] string email, [FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
             {
@@ -42,6 +42,7 @@ namespace InternalPortal.Controllers
             }
             return Ok(existingContacts);
         }
+      
 
         [HttpGet("answer/{id}/{answer}")]
         [ProducesResponseType(typeof(Contact), 200)]

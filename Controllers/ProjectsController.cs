@@ -44,6 +44,8 @@ namespace InternalPortal.Controllers
             return _unitOfWork.Projects.GetAll();
         }
 
+      
+
         // GET: api/Projects/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(Project), 200)]
