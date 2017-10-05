@@ -27,15 +27,7 @@ namespace InternalPortal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<User>()
-                .HasOne(p => p.CreatedBy)
-                .WithMany()
-                .HasForeignKey(b => b.CreatedByUserId);
-            modelBuilder.Entity<User>()
-                .HasOne(p => p.UpdatedBy)
-                .WithMany()
-                .HasForeignKey(b => b.UpdatedByUserId);
+           
 
        
           
