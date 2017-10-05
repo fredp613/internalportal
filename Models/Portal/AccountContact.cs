@@ -14,20 +14,17 @@ namespace InternalPortal.Models
         [Key]
         public Guid AccountContactId { get; set; }
         public Guid AccountId { get; set; }
+        [JsonIgnore]
         public Account Account { get; set; }
         public Guid ContactId { get; set; }
         [JsonIgnore]
         public Contact Contact { get; set; }    
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid? UpdatedByInternalUserId { get; set; }
-        
-        public InternalUser InternalUpdatedBy { get; set; }
+        public Guid? UpdatedByInternalUserId { get; set; }        
+       
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
-        [ForeignKey("CreatedByUserId")]
-        public User CreatedBy { get; set; }
-        [ForeignKey("UpdatedByUserId")]
-        public User UpdatedBy { get; set; }
+     
     }
 }

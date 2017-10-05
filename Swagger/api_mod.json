@@ -6,7 +6,7 @@
     "description": "API for Portal System in AEM",
     "termsOfService": "None"
   },
-  "host": "otvcrm01:84",
+  "host": "otvcrm01:83",
   "basePath": "/",
   "schemes": [ "http", "https" ],
   "consumes": [ "application/json" ],
@@ -42,7 +42,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Success",
             "schema": { "$ref": "#/definitions/Account" }
           }
@@ -135,7 +135,7 @@
         "tags": [ "Considerations" ],
         "operationId": "ApiConsiderationsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "consideration",
@@ -144,7 +144,12 @@
             "schema": { "$ref": "#/definitions/Consideration" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Consideration" }
+          }
+        }
       }
     },
     "/api/Considerations/{id}": {
@@ -233,7 +238,7 @@
         "tags": [ "Contacts" ],
         "operationId": "ApiContactsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "contact",
@@ -242,7 +247,12 @@
             "schema": { "$ref": "#/definitions/Contact" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Contact" }
+          }
+        }
       }
     },
     "/api/Contacts/getbyemail/{id}/{email}": {
@@ -419,7 +429,7 @@
         "tags": [ "CostCategories" ],
         "operationId": "ApiCostCategoriesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "costCategory",
@@ -428,7 +438,12 @@
             "schema": { "$ref": "#/definitions/CostCategory" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/CostCategory" }
+          }
+        }
       }
     },
     "/api/CostCategories/{id}": {
@@ -517,7 +532,7 @@
         "tags": [ "EligibilityCriterias" ],
         "operationId": "ApiEligibilityCriteriasPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "eligibilityCriteria",
@@ -526,7 +541,12 @@
             "schema": { "$ref": "#/definitions/EligibilityCriteria" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/EligibilityCriteria" }
+          }
+        }
       }
     },
     "/api/EligibilityCriterias/{id}": {
@@ -615,7 +635,7 @@
         "tags": [ "EligibleClientTypes" ],
         "operationId": "ApiEligibleClientTypesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "eligibleClientType",
@@ -624,7 +644,12 @@
             "schema": { "$ref": "#/definitions/EligibleClientType" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/EligibleClientType" }
+          }
+        }
       }
     },
     "/api/EligibleClientTypes/GetEligibleClientTypeList": {
@@ -753,7 +778,7 @@
         "tags": [ "EligibleCostCategories" ],
         "operationId": "ApiEligibleCostCategoriesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "eligibleCostCategory",
@@ -762,7 +787,12 @@
             "schema": { "$ref": "#/definitions/EligibleCostCategory" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/EligibleCostCategory" }
+          }
+        }
       }
     },
     "/api/EligibleCostCategories/{id}": {
@@ -851,7 +881,7 @@
         "tags": [ "ExpectedResults" ],
         "operationId": "ApiExpectedResultsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "expectedResult",
@@ -860,7 +890,12 @@
             "schema": { "$ref": "#/definitions/ExpectedResult" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/ExpectedResult" }
+          }
+        }
       }
     },
     "/api/ExpectedResults/{id}": {
@@ -949,7 +984,7 @@
         "tags": [ "FrequentlyAskedQuestions" ],
         "operationId": "ApiFrequentlyAskedQuestionsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "frequentlyAskedQuestion",
@@ -958,7 +993,12 @@
             "schema": { "$ref": "#/definitions/FrequentlyAskedQuestion" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FrequentlyAskedQuestion" }
+          }
+        }
       }
     },
     "/api/FrequentlyAskedQuestions/{id}": {
@@ -1083,7 +1123,7 @@
         "tags": [ "FundingOpportunities" ],
         "operationId": "ApiByLangFundingOpportunitiesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunity",
@@ -1098,7 +1138,12 @@
             "type": "string"
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunity" }
+          }
+        }
       }
     },
     "/api/{lang}/FundingOpportunities/GetAllFundingOpportunities": {
@@ -1572,7 +1617,7 @@
         "tags": [ "FundingOpportunityConsiderations" ],
         "operationId": "ApiFundingOpportunityConsiderationsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityConsideration",
@@ -1581,7 +1626,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityConsideration" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityConsideration" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityConsiderations/{id}": {
@@ -1670,7 +1720,7 @@
         "tags": [ "FundingOpportunityEligibilityCriterias" ],
         "operationId": "ApiFundingOpportunityEligibilityCriteriasPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityEligibilityCriteria",
@@ -1679,7 +1729,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityEligibilityCriteria" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityEligibilityCriteria" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityEligibilityCriterias/{id}": {
@@ -1791,7 +1846,7 @@
         "tags": [ "FundingOpportunityExpectedResults" ],
         "operationId": "ApiFundingOpportunityExpectedResultsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityExpectedResult",
@@ -1800,7 +1855,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityExpectedResult" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityExpectedResult" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityExpectedResults/{id}": {
@@ -1889,7 +1949,7 @@
         "tags": [ "FundingOpportunityFrequentlyAskedQuestions" ],
         "operationId": "ApiFundingOpportunityFrequentlyAskedQuestionsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityFrequentlyAskedQuestion",
@@ -1898,7 +1958,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityFrequentlyAskedQuestion" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityFrequentlyAskedQuestions/{id}": {
@@ -1987,7 +2052,7 @@
         "tags": [ "FundingOpportunityInternalUsers" ],
         "operationId": "ApiFundingOpportunityInternalUsersPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityInternalUser",
@@ -1996,7 +2061,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityInternalUser" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityInternalUser" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityInternalUsers/{id}": {
@@ -2085,7 +2155,7 @@
         "tags": [ "FundingOpportunityObjectives" ],
         "operationId": "ApiFundingOpportunityObjectivesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityObjective",
@@ -2094,7 +2164,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityObjective" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityObjective" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityObjectives/{id}": {
@@ -2183,7 +2258,7 @@
         "tags": [ "FundingOpportunityResources" ],
         "operationId": "ApiFundingOpportunityResourcesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingOpportunityResource",
@@ -2192,7 +2267,12 @@
             "schema": { "$ref": "#/definitions/FundingOpportunityResource" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingOpportunityResource" }
+          }
+        }
       }
     },
     "/api/FundingOpportunityResources/{id}": {
@@ -2276,7 +2356,7 @@
         "tags": [ "FundingProgramInternalUsers" ],
         "operationId": "ApiFundingProgramInternalUsersPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingProgramInternalUser",
@@ -2285,7 +2365,12 @@
             "schema": { "$ref": "#/definitions/FundingProgramInternalUser" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingProgramInternalUser" }
+          }
+        }
       }
     },
     "/api/FundingProgramInternalUsers/{id}": {
@@ -2374,7 +2459,7 @@
         "tags": [ "FundingPrograms" ],
         "operationId": "ApiFundingProgramsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "fundingProgram",
@@ -2383,7 +2468,12 @@
             "schema": { "$ref": "#/definitions/FundingProgram" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/FundingProgram" }
+          }
+        }
       }
     },
     "/api/FundingPrograms/{id}": {
@@ -2490,7 +2580,7 @@
         "tags": [ "InternalUserRoles" ],
         "operationId": "ApiInternalUserRolesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "internalUserRole",
@@ -2499,7 +2589,12 @@
             "schema": { "$ref": "#/definitions/InternalUserRole" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/InternalUserRole" }
+          }
+        }
       }
     },
     "/api/InternalUserRoles/{id}": {
@@ -2588,7 +2683,7 @@
         "tags": [ "InternalUsers" ],
         "operationId": "ApiInternalUsersPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "internalUser",
@@ -2597,7 +2692,12 @@
             "schema": { "$ref": "#/definitions/InternalUser" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/InternalUser" }
+          }
+        }
       }
     },
     "/api/InternalUsers/{id}": {
@@ -2830,7 +2930,7 @@
         "tags": [ "Objectives" ],
         "operationId": "ApiObjectivesPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "objective",
@@ -2839,7 +2939,12 @@
             "schema": { "$ref": "#/definitions/Objective" }
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Objective" }
+          }
+        }
       }
     },
     "/api/Objectives/{id}": {
@@ -2931,7 +3036,7 @@
         "tags": [ "Projects" ],
         "operationId": "ApiByLangProjectsPost",
         "consumes": [ "application/json", "text/json", "application/json-patch+json" ],
-        "produces": [],
+        "produces": [ "application/json" ],
         "parameters": [
           {
             "name": "project",
@@ -2946,7 +3051,12 @@
             "type": "string"
           }
         ],
-        "responses": { "200": { "description": "Success" } }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": { "$ref": "#/definitions/Project" }
+          }
+        }
       }
     },
     "/api/{lang}/Projects/{id}": {
@@ -3255,8 +3365,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "address": { "$ref": "#/definitions/Address" },
-        "account": { "$ref": "#/definitions/Account" },
         "createdOn": {
           "format": "date-time",
           "type": "string"
@@ -3298,7 +3406,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "contact": { "$ref": "#/definitions/Contact" },
         "createdOn": {
           "format": "date-time",
           "type": "string"
@@ -3401,37 +3508,66 @@
         "updatedBy": { "$ref": "#/definitions/User" }
       }
     },
-    "Address": {
+    "FundingProgramInternalUser": {
       "type": "object",
       "properties": {
-        "addressId": {
+        "fundingProgramInternalUserId": {
           "format": "uuid",
           "type": "string"
         },
-        "gcimsAddressId": {
-          "format": "int32",
-          "type": "integer"
+        "fundingProgramId": {
+          "format": "uuid",
+          "type": "string"
         },
-        "addressLine1": { "type": "string" },
-        "addressLine2": { "type": "string" },
-        "addressLine3": { "type": "string" },
-        "addressLine4": { "type": "string" },
-        "city": { "type": "string" },
-        "gcimsCityID": {
-          "format": "int32",
-          "type": "integer"
+        "internalUserId": {
+          "format": "uuid",
+          "type": "string"
         },
-        "province": { "type": "string" },
-        "gcimsProvinceID": {
-          "format": "int32",
-          "type": "integer"
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
         },
-        "country": { "type": "string" },
-        "gcimsCountryID": {
-          "format": "int32",
-          "type": "integer"
+        "updatedOn": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "FundingOpportunityInternalUser": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityInternalUserId": {
+          "format": "uuid",
+          "type": "string"
         },
-        "postal": { "type": "string" },
+        "fundingOpportunityId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "internalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "hasFullAccess": { "type": "boolean" },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedOn": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Consideration": {
+      "type": "object",
+      "properties": {
+        "considerationId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "descriptionE": { "type": "string" },
+        "descriptionF": { "type": "string" },
         "createdOn": {
           "format": "date-time",
           "type": "string"
@@ -3440,21 +3576,14 @@
           "format": "date-time",
           "type": "string"
         },
+        "createdByInternalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
         "updatedByInternalUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
-        "createdByUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "updatedByUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "Contact": {
@@ -3523,57 +3652,6 @@
         "updatedBy": { "$ref": "#/definitions/User" }
       }
     },
-    "FundingProgramInternalUser": {
-      "type": "object",
-      "properties": {
-        "fundingProgramInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "fundingProgramId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "internalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "FundingOpportunityInternalUser": {
-      "type": "object",
-      "properties": {
-        "fundingOpportunityInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "fundingOpportunityId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "internalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "hasFullAccess": { "type": "boolean" },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
     "ContactAddress": {
       "type": "object",
       "properties": {
@@ -3581,7 +3659,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "contact": { "$ref": "#/definitions/Contact" },
         "address": { "$ref": "#/definitions/Address" },
         "createdOn": {
           "format": "date-time",
@@ -3608,15 +3685,37 @@
         "updatedBy": { "$ref": "#/definitions/User" }
       }
     },
-    "Consideration": {
+    "Address": {
       "type": "object",
       "properties": {
-        "considerationId": {
+        "addressId": {
           "format": "uuid",
           "type": "string"
         },
-        "descriptionE": { "type": "string" },
-        "descriptionF": { "type": "string" },
+        "gcimsAddressId": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "addressLine1": { "type": "string" },
+        "addressLine2": { "type": "string" },
+        "addressLine3": { "type": "string" },
+        "addressLine4": { "type": "string" },
+        "city": { "type": "string" },
+        "gcimsCityID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "province": { "type": "string" },
+        "gcimsProvinceID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "country": { "type": "string" },
+        "gcimsCountryID": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "postal": { "type": "string" },
         "createdOn": {
           "format": "date-time",
           "type": "string"
@@ -3625,14 +3724,21 @@
           "format": "date-time",
           "type": "string"
         },
-        "createdByInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
         "updatedByInternalUserId": {
           "format": "uuid",
           "type": "string"
-        }
+        },
+        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
+        "createdByUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "updatedByUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "createdBy": { "$ref": "#/definitions/User" },
+        "updatedBy": { "$ref": "#/definitions/User" }
       }
     },
     "CostCategory": {
@@ -4388,7 +4494,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "primaryContact": { "$ref": "#/definitions/Contact" },
         "projectContacts": {
           "type": "array",
           "items": { "$ref": "#/definitions/ProjectContact" }
@@ -4441,8 +4546,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "contact": { "$ref": "#/definitions/Contact" },
-        "project": { "$ref": "#/definitions/Project" },
         "createdOn": {
           "format": "date-time",
           "type": "string"

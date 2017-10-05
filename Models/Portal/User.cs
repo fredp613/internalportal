@@ -16,15 +16,12 @@ namespace InternalPortal.Models
         public string PAI { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        [ForeignKey("InternalUpdatedBy")]
         public Guid? UpdatedByInternalUserId { get; set; }        
         public virtual InternalUser InternalUpdatedBy { get; set; }
-        [ForeignKey("CreatedBy")]
         public Guid? CreatedByUserId { get; set; }
-        [ForeignKey("UpdatedBy")]
+       
         public Guid? UpdatedByUserId { get; set; }        
-        public virtual User CreatedBy { get; set; }
-        public virtual User UpdatedBy { get; set; }
+       
 
       
 

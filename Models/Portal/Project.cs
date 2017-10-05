@@ -49,11 +49,14 @@ namespace InternalPortal.Models
      //   public tblContacts Contact { get; set; }
         public Guid? PrimaryContactAddressId { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
+        [JsonIgnore]
         [ForeignKey("PrimaryContactAddressId")]
         public ContactAddress PrimaryContactAddress { get; set; }
+        [JsonIgnore]
         [ForeignKey("PrimaryAccountAddressId")]
         public AccountAddress PrimaryAccountAddress { get; set; }
         public Guid AccountId { get; set; }
+        [JsonIgnore]
         public Account Account { get; set; }
         public Guid ContactId { get; set; }
         [JsonIgnore]
@@ -69,14 +72,10 @@ namespace InternalPortal.Models
         public DateTime ExternalUpdatedOn { get; set; }      
         public DateTime InternalUpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
-        
-        public InternalUser InternalUpdatedBy { get; set; }
+
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
-        [ForeignKey("CreatedByUserId")]
-        public User CreatedBy { get; set; }
-        [ForeignKey("UpdatedByUserId")]
-        public User UpdatedBy { get; set; }
+      
 
     }
 }
