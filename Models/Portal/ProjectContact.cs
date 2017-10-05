@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -9,7 +10,9 @@ namespace InternalPortal.Models.Portal
     public class ProjectContact
     {
         public Guid ProjectContactId { get; set; }
+        [JsonIgnore]
         public Contact Contact { get; set; }
+        [JsonIgnore]
         public Project Project { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }

@@ -1,5 +1,6 @@
 ﻿using InternalPortal.Models.Portal;
 using InternalPortal.Models.Portal.Program;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -55,6 +56,7 @@ namespace InternalPortal.Models
         public Guid AccountId { get; set; }
         public Account Account { get; set; }
         public Guid ContactId { get; set; }
+        [JsonIgnore]
         public Contact PrimaryContact { get; set; }
 
         public IEnumerable<ProjectContact> ProjectContacts { get; set; }
