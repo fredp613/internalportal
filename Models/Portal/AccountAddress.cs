@@ -1,4 +1,5 @@
 ﻿using InternalPortal.Models.Portal;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -13,8 +14,10 @@ namespace InternalPortal.Models
         [Key]
         public Guid AccountAddressId { get; set; }
         public Guid AddressId { get; set; }
-        public Guid AccountId { get; set; }     
-        public  Address Address { get; set; }        
+        public Guid AccountId { get; set; }    
+        [JsonIgnore]
+        public  Address Address { get; set; }      
+        [JsonIgnore]
         public  Account Account { get; set; }   
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
