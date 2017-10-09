@@ -6,7 +6,7 @@
     "description": "API for Portal System in AEM",
     "termsOfService": "None"
   },
-  "host": "otvcrm01:83",
+  "host": "172.16.11.134:84",
   "basePath": "/",
   "schemes": [ "http", "https" ],
   "consumes": [ "application/json" ],
@@ -3337,7 +3337,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -3345,9 +3344,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "AccountAddress": {
@@ -3377,7 +3374,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -3385,9 +3381,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "AccountContact": {
@@ -3401,7 +3395,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "account": { "$ref": "#/definitions/Account" },
         "contactId": {
           "format": "uuid",
           "type": "string"
@@ -3418,143 +3411,12 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
         },
         "updatedByUserId": {
           "format": "uuid",
-          "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
-      }
-    },
-    "InternalUser": {
-      "type": "object",
-      "properties": {
-        "internalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "userName": { "type": "string" },
-        "firstName": { "type": "string" },
-        "lastName": { "type": "string" },
-        "email": { "type": "string" },
-        "language": { "type": "string" },
-        "isPortalAdministrator": { "type": "boolean" },
-        "isFundingOpportunityAdministrator": { "type": "boolean" },
-        "isWorkloadManager": { "type": "boolean" },
-        "isSubmissionReviewer": { "type": "boolean" },
-        "fullName": { "type": "string" },
-        "roles": { "type": "string" },
-        "fundingProgramInternalUsers": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/FundingProgramInternalUser" }
-        },
-        "fundingOpportunityInternalUsers": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/FundingOpportunityInternalUser" }
-        },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "createdByInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "updatedByInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        }
-      }
-    },
-    "User": {
-      "type": "object",
-      "properties": {
-        "userId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "pai": { "type": "string" },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedByInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
-        "createdByUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "updatedByUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
-      }
-    },
-    "FundingProgramInternalUser": {
-      "type": "object",
-      "properties": {
-        "fundingProgramInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "fundingProgramId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "internalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "FundingOpportunityInternalUser": {
-      "type": "object",
-      "properties": {
-        "fundingOpportunityInternalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "fundingOpportunityId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "internalUserId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "hasFullAccess": { "type": "boolean" },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "updatedOn": {
-          "format": "date-time",
           "type": "string"
         }
       }
@@ -3639,7 +3501,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -3647,9 +3508,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "ContactAddress": {
@@ -3672,7 +3531,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -3680,9 +3538,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "Address": {
@@ -3728,7 +3584,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -3736,9 +3591,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "CostCategory": {
@@ -4257,6 +4110,57 @@
         }
       }
     },
+    "FundingOpportunityInternalUser": {
+      "type": "object",
+      "properties": {
+        "fundingOpportunityInternalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "fundingOpportunityId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "internalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "hasFullAccess": { "type": "boolean" },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedOn": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "FundingProgramInternalUser": {
+      "type": "object",
+      "properties": {
+        "fundingProgramInternalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "fundingProgramId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "internalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedOn": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "FundingProgram": {
       "type": "object",
       "properties": {
@@ -4341,6 +4245,50 @@
         "roleDesc": { "type": "string" },
         "createdOn": {
           "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "InternalUser": {
+      "type": "object",
+      "properties": {
+        "internalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "userName": { "type": "string" },
+        "firstName": { "type": "string" },
+        "lastName": { "type": "string" },
+        "email": { "type": "string" },
+        "language": { "type": "string" },
+        "isPortalAdministrator": { "type": "boolean" },
+        "isFundingOpportunityAdministrator": { "type": "boolean" },
+        "isWorkloadManager": { "type": "boolean" },
+        "isSubmissionReviewer": { "type": "boolean" },
+        "fullName": { "type": "string" },
+        "roles": { "type": "string" },
+        "fundingProgramInternalUsers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FundingProgramInternalUser" }
+        },
+        "fundingOpportunityInternalUsers": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/FundingOpportunityInternalUser" }
+        },
+        "createdOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "updatedOn": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "createdByInternalUserId": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "updatedByInternalUserId": {
+          "format": "uuid",
           "type": "string"
         }
       }
@@ -4483,13 +4431,10 @@
           "format": "uuid",
           "type": "string"
         },
-        "primaryContactAddress": { "$ref": "#/definitions/ContactAddress" },
-        "primaryAccountAddress": { "$ref": "#/definitions/AccountAddress" },
         "accountId": {
           "format": "uuid",
           "type": "string"
         },
-        "account": { "$ref": "#/definitions/Account" },
         "contactId": {
           "format": "uuid",
           "type": "string"
@@ -4526,7 +4471,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -4534,9 +4478,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "ProjectContact": {
@@ -4558,7 +4500,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -4566,9 +4507,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "ProjectBudget": {
@@ -4602,7 +4541,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -4610,9 +4548,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "ProjectExpectedResult": {
@@ -4642,7 +4578,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -4650,9 +4585,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     },
     "ProjectObjective": {
@@ -4683,7 +4616,6 @@
           "format": "uuid",
           "type": "string"
         },
-        "internalUpdatedBy": { "$ref": "#/definitions/InternalUser" },
         "createdByUserId": {
           "format": "uuid",
           "type": "string"
@@ -4691,9 +4623,7 @@
         "updatedByUserId": {
           "format": "uuid",
           "type": "string"
-        },
-        "createdBy": { "$ref": "#/definitions/User" },
-        "updatedBy": { "$ref": "#/definitions/User" }
+        }
       }
     }
   },
