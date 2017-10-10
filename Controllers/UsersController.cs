@@ -47,9 +47,9 @@ namespace InternalPortal.Controllers
             return Ok(user);
         }
         // GET: api/Users/5
-        [HttpGet("GetByPAI/{PAI}")]
+        [HttpGet("GetByPAI")]
         [ProducesResponseType(typeof(User), 200)]
-        public async Task<IActionResult> GetUserByPAI([FromRoute] string PAI)
+        public async Task<IActionResult> GetUserByPAI([FromBody] string PAI)
         {
             if (!ModelState.IsValid)
             {
