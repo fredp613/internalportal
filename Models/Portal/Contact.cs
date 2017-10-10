@@ -25,7 +25,6 @@ namespace InternalPortal.Models
             }
             set { }
         }
-        
         public string Email { get; set; }
         public string PhoneNumber { get; set; }     
         public string SalutationID { get; set; }
@@ -35,6 +34,7 @@ namespace InternalPortal.Models
         public string ShareSecretQuestion { get; set; }
         public string SharedSecretAnswer { get; set; }
         public bool IsPrimary { get; set; }
+        public int Attempts { get; set; }
         public Guid PrimaryAccountAddressId { get; set; }
         public Guid PaymentAccountAddressId { get; set; }        
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
