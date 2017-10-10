@@ -111,7 +111,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var userExists = _context.User.Where(m => m.PAI == user.PAI).First();
+            var userExists = _context.User.SingleOrDefault(m => m.PAI == user.PAI);
             if (userExists != null)
             {
                 return BadRequest(ModelState);
