@@ -59,6 +59,23 @@ namespace InternalPortal.Controllers
             return Ok(contact);
         }
 
+        [HttpGet("getbypai/{PAI}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        public async Task<IActionResult> GetContactByPAI([FromRoute] string PAI)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var user = _context.User.SingleOrDefault(u => u.PAI == PAI); 
+            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.CreatedByUserId == user.UserId);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return Ok(contact);
+        }
+
 
         [HttpGet("answer/{id}/{answer}")]
         [ProducesResponseType(typeof(Contact), 200)]
