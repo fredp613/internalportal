@@ -111,8 +111,15 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
+            var userExists = _context.User.Where(m => m.PAI == user.PAI).First();
+            if (userExists != null)
+            {
+                return BadRequest(ModelState);
+            }
+
             _context.User.Add(user);
             await _context.SaveChangesAsync();
+
 
             // return CreatedAtAction("GetUser", new { id = user.UserId }, user);
             return Ok(user); 
