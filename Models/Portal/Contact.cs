@@ -14,7 +14,7 @@ namespace InternalPortal.Models
     {
         [Key]
         public Guid ContactId { get; set; }
-        public int GcimsContactID { get; set; }
+        public int? GcimsContactID { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         [NotMapped]
@@ -39,8 +39,8 @@ namespace InternalPortal.Models
         public Guid? PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }
+        public DateTime? CreatedOn { get; set; }
+        public DateTime? UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }

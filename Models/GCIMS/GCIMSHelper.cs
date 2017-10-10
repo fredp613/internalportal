@@ -154,7 +154,7 @@ namespace InternalPortal.Models.GCIMS
                 _context.SaveChanges();
             }
 
-            return Contact.GcimsContactID;
+            return (int)Contact.GcimsContactID;
         }
 
         private bool ContactExists(int id)
