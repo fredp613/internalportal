@@ -9,8 +9,8 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    [Migration("20171010043550_testing123")]
-    partial class testing123
+    [Migration("20171010044604_test4322")]
+    partial class test4322
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
