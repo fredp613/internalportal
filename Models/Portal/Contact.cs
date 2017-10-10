@@ -36,14 +36,14 @@ namespace InternalPortal.Models
         public bool IsPrimary { get; set; }
         public int Attempts { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
-        public Guid? PaymentAccountAddressId { get; set; }        
+        public Guid? PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
         public IEnumerable<AccountContact> ContactAccounts { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
-        public Guid? UpdatedByInternalUserId { get; set; }        
+        public Guid? UpdatedByInternalUserId { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
-     
+
     }
 }

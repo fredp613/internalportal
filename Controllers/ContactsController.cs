@@ -67,7 +67,7 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = _context.User.SingleOrDefault(u => u.PAI == PAI); 
+            var user = _context.User.SingleOrDefault(u => u.PAI == PAI);
             var contact = await _context.Contact.SingleOrDefaultAsync(m => m.CreatedByUserId == user.UserId);
             if (contact == null)
             {
@@ -85,8 +85,8 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id); 
-           
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+
             if (contact == null)
             {
                 return NotFound();
@@ -94,7 +94,7 @@ namespace InternalPortal.Controllers
 
             if (contact.SharedSecretAnswer == answer)
             {
-                return Ok(contact); 
+                return Ok(contact);
             }
             return NotFound();
         }
@@ -142,11 +142,11 @@ namespace InternalPortal.Controllers
             return Ok(contact);
         }
 
-    
-       
+
+
 
         // PUT: api/Contacts/5
-        [HttpPut("{id}")]        
+        [HttpPut("{id}")]
         public async Task<IActionResult> PutContact([FromRoute] Guid id, [FromBody] Contact contact)
         {
             if (!ModelState.IsValid)
