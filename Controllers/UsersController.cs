@@ -47,7 +47,7 @@ namespace InternalPortal.Controllers
             return Ok(user);
         }
         // GET: api/Users/5
-        [HttpGet("GetByPAI")]
+        [HttpPost("GetByPAI")]
         [ProducesResponseType(typeof(User), 200)]
         public async Task<IActionResult> GetUserByPAI([FromBody] string PAI)
         {
