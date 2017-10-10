@@ -42,7 +42,23 @@ namespace InternalPortal.Controllers
             }
             return Ok(existingContacts);
         }
-      
+
+        [HttpGet("getbyuserid/{userid}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        public async Task<IActionResult> GetContactByUserId([FromRoute] Guid userid)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.CreatedByUserId == userid);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            return Ok(contact);
+        }
+
 
         [HttpGet("answer/{id}/{answer}")]
         [ProducesResponseType(typeof(Contact), 200)]
