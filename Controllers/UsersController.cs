@@ -46,6 +46,25 @@ namespace InternalPortal.Controllers
 
             return Ok(user);
         }
+        // GET: api/Users/5
+        [HttpGet("GetByPAI/{PAI}")]
+        [ProducesResponseType(typeof(User), 200)]
+        public async Task<IActionResult> GetUserByPAI([FromRoute] string PAI)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == PAI);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
 
         // PUT: api/Users/5
         [HttpPut("{id}")]
