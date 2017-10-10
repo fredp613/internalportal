@@ -77,48 +77,48 @@ namespace InternalPortal.Controllers
         }
 
 
-        //[HttpGet("answer/{id}/{answer}")]
-        //[ProducesResponseType(typeof(Contact), 200)]
-        //public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+        [HttpGet("answer/{id}/{answer}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
 
-        //    if (contact == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (contact == null)
+            {
+                return NotFound();
+            }
 
-        //    if (contact.SharedSecretAnswer == answer)
-        //    {
-        //        return Ok(contact);
-        //    }
-        //    return NotFound();
-        //}
-        //[HttpGet("dob/{id}/{dob}")]
-        //[ProducesResponseType(typeof(Contact), 200)]
-        //public async Task<IActionResult> ConfirmDob([FromRoute] Guid id, [FromRoute] DateTime dob)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest(ModelState);
-        //    }
-        //    var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+            if (contact.SharedSecretAnswer == answer)
+            {
+                return Ok(contact);
+            }
+            return NotFound();
+        }
+        [HttpGet("dob/{id}/{dob}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        public async Task<IActionResult> ConfirmDob([FromRoute] Guid id, [FromRoute] DateTime dob)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
 
-        //    if (contact == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (contact == null)
+            {
+                return NotFound();
+            }
 
-        //    if (contact.DateOfBirth == dob)
-        //    {
-        //        return Ok(contact);
-        //    }
-        //    return NotFound();
-        //}
+            if (contact.DateOfBirth == dob)
+            {
+                return Ok(contact);
+            }
+            return NotFound();
+        }
 
 
 

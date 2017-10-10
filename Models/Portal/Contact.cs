@@ -30,11 +30,11 @@ namespace InternalPortal.Models
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
         [JsonConverter(typeof(OnlyDateConverter))]
-       // public DateTime DateOfBirth { get; set; }
-       // public string ShareSecretQuestion { get; set; }
-      //  public string SharedSecretAnswer { get; set; }
-      //  public bool IsPrimary { get; set; }
-      //  public int Attempts { get; set; }
+        public DateTime DateOfBirth { get; set; }
+        public string ShareSecretQuestion { get; set; }
+        public string SharedSecretAnswer { get; set; }
+        public bool IsPrimary { get; set; }
+        public int Attempts { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
         public Guid? PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
