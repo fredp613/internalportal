@@ -19,7 +19,6 @@ namespace InternalPortal.Models
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }        
-
         //public virtual InternalUser InternalUpdatedBy { get; set; }
         public Guid? CreatedByUserId { get; set; }
        
