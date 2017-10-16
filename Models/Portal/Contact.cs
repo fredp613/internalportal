@@ -35,6 +35,7 @@ namespace InternalPortal.Models
         public string SharedSecretAnswer { get; set; }
         public bool IsPrimary { get; set; }
         public int Attempts { get; set; }
+        public bool IsBlocked { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
         public Guid? PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }
