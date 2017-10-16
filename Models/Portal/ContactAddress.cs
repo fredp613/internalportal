@@ -15,6 +15,7 @@ namespace InternalPortal.Models
         public Guid ContactAddressId { get; set; }
         [JsonIgnore]
         public Contact Contact { get; set; }
+        [JsonIgnore]
         public Address Address { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
