@@ -13,7 +13,9 @@ namespace InternalPortal.Models
         
         [Key]
         public Guid UserId { get; set; }
-        public string PAI { get; set; }
+        public string PAI { get; set; } 
+        //stores the contact reference to be used in the portal
+        public Guid ContactId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }        
