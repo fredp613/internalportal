@@ -14,6 +14,15 @@ namespace InternalPortal.Models.Portal
         public Contact Contact { get; set; }
         [JsonIgnore]
         public Project Project { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string Title { get; set; }
+        public bool isSigningAuthority { get; set; }
+        public Guid AddressId { get; set; }
+        [JsonIgnore]
+        public Address Address { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }

@@ -68,5 +68,6 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityResource> FundingOpportunityResource { get; set; }
         public DbSet<InternalPortal.Models.Portal.FundingProgramInternalUser> FundingProgramInternalUser { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunityInternalUser> FundingOpportunityInternalUser { get; set; }
+        public DbSet<InternalPortal.Models.Portal.ProjectContact> ProjectContact { get; set; }
     }
 }
