@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171016175936_blockedcontact")]
+    partial class blockedcontact
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -123,8 +124,6 @@ namespace InternalPortal.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<int>("Attempts");
-
-                    b.Property<string>("BlockJustification");
 
                     b.Property<Guid?>("CreatedByUserId");
 
@@ -983,8 +982,6 @@ namespace InternalPortal.Migrations
                 {
                     b.Property<Guid>("UserId")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<Guid>("ContactId");
 
                     b.Property<Guid?>("CreatedByUserId");
 
