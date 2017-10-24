@@ -50,10 +50,12 @@ namespace InternalPortal.Models
         public string Evaluation { get; set; }
         public Status ProjectStatus { get; set; }         
         [JsonIgnore]
+        [NotMapped]
         public tblAddresses PrimaryClientAddress { get; set; }
         [JsonIgnore]
         public tblClients Client { get; set; }
         [JsonIgnore]
+        [NotMapped]
         public tblContacts tblContact { get; set; }
         public Guid? PrimaryContactAddressId { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }

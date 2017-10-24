@@ -14,7 +14,7 @@ using InternalPortal.Models.Portal.Interfaces;
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
-    [Route("api/{lang}/Projects")]
+    [Route("api/Projects")]
     public class ProjectsController : Controller
     {
         private readonly PortalContext _context;
