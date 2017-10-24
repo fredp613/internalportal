@@ -27,7 +27,7 @@ namespace InternalPortal.Models
         public string Lang { get; set; }
         public string FiscalYear { get; set; }
         public double RequestedAmount { get; set; }
-        public string CorporateFileNumber { get; set; }      
+        public string CorporateFileNumber { get; set; }     
         public Guid? FundingOpportunityID { get; set; }
         public FundingOpportunity Program { get; set; }
         public string GCIMSCommitmentItemID { get; set; }
@@ -42,11 +42,19 @@ namespace InternalPortal.Models
         public bool NewPrimaryClientAddress { get; set; }  
         public string GcimsClientId { get; set; }
         public int GcimsContactId { get; set; }
-        public Status ProjectStatus { get; set; }
-      //  public tblAddresses PrimaryContactAddress { get; set; }
-      //  public tblAddresses PrimaryClientAddress { get; set; }
-      //  public tblClients Client { get; set; }
-     //   public tblContacts Contact { get; set; }
+        public string ProjectNeeded { get; set; }
+        public string ExpertiseJustificiation { get; set; }
+        public string Diversity { get; set; }
+        public string LanguageMinority { get; set; }
+        public string Communication { get; set; }
+        public string Evaluation { get; set; }
+        public Status ProjectStatus { get; set; }         
+        [JsonIgnore]
+        public tblAddresses PrimaryClientAddress { get; set; }
+        [JsonIgnore]
+        public tblClients Client { get; set; }
+        [JsonIgnore]
+        public tblContacts tblContact { get; set; }
         public Guid? PrimaryContactAddressId { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
         [JsonIgnore]

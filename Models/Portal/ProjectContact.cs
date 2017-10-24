@@ -10,6 +10,8 @@ namespace InternalPortal.Models.Portal
     public class ProjectContact
     {
         public Guid ProjectContactId { get; set; }
+        public Guid ProjectId { get; set; }
+        public Guid ContactId { get; set; }
         [JsonIgnore]
         public Contact Contact { get; set; }
         [JsonIgnore]
