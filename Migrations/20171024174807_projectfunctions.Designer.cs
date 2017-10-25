@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171024174807_projectfunctions")]
+    partial class projectfunctions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
