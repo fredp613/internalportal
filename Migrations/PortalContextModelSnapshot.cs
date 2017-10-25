@@ -950,13 +950,13 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("ProjectId")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<Guid>("AccountId");
+                    b.Property<Guid?>("AccountId");
 
                     b.Property<string>("ClientID");
 
                     b.Property<string>("Communication");
 
-                    b.Property<Guid>("ContactId");
+                    b.Property<Guid?>("ContactId");
 
                     b.Property<string>("CorporateFileNumber");
 
@@ -1002,8 +1002,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid?>("PrimaryAccountAddressId");
 
-                    b.Property<int?>("PrimaryClientAddressAddressID");
-
                     b.Property<Guid?>("PrimaryContactAddressId");
 
                     b.Property<string>("ProjectNeeded");
@@ -1026,8 +1024,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid?>("UpdatedByUserId");
 
-                    b.Property<int?>("tblContactContactID");
-
                     b.HasKey("ProjectId");
 
                     b.HasIndex("AccountId");
@@ -1040,11 +1036,7 @@ namespace InternalPortal.Migrations
 
                     b.HasIndex("PrimaryAccountAddressId");
 
-                    b.HasIndex("PrimaryClientAddressAddressID");
-
                     b.HasIndex("PrimaryContactAddressId");
-
-                    b.HasIndex("tblContactContactID");
 
                     b.ToTable("Project");
                 });
@@ -1111,50 +1103,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("UserId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("tblAddresses", b =>
-                {
-                    b.Property<int>("AddressID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AddressLine1");
-
-                    b.Property<string>("AddressLine2");
-
-                    b.Property<string>("AddressLine3");
-
-                    b.Property<string>("AddressLine4");
-
-                    b.Property<int>("AddressTypeID");
-
-                    b.Property<int>("CityID");
-
-                    b.Property<string>("ClientID");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate");
-
-                    b.Property<string>("Fax");
-
-                    b.Property<bool>("Historical");
-
-                    b.Property<string>("OldCityID");
-
-                    b.Property<string>("OldProvinceID");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.Property<DateTime?>("UpdatedDate");
-
-                    b.HasKey("AddressID");
-
-                    b.ToTable("tblAddresses");
                 });
 
             modelBuilder.Entity("tblClients", b =>
@@ -1259,64 +1207,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("ClientID");
 
                     b.ToTable("tblClients");
-                });
-
-            modelBuilder.Entity("tblContacts", b =>
-                {
-                    b.Property<int>("ContactID")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("AddressLine1");
-
-                    b.Property<string>("AddressLine2");
-
-                    b.Property<string>("AddressLine3");
-
-                    b.Property<string>("AddressLine4");
-
-                    b.Property<int?>("CityID");
-
-                    b.Property<string>("ClientID");
-
-                    b.Property<string>("CreatedBy");
-
-                    b.Property<DateTime?>("CreatedDate");
-
-                    b.Property<bool>("Disabled");
-
-                    b.Property<string>("Email");
-
-                    b.Property<string>("Fax");
-
-                    b.Property<string>("Firstname");
-
-                    b.Property<bool>("Historical");
-
-                    b.Property<string>("Initials");
-
-                    b.Property<string>("LanguageID");
-
-                    b.Property<string>("Lastname");
-
-                    b.Property<string>("OldCityID");
-
-                    b.Property<string>("OldProvinceID");
-
-                    b.Property<string>("Phone");
-
-                    b.Property<string>("PostalCode");
-
-                    b.Property<string>("SalutationID");
-
-                    b.Property<string>("Title");
-
-                    b.Property<string>("UpdatedBy");
-
-                    b.Property<DateTime?>("UpdatedDate");
-
-                    b.HasKey("ContactID");
-
-                    b.ToTable("tblContacts");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.AccountAddress", b =>
@@ -1538,8 +1428,7 @@ namespace InternalPortal.Migrations
                 {
                     b.HasOne("InternalPortal.Models.Portal.Account", "Account")
                         .WithMany()
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("AccountId");
 
                     b.HasOne("tblClients", "Client")
                         .WithMany()
@@ -1547,8 +1436,7 @@ namespace InternalPortal.Migrations
 
                     b.HasOne("InternalPortal.Models.Contact", "PrimaryContact")
                         .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ContactId");
 
                     b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunity", "Program")
                         .WithMany()
@@ -1558,17 +1446,9 @@ namespace InternalPortal.Migrations
                         .WithMany()
                         .HasForeignKey("PrimaryAccountAddressId");
 
-                    b.HasOne("tblAddresses", "PrimaryClientAddress")
-                        .WithMany()
-                        .HasForeignKey("PrimaryClientAddressAddressID");
-
                     b.HasOne("InternalPortal.Models.ContactAddress", "PrimaryContactAddress")
                         .WithMany()
                         .HasForeignKey("PrimaryContactAddressId");
-
-                    b.HasOne("tblContacts", "tblContact")
-                        .WithMany()
-                        .HasForeignKey("tblContactContactID");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.ProjectMember", b =>
