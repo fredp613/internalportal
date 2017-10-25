@@ -29,6 +29,7 @@ namespace InternalPortal.Models
         public double RequestedAmount { get; set; }
         public string CorporateFileNumber { get; set; }     
         public Guid? FundingOpportunityID { get; set; }
+        [JsonIgnore]
         public FundingOpportunity Program { get; set; }
         public string GCIMSCommitmentItemID { get; set; }
         public string Title { get; set; }
@@ -65,10 +66,10 @@ namespace InternalPortal.Models
         [JsonIgnore]
         [ForeignKey("PrimaryAccountAddressId")]
         public AccountAddress PrimaryAccountAddress { get; set; }
-        public Guid AccountId { get; set; }
+        public Guid? AccountId { get; set; }
         [JsonIgnore]
         public Account Account { get; set; }
-        public Guid ContactId { get; set; }
+        public Guid? ContactId { get; set; }
         [JsonIgnore]
         public Contact PrimaryContact { get; set; }
 
