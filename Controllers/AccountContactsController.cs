@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
+using InternalPortal.Models.Portal;
 
 namespace InternalPortal.Controllers
 {
@@ -45,6 +46,16 @@ namespace InternalPortal.Controllers
             }
 
             return Ok(accountContact);
+        }
+
+        // GET: api/AccountContacts/GetAccountsByContact/5
+        [HttpGet("/GetAccountsByContact/{contactId}")]
+       
+        public IEnumerable<Account> GetAccountsByContact([FromRoute] Guid contactId)
+        {
+           
+            return _context.AccountContact.Where(m => m.ContactId == contactId).Select(a => a.Account);
+            
         }
 
         // PUT: api/AccountContacts/5
