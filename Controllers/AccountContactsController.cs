@@ -49,7 +49,7 @@ namespace InternalPortal.Controllers
         }
 
         // GET: api/AccountContacts/GetAccountsByContact/5
-        [HttpGet("/GetAccountsByContact/{contactId}")]
+        [HttpGet("GetAccountsByContact/{contactId}")]
        
         public IEnumerable<Account> GetAccountsByContact([FromRoute] Guid contactId)
         {
