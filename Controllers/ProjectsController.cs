@@ -43,7 +43,12 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.Projects.GetAll();
         }
+        [HttpGet("GetProjectsByContact/{ContactID}")]
+        public IEnumerable<Project> GetProjectsByContact([FromRoute] Guid contactId)
+        {
+            return _context.Project.Where(c => c.ContactId == contactId);
 
+        }
       
 
         // GET: api/Projects/5
