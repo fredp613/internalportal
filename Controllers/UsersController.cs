@@ -63,10 +63,10 @@ namespace InternalPortal.Controllers
             var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == myString);
            
            
-            if (user == null)
-            {
-                return NotFound();
-            }
+            //if (user == null)
+            //{
+            //    return NotFound();
+            //}
 
             return Ok(user);
         }
