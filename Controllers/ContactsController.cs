@@ -92,7 +92,7 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer)
+            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == contact1.DateOfBirth)
             {
                 return Ok(contact);
             }
