@@ -79,7 +79,7 @@ namespace InternalPortal.Controllers
 
         [HttpPost("ConfirmSecret")]
         [ProducesResponseType(typeof(Contact), 200)]
-        public async Task<IActionResult> ConfirmSecret([FromBody] Contact contact1, [FromBody] string pai)
+        public async Task<IActionResult> ConfirmSecret([FromBody] Contact contact1)
         {
             if (!ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace InternalPortal.Controllers
 
             if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == contact1.DateOfBirth)
             {
-                var user = await _context.User.SingleOrDefaultAsync(u => u.PAI == pai);
+                var user = await _context.User.SingleOrDefaultAsync(u => u.UserId == contact1.UpdatedByUserId);
                 user.ContactId = contact.ContactId;
                 _context.Entry(user).State = EntityState.Modified;
                 await _context.SaveChangesAsync();
