@@ -27,20 +27,20 @@ namespace InternalPortal.Controllers
         {
             return _context.Contact;
         }
-        [HttpGet("getbyemail/{id}/{email}")]
+        [HttpGet("getbyemail/{email}")]
         [ProducesResponseType(typeof(Contact), 200)]
-        public async Task<IActionResult> GetContactEmail([FromRoute] string email, [FromRoute] Guid id)
+        public async Task<IActionResult> GetContactEmail([FromRoute] string email)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var existingContacts = await _context.Contact.Where(m => m.Email == email && m.ContactId != id).ToListAsync();
-            if (existingContacts == null)
+            var existingContact = await _context.Contact.SingleOrDefaultAsync(m => m.Email == email);
+            if (existingContact == null)
             {
                 return NotFound();
             }
-            return Ok(existingContacts);
+            return Ok(existingContact);
         }
 
         [HttpGet("getbyuserid/{userid}")]
