@@ -60,7 +60,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == user1.PAI);
+            var user = await _context.User.Where(m => m.PAI == user1.PAI).FirstOrDefaultAsync();
             Debug.WriteLine(user1.PAI);
             System.Console.WriteLine(user1.PAI);
             _logger.LogDebug("test", null);
