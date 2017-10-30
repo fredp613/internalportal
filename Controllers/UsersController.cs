@@ -53,17 +53,16 @@ namespace InternalPortal.Controllers
         // GET: api/Users/5
         [HttpPost("GetByPAI")]
         [ProducesResponseType(typeof(User), 200)]
-        public async Task<IActionResult> GetUserByPAI([FromBody] User user1)
+        public async Task<IActionResult> GetUserByPAI([FromBody] String pai)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.User.Where(m => m.PAI == user1.PAI).FirstOrDefaultAsync();
-            Debug.WriteLine(user1.PAI);
-            System.Console.WriteLine(user1.PAI);
-            _logger.LogDebug("test", null);
+            var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == pai);
+           
+           
             if (user == null)
             {
                 return NotFound();
