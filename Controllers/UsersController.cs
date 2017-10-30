@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using System.Diagnostics;
+using Microsoft.Extensions.Logging;
 
 namespace InternalPortal.Controllers
 {
@@ -15,10 +16,12 @@ namespace InternalPortal.Controllers
     public class UsersController : Controller
     {
         private readonly PortalContext _context;
+        private readonly ILogger _logger;
 
-        public UsersController(PortalContext context)
+        public UsersController(PortalContext context, ILogger<UsersController> logger)
         {
             _context = context;
+            _logger = logger;
         }
 
         // GET: api/Users
@@ -60,6 +63,7 @@ namespace InternalPortal.Controllers
             var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == user1.PAI);
             Debug.WriteLine(user1.PAI);
             System.Console.WriteLine(user1.PAI);
+            _logger.LogDebug("test", null);
             if (user == null)
             {
                 return NotFound();
