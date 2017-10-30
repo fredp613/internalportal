@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
+using System.Diagnostics;
 
 namespace InternalPortal.Controllers
 {
@@ -57,7 +58,8 @@ namespace InternalPortal.Controllers
             }
 
             var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == user1.PAI);
-
+            Debug.WriteLine(user1.PAI);
+            System.Console.WriteLine(user1.PAI);
             if (user == null)
             {
                 return NotFound();
