@@ -77,9 +77,9 @@ namespace InternalPortal.Controllers
         }
 
 
-        [HttpGet("answer/{id}/{answer}")]
+        [HttpPost("ConfirmSecret")]
         [ProducesResponseType(typeof(Contact), 200)]
-        public async Task<IActionResult> ConfirmSecret([FromRoute] Guid id, [FromRoute] string answer)
+        public async Task<IActionResult> ConfirmSecret([FromBody] Guid id, [FromBody] string answer)
         {
             if (!ModelState.IsValid)
             {
