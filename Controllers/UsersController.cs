@@ -56,7 +56,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == string.Format(user1.PAI));
+            var user = await _context.User.SingleOrDefaultAsync(m => m.PAI == user1.PAI);
 
             if (user == null)
             {
