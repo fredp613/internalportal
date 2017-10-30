@@ -94,10 +94,10 @@ namespace InternalPortal.Controllers
 
             if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == contact1.DateOfBirth)
             {
-                //var user = await _context.User.SingleOrDefaultAsync(u => u.UserId == contact1.UpdatedByUserId);
-                //user.ContactId = contact.ContactId;
-                //_context.Entry(user).State = EntityState.Modified;
-                //await _context.SaveChangesAsync();
+                var user = await _context.User.SingleOrDefaultAsync(u => u.UserId == contact1.UpdatedByUserId);
+                user.ContactId = contact.ContactId;
+                _context.Entry(user).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
 
                 return Ok(contact);
             }
