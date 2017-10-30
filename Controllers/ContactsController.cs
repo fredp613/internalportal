@@ -79,13 +79,13 @@ namespace InternalPortal.Controllers
 
         [HttpPost("ConfirmSecret")]
         [ProducesResponseType(typeof(Contact), 200)]
-        public async Task<IActionResult> ConfirmSecret([FromBody] Guid id, [FromBody] string answer)
+        public async Task<IActionResult> ConfirmSecret([FromBody] string id, [FromBody] string answer)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == Guid.Parse(id));
 
             if (contact == null)
             {
