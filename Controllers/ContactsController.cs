@@ -67,8 +67,8 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-            var user = _context.User.SingleOrDefault(u => u.PAI == user1.PAI);
-            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.CreatedByUserId == user.UserId);
+            var user = await _context.User.SingleOrDefaultAsync(u => u.PAI == user1.PAI);
+            var contact = await _context.Contact.SingleOrDefaultAsync(m => m.ContactId == user.ContactId);
             if (contact == null)
             {
                 return NotFound();
