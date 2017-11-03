@@ -44,17 +44,12 @@ namespace InternalPortal.Controllers
             return _unitOfWork.Projects.GetAll();
         }
         [HttpGet("GetProjectsByContact/{ContactID}")]
-        public IEnumerable<Project> GetProjectsByContact([FromRoute] Guid contactId)
+        public IEnumerable<Project> GetProjectsByContact([FromRoute] string contactId)
         {
-            return _context.Project.Where(c => c.ContactId == contactId);
+            return _context.Project.Where(c => c.ContactId == Guid.Parse(contactId));
 
         }
-        [HttpPost("GetContactProjects")]
-        public IEnumerable<Project> GetContactProjects([FromBody] Guid contactId)
-        {
-            return _context.Project.Where(c => c.ContactId == contactId);
-
-        }
+     
 
 
         // GET: api/Projects/5
