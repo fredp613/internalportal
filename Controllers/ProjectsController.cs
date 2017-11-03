@@ -49,7 +49,13 @@ namespace InternalPortal.Controllers
             return _context.Project.Where(c => c.ContactId == contactId);
 
         }
-      
+        [HttpGet("GetContactProjects")]
+        public IEnumerable<Project> GetContactProjects([FromBody] Guid contactId)
+        {
+            return _context.Project.Where(c => c.ContactId == contactId);
+
+        }
+
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
