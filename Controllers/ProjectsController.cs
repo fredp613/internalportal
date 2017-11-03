@@ -43,13 +43,27 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.Projects.GetAll();
         }
-        [HttpGet("GetProjectsByContact/{ContactID}")]
-        public IEnumerable<Project> GetProjectsByContact([FromRoute] string contactId)
+        [HttpGet("GetProjectsByContact")]
+        public IEnumerable<Project> GetProjectsByContact([FromBody] Guid contactId)
         {
-            return _context.Project.Where(c => c.ContactId == Guid.Parse(contactId));
+            return _context.Project.Where(c => c.ContactId == contactId);
 
         }
-     
+
+
+        [HttpPost("GetContactProjects")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public async Task<IActionResult> GetContactByPAI([FromBody] User user1)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
+            return Ok(projects);
+        }
+
 
 
         // GET: api/Projects/5
