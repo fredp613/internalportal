@@ -199,6 +199,12 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }           
             FiscalYear.GetFiscalYearByDateTime(project.ExternalCreatedOn);
+            Random rnd = new Random();
+            int randomNo = rnd.Next(10000000, 99999999);
+
+            string randomNumber = "APP-" + randomNo;
+            project.CorporateFileNumber = randomNumber;
+
             _unitOfWork.Projects.Add(project);
 
             await _unitOfWork.SaveChangesAsync();
