@@ -158,8 +158,11 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest();
             }
+            
 
             _context.Entry(project).State = EntityState.Modified;
+
+            project.ExternalUpdatedOn = DateTime.Now;
 
             if (project.SubmitGcims)
             {
