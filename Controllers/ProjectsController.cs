@@ -204,6 +204,7 @@ namespace InternalPortal.Controllers
 
             string randomNumber = "APP-" + randomNo;
             project.CorporateFileNumber = randomNumber;
+            project.ExternalUpdatedOn = DateTime.Now;
 
             _unitOfWork.Projects.Add(project);
 
