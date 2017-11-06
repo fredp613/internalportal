@@ -10,6 +10,8 @@ using InternalPortal.Models.GCIMS;
 using InternalPortal.Models.Helpers;
 using InternalPortal.Models.Portal.Implementations;
 using InternalPortal.Models.Portal.Interfaces;
+using InternalPortal.Models.Portal;
+using System.Linq;
 
 namespace InternalPortal.Controllers
 {
@@ -63,6 +65,54 @@ namespace InternalPortal.Controllers
             var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
             return Ok(projects);
         }
+
+        [HttpPost("GetUserAssignedBucketsProjects")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserAssignedBucketsProjects([FromBody] InternalUser internalUser)
+        {
+           
+            var foiu = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == internalUser.InternalUserId);
+            List<Project> projects = new List<Project>();
+            foreach (var fo in foiu)
+            {
+                List<Project> projs = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId).ToList();
+                projects = projs;
+            }
+
+            
+            return projects;
+        }
+
+        [HttpPost("GetUserOwnerProjects")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserOwnerProjects([FromBody] InternalUser internalUser)
+        {
+          
+            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId);
+           
+        }
+
+        [HttpPost("GetUserIncompleteProjects")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserIncompleteProjects([FromBody] InternalUser internalUser)
+        {
+           
+            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId && u.ProjectStatus == Status.Incomplete);
+ 
+        }
+
+        [HttpPost("GetUserWithdrawnProjects")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserWithdrawnProjects([FromBody] InternalUser internalUser)
+        {
+          
+            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId && u.ProjectStatus == Status.Withdrawn);
+            
+        }
+
+
+
+
 
 
 

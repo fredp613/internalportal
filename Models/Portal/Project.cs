@@ -16,7 +16,8 @@ namespace InternalPortal.Models
         Submitted = 2,
         Approved = 3,
         NotApproved = 4,
-        AwaitingReview = 5
+        Incomplete = 5, 
+        Withdrawn = 6
     }
     public class Project
     {
@@ -84,6 +85,9 @@ namespace InternalPortal.Models
 
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
+        public Guid? AssignedTo { get; set; }
+        public Guid? AssignedBy { get; set; }
+        public Guid? CurrentOwner { get; set; }
       
 
     }
