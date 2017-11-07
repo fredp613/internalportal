@@ -50,7 +50,7 @@ namespace InternalPortal.Controllers
         }
         // GET: api/FundingOpportunities/GetOpenClosedFundingOpportunities
         [HttpGet]
-        [Route("GetActiveFundingOpportunities")]
+        [Route("GetOpenClosedFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities()
         {
             //this.Response.Cookies.Append("asdf", "asdf");
