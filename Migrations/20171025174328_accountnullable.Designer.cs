@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171025174328_accountnullable")]
+    partial class accountnullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -952,10 +953,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid?>("AccountId");
 
-                    b.Property<Guid?>("AssignedBy");
-
-                    b.Property<Guid?>("AssignedTo");
-
                     b.Property<string>("ClientID");
 
                     b.Property<string>("Communication");
@@ -965,8 +962,6 @@ namespace InternalPortal.Migrations
                     b.Property<string>("CorporateFileNumber");
 
                     b.Property<Guid?>("CreatedByUserId");
-
-                    b.Property<Guid?>("CurrentOwner");
 
                     b.Property<string>("Description");
 
