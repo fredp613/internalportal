@@ -48,6 +48,15 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities();
         }
+        // GET: api/FundingOpportunities/GetOpenClosedFundingOpportunities
+        [HttpGet]
+        [Route("GetActiveFundingOpportunities")]
+        public IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities()
+        {
+            //this.Response.Cookies.Append("asdf", "asdf");
+            return _context.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published);
+        }
+
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
         [HttpGet]
         [Route("GetActiveFundingOpportunities")]
