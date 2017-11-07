@@ -54,7 +54,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities()
         {
             //this.Response.Cookies.Append("asdf", "asdf");
-            return _context.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published);
+            return _context.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published && f.ActivationStartDate <= DateTime.Now.Date);
         }
 
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
