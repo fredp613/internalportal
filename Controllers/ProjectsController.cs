@@ -46,38 +46,27 @@ namespace InternalPortal.Controllers
             return _unitOfWork.Projects.GetAll();
         }
         [HttpGet("GetProjectsByContact")]
-        public IEnumerable<Project> GetProjectsByContact([FromBody] Guid contactId)
+        public IEnumerable<Project> GetProjectsByContact([FromBody] User user)
         {
-            return _context.Project.Where(c => c.ContactId == contactId);
+            return _context.Project.Where(c => c.ContactId == user.ContactId);
 
         }
 
 
         [HttpPost("GetContactProjects")]
-        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        //public async Task<IActionResult> GetContactProjects([FromBody] User user1)
-        public IEnumerable<Project> GetContactProjects([FromBody] User user1)
+        public IEnumerable<Project> GetContactProjects([FromBody] User user)
         {
-            //if (!ModelState.IsValid)
-            //{
-            //    return BadRequest(ModelState);
-            //}
-
-            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId).ToList();
+          
+            var projects = _context.Project.Where(c => c.ContactId == user.ContactId).ToList();
             return projects;
         }
 
         [HttpPost("GetContactProjectsCount")]
-        [ProducesResponseType(typeof(int), 200)]
-        public int GetContactProjectsCount([FromBody] Guid contactId)
+        public int GetContactProjectsCount([FromBody] User user)
         {
-           // int count = 0;
-            return _context.Project.Where(c => c.ContactId == contactId).Count();
-            //if (projects != null)
-            //{
-            //    return projects.Count();
-            //}
-            //return count;
+          
+            return _context.Project.Where(c => c.ContactId == user.ContactId).Count();
+          
         }
 
         [HttpPost("GetUserAssignedBucketsProjects")]
