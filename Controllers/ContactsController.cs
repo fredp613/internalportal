@@ -197,6 +197,12 @@ namespace InternalPortal.Controllers
             }
 
             _context.Contact.Add(contact);
+            
+
+            User user = _context.User.SingleOrDefault(u => u.UserId == contact.CreatedByUserId);
+            user.ContactId = contact.ContactId;
+            _context.Entry(user).State = EntityState.Modified;
+
             await _context.SaveChangesAsync();
 
             return Ok(contact);
