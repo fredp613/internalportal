@@ -15,6 +15,7 @@ using System.Linq;
 
 namespace InternalPortal.Controllers
 {
+  
     [Produces("application/json")]
     [Route("api/Projects")]
     public class ProjectsController : Controller
@@ -65,7 +66,8 @@ namespace InternalPortal.Controllers
         public int GetContactProjectsCount([FromBody] User user)
         {
           
-            return _context.Project.Where(c => c.ContactId == user.ContactId).Count();
+            return  _context.Project.Where(c => c.ContactId == user.ContactId).Count();
+           
           
         }
 
