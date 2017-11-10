@@ -62,7 +62,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var projects = _context.Project.Where(c => c.FundingOpportunityID == user1.ContactId);
+            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId).ToList();
             return Ok(projects);
         }
 
@@ -71,7 +71,7 @@ namespace InternalPortal.Controllers
         public int GetContactProjectsCount([FromBody] Guid contactId)
         {
            // int count = 0;
-            return _context.Project.Where(c => c.FundingOpportunityID == contactId).Count();
+            return _context.Project.Where(c => c.ContactId == contactId).Count();
             //if (projects != null)
             //{
             //    return projects.Count();
@@ -122,11 +122,6 @@ namespace InternalPortal.Controllers
             return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId && u.ProjectStatus == Status.Withdrawn);
             
         }
-
-
-
-
-
 
 
         // GET: api/Projects/5
