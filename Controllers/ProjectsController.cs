@@ -68,10 +68,10 @@ namespace InternalPortal.Controllers
 
         [HttpPost("GetContactProjectsCount")]
         [ProducesResponseType(typeof(int), 200)]
-        public int GetContactProjectsCount([FromBody] User user1)
+        public int GetContactProjectsCount([FromBody] Guid contactId)
         {
            // int count = 0;
-            return _context.Project.Where(c => c.ContactId == user1.ContactId).Count();
+            return _context.Project.Where(c => c.ContactId == contactId).Count();
             //if (projects != null)
             //{
             //    return projects.Count();
