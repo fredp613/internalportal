@@ -67,6 +67,7 @@ namespace InternalPortal.Controllers
         }
 
         [HttpPost("GetContactProjectsCount")]
+        [ProducesResponseType(typeof(int), 200)]
         public int GetContactProjectsCount([FromBody] User user1)
         {
             int count = 0;
