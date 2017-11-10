@@ -70,13 +70,13 @@ namespace InternalPortal.Controllers
         [ProducesResponseType(typeof(int), 200)]
         public int GetContactProjectsCount([FromBody] User user1)
         {
-            int count = 0;
-            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
-            if (projects != null)
-            {
-                return projects.Count();
-            }
-            return count;
+           // int count = 0;
+            return _context.Project.Where(c => c.ContactId == user1.ContactId).Count();
+            //if (projects != null)
+            //{
+            //    return projects.Count();
+            //}
+            //return count;
         }
 
         [HttpPost("GetUserAssignedBucketsProjects")]
