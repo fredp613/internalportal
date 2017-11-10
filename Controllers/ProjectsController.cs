@@ -55,7 +55,7 @@ namespace InternalPortal.Controllers
 
         [HttpPost("GetContactProjects")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public async Task<IActionResult> GetContactByPAI([FromBody] User user1)
+        public async Task<IActionResult> GetContactProjects([FromBody] User user1)
         {
             if (!ModelState.IsValid)
             {
@@ -64,6 +64,18 @@ namespace InternalPortal.Controllers
 
             var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
             return Ok(projects);
+        }
+
+        [HttpPost("GetContactProjectsCount")]
+        public int GetContactProjectsCount([FromBody] User user1)
+        {
+            int count = 0;
+            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
+            if (projects != null)
+            {
+                return projects.Count();
+            }
+            return count;
         }
 
         [HttpPost("GetUserAssignedBucketsProjects")]
