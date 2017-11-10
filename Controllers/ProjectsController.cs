@@ -55,15 +55,16 @@ namespace InternalPortal.Controllers
 
         [HttpPost("GetContactProjects")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public async Task<IActionResult> GetContactProjects([FromBody] User user1)
+        //public async Task<IActionResult> GetContactProjects([FromBody] User user1)
+        public IEnumerable<Project> GetContactProjects([FromBody] User user1)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest(ModelState);
-            }
+            //if (!ModelState.IsValid)
+            //{
+            //    return BadRequest(ModelState);
+            //}
 
             var projects = _context.Project.Where(c => c.ContactId == user1.ContactId).ToList();
-            return Ok(projects);
+            return projects;
         }
 
         [HttpPost("GetContactProjectsCount")]
