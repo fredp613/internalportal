@@ -62,7 +62,7 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-            var projects = _context.Project.Where(c => c.ContactId == user1.ContactId);
+            var projects = _context.Project.Where(c => c.FundingOpportunityID == user1.ContactId);
             return Ok(projects);
         }
 
