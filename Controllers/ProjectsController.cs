@@ -71,7 +71,7 @@ namespace InternalPortal.Controllers
         public int GetContactProjectsCount([FromBody] Guid contactId)
         {
            // int count = 0;
-            return _context.Project.Where(c => c.ContactId == contactId).Count();
+            return _context.Project.Where(c => c.FundingOpportunityID == contactId).Count();
             //if (projects != null)
             //{
             //    return projects.Count();
