@@ -53,7 +53,7 @@ namespace InternalPortal.Controllers
         [HttpGet("GetProjectsByContact")]
         public IEnumerable<Project> GetProjectsByContact([FromBody] User user)
         {
-            return _context.Project.Where(c => c.ContactId == user.ContactId);
+            return _context.Project.Where(c => c.ContactId == user.ContactId).OrderByDescending(c => c.ExternalUpdatedOn);
 
         }
 
