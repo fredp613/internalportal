@@ -15,6 +15,10 @@ using System.Linq;
 
 namespace InternalPortal.Controllers
 {
+    public struct Calcs
+    {
+        public int Count;
+    }
   
     [Produces("application/json")]
     [Route("api/Projects")]
@@ -63,12 +67,16 @@ namespace InternalPortal.Controllers
         }
 
         [HttpPost("GetContactProjectsCount")]
-        public int GetContactProjectsCount([FromBody] User user)
+        public Calcs GetContactProjectsCount([FromBody] User user)
         {
-          
-            return  _context.Project.Where(c => c.ContactId == user.ContactId).Count();
-           
-          
+            var calc = new Calcs;
+            calc.Count = 0;
+            var projects =  _context.Project.Where(c => c.ContactId == user.ContactId);
+            if (projects != null)
+            {
+                calc.Count = projects.Count();
+            }
+            return calc;          
         }
 
         [HttpPost("GetUserAssignedBucketsProjects")]

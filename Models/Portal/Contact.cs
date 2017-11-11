@@ -34,7 +34,7 @@ namespace InternalPortal.Models
         public string ShareSecretQuestion { get; set; }
         public string SharedSecretAnswer { get; set; }
         public bool IsPrimary { get; set; }
-        public int Attempts { get; set; }
+        public int Attempts { get; set; }        
         public bool IsBlocked { get; set; }
         public string BlockJustification { get; set; }
         public Guid? PrimaryAccountAddressId { get; set; }
@@ -46,6 +46,9 @@ namespace InternalPortal.Models
         public Guid? UpdatedByInternalUserId { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
+
+        //unmapped properties 
+       
 
     }
 }
