@@ -69,7 +69,7 @@ namespace InternalPortal.Controllers
         [HttpPost("GetContactProjectsCount")]
         public Calcs GetContactProjectsCount([FromBody] User user)
         {
-            var calc = new Calcs;
+            var calc = new Calcs();
             calc.Count = 0;
             var projects =  _context.Project.Where(c => c.ContactId == user.ContactId);
             if (projects != null)
