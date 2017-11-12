@@ -268,7 +268,7 @@ namespace InternalPortal.Controllers
             project.ExternalUpdatedOn = DateTime.Now;
 
             _context.Project.Add(project);
-            _context.Account.Add(project.Account); 
+           // _context.Account.Add(project.Account); 
 
 
 
