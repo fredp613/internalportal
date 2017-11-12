@@ -267,9 +267,12 @@ namespace InternalPortal.Controllers
             project.CorporateFileNumber = randomNumber;
             project.ExternalUpdatedOn = DateTime.Now;
 
-            _unitOfWork.Projects.Add(project);
+            _context.Project.Add(project);
+            _context.Account.Add(project.Account); 
 
-            await _unitOfWork.SaveChangesAsync();
+
+
+            await _context.SaveChangesAsync();
 
             return Ok(project);
         }
