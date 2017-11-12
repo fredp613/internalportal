@@ -10,10 +10,7 @@ namespace InternalPortal.Models.Portal
     public class ProjectContact
     {
         public Guid ProjectContactId { get; set; }
-        public Guid ProjectId { get; set; }
-        public Guid ContactId { get; set; }
-        [JsonIgnore]
-        public Contact Contact { get; set; }
+        public Guid ProjectId { get; set; }       
         [JsonIgnore]
         public Project Project { get; set; }
         public string FirstName { get; set; }
@@ -22,9 +19,7 @@ namespace InternalPortal.Models.Portal
         public string PhoneNumber { get; set; }
         public string Title { get; set; }
         public bool isSigningAuthority { get; set; }
-        public Guid AddressId { get; set; }
-        [JsonIgnore]
-        public Address Address { get; set; }
+      
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
