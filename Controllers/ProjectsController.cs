@@ -268,14 +268,8 @@ namespace InternalPortal.Controllers
             project.ExternalUpdatedOn = DateTime.Now;
 
             _context.Project.Add(project);
-            if (project.Account != null)
-            {
-                _context.Account.Add(project.Account);
-            }
            
-
-
-
+            
             await _context.SaveChangesAsync();
 
             return Ok(project);
