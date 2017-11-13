@@ -31,8 +31,22 @@ namespace InternalPortal.Models.Portal
 
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }     
-        public Guid? UpdatedByInternalUserId { get; set; }        
-    
+        public Guid? UpdatedByInternalUserId { get; set; }   
+        
+        public string PrimaryAddressLine1 { get; set; }
+        public string PrimaryAddressLine2 { get; set; }
+        public string PrimaryCity { get; set; }
+        public string PrimaryState { get; set; }
+        public string PrimaryPostal { get; set; }
+        public string PrimaryCountry { get; set; }
+
+        public string BillingAddressLine1 { get; set; }
+        public string BillingAddressLine2 { get; set; }
+        public string BillingCity { get; set; }
+        public string BillingState { get; set; }
+        public string BillingPostal { get; set; }
+        public string BillingCountry { get; set; }
+
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
        
