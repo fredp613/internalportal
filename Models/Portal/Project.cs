@@ -71,8 +71,7 @@ namespace InternalPortal.Models
         public Guid? ContactId { get; set; }
         
         public Guid? PrimaryProjectContactId { get; set; }
-        [JsonIgnore]
-        public ProjectContact PrimaryProjectContact { get; set; }
+      
         [JsonIgnore]
         public Contact PrimaryContact { get; set; }
 
