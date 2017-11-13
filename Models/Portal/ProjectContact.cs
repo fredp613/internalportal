@@ -11,7 +11,7 @@ namespace InternalPortal.Models.Portal
     {
         public Guid ProjectContactId { get; set; }
         public Guid ProjectId { get; set; }       
-        //[JsonIgnore]
+        [JsonIgnore]
         public Project Project { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
