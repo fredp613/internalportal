@@ -69,7 +69,7 @@ namespace InternalPortal.Models
         [JsonIgnore]
         public Account Account { get; set; }
         public Guid? ContactId { get; set; }
-        public Guid? PrimaryContactId { get; set; }
+        public Guid? PrimaryProjectContactId { get; set; }
         [JsonIgnore]
         public Contact PrimaryContact { get; set; }
 
