@@ -48,6 +48,14 @@ namespace InternalPortal.Controllers
             return Ok(projectContact);
         }
 
+        [HttpPost("GetAdditionalContacts")]
+        public IEnumerable<ProjectContact> GetContactProjects([FromBody] ProjectContact primaryProjectContact)
+        {
+
+            var projectContacts = _context.ProjectContact.Where(c => c.ProjectId == primaryProjectContact.ProjectId && c.ProjectContactId != primaryProjectContact.ProjectContactId).ToList();
+            return projectContacts;
+        }
+
         // PUT: api/ProjectContacts/5
         [HttpPut("{id}")]
 
