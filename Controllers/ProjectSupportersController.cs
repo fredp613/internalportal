@@ -46,6 +46,11 @@ namespace InternalPortal.Controllers
 
             return Ok(projectSupporter);
         }
+        [HttpPost("GetByProject")]
+        public IEnumerable<ProjectSupporter> GetByProject([FromBody] Project project)
+        {
+            return _context.ProjectSupporter.Where(s => s.ProjectId == project.ProjectId);
+        }
 
         // PUT: api/ProjectSupporters/5
         [HttpPut("{id}")]
