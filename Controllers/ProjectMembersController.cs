@@ -47,6 +47,12 @@ namespace InternalPortal.Controllers
             return Ok(projectMember);
         }
 
+        [HttpPost("GetByProject")]
+        public IEnumerable<ProjectMember> GetByProject([FromBody] Project project)
+        {
+            return _context.ProjectMember.Where(m => m.ProjectId == project.ProjectId);
+        }
+
         // PUT: api/ProjectMembers/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProjectMember([FromRoute] Guid id, [FromBody] ProjectMember projectMember)
