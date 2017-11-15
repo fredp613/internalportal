@@ -268,8 +268,22 @@ namespace InternalPortal.Controllers
             project.ExternalUpdatedOn = DateTime.Now;
 
             _context.Project.Add(project);
-           
-            
+
+            var relatedObjectives = _context.FundingOpportunityObjective.Where(fo => fo.FundingOpportunityId == project.FundingOpportunityID); 
+            if (relatedObjectives != null)
+            {
+                foreach (var o in relatedObjectives)
+                {
+                    ProjectObjective newObj = new ProjectObjective
+                    {
+                        ProjectID = project.ProjectId,
+                        ObjectiveID = o.ObjectiveId
+                    };
+                    _context.ProjectObjective.Add(newObj);
+                }
+            }
+
+
             await _context.SaveChangesAsync();
 
             return Ok(project);

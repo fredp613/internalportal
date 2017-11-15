@@ -73,5 +73,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.ProjectFederalDepartment> ProjectFederalDepartment { get; set; }
         public DbSet<InternalPortal.Models.ProjectMember> ProjectMember { get; set; }
         public DbSet<InternalPortal.Models.ProjectSupporter> ProjectSupporter { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.ProjectObjective> ProjectObjective { get; set; }
     }
 }
