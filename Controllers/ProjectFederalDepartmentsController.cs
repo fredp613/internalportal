@@ -48,6 +48,12 @@ namespace InternalPortal.Controllers
             return Ok(projectFederalDepartment);
         }
 
+        [HttpPost("GetByProject")]
+        public IEnumerable<ProjectFederalDepartment> GetByProject([FromBody] Project project)
+        {            
+            return _context.ProjectFederalDepartment.Where(f => f.ProjectId == project.ProjectId);           
+        }
+
         // PUT: api/ProjectFederalDepartments/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutProjectFederalDepartment([FromRoute] Guid id, [FromBody] ProjectFederalDepartment projectFederalDepartment)
