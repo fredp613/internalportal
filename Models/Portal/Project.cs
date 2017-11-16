@@ -45,12 +45,19 @@ namespace InternalPortal.Models
         public string GcimsClientId { get; set; }
         public int GcimsContactId { get; set; }
         public string ProjectNeeded { get; set; }
+        public string Objective1 { get; set; }
+        public string Objective2 { get; set; }
+        public string Objective3 { get; set; }
         public string ExpertiseJustificiation { get; set; }
         public string Diversity { get; set; }
         public string LanguageMinority { get; set; }
         public string Communication { get; set; }
         public string Evaluation { get; set; }
-        public Status ProjectStatus { get; set; }         
+        public Status ProjectStatus { get; set; }   
+        public string AdditionalInformation { get; set; }
+        public bool Audited { get; set; }
+        public bool TaxRebate { get; set; }
+        public double TaxPercent { get; set; }
         [JsonIgnore]
         [NotMapped]
         public tblAddresses PrimaryClientAddress { get; set; }
