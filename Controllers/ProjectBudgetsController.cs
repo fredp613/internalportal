@@ -7,11 +7,16 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using InternalPortal.Models.Portal;
+using InternalPortal.Models.Helpers;
 
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
     [Route("api/ProjectBudgets")]
+    public class FiscalYears
+    {
+        public string FiscalYear { get; set; }
+    }
     public class ProjectBudgetsController : Controller
     {
         private readonly PortalContext _context;
@@ -52,6 +57,21 @@ namespace InternalPortal.Controllers
         public IEnumerable<ProjectBudget> GetByProject([FromBody] Project project)
         {
             return _context.ProjectBudget.Where(s => s.ProjectID == project.ProjectId);
+        }
+        [HttpGet("GetFiscalYears")]
+        public IEnumerable<FiscalYears> GetFiscalYears([FromBody] Project project)
+        {
+            var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
+            IEnumerable<FiscalYears> fiscalYears = null;
+            foreach (var f in fys)
+            {
+                var fy = new FiscalYears
+                {
+                    FiscalYear = f
+                };
+                fiscalYears.Append(fy);
+            }
+            return fiscalYears;
         }
 
         // PUT: api/ProjectBudgets/5
