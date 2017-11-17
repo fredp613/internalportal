@@ -58,7 +58,7 @@ namespace InternalPortal.Controllers
         {
             return _context.ProjectBudget.Where(s => s.ProjectID == project.ProjectId);
         }
-        [HttpGet("GetFiscalYears")]
+        [HttpPost("GetFiscalYears")]
         public IEnumerable<FiscalYears> GetFiscalYears([FromBody] Project project)
         {
             var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
