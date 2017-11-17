@@ -58,21 +58,21 @@ namespace InternalPortal.Controllers
         {
             return _context.ProjectBudget.Where(s => s.ProjectID == project.ProjectId);
         }
-        [HttpPost("GetFiscalYears")]
-        public IEnumerable<FiscalYears> GetFiscalYears([FromBody] Project project)
-        {
-            var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
-            IEnumerable<FiscalYears> fiscalYears = null;
-            foreach (var f in fys)
-            {
-                var fy = new FiscalYears
-                {
-                    FiscalYear = f
-                };
-                fiscalYears.Append(fy);
-            }
-            return fiscalYears;
-        }
+        //[HttpPost("GetFiscalYears")]
+        //public IEnumerable<FiscalYears> GetFiscalYears([FromBody] Project project)
+        //{
+        //    var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
+        //    IEnumerable<FiscalYears> fiscalYears = null;
+        //    foreach (var f in fys)
+        //    {
+        //        var fy = new FiscalYears
+        //        {
+        //            FiscalYear = f
+        //        };
+        //        fiscalYears.Append(fy);
+        //    }
+        //    return fiscalYears;
+        //}
 
         // PUT: api/ProjectBudgets/5
         [HttpPut("{id}")]
