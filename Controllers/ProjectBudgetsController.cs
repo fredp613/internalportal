@@ -81,17 +81,20 @@ namespace InternalPortal.Controllers
             List<FiscalYears> fiscalYears = new List<FiscalYears>();
             foreach (var f in fys)
             {
-                double amount = _context.ProjectBudget.
+                double? amount = _context.ProjectBudget.
                     Where(p => p.FiscalYear == f && p.ProjectID == project.ProjectId && p.FundingOrganization == "Justice Canada")
                     .Sum(a=>a.Amount);
 
-
-                var fy = new FiscalYears
+                if (amount != null)
                 {
-                    FiscalYear = f,
-                    Amount = amount
-                };
-                fiscalYears.Add(fy);
+                    var fy = new FiscalYears
+                    {
+                        FiscalYear = f,
+                        Amount = (double)amount
+                    };
+                    fiscalYears.Add(fy);
+                }
+               
 
                 
             }
