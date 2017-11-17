@@ -48,6 +48,12 @@ namespace InternalPortal.Controllers
             return Ok(eligibleCostCategory);
         }
 
+        [HttpPost("GetByFundingOpportunity")]
+        public IEnumerable<EligibleCostCategory> GetByProject([FromBody] FundingOpportunity fundingOpportunity)
+        {
+            return _context.EligibleCostCategory.Where(s => s.FundingOpportunityId == fundingOpportunity.FundingOpportunityId);
+        }
+
         // PUT: api/EligibleCostCategories/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEligibleCostCategory([FromRoute] Guid id, [FromBody] EligibleCostCategory eligibleCostCategory)

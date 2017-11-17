@@ -77,5 +77,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.ProjectObjective> ProjectObjective { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.ProjectActivity> ProjectActivity { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.ProjectBudget> ProjectBudget { get; set; }
     }
 }

@@ -15,6 +15,9 @@ namespace InternalPortal.Models.Portal
         public Guid CostCategoryID { get; set; }
         public Guid ProjectID { get; set; }
         public double Amount { get; set; }
+        public string Description { get; set; }
+        public string FundingOrganization { get; set; }
+        public string FiscalYear { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
