@@ -14,6 +14,7 @@ namespace InternalPortal.Controllers
     public class FiscalYears
     {
         public string FiscalYear { get; set; }
+        public double Amount { get; set; }
     }
     [Produces("application/json")]
     [Route("api/ProjectBudgets")]   
@@ -70,6 +71,29 @@ namespace InternalPortal.Controllers
                     FiscalYear = f
                 };
                 fiscalYears.Add(fy);
+            }
+            return fiscalYears;
+        }
+        [HttpPost("GetFiscalYearSummary")]
+        public IEnumerable<FiscalYears> GetFiscalYearSummary([FromBody] Project project)
+        {
+            var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
+            List<FiscalYears> fiscalYears = new List<FiscalYears>();
+            foreach (var f in fys)
+            {
+                double amount = _context.ProjectBudget.
+                    Where(p => p.FiscalYear == f && p.ProjectID == project.ProjectId && p.FundingOrganization == "Justice Canada")
+                    .Sum(a=>a.Amount);
+
+
+                var fy = new FiscalYears
+                {
+                    FiscalYear = f,
+                    Amount = amount
+                };
+                fiscalYears.Add(fy);
+
+                
             }
             return fiscalYears;
         }
