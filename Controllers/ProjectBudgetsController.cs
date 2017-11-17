@@ -62,14 +62,14 @@ namespace InternalPortal.Controllers
         public IEnumerable<FiscalYears> GetFiscalYears([FromBody] Project project)
         {
             var fys = FiscalYear.GetFiscalYearByDateTimeRange(project.StartDate, project.EndDate);
-            IEnumerable<FiscalYears> fiscalYears = null;
+            List<FiscalYears> fiscalYears = new List<FiscalYears>();
             foreach (var f in fys)
             {
                 var fy = new FiscalYears
                 {
                     FiscalYear = f
                 };
-                fiscalYears.Append(fy);
+                fiscalYears.Add(fy);
             }
             return fiscalYears;
         }
