@@ -258,6 +258,7 @@ namespace InternalPortal.Controllers
 
             var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
             project.ExternalUpdatedOn = DateTime.Now;
+            project.SubmittedOn = DateTime.Now;
             project.ProjectStatus = Status.Submitted;
             
             _context.Entry(project).State = EntityState.Modified;
