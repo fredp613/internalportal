@@ -252,7 +252,7 @@ namespace InternalPortal.Controllers
 
 
 
-        [HttpPut("submit/{id}")]
+        [HttpPut("Submit/{id}")]
         public async Task<IActionResult> SubmitProject([FromRoute] Guid id)
         {
 
