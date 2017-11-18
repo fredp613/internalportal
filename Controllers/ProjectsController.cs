@@ -250,6 +250,37 @@ namespace InternalPortal.Controllers
             return NoContent();
         }
 
+
+
+        [HttpPut("submit/{id}")]
+        public async Task<IActionResult> SubmitProject([FromRoute] Guid id)
+        {
+
+            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
+            project.ExternalUpdatedOn = DateTime.Now;
+            project.ProjectStatus = Status.Submitted;
+            
+            _context.Entry(project).State = EntityState.Modified;
+            
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_unitOfWork.Projects.ProjectExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+
         // POST: api/Projects 
         [HttpPost]
         [ProducesResponseType(typeof(Project), 200)]
