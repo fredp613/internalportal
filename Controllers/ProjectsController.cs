@@ -253,6 +253,7 @@ namespace InternalPortal.Controllers
 
        
         [HttpPost("Submit")]
+        [ProducesResponseType(typeof(Project), 200)]
         public async Task<IActionResult> SubmitProject([FromBody] Project proj)
         {
 
@@ -279,7 +280,7 @@ namespace InternalPortal.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(project);
         }
 
         // POST: api/Projects 
