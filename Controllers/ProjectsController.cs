@@ -61,9 +61,8 @@ namespace InternalPortal.Controllers
         [HttpPost("GetContactProjects")]
         public IEnumerable<Project> GetContactProjects([FromBody] User user)
         {
-          
-            var projects = _context.Project.Where(c => c.ContactId == user.ContactId).ToList();
-            return projects;
+
+            return _context.Project.Where(c => c.ContactId == user.ContactId).OrderByDescending(c => c.ExternalUpdatedOn);
         }
 
         [HttpPost("GetContactProjectsCount")]
@@ -136,6 +135,7 @@ namespace InternalPortal.Controllers
 
             // var project = await _unitOfWork.Project.SingleOrDefaultAsync(m => m.ProjectId == id);
             var project = await _unitOfWork.Projects.GetAsync(id);
+         
 
             if (project == null)
             {
