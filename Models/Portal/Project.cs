@@ -91,6 +91,7 @@ namespace InternalPortal.Models
         public DateTime ExternalCreatedOn { get; set; }
         public DateTime ExternalUpdatedOn { get; set; }      
         public DateTime InternalUpdatedOn { get; set; }
+        public DateTime SubmittedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
 
         public Guid? CreatedByUserId { get; set; }
