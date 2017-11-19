@@ -404,7 +404,7 @@ namespace InternalPortal.Controllers
             _context.RemoveRange(projectObjectives);
             _context.RemoveRange(projectActivities);
             _context.RemoveRange(projectFederalDepartments);
-            await _context.SaveChangesAsync();
+           // await _context.SaveChangesAsync();
 
             _context.Project.Remove(project);
 
