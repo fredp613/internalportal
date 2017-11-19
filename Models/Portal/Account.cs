@@ -23,6 +23,7 @@ namespace InternalPortal.Models.Portal
         public string BandNumber { get; set; }
 
         public string IncorporationLevel { get; set; }
+        public string IncorporationNumber { get; set; }
         public DateTime DateRegistered { get; set; }
         public string Website { get; set; }
 
