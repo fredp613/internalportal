@@ -99,6 +99,12 @@ namespace InternalPortal.Models
         public Guid? AssignedTo { get; set; }
         public Guid? AssignedBy { get; set; }
         public Guid? CurrentOwner { get; set; }
+
+        //unmapped properties
+        [NotMapped]
+        public string ContactName { get; set; }
+        [NotMapped]
+        public string FundingOpportunityName { get; set; }
       
 
     }

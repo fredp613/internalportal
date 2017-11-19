@@ -138,6 +138,11 @@ namespace InternalPortal.Controllers
                     foreach (var fo in userFundingOpportunities)
                     {
                         var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId);
+                        foreach (var proj in foProjects)
+                        {
+                            proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                            proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                        }
                         projects.AddRange(foProjects);
 
                     }
