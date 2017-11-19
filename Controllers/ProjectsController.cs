@@ -397,11 +397,8 @@ namespace InternalPortal.Controllers
             var projectActivities = _context.ProjectActivity.Where(p => p.ProjectId == id);
             var projectFederalDepartments = _context.ProjectFederalDepartment.Where(p => p.ProjectId == id);
 
-            if (projectBudgets != null)
-            {
-                _context.RemoveRange(projectBudgets);
-            }
-       
+            _context.RemoveRange(projectContacts);
+            _context.RemoveRange(projectBudgets);       
             _context.RemoveRange(projectMembers);
             _context.RemoveRange(projectSupporters);
             _context.RemoveRange(projectObjectives);
