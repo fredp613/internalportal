@@ -7,6 +7,7 @@ using InternalPortal.Models.Portal;
 using InternalPortal.Models.Portal.Program;
 using InternalPortal.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace InternalPortal.Models
 {
@@ -27,10 +28,12 @@ namespace InternalPortal.Models
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-           
 
-       
-          
+            modelBuilder.Entity<ProjectContact>()
+               .HasOne(p => p.Project)
+               .WithMany(b => b.ProjectContacts)
+               .OnDelete(DeleteBehavior.Cascade);
+            
 
         }
 
