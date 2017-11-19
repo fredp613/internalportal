@@ -131,7 +131,14 @@ namespace InternalPortal.Controllers
             {
                 if (currentUser.IsPortalAdministrator)
                 {
-                    return _unitOfWork.Projects.GetAll();
+                    var projs = _unitOfWork.Projects.GetAll();
+                    foreach (var proj in projs)
+                    {
+                        proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                        proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    }
+                    return projs;
+
                 } else if (currentUser.IsWorkloadManager) {
                     var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
                     List<Project> projects = new List<Project>();
