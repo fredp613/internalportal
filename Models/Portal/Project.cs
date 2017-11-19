@@ -16,7 +16,7 @@ namespace InternalPortal.Models
         Submitted = 2,
         Approved = 3,
         NotApproved = 4,
-        Incomplete = 5, 
+        Incomplete = 5,
         Withdrawn = 6
     }
     public class Project

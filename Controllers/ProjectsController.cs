@@ -283,6 +283,37 @@ namespace InternalPortal.Controllers
             return Ok(project);
         }
 
+        [HttpPost("Withdraw")]
+        [ProducesResponseType(typeof(Project), 200)]
+        public async Task<IActionResult> WithdrawProject([FromBody] Project proj)
+        {
+
+            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
+            project.ExternalUpdatedOn = DateTime.Now;
+            project.SubmittedOn = DateTime.Now;
+            project.ProjectStatus = Status.Withdrawn;
+
+            _context.Entry(project).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_unitOfWork.Projects.ProjectExists(proj.ProjectId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(project);
+        }
+
         // POST: api/Projects 
         [HttpPost]
         [ProducesResponseType(typeof(Project), 200)]
@@ -358,12 +389,13 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
+            var projectContacts = _context.ProjectContact.Where(p => p.ProjectId == id);
             var projectBudgets = _context.ProjectBudget.Where(p => p.ProjectID == id);
-            var projectMembers = _context.ProjectBudget.Where(p => p.ProjectID == id);
-            var projectSupporters = _context.ProjectBudget.Where(p => p.ProjectID == id);
-            var projectObjectives = _context.ProjectBudget.Where(p => p.ProjectID == id);
-            var projectActivities = _context.ProjectBudget.Where(p => p.ProjectID == id);
-            var projectFederalDepartments = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectMembers = _context.ProjectMember.Where(p => p.ProjectId == id);
+            var projectSupporters = _context.ProjectSupporter.Where(p => p.ProjectId == id);
+            var projectObjectives = _context.ProjectObjective.Where(p => p.ProjectID == id);
+            var projectActivities = _context.ProjectActivity.Where(p => p.ProjectId == id);
+            var projectFederalDepartments = _context.ProjectFederalDepartment.Where(p => p.ProjectId == id);
 
             _context.RemoveRange(projectBudgets);
             _context.RemoveRange(projectMembers);
