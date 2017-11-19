@@ -51,8 +51,8 @@ namespace InternalPortal.Controllers
         [HttpPost("GetAdditionalContacts")]
         public IEnumerable<ProjectContact> GetContactProjects([FromBody] ProjectContact primaryProjectContact)
         {
-            var primaryContact = _context.Project.SingleOrDefault(p => p.ProjectId == primaryProjectContact.ProjectId);
-            var projectContacts = _context.ProjectContact.Where(c => c.ProjectId == primaryProjectContact.ProjectId && c.ProjectContactId != primaryContact.PrimaryProjectContactId).ToList();
+           // var primaryContact = _context.Project.SingleOrDefault(p => p.ProjectId == primaryProjectContact.ProjectId);
+            var projectContacts = _context.ProjectContact.Where(c => c.ProjectId == primaryProjectContact.ProjectId && c.ProjectContactId != primaryProjectContact.ProjectContactId).ToList();
             return projectContacts;
         }
 
