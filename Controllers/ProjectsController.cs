@@ -122,6 +122,34 @@ namespace InternalPortal.Controllers
             
         }
 
+        [HttpGet("GetWorkloadManagerSubmissions/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetWorkloadManagerSubmissions([FromRoute] string userName)
+        {
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == userName);
+            if (currentUser != null)
+            {
+                if (currentUser.IsPortalAdministrator)
+                {
+                    return _unitOfWork.Projects.GetAll();
+                } else if (currentUser.IsWorkloadManager) {
+                    var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
+                    List<Project> projects = new List<Project>();
+                    foreach (var fo in userFundingOpportunities)
+                    {
+                        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId);
+                        projects.AddRange(foProjects);
+
+                    }
+                    return projects;
+                }
+                               
+            }
+
+            return null;
+           
+        }
+
 
         // GET: api/Projects/5
         [HttpGet("{id}")]
