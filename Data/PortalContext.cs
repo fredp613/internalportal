@@ -29,10 +29,8 @@ namespace InternalPortal.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<ProjectContact>()
-               .HasOne(p => p.Project)
-               .WithMany(b => b.ProjectContacts)
-               .OnDelete(DeleteBehavior.Cascade);
+           
+            
             
 
         }

@@ -358,10 +358,24 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            // _context.Project.Remove(project);
-            _unitOfWork.Projects.Remove(project);
+            var projectBudgets = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectMembers = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectSupporters = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectObjectives = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectActivities = _context.ProjectBudget.Where(p => p.ProjectID == id);
+            var projectFederalDepartments = _context.ProjectBudget.Where(p => p.ProjectID == id);
 
-            await _unitOfWork.SaveChangesAsync();
+            _context.RemoveRange(projectBudgets);
+            _context.RemoveRange(projectMembers);
+            _context.RemoveRange(projectSupporters);
+            _context.RemoveRange(projectObjectives);
+            _context.RemoveRange(projectActivities);
+            _context.RemoveRange(projectFederalDepartments);
+
+            // _context.Project.Remove(project);
+            _context.Project.Remove(project);
+
+            await _context.SaveChangesAsync();
 
             return Ok(project);
         }
