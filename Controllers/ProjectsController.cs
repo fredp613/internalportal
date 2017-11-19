@@ -397,14 +397,18 @@ namespace InternalPortal.Controllers
             var projectActivities = _context.ProjectActivity.Where(p => p.ProjectId == id);
             var projectFederalDepartments = _context.ProjectFederalDepartment.Where(p => p.ProjectId == id);
 
-            _context.RemoveRange(projectBudgets);
+            if (projectBudgets != null)
+            {
+                _context.RemoveRange(projectBudgets);
+            }
+       
             _context.RemoveRange(projectMembers);
             _context.RemoveRange(projectSupporters);
             _context.RemoveRange(projectObjectives);
             _context.RemoveRange(projectActivities);
             _context.RemoveRange(projectFederalDepartments);
+            await _context.SaveChangesAsync();
 
-            // _context.Project.Remove(project);
             _context.Project.Remove(project);
 
             await _context.SaveChangesAsync();
