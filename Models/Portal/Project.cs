@@ -1,4 +1,5 @@
-﻿using InternalPortal.Models.Portal;
+﻿using InternalPortal.Models.Helpers;
+using InternalPortal.Models.Portal;
 using InternalPortal.Models.Portal.Program;
 using Newtonsoft.Json;
 using System;
@@ -35,7 +36,9 @@ namespace InternalPortal.Models
         public string GCIMSCommitmentItemID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime StartDate { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime EndDate { get; set; }    
         public bool SubmitGcims { get; set; }
         public bool UpdatePrimaryContactAddress { get; set; }

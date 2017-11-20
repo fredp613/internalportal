@@ -1,4 +1,6 @@
-﻿using System;
+﻿using InternalPortal.Models.Helpers;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,6 +26,7 @@ namespace InternalPortal.Models.Portal
 
         public string IncorporationLevel { get; set; }
         public string IncorporationNumber { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime? DateRegistered { get; set; }
         public string Website { get; set; }
 
