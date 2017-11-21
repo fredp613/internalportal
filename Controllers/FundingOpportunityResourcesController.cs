@@ -101,6 +101,7 @@ namespace InternalPortal.Controllers
 
         // DELETE: api/FundingOpportunityResources/5
         [HttpDelete("{id}")]
+        [ProducesResponseType(typeof(FundingOpportunityResource), 200)]
         public async Task<IActionResult> DeleteFundingOpportunityResource([FromRoute] Guid id)
         {
             if (!ModelState.IsValid)
