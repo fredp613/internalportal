@@ -66,17 +66,17 @@ namespace InternalPortal.Models.Portal.Program
                 {
                     if (Lang == "EN")
                     {
-                        return StatusDesc = "Active";
+                        return StatusDesc = "Open";
                     } 
-                    return StatusDesc = "Actif";
+                    return StatusDesc = "Ouvert";
                 }
                 else if (ActivationStartDate > DateTime.Now && Status == FOStatus.Published)
                 {
                     if (Lang == "EN")
                     {
-                        return StatusDesc = "Awaiting publish";
+                        return StatusDesc = "Scheduled";
                     }
-                    return StatusDesc = "En attente de publication";
+                    return StatusDesc = "Prévu";
                 }
                 else if (Status == FOStatus.Draft)
                 {
