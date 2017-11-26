@@ -137,15 +137,15 @@ namespace InternalPortal.Models.GCIMS
                 contactId.SqlDbType = System.Data.SqlDbType.Int;
 
 
-                var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
-                projectContact.GCIMSContactID = (int)contactId.Value;
+            // var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
+                projectContact.GCIMSContactID = 33659; //(int)contactId.Value;
                 _portalContext.Entry(projectContact).State = EntityState.Modified;
                 _portalContext.SaveChanges();
         
                 tblContacts newGcimsContact = new tblContacts
                 {
                     Firstname = projectContact.FirstName,
-                    ContactID = newContactID,
+                    ContactID = 33659,//newContactID,
                     Lastname = projectContact.LastName,
                    // SalutationID = projectContact.SalutationID,
                    // LanguageID = projectContact.PreferredLanguageID,
