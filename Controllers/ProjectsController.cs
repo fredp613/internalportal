@@ -197,7 +197,7 @@ namespace InternalPortal.Controllers
             }
             if (project.ProjectStatus.Equals(1))
             {
-                GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
+                GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
                 var status = gcimsHelper.GetProjectStatus();
                 if (status.Equals(2))
                 {
@@ -259,7 +259,7 @@ namespace InternalPortal.Controllers
 
             if (project.SubmitGcims)
             {
-                GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
+                GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
                 var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
                 project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
                 project.GcimsClientId = newGCIMSProject.Result.ClientID;
