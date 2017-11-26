@@ -131,36 +131,28 @@ namespace InternalPortal.Controllers
             {
                 if (currentUser.IsPortalAdministrator)
                 {
-                    var projs = _context.Project.Where(p => p.ProjectStatus == Status.Submitted);
-                    foreach (var proj in projs)
-                    {
-                        proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
-                        proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
-                    }
-                    return projs;
+                   return _unitOfWork.Projects.GetWorkloadManagerSubmittedProjects();
 
-                    //} else if (currentUser.IsWorkloadManager) {
-                    //    var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
-                    //    List<Project> projects = new List<Project>();
-                    //    foreach (var fo in userFundingOpportunities)
-                    //    {
-                    //        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId && f.ProjectStatus == Status.Submitted);
-                    //        foreach (var proj in foProjects)
-                    //        {
-                    //            proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
-                    //            proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
-                    //        }
-                    //        projects.AddRange(foProjects);
-
-                    //    }
-                    //    return projects;
-                    //}
                 }
-                               
-            }
+                else if (currentUser.IsWorkloadManager)
+                {
+                    var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
+                    List<Project> projects = new List<Project>();
+                    foreach (var fo in userFundingOpportunities)
+                    {
+                        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId && f.ProjectStatus == Status.Submitted);
+                        foreach (var proj in foProjects)
+                        {
+                            proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                            proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                        }
+                        projects.AddRange(foProjects);
 
-            return null;
-           
+                    }
+                    return projects;
+                }
+            }                                           
+            return null;           
         }
 
 

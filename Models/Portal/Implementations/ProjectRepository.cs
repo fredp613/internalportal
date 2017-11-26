@@ -37,6 +37,17 @@ namespace InternalPortal.Models.Portal.Implementations
             return projects;
         }
 
+        public IEnumerable<Project> GetWorkloadManagerSubmittedProjects()
+        {
+            var projs = PortalContext.Project.Where(p => p.ProjectStatus == Status.Submitted);
+            foreach (var proj in projs)
+            {
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+            return projs;
+        }
+
         public bool ProjectExists(Guid projectId)
         {
             return PortalContext.Project.Any(e => e.ProjectId == projectId);
