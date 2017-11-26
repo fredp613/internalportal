@@ -131,7 +131,7 @@ namespace InternalPortal.Controllers
             {
                 if (currentUser.IsPortalAdministrator)
                 {
-                   return  _unitOfWork.Projects.GetWorkloadManagerSubmittedProjects();
+                   return  _unitOfWork.Projects.GetWorkloadManagerSubmittedProjects(lang);
 
                 }
                 else if (currentUser.IsWorkloadManager)
