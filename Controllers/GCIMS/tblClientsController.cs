@@ -29,6 +29,7 @@ namespace InternalPortal.Controllers.GCIMS
 
         // GET: api/tblClients/5
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(tblClients), 200)]
         public async Task<IActionResult> GettblClients([FromRoute] string id)
         {
             if (!ModelState.IsValid)
