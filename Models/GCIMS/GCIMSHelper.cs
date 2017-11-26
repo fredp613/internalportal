@@ -21,14 +21,14 @@ namespace InternalPortal.Models.GCIMS
 
         public async Task<tblProjects> CreateGCIMSproject()
         {
-            var clientId = CreateOrUpdateClient(_project.Account);
+           // var clientId = CreateOrUpdateClient(_project.Account);
             var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
 
             var GCIMSUserName = new SqlParameter("@GCIMSUserName", _project.GCIMSUserName);
-            var ClientID = new SqlParameter("@ClientID", clientId);
+            var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
             var ContactID = new SqlParameter("@ContactID", contactId);
             var Lang = new SqlParameter("@Lang", _project.Lang);
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
