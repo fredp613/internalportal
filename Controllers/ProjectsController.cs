@@ -122,9 +122,9 @@ namespace InternalPortal.Controllers
             
         }
 
-        [HttpGet("GetWorkloadManagerSubmissions/{username}")]
+        [HttpGet("GetWorkloadManagerSubmissions/{lang}/{username}")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public IEnumerable<Project> GetWorkloadManagerSubmissions([FromRoute] string userName)
+        public IEnumerable<Project> GetWorkloadManagerSubmissions([FromRoute] string userName, [FromRoute] string lang)
         {
             var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == userName);
             if (currentUser != null)
