@@ -389,8 +389,9 @@ namespace InternalPortal.Controllers
         }
 
         // POST: api/Projects/PostGCIMS 
-        [HttpPost]
-        [Route("PostGCIMS")]
+      
+        [HttpPost("PostGCIMS")]
+        [ProducesResponseType(typeof(tblProjects), 200)]
         public async Task<IActionResult> PostGCIMS([FromBody] Guid id)
         {
             if (!ModelState.IsValid)
@@ -404,8 +405,8 @@ namespace InternalPortal.Controllers
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
 
-            return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
-           // return Ok(newGCIMSProject.Result);
+            //return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
+            return Ok(newGCIMSProject.Result);
         }
 
         // DELETE: api/Projects/5
