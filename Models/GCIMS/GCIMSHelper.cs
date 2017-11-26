@@ -34,7 +34,7 @@ namespace InternalPortal.Models.GCIMS
 
             var GCIMSUserName = new SqlParameter("@GCIMSUserName", _project.GCIMSUserName);
             var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
-            var ContactID = new SqlParameter("@ContactID", contactId);
+            var ContactID = 212;  //new SqlParameter("@ContactID", contactId);
             var Lang = new SqlParameter("@Lang", _project.Lang);
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
             var RequestedAmount = new SqlParameter("@RequestedAmount", _project.RequestedAmount);
@@ -86,59 +86,58 @@ namespace InternalPortal.Models.GCIMS
             }
             return null;
         }
-        public string CreateOrUpdateClient(Account Account)
+        //public string CreateOrUpdateClient(Account Account)
+        //{
+        //    var GcimsClient = _context.tblClients.SingleOrDefault(c => c.ClientID == Account.GcimsClientID);
+        //    //update
+        //    if (ClientExists(GcimsClient.ClientID))
+        //    {
+        //        _context.Entry(GcimsClient).State = EntityState.Modified;
+        //        _context.SaveChanges();
+        //    }
+        //    else //create
+        //    {
+        //        //get next client id
+        //        var clientId = new SqlParameter("@NextNum", "1");
+        //        clientId.Direction = System.Data.ParameterDirection.Output;
+        //        var newClientID = _context.Database.ExecuteSqlCommand("exec sp_GetNextClientID @NextNum OUT", clientId).ToString();
+        //        Account.GcimsClientID = newClientID;
+        //        //update account informaiton here. before creating new.
+
+        //        tblClients newGcimsClient = new tblClients
+        //        {
+        //            ClientName = Account.AccountName,
+        //            ClientID = newClientID,
+        //            ClientTypeID = 1                    
+        //        };
+        //        _context.tblClients.Add(newGcimsClient);
+        //        _context.SaveChanges();
+        //    }
+
+        //    return Account.GcimsClientID;
+        //}
+        public int CreateOrUpdateContact(ProjectContact projectContact)
         {
-            var GcimsClient = _context.tblClients.SingleOrDefault(c => c.ClientID == Account.GcimsClientID);
+            
+            var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
             //update
-            if (ClientExists(GcimsClient.ClientID))
+            if (GcimsContact != null)
             {
-                _context.Entry(GcimsClient).State = EntityState.Modified;
+                _context.Entry(GcimsContact).State = EntityState.Modified;
                 _context.SaveChanges();
             }
             else //create
             {
                 //get next client id
-                var clientId = new SqlParameter("@NextNum", "1");
-                clientId.Direction = System.Data.ParameterDirection.Output;
-                var newClientID = _context.Database.ExecuteSqlCommand("exec sp_GetNextClientID @NextNum OUT", clientId).ToString();
-                Account.GcimsClientID = newClientID;
-                //update account informaiton here. before creating new.
-
-                tblClients newGcimsClient = new tblClients
+                var contactId = new SqlParameter("@NextNum", 1)
                 {
-                    ClientName = Account.AccountName,
-                    ClientID = newClientID,
-                    ClientTypeID = 1                    
+                    Direction = System.Data.ParameterDirection.Output,
+                    SqlDbType = System.Data.SqlDbType.Int
                 };
-                _context.tblClients.Add(newGcimsClient);
-                _context.SaveChanges();
-            }
-
-            return Account.GcimsClientID;
-        }
-        public int CreateOrUpdateContact(ProjectContact projectContact)
-        {
-            //if (projectContact != null)
-            //{
-
-            //}
-            //var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
-            ////update
-            //if (GcimsContact != null)
-            //{
-            //    _context.Entry(GcimsContact).State = EntityState.Modified;
-            //    _context.SaveChanges();
-            //}
-            //else //create
-            //{
-                //get next client id
-                var contactId = new SqlParameter("@NextNum", 1);
-                contactId.Direction = System.Data.ParameterDirection.Output;
-                contactId.SqlDbType = System.Data.SqlDbType.Int;
 
 
-            // var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
-                projectContact.GCIMSContactID = 33659; //(int)contactId.Value;
+                var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
+                projectContact.GCIMSContactID = (int)contactId.Value;
                 _portalContext.Entry(projectContact).State = EntityState.Modified;
                 _portalContext.SaveChanges();
         
@@ -162,7 +161,7 @@ namespace InternalPortal.Models.GCIMS
                 };
                 _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();
-          //  }
+            }
 
             return (int)projectContact.GCIMSContactID;
         }
