@@ -131,7 +131,7 @@ namespace InternalPortal.Controllers
             {
                 if (currentUser.IsPortalAdministrator)
                 {
-                   return _unitOfWork.Projects.GetWorkloadManagerSubmittedProjects();
+                   return  _unitOfWork.Projects.GetWorkloadManagerSubmittedProjects();
 
                 }
                 else if (currentUser.IsWorkloadManager)
@@ -151,8 +151,10 @@ namespace InternalPortal.Controllers
                     }
                     return projects;
                 }
-            }                                           
-            return null;           
+            }
+
+            return null;
+           
         }
 
 
