@@ -144,7 +144,7 @@ namespace InternalPortal.Controllers
                     List<Project> projects = new List<Project>();
                     foreach (var fo in userFundingOpportunities)
                     {
-                        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId);
+                        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId && f.ProjectStatus == Status.Submitted);
                         foreach (var proj in foProjects)
                         {
                             proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
