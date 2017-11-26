@@ -118,15 +118,19 @@ namespace InternalPortal.Models.GCIMS
         }
         public int CreateOrUpdateContact(ProjectContact projectContact)
         {
-            var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
-            //update
-            if (GcimsContact != null)
-            {
-                _context.Entry(GcimsContact).State = EntityState.Modified;
-                _context.SaveChanges();
-            }
-            else //create
-            {
+            //if (projectContact != null)
+            //{
+
+            //}
+            //var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
+            ////update
+            //if (GcimsContact != null)
+            //{
+            //    _context.Entry(GcimsContact).State = EntityState.Modified;
+            //    _context.SaveChanges();
+            //}
+            //else //create
+            //{
                 //get next client id
                 var contactId = new SqlParameter("@NextNum", 1);
                 contactId.Direction = System.Data.ParameterDirection.Output;
@@ -157,7 +161,7 @@ namespace InternalPortal.Models.GCIMS
                 };
                 _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();
-            }
+          //  }
 
             return (int)projectContact.GCIMSContactID;
         }
