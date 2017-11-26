@@ -12,6 +12,7 @@ using InternalPortal.Models.Portal.Implementations;
 using InternalPortal.Models.Portal.Interfaces;
 using InternalPortal.Models.Portal;
 using System.Linq;
+using System.Diagnostics;
 
 namespace InternalPortal.Controllers
 {
@@ -35,10 +36,10 @@ namespace InternalPortal.Controllers
         //    _gcimsContext = gcimsContext;
         //    _unitOfWork = new UnitOfWork(_context);
         //}
-        public ProjectsController(PortalContext context)
+        public ProjectsController(PortalContext context, GcimsContext gcimsContext)
         {
             _context = context;
-            
+            _gcimsContext = gcimsContext;
           //  _Language = this.RouteData.Values["lang"].ToString().ToUpper();
             _unitOfWork = new UnitOfWork(_context, "EN");
 
@@ -404,9 +405,9 @@ namespace InternalPortal.Controllers
             var fo = await _context.FundingOpportunity.FindAsync(project.FundingOpportunityID);
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
-           // project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
+            project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
             //missing contact information
-
+           
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
 

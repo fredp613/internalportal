@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171112234229_removedcontactdep")]
+    partial class removedcontactdep
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -208,29 +209,15 @@ namespace InternalPortal.Migrations
 
                     b.Property<string>("BandNumber");
 
-                    b.Property<string>("BillingAddressLine1");
-
-                    b.Property<string>("BillingAddressLine2");
-
-                    b.Property<string>("BillingCity");
-
-                    b.Property<string>("BillingCountry");
-
-                    b.Property<string>("BillingPostal");
-
-                    b.Property<string>("BillingState");
-
                     b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<DateTime?>("DateRegistered");
+                    b.Property<DateTime>("DateRegistered");
 
                     b.Property<string>("GcimsClientID");
 
                     b.Property<string>("IncorporationLevel");
-
-                    b.Property<string>("IncorporationNumber");
 
                     b.Property<string>("LegalName");
 
@@ -239,18 +226,6 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("PaymentAccountAddressId");
 
                     b.Property<Guid>("PrimaryAccountAddressId");
-
-                    b.Property<string>("PrimaryAddressLine1");
-
-                    b.Property<string>("PrimaryAddressLine2");
-
-                    b.Property<string>("PrimaryCity");
-
-                    b.Property<string>("PrimaryCountry");
-
-                    b.Property<string>("PrimaryPostal");
-
-                    b.Property<string>("PrimaryState");
 
                     b.Property<string>("PrimaryWork");
 
@@ -829,40 +804,6 @@ namespace InternalPortal.Migrations
                     b.ToTable("Objective");
                 });
 
-            modelBuilder.Entity("InternalPortal.Models.Portal.ProjectActivity", b =>
-                {
-                    b.Property<Guid>("ProjectActivityId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<Guid?>("CreatedByUserId");
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<DateTime>("EndDate");
-
-                    b.Property<string>("Output");
-
-                    b.Property<Guid>("ProjectId");
-
-                    b.Property<string>("ResponsibleParty");
-
-                    b.Property<DateTime>("StartDate");
-
-                    b.Property<string>("Title");
-
-                    b.Property<Guid?>("UpdatedByInternalUserId");
-
-                    b.Property<Guid?>("UpdatedByUserId");
-
-                    b.Property<DateTime>("UpdatedOn");
-
-                    b.HasKey("ProjectActivityId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectActivity");
-                });
-
             modelBuilder.Entity("InternalPortal.Models.Portal.ProjectBudget", b =>
                 {
                     b.Property<Guid>("ProjectBudgetId")
@@ -875,12 +816,6 @@ namespace InternalPortal.Migrations
                     b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTime>("CreatedOn");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("FiscalYear");
-
-                    b.Property<string>("FundingOrganization");
 
                     b.Property<Guid>("ProjectID");
 
@@ -909,8 +844,6 @@ namespace InternalPortal.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<int>("GCIMSContactID");
 
                     b.Property<string>("LastName");
 
@@ -1012,13 +945,9 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid?>("AccountId");
 
-                    b.Property<string>("AdditionalInformation");
-
                     b.Property<Guid?>("AssignedBy");
 
                     b.Property<Guid?>("AssignedTo");
-
-                    b.Property<bool>("Audited");
 
                     b.Property<string>("ClientID");
 
@@ -1070,17 +999,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<bool>("NewPrimaryContactAddress");
 
-                    b.Property<string>("Objective1");
-
-                    b.Property<string>("Objective2");
-
-                    b.Property<string>("Objective3");
-
                     b.Property<Guid?>("PrimaryAccountAddressId");
 
                     b.Property<Guid?>("PrimaryContactAddressId");
 
-                    b.Property<Guid?>("PrimaryProjectContactId");
+                    b.Property<Guid?>("PrimaryContactId");
 
                     b.Property<string>("ProjectNeeded");
 
@@ -1091,12 +1014,6 @@ namespace InternalPortal.Migrations
                     b.Property<DateTime>("StartDate");
 
                     b.Property<bool>("SubmitGcims");
-
-                    b.Property<DateTime>("SubmittedOn");
-
-                    b.Property<double>("TaxPercent");
-
-                    b.Property<bool>("TaxRebate");
 
                     b.Property<string>("Title");
 
@@ -1114,13 +1031,13 @@ namespace InternalPortal.Migrations
 
                     b.HasIndex("ClientID");
 
-                    b.HasIndex("ContactId");
-
                     b.HasIndex("FundingOpportunityID");
 
                     b.HasIndex("PrimaryAccountAddressId");
 
                     b.HasIndex("PrimaryContactAddressId");
+
+                    b.HasIndex("PrimaryContactId");
 
                     b.ToTable("Project");
                 });
@@ -1466,14 +1383,6 @@ namespace InternalPortal.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("InternalPortal.Models.Portal.ProjectActivity", b =>
-                {
-                    b.HasOne("InternalPortal.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("InternalPortal.Models.Portal.ProjectBudget", b =>
                 {
                     b.HasOne("InternalPortal.Models.Project")
@@ -1516,10 +1425,6 @@ namespace InternalPortal.Migrations
                         .WithMany()
                         .HasForeignKey("ClientID");
 
-                    b.HasOne("InternalPortal.Models.Contact", "PrimaryContact")
-                        .WithMany()
-                        .HasForeignKey("ContactId");
-
                     b.HasOne("InternalPortal.Models.Portal.Program.FundingOpportunity", "Program")
                         .WithMany()
                         .HasForeignKey("FundingOpportunityID");
@@ -1531,6 +1436,10 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.ContactAddress", "PrimaryContactAddress")
                         .WithMany()
                         .HasForeignKey("PrimaryContactAddressId");
+
+                    b.HasOne("InternalPortal.Models.Contact", "PrimaryContact")
+                        .WithMany()
+                        .HasForeignKey("PrimaryContactId");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.ProjectMember", b =>

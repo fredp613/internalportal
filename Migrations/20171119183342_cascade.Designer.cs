@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171119183342_cascade")]
+    partial class cascade
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -224,13 +225,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<DateTime?>("DateRegistered");
+                    b.Property<DateTime>("DateRegistered");
 
                     b.Property<string>("GcimsClientID");
 
                     b.Property<string>("IncorporationLevel");
-
-                    b.Property<string>("IncorporationNumber");
 
                     b.Property<string>("LegalName");
 
@@ -909,8 +908,6 @@ namespace InternalPortal.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<int>("GCIMSContactID");
 
                     b.Property<string>("LastName");
 

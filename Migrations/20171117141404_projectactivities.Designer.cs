@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171117141404_projectactivities")]
+    partial class projectactivities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -224,13 +225,11 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<DateTime?>("DateRegistered");
+                    b.Property<DateTime>("DateRegistered");
 
                     b.Property<string>("GcimsClientID");
 
                     b.Property<string>("IncorporationLevel");
-
-                    b.Property<string>("IncorporationNumber");
 
                     b.Property<string>("LegalName");
 
@@ -844,8 +843,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid>("ProjectId");
 
-                    b.Property<string>("ResponsibleParty");
-
                     b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Title");
@@ -876,12 +873,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<DateTime>("CreatedOn");
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("FiscalYear");
-
-                    b.Property<string>("FundingOrganization");
-
                     b.Property<Guid>("ProjectID");
 
                     b.Property<Guid?>("UpdatedByInternalUserId");
@@ -909,8 +900,6 @@ namespace InternalPortal.Migrations
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<int>("GCIMSContactID");
 
                     b.Property<string>("LastName");
 
@@ -1091,8 +1080,6 @@ namespace InternalPortal.Migrations
                     b.Property<DateTime>("StartDate");
 
                     b.Property<bool>("SubmitGcims");
-
-                    b.Property<DateTime>("SubmittedOn");
 
                     b.Property<double>("TaxPercent");
 
