@@ -32,7 +32,7 @@ namespace InternalPortal.Models.GCIMS
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
 
-            var GCIMSUserName = new SqlParameter("@GCIMSUserName", _project.GCIMSUserName);
+            var GCIMSUserName = new SqlParameter("@GCIMSUserName", "GCIMSUnit");
             var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
             var ContactID = new SqlParameter("@ContactID", 212);
             var Lang = new SqlParameter("@Lang", _project.Lang);
