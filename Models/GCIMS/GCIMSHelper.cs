@@ -135,8 +135,9 @@ namespace InternalPortal.Models.GCIMS
                 var contactId = new SqlParameter("@NextNum", 1);
                 contactId.Direction = System.Data.ParameterDirection.Output;
                 contactId.SqlDbType = System.Data.SqlDbType.Int;
-                var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
 
+
+                var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
                 projectContact.GCIMSContactID = (int)contactId.Value;
                 _portalContext.Entry(projectContact).State = EntityState.Modified;
                 _portalContext.SaveChanges();
