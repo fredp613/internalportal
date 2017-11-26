@@ -139,21 +139,22 @@ namespace InternalPortal.Controllers
                     }
                     return projs;
 
-                } else if (currentUser.IsWorkloadManager) {
-                    var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
-                    List<Project> projects = new List<Project>();
-                    foreach (var fo in userFundingOpportunities)
-                    {
-                        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId && f.ProjectStatus == Status.Submitted);
-                        foreach (var proj in foProjects)
-                        {
-                            proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
-                            proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
-                        }
-                        projects.AddRange(foProjects);
+                    //} else if (currentUser.IsWorkloadManager) {
+                    //    var userFundingOpportunities = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
+                    //    List<Project> projects = new List<Project>();
+                    //    foreach (var fo in userFundingOpportunities)
+                    //    {
+                    //        var foProjects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId && f.ProjectStatus == Status.Submitted);
+                    //        foreach (var proj in foProjects)
+                    //        {
+                    //            proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                    //            proj.FundingOpportunityName = _context.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    //        }
+                    //        projects.AddRange(foProjects);
 
-                    }
-                    return projects;
+                    //    }
+                    //    return projects;
+                    //}
                 }
                                
             }
