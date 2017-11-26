@@ -57,6 +57,63 @@ namespace InternalPortal.Models
         public string Communication { get; set; }
         public string Evaluation { get; set; }
         public Status ProjectStatus { get; set; }   
+        [NotMapped]
+        public string StatusDesc
+        {
+            get
+            {
+                if (ProjectStatus == Status.Submitted)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status),Status.Submitted);
+                    }
+                    return StatusDesc = "Soumis";
+                }
+                else if (ProjectStatus == Status.Withdrawn)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.Withdrawn);
+                    }
+                    return StatusDesc = "Enlever";
+                }
+                else if (ProjectStatus == Status.Draft)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.Draft);
+                    }
+                    return StatusDesc = "Brouillon";
+                }
+                else if (ProjectStatus == Status.Approved)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.Approved);
+                    }
+                    return StatusDesc = "Approuver";
+                }
+                else if (ProjectStatus == Status.Incomplete)
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.Incomplete);
+                    }
+                    return StatusDesc = "Incomplet";
+                }
+
+                else
+                {
+                    if (Lang == "EN")
+                    {
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.NotApproved);
+                    }
+                    return StatusDesc = "Non approuver";
+                }
+            }
+            set { }
+        }
         public string AdditionalInformation { get; set; }
         public bool Audited { get; set; }
         public bool TaxRebate { get; set; }
