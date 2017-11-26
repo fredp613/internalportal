@@ -118,7 +118,7 @@ namespace InternalPortal.Models.GCIMS
         }
         public int CreateOrUpdateContact(ProjectContact projectContact)
         {
-            var GcimsContact = _context.tblContacts.SingleOrDefault(c => c.ContactID == projectContact.GCIMSContactID);
+            var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
             //update
             if (GcimsContact != null)
             {
