@@ -48,7 +48,7 @@ namespace InternalPortal.Models.GCIMS
             projectID.Direction = System.Data.ParameterDirection.Output;
             projectID.SqlDbType = System.Data.SqlDbType.Int;
             ContactID.SqlDbType = System.Data.SqlDbType.Int;
-            var newproject = _context.Database.ExecuteSqlCommand("exec web_sp_createproject @GCIMSUserName,@ClientID,@ContactID,@Lang," +
+            var newproject = _context.Database.ExecuteSqlCommand("exec web_sp_createProject @GCIMSUserName,@ClientID,@ContactID,@Lang," +
                 "@FiscalYear,@RequestedAmount,@CorporateFileNumber, @CommitmentItemID, @Title, " +
                 "@Description, @StartDate, @EndDate, @projectID OUT",
              GCIMSUserName,
