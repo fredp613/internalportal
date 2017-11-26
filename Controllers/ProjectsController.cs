@@ -392,7 +392,7 @@ namespace InternalPortal.Controllers
       
         [HttpPost("PostGCIMS")]
         [ProducesResponseType(typeof(tblProjects), 200)]
-        public async Task<IActionResult> PostGCIMS([FromBody] Guid id)
+        public async Task<IActionResult> PostGCIMS([FromBody] Project proj)
         {
             if (!ModelState.IsValid)
             {
@@ -400,7 +400,7 @@ namespace InternalPortal.Controllers
             }
 
            // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
-            var project = await _unitOfWork.Projects.GetAsync(id);
+            var project = await _unitOfWork.Projects.GetAsync(proj.ProjectId);
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
