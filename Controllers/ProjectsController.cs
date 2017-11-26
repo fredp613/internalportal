@@ -400,11 +400,11 @@ namespace InternalPortal.Controllers
             }
 
            // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
-            var project = await _unitOfWork.Projects.GetAsync(proj.ProjectId);
+            var project = await _context.Project.FindAsync(proj.ProjectId);
             var fo = await _context.FundingOpportunity.FindAsync(project.FundingOpportunityID);
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
-            project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
+           // project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
             //missing contact information
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
