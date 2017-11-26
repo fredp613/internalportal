@@ -4,6 +4,7 @@ using System;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using InternalPortal.Models;
 
 namespace InternalPortal.Models.GCIMS
 {
@@ -11,9 +12,11 @@ namespace InternalPortal.Models.GCIMS
     {
 
         private  readonly GcimsContext _context;
+        private readonly PortalContext _portalContext;
         private readonly Project _project;
-        public GCIMSHelper(GcimsContext context, Project project)
+        public GCIMSHelper(GcimsContext context, PortalContext portalContext, Project project)
         {
+            _portalContext = portalContext;
             _context = context;
             _project = project;
 
@@ -21,8 +24,10 @@ namespace InternalPortal.Models.GCIMS
 
         public async Task<tblProjects> CreateGCIMSproject()
         {
-           // var clientId = CreateOrUpdateClient(_project.Account);
-            var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
+            // var clientId = CreateOrUpdateClient(_project.Account);
+            //var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
+            var primaryContact = _portalContext.ProjectContact.SingleOrDefault(c => c.ProjectContactId == _project.PrimaryProjectContactId);
+            var contactId = CreateOrUpdateContact(primaryContact);
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
@@ -111,9 +116,9 @@ namespace InternalPortal.Models.GCIMS
 
             return Account.GcimsClientID;
         }
-        public int CreateOrUpdateContact(Account Account, Contact Contact, Address Address, string ClientID)
+        public int CreateOrUpdateContact(ProjectContact projectContact)
         {
-            var GcimsContact = _context.tblContacts.SingleOrDefault(c => c.ContactID == Contact.GcimsContactID);
+            var GcimsContact = _context.tblContacts.SingleOrDefault(c => c.ContactID == projectContact.GCIMSContactID);
             //update
             if (GcimsContact != null)
             {
@@ -128,25 +133,25 @@ namespace InternalPortal.Models.GCIMS
                 contactId.SqlDbType = System.Data.SqlDbType.Int;
                 var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
 
-                Contact.GcimsContactID = (int)contactId.Value;
-                _context.Entry(Contact).State = EntityState.Modified;
-                _context.SaveChanges();
-                //Contact.GcimsClientID = ClientID;
+                projectContact.GCIMSContactID = (int)contactId.Value;
+                _portalContext.Entry(projectContact).State = EntityState.Modified;
+                _portalContext.SaveChanges();
+        
                 tblContacts newGcimsContact = new tblContacts
                 {
-                    Firstname = Contact.FirstName,
+                    Firstname = projectContact.FirstName,
                     ContactID = newContactID,
-                    Lastname = Contact.LastName,
-                    SalutationID = Contact.SalutationID,
-                    LanguageID = Contact.PreferredLanguageID,
-                    ClientID = Account.GcimsClientID,
-                    CityID = Address.GcimsCityID,
-                    AddressLine1 = Address.AddressLine1,
-                    AddressLine2 = Address.AddressLine2,
-                    AddressLine3 = Address.AddressLine3,
-                    AddressLine4 = Address.AddressLine4,
-                    Email = Contact.Email,
-                    PostalCode = Address.Postal,
+                    Lastname = projectContact.LastName,
+                   // SalutationID = projectContact.SalutationID,
+                   // LanguageID = projectContact.PreferredLanguageID,
+                    ClientID = _project.GcimsClientId,
+                    //CityID = Address.GcimsCityID,
+                    //AddressLine1 = Address.AddressLine1,
+                    //AddressLine2 = Address.AddressLine2,
+                    //AddressLine3 = Address.AddressLine3,
+                    //AddressLine4 = Address.AddressLine4,
+                    Email = projectContact.Email,
+                   // PostalCode = projectContact.Pos,
                     CreatedBy = "GCIMSUnit",
                     UpdatedBy = "GCIMSUnit"
                 };
@@ -154,7 +159,7 @@ namespace InternalPortal.Models.GCIMS
                 _context.SaveChanges();
             }
 
-            return (int)Contact.GcimsContactID;
+            return (int)projectContact.GCIMSContactID;
         }
 
         private bool ContactExists(int id)

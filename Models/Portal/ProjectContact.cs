@@ -19,11 +19,10 @@ namespace InternalPortal.Models.Portal
         public string PhoneNumber { get; set; }
         public string Title { get; set; }
         public bool isSigningAuthority { get; set; }
-      
+        public int GCIMSContactID { get; set; }      
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
         public Guid? UpdatedByInternalUserId { get; set; }
-
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
        

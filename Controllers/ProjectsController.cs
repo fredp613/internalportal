@@ -401,6 +401,11 @@ namespace InternalPortal.Controllers
 
            // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
             var project = await _unitOfWork.Projects.GetAsync(proj.ProjectId);
+            var fo = await _unitOfWork.FundingOpportunities.GetAsync((Guid)proj.FundingOpportunityID);
+            project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
+            project.Lang = "EN";
+            project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
+            //missing contact information
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
