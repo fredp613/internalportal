@@ -34,7 +34,7 @@ namespace InternalPortal.Models.GCIMS
 
             var GCIMSUserName = new SqlParameter("@GCIMSUserName", _project.GCIMSUserName);
             var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
-            var ContactID = 212;  //new SqlParameter("@ContactID", contactId);
+            var ContactID = new SqlParameter("@ContactID", 212);
             var Lang = new SqlParameter("@Lang", _project.Lang);
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
             var RequestedAmount = new SqlParameter("@RequestedAmount", _project.RequestedAmount);
