@@ -131,7 +131,7 @@ namespace InternalPortal.Controllers
             {
                 if (currentUser.IsPortalAdministrator)
                 {
-                    var projs = _unitOfWork.Projects.GetAll();
+                    var projs = _context.Project.Where(p => p.ProjectStatus == Status.Submitted);
                     foreach (var proj in projs)
                     {
                         proj.ContactName = _context.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
