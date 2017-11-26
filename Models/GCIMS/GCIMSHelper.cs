@@ -27,7 +27,7 @@ namespace InternalPortal.Models.GCIMS
             // var clientId = CreateOrUpdateClient(_project.Account);
             //var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
             var primaryContact = _portalContext.ProjectContact.SingleOrDefault(c => c.ProjectContactId == _project.PrimaryProjectContactId);
-            var contactId = CreateOrUpdateContact(primaryContact);
+           // var contactId = CreateOrUpdateContact(primaryContact);
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
