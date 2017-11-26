@@ -401,7 +401,7 @@ namespace InternalPortal.Controllers
 
            // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
             var project = await _unitOfWork.Projects.GetAsync(proj.ProjectId);
-            var fo = await _context.FundingOpportunity.FindAsync(proj.FundingOpportunityID);
+            var fo = await _context.FundingOpportunity.FindAsync(project.FundingOpportunityID);
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
