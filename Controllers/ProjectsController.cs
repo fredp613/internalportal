@@ -407,7 +407,7 @@ namespace InternalPortal.Controllers
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
             //missing contact information
 
-            GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, project);
+            GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
 
             //return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
