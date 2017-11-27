@@ -5,6 +5,135 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 
 
+public class tblProjectExpenseLineItems
+{
+    public int ProjectID { get; set; }
+
+    public int ExpenseLineItemID { get; set; }
+
+    public string ExpenseLineItemDescription { get; set; }
+
+    public int ExpenseCategoryID { get; set; }
+
+    public string ExpenseLineItemComments { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public string UpdatedBy { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+    public string SportExpenseDetails { get; set; }
+
+    public decimal ActualPaid { get; set; }
+
+    public decimal ActualCost { get; set; }
+
+    public string PostApprovalComments { get; set; }
+
+    public bool CanEditPostApproval { get; set; }
+
+    public string PostApprovalSportExpenseDetails { get; set; }
+
+}
+
+
+
+public class tblApplicationExpenses
+{
+    public int ApplicationID { get; set; }
+
+    public int ProjectID { get; set; }
+
+    public int ExpenseLineItemID { get; set; }
+
+    public decimal? ExpenseAmount { get; set; }
+
+    public decimal? RequestedAmount { get; set; }
+
+    public decimal? RecommendedAmount { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public string UpdatedBy { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+    [Key]
+    public Guid ApplicationExpenseID { get; set; }
+
+    public Guid? AmendmentID { get; set; }
+
+    public bool PostApproval { get; set; }
+
+}
+
+public class tblProjectRevenueLineItems
+{
+    public int ProjectID { get; set; }
+
+    public int RevenueLineItemID { get; set; }
+
+    public string RevenueLineItemDescription { get; set; }
+
+    public int RevenueCategoryID { get; set; }
+
+    public string RevenueLineItemComments { get; set; }
+
+    public bool RevenueLineItemAssured { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public string UpdatedBy { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+    public decimal ActualInkindRevenueAmount { get; set; }
+
+    public decimal ActualCashRevenueAmount { get; set; }
+
+    public string PostApprovalComments { get; set; }
+
+    public bool CanEditPostApproval { get; set; }
+
+}
+public class tblApplicationRevenues
+{
+    public int ApplicationID { get; set; }
+
+    public int ProjectID { get; set; }
+
+    public int RevenueLineItemID { get; set; }
+
+    public decimal? RevenueAmount { get; set; }
+
+    public string CreatedBy { get; set; }
+
+    public DateTime? CreatedDate { get; set; }
+
+    public string UpdatedBy { get; set; }
+
+    public DateTime? UpdatedDate { get; set; }
+
+    public decimal InkindRevenueAmount { get; set; }
+
+    public decimal CashRevenueAmount { get; set; }
+
+    [Key]
+    public Guid ApplicationRevenueID { get; set; }
+
+    public Guid? AmendmentID { get; set; }
+
+    public bool PostApproval { get; set; }
+
+}
+
 
 public class luExpenseCategories
 {

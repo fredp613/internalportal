@@ -8,10 +8,10 @@ using InternalPortal.Models;
 
 namespace InternalPortal.Models.GCIMS
 {
-    public class GCIMSHelper 
+    public class GCIMSHelper
     {
 
-        private  readonly GcimsContext _context;
+        private readonly GcimsContext _context;
         private readonly PortalContext _portalContext;
         private readonly Project _project;
         public GCIMSHelper(GcimsContext context, PortalContext portalContext, Project project)
@@ -67,7 +67,9 @@ namespace InternalPortal.Models.GCIMS
 
 
             if (projectID != null)
-            {              
+            {
+                CreateExpenseItems((int)projectID.Value);
+                CreateRevenueItems((int)projectID.Value);
                 var createdproject = await _context.tblProjects.SingleOrDefaultAsync(m => m.ProjectID == (int)projectID.Value);
                 createdproject.tblApplication = await _context.tblApplications.SingleOrDefaultAsync(a => a.ProjectID == (int)projectID.Value);
                 return createdproject;
@@ -118,13 +120,13 @@ namespace InternalPortal.Models.GCIMS
         //}
         public int CreateOrUpdateContact(ProjectContact projectContact)
         {
-            
+
             var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
             //update
             if (GcimsContact != null)
             {
-               // _context.Entry(GcimsContact).State = EntityState.Modified;
-               // _context.SaveChanges();
+                // _context.Entry(GcimsContact).State = EntityState.Modified;
+                // _context.SaveChanges();
                 return projectContact.GCIMSContactID;
             }
             else //create
@@ -136,19 +138,19 @@ namespace InternalPortal.Models.GCIMS
 
 
                 var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
-               
+
                 projectContact.GCIMSContactID = (int)contactId.Value;
-                _portalContext.Entry(projectContact).State = EntityState.Modified;
+                _portalContext.Entry(projectContact).Property(p => p.GCIMSContactID).IsModified = true;
                 _portalContext.SaveChanges();
 
-        
+
                 tblContacts newGcimsContact = new tblContacts
                 {
                     Firstname = projectContact.FirstName,
                     ContactID = projectContact.GCIMSContactID,
                     Lastname = projectContact.LastName,
-                   // SalutationID = projectContact.SalutationID,
-                   // LanguageID = projectContact.PreferredLanguageID,
+                    SalutationID = "Unkn",
+                    LanguageID = "E",
                     ClientID = _project.GcimsClientId,
                     //CityID = Address.GcimsCityID,
                     //AddressLine1 = Address.AddressLine1,
@@ -156,15 +158,108 @@ namespace InternalPortal.Models.GCIMS
                     //AddressLine3 = Address.AddressLine3,
                     //AddressLine4 = Address.AddressLine4,
                     Email = projectContact.Email,
-                   // PostalCode = projectContact.Pos,
+                    Phone = (projectContact.PhoneNumber == null ? "6132222222" : projectContact.PhoneNumber),
+                    // PostalCode = projectContact.Pos,
                     CreatedBy = "GCIMSUnit",
-                    UpdatedBy = "GCIMSUnit"
+                    UpdatedBy = "GCIMSUnit",
+                    CreatedDate = DateTime.Now,
+                    UpdatedDate = DateTime.Now
                 };
                 _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();
                 return newContactID;
             }
+
+        }
+
+        public void CreateExpenseItems(int projectId)
+        {
+            var budgetItems = _portalContext.ProjectBudget.Where(p => p.ProjectID == _project.ProjectId);
+            var gcimsApplication = _context.tblApplications.SingleOrDefault(p => p.ProjectID == projectId);
+     
+        
+            for (var i = 0; i <= budgetItems.Count() - 1; i ++)
+            {
+                var bi = budgetItems.ToList()[i];
+                var eligibleCostCategory = _portalContext.EligibleCostCategory.SingleOrDefault(e => e.EligibleCostCategoryId == bi.CostCategoryID);
+                var gcimsCostCategoryId = _portalContext.CostCategory.SingleOrDefault(c => c.CostCategoryId == eligibleCostCategory.CostCategoryId).GcimsCostCategoryID;
+
+                if (gcimsCostCategoryId != null)
+                {
+                    var tblProjectExpenseLineItem = new tblProjectExpenseLineItems
+                    {
+                        ExpenseLineItemDescription = bi.FiscalYear + " - " + bi.Description,
+                        ExpenseLineItemID = i,                         
+                        ProjectID = projectId, 
+                        ExpenseCategoryID = int.Parse(gcimsCostCategoryId),
+                        CreatedDate = DateTime.Now, 
+                        CreatedBy = "GCIMSUnit"
+                       
+                    };
+                    //create gcims expense item
+                    var tblApplicationExpense = new tblApplicationExpenses
+                    {
+                        ProjectID = projectId,
+                        ApplicationID = gcimsApplication.ApplicationID,                        
+                        CreatedBy = "GCIMSUnit",
+                        CreatedDate = DateTime.Now,
+                        ExpenseAmount = (decimal)bi.Amount,
+                        ExpenseLineItemID = i,  //int.Parse(gcimsCostCategoryId), 
+                        RequestedAmount = bi.FundingOrganization == "Justice Canada" ? (decimal)bi.Amount : 0
+                    };
+                    _context.Add(tblProjectExpenseLineItem);
+                    _context.SaveChanges();
+                    _context.Add(tblApplicationExpense);
+                    _context.SaveChanges();
+
+                }
+
+            }
             
+           
+
+        }
+
+        public void CreateRevenueItems(int projectId)
+        {
+            var revenueItems = _portalContext.ProjectBudget.Where(p => p.ProjectID == _project.ProjectId).GroupBy(x => x.FundingOrganization).Select(s => new
+            {
+                Item = s.Key, 
+                Amount = s.Sum(si => si.Amount)
+            }); 
+            var gcimsApplication = _context.tblApplications.SingleOrDefault(p => p.ProjectID == projectId);
+
+
+            for (var i = 0; i <= revenueItems.Count() - 1; i++)
+            {
+                var ri = revenueItems.ToList()[i];
+
+                var tblProjectRevenueLineItem = new tblProjectRevenueLineItems
+                {
+                    ProjectID = projectId,
+                    RevenueLineItemID = i,
+                    CreatedBy = "GCIMSUnit",
+                    CreatedDate = DateTime.Now, 
+                    RevenueCategoryID = ri.Item == "Justice Canada" ? 10 : 34, 
+                    RevenueLineItemDescription = ri.Item
+                };
+                var tblRevenueLineItem = new tblApplicationRevenues
+                {
+                    ProjectID = projectId,
+                    ApplicationID = gcimsApplication.ApplicationID,
+                    RevenueLineItemID = i,
+                    CashRevenueAmount = (decimal)ri.Amount,
+                    RevenueAmount = (decimal)ri.Amount,
+                    CreatedBy = "GCIMSUnit",
+                    CreatedDate = DateTime.Now
+                };
+                _context.Add(tblProjectRevenueLineItem);
+                _context.SaveChanges();
+                _context.Add(tblRevenueLineItem);
+                _context.SaveChanges();
+
+            }
+
         }
 
         private bool ContactExists(int id)

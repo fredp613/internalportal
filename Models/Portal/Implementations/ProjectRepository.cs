@@ -39,7 +39,7 @@ namespace InternalPortal.Models.Portal.Implementations
 
         public IEnumerable<Project> GetWorkloadManagerSubmittedProjects(string lang)
         {
-            var projs = PortalContext.Project.Where(p => p.ProjectStatus == Status.Submitted);
+            var projs = PortalContext.Project.Where(p => p.ProjectStatus == Status.Submitted && p.GcimsProjectID == 0);
             foreach (var proj in projs)
             {
                 proj.Lang = lang;
