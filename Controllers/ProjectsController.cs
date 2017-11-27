@@ -400,21 +400,28 @@ namespace InternalPortal.Controllers
                 return BadRequest(ModelState);
             }
 
-           // var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == id);
-            var project = await _context.Project.FindAsync(proj.ProjectId);
+           var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
+          //  var project = await _context.Project.FindAsync(proj.ProjectId);
             var fo = await _context.FundingOpportunity.FindAsync(project.FundingOpportunityID);
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
-           
-           
+            project.GcimsClientId = proj.GcimsClientId;
+
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
 
             project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
-           
+
+            _context.Entry(project).Property(x => x.GcimsClientId).IsModified = true;
+            _context.Entry(project).Property(x => x.Lang).IsModified = true;
+            _context.Entry(project).Property(x => x.FiscalYear).IsModified = true;
+            _context.Entry(project).Property(x => x.GCIMSCommitmentItemID).IsModified = true;
+            _context.Entry(project).Property(x => x.GcimsProjectID).IsModified = true;
+            _context.SaveChanges();
+
             //_context.Entry(project).State = EntityState.Modified;
-           // _context.SaveChanges();
+            // _context.SaveChanges();
 
             //return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
             return Ok(newGCIMSProject.Result);
