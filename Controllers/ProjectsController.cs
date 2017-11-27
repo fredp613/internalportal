@@ -406,10 +406,15 @@ namespace InternalPortal.Controllers
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
-            //missing contact information
+           
            
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
+
+            project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
+           
+            _context.Entry(project).State = EntityState.Modified;
+            _context.SaveChanges();
 
             //return CreatedAtAction("GetProject", new { id = project.ProjectId }, project);
             return Ok(newGCIMSProject.Result);

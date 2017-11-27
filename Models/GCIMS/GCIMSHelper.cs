@@ -27,14 +27,14 @@ namespace InternalPortal.Models.GCIMS
             // var clientId = CreateOrUpdateClient(_project.Account);
             //var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
             var primaryContact = _portalContext.ProjectContact.SingleOrDefault(c => c.ProjectContactId == _project.PrimaryProjectContactId);
-           // var contactId = CreateOrUpdateContact(primaryContact);
+            var contactId = CreateOrUpdateContact(primaryContact);
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
 
             var GCIMSUserName = new SqlParameter("@GCIMSUserName", "GCIMSUnit");
             var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
-            var ContactID = new SqlParameter("@ContactID", 212);
+            var ContactID = new SqlParameter("@ContactID", contactId);
             var Lang = new SqlParameter("@Lang", _project.Lang);
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
             var RequestedAmount = new SqlParameter("@RequestedAmount", _project.RequestedAmount);
@@ -123,28 +123,29 @@ namespace InternalPortal.Models.GCIMS
             //update
             if (GcimsContact != null)
             {
-                _context.Entry(GcimsContact).State = EntityState.Modified;
-                _context.SaveChanges();
+               // _context.Entry(GcimsContact).State = EntityState.Modified;
+               // _context.SaveChanges();
+                return projectContact.GCIMSContactID;
             }
             else //create
             {
                 //get next client id
-                var contactId = new SqlParameter("@NextNum", 1)
-                {
-                    Direction = System.Data.ParameterDirection.Output,
-                    SqlDbType = System.Data.SqlDbType.Int
-                };
+                var contactId = new SqlParameter("@NextNum", 1);
+                contactId.Direction = System.Data.ParameterDirection.Output;
+                contactId.SqlDbType = System.Data.SqlDbType.Int;
 
 
                 var newContactID = _context.Database.ExecuteSqlCommand("exec sp_GetNextContactID @NextNum OUT", contactId);
+               
                 projectContact.GCIMSContactID = (int)contactId.Value;
                 _portalContext.Entry(projectContact).State = EntityState.Modified;
                 _portalContext.SaveChanges();
+
         
                 tblContacts newGcimsContact = new tblContacts
                 {
                     Firstname = projectContact.FirstName,
-                    ContactID = 33659,//newContactID,
+                    ContactID = projectContact.GCIMSContactID,
                     Lastname = projectContact.LastName,
                    // SalutationID = projectContact.SalutationID,
                    // LanguageID = projectContact.PreferredLanguageID,
@@ -161,9 +162,9 @@ namespace InternalPortal.Models.GCIMS
                 };
                 _context.tblContacts.Add(newGcimsContact);
                 _context.SaveChanges();
+                return newContactID;
             }
-
-            return (int)projectContact.GCIMSContactID;
+            
         }
 
         private bool ContactExists(int id)

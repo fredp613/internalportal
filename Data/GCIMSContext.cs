@@ -20,5 +20,6 @@ namespace InternalPortal.Models
         public DbSet<tblClients> tblClients { get; set; }
         public DbSet<luCommitmentItems> luCommitmentItems { get; set; }
         public DbSet<luExpenseCategories> luExpenseCategories { get; set; }
+     //   public DbSet<cgfContactID> cfgContactID { get; set; }
     }
 }
