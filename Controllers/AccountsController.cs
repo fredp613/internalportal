@@ -48,6 +48,21 @@ namespace InternalPortal.Controllers
             return Ok(account);
         }
 
+        // GET: api/Accounts/5
+        [HttpGet("AccountsByContact/{contactid}")]      
+        public IEnumerable<Account> GetAccountsByContact([FromRoute] Guid contactid)
+        {
+
+            var accountIds = _context.Project.Where(c => c.ContactId == contactid).Select(c => c.AccountId).Distinct();
+            List<Account> accounts = new List<Account>();
+            foreach (var a in accountIds)
+            {
+                var account = _context.Account.SingleOrDefault(x => x.AccountId == (Guid)a);
+                accounts.Add(account);
+            }
+            return accounts;
+        }
+
         // PUT: api/Accounts/5
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount([FromRoute] Guid id, [FromBody] Account account)

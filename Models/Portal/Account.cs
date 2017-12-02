@@ -33,10 +33,6 @@ namespace InternalPortal.Models.Portal
         public string PrimaryWork { get; set; }
         public string Mandate { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-        public DateTime UpdatedOn { get; set; }     
-        public Guid? UpdatedByInternalUserId { get; set; }   
-        
         public string PrimaryAddressLine1 { get; set; }
         public string PrimaryAddressLine2 { get; set; }
         public string PrimaryCity { get; set; }
@@ -50,10 +46,13 @@ namespace InternalPortal.Models.Portal
         public string BillingState { get; set; }
         public string BillingPostal { get; set; }
         public string BillingCountry { get; set; }
-
+        public Guid? CreatedByContactId { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
-       
+        public Guid? UpdatedByInternalUserId { get; set; }
+        public DateTime CreatedOn { get; set; }
+        public DateTime UpdatedOn { get; set; }
+
 
     }
 }
