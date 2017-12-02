@@ -269,6 +269,30 @@ namespace InternalPortal.Migrations
                     b.ToTable("Account");
                 });
 
+            modelBuilder.Entity("InternalPortal.Models.Portal.Feedback", b =>
+                {
+                    b.Property<Guid>("FeedbackId")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<Guid>("CreatedBy");
+
+                    b.Property<DateTime>("CreatedOn");
+
+                    b.Property<string>("Description");
+
+                    b.Property<Guid>("ProjectId");
+
+                    b.Property<Guid>("UpdatedBy");
+
+                    b.Property<DateTime>("UpdatedOn");
+
+                    b.HasKey("FeedbackId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Feedback");
+                });
+
             modelBuilder.Entity("InternalPortal.Models.Portal.FundingProgramInternalUser", b =>
                 {
                     b.Property<Guid>("FundingProgramInternalUserId")
@@ -1191,6 +1215,50 @@ namespace InternalPortal.Migrations
                     b.ToTable("User");
                 });
 
+            modelBuilder.Entity("tblAddresses", b =>
+                {
+                    b.Property<int>("AddressID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddressLine1");
+
+                    b.Property<string>("AddressLine2");
+
+                    b.Property<string>("AddressLine3");
+
+                    b.Property<string>("AddressLine4");
+
+                    b.Property<int>("AddressTypeID");
+
+                    b.Property<int>("CityID");
+
+                    b.Property<string>("ClientID");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<string>("Fax");
+
+                    b.Property<bool>("Historical");
+
+                    b.Property<string>("OldCityID");
+
+                    b.Property<string>("OldProvinceID");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.HasKey("AddressID");
+
+                    b.ToTable("tblAddresses");
+                });
+
             modelBuilder.Entity("tblClients", b =>
                 {
                     b.Property<string>("ClientID")
@@ -1295,6 +1363,64 @@ namespace InternalPortal.Migrations
                     b.ToTable("tblClients");
                 });
 
+            modelBuilder.Entity("tblContacts", b =>
+                {
+                    b.Property<int>("ContactID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddressLine1");
+
+                    b.Property<string>("AddressLine2");
+
+                    b.Property<string>("AddressLine3");
+
+                    b.Property<string>("AddressLine4");
+
+                    b.Property<int?>("CityID");
+
+                    b.Property<string>("ClientID");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime?>("CreatedDate");
+
+                    b.Property<bool>("Disabled");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Fax");
+
+                    b.Property<string>("Firstname");
+
+                    b.Property<bool>("Historical");
+
+                    b.Property<string>("Initials");
+
+                    b.Property<string>("LanguageID");
+
+                    b.Property<string>("Lastname");
+
+                    b.Property<string>("OldCityID");
+
+                    b.Property<string>("OldProvinceID");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("PostalCode");
+
+                    b.Property<string>("SalutationID");
+
+                    b.Property<string>("Title");
+
+                    b.Property<string>("UpdatedBy");
+
+                    b.Property<DateTime?>("UpdatedDate");
+
+                    b.HasKey("ContactID");
+
+                    b.ToTable("tblContacts");
+                });
+
             modelBuilder.Entity("InternalPortal.Models.AccountAddress", b =>
                 {
                     b.HasOne("InternalPortal.Models.Portal.Account", "Account")
@@ -1330,6 +1456,14 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.Contact", "Contact")
                         .WithMany("ContactAddresses")
                         .HasForeignKey("ContactId");
+                });
+
+            modelBuilder.Entity("InternalPortal.Models.Portal.Feedback", b =>
+                {
+                    b.HasOne("InternalPortal.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("InternalPortal.Models.Portal.FundingProgramInternalUser", b =>

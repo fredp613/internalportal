@@ -29,13 +29,19 @@ namespace InternalPortal.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-           
-            
-            
+            //modelBuilder.Entity<Project>()
+            //.Property(b => b.ExternalCreatedOn)            
+            //.HasDefaultValueSql("getdate()");
+
+            //modelBuilder.Entity<Feedback>()
+            //.Property(b => b.CreatedOn)
+            //.HasDefaultValueSql("getdate()");
 
         }
 
-  
+      
+
+
 
         public DbSet<InternalPortal.Models.Portal.Program.FundingOpportunity> FundingOpportunity { get; set; }
         public DbSet<InternalPortal.Models.Portal.Program.FundingProgram> FundingProgram { get; set; }
@@ -80,5 +86,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.ProjectActivity> ProjectActivity { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.ProjectBudget> ProjectBudget { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.Feedback> Feedback { get; set; }
     }
 }
