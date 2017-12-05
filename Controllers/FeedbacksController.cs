@@ -110,7 +110,14 @@ namespace InternalPortal.Controllers
             await _context.SaveChangesAsync();
 
             var project = _context.Project.SingleOrDefault(p => p.ProjectId == feedback.ProjectId);
-            project.ProjectStatus = Status.Incomplete;
+            if (feedback.IsRejection)
+            {
+                project.ProjectStatus = Status.Rejected;
+            } else
+            {
+                project.ProjectStatus = Status.Incomplete;
+            }
+           
             _context.Entry(project).Property(s => s.ProjectStatus).IsModified = true;
             _context.SaveChanges();
 

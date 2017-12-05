@@ -16,7 +16,7 @@ namespace InternalPortal.Models
         Draft = 1,
         Submitted = 2,
         Approved = 3,
-        NotApproved = 4,
+        Rejected = 4,
         Incomplete = 5,
         Withdrawn = 6
     }
@@ -107,9 +107,9 @@ namespace InternalPortal.Models
                 {
                     if (Lang == "EN")
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.NotApproved);
+                        return StatusDesc = Enum.GetName(typeof(Status), Status.Rejected);
                     }
-                    return StatusDesc = "Non approuver";
+                    return StatusDesc = "Rejete";
                 }
             }
             set { }
@@ -147,6 +147,7 @@ namespace InternalPortal.Models
         public IEnumerable<ProjectBudget> BudgetItems { get; set; }
         public IEnumerable<ProjectExpectedResult> ExpectedResults { get; set; }
         public IEnumerable<ProjectObjective> Objectives { get; set; }
+        public IEnumerable<Feedback> Feedbacks { get; set; }
 
         public DateTime ExternalCreatedOn { get; set; }
         public DateTime ExternalUpdatedOn { get; set; }      

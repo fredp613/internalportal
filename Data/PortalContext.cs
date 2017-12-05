@@ -29,13 +29,7 @@ namespace InternalPortal.Models
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            //modelBuilder.Entity<Project>()
-            //.Property(b => b.ExternalCreatedOn)            
-            //.HasDefaultValueSql("getdate()");
-
-            //modelBuilder.Entity<Feedback>()
-            //.Property(b => b.CreatedOn)
-            //.HasDefaultValueSql("getdate()");
+            
 
         }
 
