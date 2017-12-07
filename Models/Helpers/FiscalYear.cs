@@ -43,17 +43,25 @@ namespace InternalPortal.Models.Helpers
             var intEndYear1 = Convert.ToInt32(year1.Substring(4, 4));            
             var intEndYear2 = Convert.ToInt32(year2.Substring(4, 4));
             var numberOfYears = intEndYear2 - intEndYear1;
+            List<string> fiscalYears = new List<string>();
             if (numberOfYears == 0)
             {
                 numberOfYears = numberOfYears + 1;
-            }
-            List<string> fiscalYears = new List<string>();
-            for (var i=0; i<=numberOfYears;i++)
-            {
-                string yr = (intStartYear1 + i).ToString() + (intEndYear1 + i).ToString();
+                string yr = (intStartYear1).ToString() + (intEndYear1).ToString();
                 fiscalYears.Add(yr);
-            }           
-            return fiscalYears;            
+                return fiscalYears;
+
+            } else
+            {
+               
+                for (var i = 0; i <= numberOfYears; i++)
+                {
+                    string yr = (intStartYear1 + i).ToString() + (intEndYear1 + i).ToString();
+                    fiscalYears.Add(yr);
+                }
+                return fiscalYears;
+            }
+                     
         }        
     }
 }

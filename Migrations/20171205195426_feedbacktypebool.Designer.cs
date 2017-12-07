@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20171205195426_feedbacktypebool")]
+    partial class feedbacktypebool
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -152,18 +153,6 @@ namespace InternalPortal.Migrations
 
                     b.Property<Guid?>("PrimaryAccountAddressId");
 
-                    b.Property<string>("PrimaryAddressLine1");
-
-                    b.Property<string>("PrimaryAddressLine2");
-
-                    b.Property<string>("PrimaryCity");
-
-                    b.Property<string>("PrimaryCountry");
-
-                    b.Property<string>("PrimaryPostal");
-
-                    b.Property<string>("PrimaryState");
-
                     b.Property<string>("SalutationID");
 
                     b.Property<string>("ShareSecretQuestion");
@@ -279,20 +268,6 @@ namespace InternalPortal.Migrations
                     b.HasKey("AccountId");
 
                     b.ToTable("Account");
-                });
-
-            modelBuilder.Entity("InternalPortal.Models.Portal.Country", b =>
-                {
-                    b.Property<string>("code")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("name_en");
-
-                    b.Property<string>("name_fr");
-
-                    b.HasKey("code");
-
-                    b.ToTable("Country");
                 });
 
             modelBuilder.Entity("InternalPortal.Models.Portal.Feedback", b =>

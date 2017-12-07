@@ -48,6 +48,14 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities();
         }
+
+        [HttpGet]
+        [Route("GetUnmappedFundingOpportunities/{internaluserid}")]
+        public IEnumerable<FundingOpportunity> GetUnmappedFundingOpportunities([FromRoute] Guid internaluserid)
+        {
+            var foiu = _context.FundingOpportunityInternalUser.Where(i => i.InternalUserId == internaluserid).Select(x => x.FundingOpportunityId).ToList();
+            return _unitOfWork.FundingOpportunities.GetAllFundingOpportunities().Where(x => !foiu.Contains(x.FundingOpportunityId));
+        }
         // GET: api/FundingOpportunities/GetOpenClosedFundingOpportunities
         [HttpGet]
         [Route("GetOpenClosedFundingOpportunities")]

@@ -53,7 +53,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<Feedback> GetAccountsByContact([FromRoute] Guid projectid)
         {
 
-            return _context.Feedback.Where(p => p.ProjectId == projectid);
+            return _context.Feedback.Where(p => p.ProjectId == projectid).OrderByDescending(d => d.CreatedOn);
         }
 
         // PUT: api/Feedbacks/5

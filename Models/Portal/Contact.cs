@@ -37,6 +37,15 @@ namespace InternalPortal.Models
         public int Attempts { get; set; }        
         public bool IsBlocked { get; set; }
         public string BlockJustification { get; set; }
+
+
+        public string PrimaryAddressLine1 { get; set; }
+        public string PrimaryAddressLine2 { get; set; }
+        public string PrimaryCity { get; set; }
+        public string PrimaryState { get; set; }
+        public string PrimaryPostal { get; set; }
+        public string PrimaryCountry { get; set; }
+
         public Guid? PrimaryAccountAddressId { get; set; }
         public Guid? PaymentAccountAddressId { get; set; }
         public IEnumerable<ContactAddress> ContactAddresses { get; set; }

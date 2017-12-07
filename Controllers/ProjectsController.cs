@@ -208,7 +208,7 @@ namespace InternalPortal.Controllers
                     }
                     if (status == "Not Approved")
                     {
-                        project.ProjectStatus = Status.NotApproved;
+                        project.ProjectStatus = Status.Rejected;
                     }                                      
                 }
                 
@@ -359,13 +359,15 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }           
-            FiscalYear.GetFiscalYearByDateTime(project.ExternalCreatedOn);
+            var fy = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
             Random rnd = new Random();
             int randomNo = rnd.Next(10000000, 99999999);
 
             string randomNumber = "APP-" + randomNo;
             project.CorporateFileNumber = randomNumber;
+            project.ExternalCreatedOn = DateTime.Now;
             project.ExternalUpdatedOn = DateTime.Now;
+            project.FiscalYear = fy;
 
             _context.Project.Add(project);
 
