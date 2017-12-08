@@ -252,11 +252,11 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest();
             }
-            
+            project.ExternalUpdatedOn = DateTime.Now;
 
             _context.Entry(project).State = EntityState.Modified;
 
-            project.ExternalUpdatedOn = DateTime.Now;
+            
 
             if (project.SubmitGcims)
             {
@@ -297,7 +297,13 @@ namespace InternalPortal.Controllers
             project.ExternalUpdatedOn = DateTime.Now;
             project.SubmittedOn = DateTime.Now;
             project.ProjectStatus = Status.Submitted;
-            
+
+
+            _context.Entry(project).Property(s => s.ExternalUpdatedOn).IsModified = true;
+            _context.Entry(project).Property(s => s.SubmittedOn).IsModified = true;
+            _context.Entry(project).Property(s => s.ProjectStatus).IsModified = true;
+            _context.SaveChanges();
+
             _context.Entry(project).State = EntityState.Modified;
             
             try

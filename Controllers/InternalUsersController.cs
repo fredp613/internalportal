@@ -28,7 +28,7 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<InternalUser> GetInternalUser()
         {
-            var users = _context.InternalUser;
+            var users = _context.InternalUser.OrderByDescending(u => u.UpdatedOn);
              
             return users;           
         }
@@ -82,6 +82,7 @@ namespace InternalPortal.Controllers
 
         // PUT: api/InternalUsers/5
         [HttpPut("{id}")]
+
         public async Task<IActionResult> PutInternalUser([FromRoute] Guid id, [FromBody] InternalUser internalUser)
         {
             if (!ModelState.IsValid)
@@ -93,6 +94,7 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest();
             }
+            internalUser.UpdatedOn = DateTime.Now;
 
             _context.Entry(internalUser).State = EntityState.Modified;
            
@@ -124,6 +126,8 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
+            internalUser.UpdatedOn = DateTime.Now;
+            internalUser.CreatedOn = DateTime.Now;
 
             _context.InternalUser.Add(internalUser);
            

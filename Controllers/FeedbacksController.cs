@@ -103,9 +103,7 @@ namespace InternalPortal.Controllers
 
             _context.Entry(feedback).Property(c => c.CreatedOn).CurrentValue = DateTime.Now;
             _context.Entry(feedback).Property(c=> c.UpdatedOn).CurrentValue = DateTime.Now;
-            //feedback.CreatedOn = DateTime.Now;
-            //feedback.UpdatedOn = DateTime.Now;
-
+          
             _context.Feedback.Add(feedback);
             await _context.SaveChangesAsync();
 
