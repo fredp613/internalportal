@@ -8,7 +8,13 @@ namespace InternalPortal.Models.Portal.Interfaces
     public interface IProjectRepository : IRepository<Project>
     {
         IEnumerable<Project> GetProjectsByUser(Guid UserId, int pageIndex, int pageSize);
-        IEnumerable<Project> GetWorkloadManagerSubmittedProjects(string lang);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsNotAssigned(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsNotClaimed(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsAssigned(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsIncomplete(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsPreScreened(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsWithdrawn(string lang, Guid UserId);
+        IEnumerable<Project> GetWorkloadManagerSubmittedProjectsRejected(string lang, Guid UserId);
         bool ProjectExists(Guid projectId);
 
       

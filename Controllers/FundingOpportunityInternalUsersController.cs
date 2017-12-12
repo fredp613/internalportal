@@ -28,6 +28,46 @@ namespace InternalPortal.Controllers
 
             return _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).Include(fo => fo.FundingOpportunity);
         }
+        [HttpGet("GetWorkloadManagerFundingOpportunities/{username}")]
+        public IEnumerable<FundingOpportunity> GetWorkloadManagerFundingOpportunities([FromRoute] string username)
+        {
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+
+            var fos = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId).Select(x=>x.FundingOpportunityId);
+            return _context.FundingOpportunity.Where(x => fos.Contains(x.FundingOpportunityId));
+
+        }
+      
+        [HttpGet("GetWorkloadManagerSubmissionReviewers/{username}")]
+        public IEnumerable<Object> GetWorkloadManagerSubmissionReviewers([FromRoute] string username)
+        {
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+
+            var fos = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId);
+            List<Object> foiu = new List<Object>(); 
+            
+            foreach (var fo in fos)
+            {
+                var foRec = _context.FundingOpportunity.SingleOrDefault(x => x.FundingOpportunityId == fo.FundingOpportunityId);
+                var foName = foRec.TitleE + " - " + foRec.TitleF;
+
+                var foids = _context.FundingOpportunityInternalUser.Where(f => f.FundingOpportunityId == fo.FundingOpportunityId);
+                foreach (var foid in foids)
+                {
+                    var user = _context.InternalUser.SingleOrDefault(x => x.InternalUserId == foid.InternalUserId);
+                    var userName = user.UserName;
+                    var record = new
+                    {  
+                        foid = foid.FundingOpportunityInternalUserId,
+                        username = userName,
+                        fundingOpportunityName = foName
+                    };
+                    foiu.Add(record); 
+                }
+            }
+
+            return foiu;
+        }
 
         // GET: api/FundingOpportunityInternalUsers/5
         [HttpGet("{id}")]
@@ -93,9 +133,12 @@ namespace InternalPortal.Controllers
             {
                 return BadRequest(ModelState);
             }
-
-            _context.FundingOpportunityInternalUser.Add(fundingOpportunityInternalUser);
-            await _context.SaveChangesAsync();
+            if (!FundingOpportunityInternalUserExistsWithoutId(fundingOpportunityInternalUser.InternalUserId, fundingOpportunityInternalUser.FundingOpportunityId))
+            {
+                _context.FundingOpportunityInternalUser.Add(fundingOpportunityInternalUser);
+                await _context.SaveChangesAsync();
+            }
+           
 
             return Ok(fundingOpportunityInternalUser);
         }
@@ -125,6 +168,10 @@ namespace InternalPortal.Controllers
         private bool FundingOpportunityInternalUserExists(Guid id)
         {
             return _context.FundingOpportunityInternalUser.Any(e => e.FundingOpportunityInternalUserId == id);
+        }
+        private bool FundingOpportunityInternalUserExistsWithoutId(Guid internalUserId, Guid fundingOpportunityId)
+        {
+            return _context.FundingOpportunityInternalUser.Any(e => e.InternalUserId == internalUserId && e.FundingOpportunityId == fundingOpportunityId);
         }
     }
 }

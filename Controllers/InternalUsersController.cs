@@ -32,6 +32,12 @@ namespace InternalPortal.Controllers
              
             return users;           
         }
+        // GET: api/InternalUsers
+        [HttpGet("GetBusinessUsers")]
+        public IEnumerable<InternalUser> GetBusinessUsers()
+        {
+            return _context.InternalUser.Where(u => u.IsSubmissionReviewer || u.IsWorkloadManager).OrderByDescending(u => u.UpdatedOn);          
+        }
 
         // GET: api/InternalUsers/5
         [HttpGet("{id}")]

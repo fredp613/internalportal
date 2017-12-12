@@ -64,48 +64,73 @@ namespace InternalPortal.Models
             {
                 if (ProjectStatus == Status.Submitted)
                 {
-                    if (Lang == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status),Status.Submitted);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Submitted);
+                        }
+                        return StatusDesc = "Soumis"; 
                     }
-                    return StatusDesc = "Soumis";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Submitted);
                 }
                 else if (ProjectStatus == Status.Withdrawn)
                 {
-                    if (Lang == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.Withdrawn);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Withdrawn);
+                        }
+                        return StatusDesc = "Enlever"; 
                     }
-                    return StatusDesc = "Enlever";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Withdrawn);
                 }
                 else if (ProjectStatus == Status.Draft)
                 {
-                    if (Lang == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.Draft);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Draft);
+                        }
+                        return StatusDesc = "Brouillon"; 
                     }
-                    return StatusDesc = "Brouillon";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Draft);
                 }
                 else if (ProjectStatus == Status.Approved)
                 {
-                    if (Lang == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.Approved);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Approved);
+                        }
+                        return StatusDesc = "Approuver"; 
                     }
-                    return StatusDesc = "Approuver";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Approved);
                 }
                 else if (ProjectStatus == Status.Incomplete)
                 {
-                    if (Lang == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.Incomplete);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Incomplete);
+                        }
+                        return StatusDesc = "Incomplet"; 
                     }
-                    return StatusDesc = "Incomplet";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Incomplete);
                 }
 
                 else
                 {
-                    if (Lang == "EN")
+                    if (Lang == null)
+                    {
+                        Lang = "EN";
+
+                    }
+                    if (Lang.ToUpper() == "EN")
                     {
                         return StatusDesc = Enum.GetName(typeof(Status), Status.Rejected);
                     }
@@ -160,6 +185,8 @@ namespace InternalPortal.Models
         public Guid? AssignedTo { get; set; }
         public Guid? AssignedBy { get; set; }
         public Guid? CurrentOwner { get; set; }
+        [NotMapped]
+        public string CurrentOwnerName { get; set; }
 
         //unmapped properties
         [NotMapped]

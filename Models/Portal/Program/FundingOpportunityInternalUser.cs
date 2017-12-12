@@ -22,6 +22,11 @@ namespace InternalPortal.Models.Portal.Program
         internal InternalUser InternalUser { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
+
+        [NotMapped]
+        public string FundingOpportunityName { get; set; }
+        [NotMapped]
+        public string UserName { get; set; }
         //public Guid? CreatedByInternalUserId { get; set; }
         //public Guid? UpdatedByInternalUserId { get; set; }
         //
