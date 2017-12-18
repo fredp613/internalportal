@@ -188,7 +188,7 @@ namespace InternalPortal.Models.GCIMS
                 {
                     var tblProjectExpenseLineItem = new tblProjectExpenseLineItems
                     {
-                        ExpenseLineItemDescription = bi.FiscalYear + " - " + bi.Description,
+                        ExpenseLineItemDescription = bi.FiscalYear != null ? bi.FiscalYear + " - " + bi.Description.Substring(0,60) : bi.Description.Substring(0, 90),
                         ExpenseLineItemID = i,                         
                         ProjectID = projectId, 
                         ExpenseCategoryID = int.Parse(gcimsCostCategoryId),

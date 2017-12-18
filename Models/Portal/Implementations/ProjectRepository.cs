@@ -72,9 +72,7 @@ namespace InternalPortal.Models.Portal.Implementations
         public IEnumerable<Project> GetWorkloadManagerSubmittedProjectsNotClaimed(string lang, Guid UserId)
         {
 
-            //GET Submission Reviewer IDs
-            // IF has at least one submission review in the fundingopportunity, return all projects from that funding opportunity
-            // --- reverse -- if has at last one user in fo, exclude the fo.
+            
             var userFundingOpportunities = PortalContext.FundingOpportunityInternalUser.Where(u => u.InternalUserId == UserId);
             List<Guid> BucketFOs = new List<Guid>();
 
@@ -210,12 +208,127 @@ namespace InternalPortal.Models.Portal.Implementations
             return projects;
         }
 
+
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsNotClaimed(string lang, Guid UserId)
+        {
+
+          
+            var userFundingOpportunities = PortalContext.FundingOpportunityInternalUser.Where(u => u.InternalUserId == UserId);
+            List<Guid> BucketFOs = new List<Guid>();
+
+            List<Project> projects = new List<Project>();
+            foreach (var fo1 in userFundingOpportunities)
+            {
+
+                var submissionReviewers = PortalContext.InternalUser.Where(sr => sr.IsSubmissionReviewer == true).Select(i => i.InternalUserId);
+                foreach (var sr in submissionReviewers)
+                {
+                    var foiu = PortalContext.FundingOpportunityInternalUser.SingleOrDefault(fo => fo.InternalUserId == sr && fo.FundingOpportunityId == fo1.FundingOpportunityId);
+
+                    if (foiu != null)
+                    {
+                        BucketFOs.Add(foiu.FundingOpportunityId);
+
+                    }
+
+                }
+            }
+
+            foreach (var fo in BucketFOs.Distinct())
+            {
+                var projs = PortalContext.Project.Where(p => p.ProjectStatus == Status.Submitted && p.GcimsProjectID == 0 && p.CurrentOwner == null && p.FundingOpportunityID == fo);
+                foreach (var proj in projs)
+                {
+                    proj.Lang = lang;
+                    proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                    proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                }
+                projects.AddRange(projs);
+            }
+
+            return projects;
+
+
+        }
+
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsAssigned(string lang, Guid UserId)
+        {
+            
+            var projects = PortalContext.Project.Where(u => u.CurrentOwner == UserId && u.ProjectStatus == Status.Submitted && u.GcimsProjectID == 0);
+
+            foreach (var proj in projects)
+            {
+                proj.Lang = lang;
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+
+            return projects;
+        }
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsIncomplete(string lang, Guid UserId)
+        {
+           
+            var projects = PortalContext.Project.Where(u => u.CurrentOwner == UserId && u.ProjectStatus == Status.Incomplete);
+
+            foreach (var proj in projects)
+            {
+                proj.Lang = lang;
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+
+            return projects;
+        }
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsWithdrawn(string lang, Guid UserId)
+        {
+            var projects = PortalContext.Project.Where(p => p.CurrentOwner == UserId && p.ProjectStatus == Status.Withdrawn);
+
+            foreach (var proj in projects)
+            {
+                proj.Lang = lang;
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+
+            return projects;
+        }
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsPreScreened(string lang, Guid UserId)
+        {     
+            var projects = PortalContext.Project.Where(p => p.CurrentOwner == UserId && p.ProjectStatus == Status.Submitted && p.GcimsProjectID != 0);
+
+            foreach (var proj in projects)
+            {
+                proj.Lang = lang;
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+
+            return projects;            
+        }
+
+        public IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsRejected(string lang, Guid UserId)
+        {
+            var projects = PortalContext.Project.Where(p => p.CurrentOwner == UserId && p.ProjectStatus == Status.Rejected);
+            foreach (var proj in projects)
+            {
+                proj.Lang = lang;
+                proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
+                proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+            }
+            return projects;
+
+        }
+
         public bool ProjectExists(Guid projectId)
         {
             return PortalContext.Project.Any(e => e.ProjectId == projectId);
 
         }
 
-       
     }
 }

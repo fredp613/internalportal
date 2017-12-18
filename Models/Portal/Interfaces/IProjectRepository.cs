@@ -15,6 +15,13 @@ namespace InternalPortal.Models.Portal.Interfaces
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsPreScreened(string lang, Guid UserId);
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsWithdrawn(string lang, Guid UserId);
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsRejected(string lang, Guid UserId);
+
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsNotClaimed(string lang, Guid UserId);
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsAssigned(string lang, Guid UserId);
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsIncomplete(string lang, Guid UserId);
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsPreScreened(string lang, Guid UserId);
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsWithdrawn(string lang, Guid UserId);
+        IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsRejected(string lang, Guid UserId);
         bool ProjectExists(Guid projectId);
 
       

@@ -56,13 +56,18 @@ namespace InternalPortal.Controllers
                 {
                     var user = _context.InternalUser.SingleOrDefault(x => x.InternalUserId == foid.InternalUserId);
                     var userName = user.UserName;
-                    var record = new
-                    {  
-                        foid = foid.FundingOpportunityInternalUserId,
-                        username = userName,
-                        fundingOpportunityName = foName
-                    };
-                    foiu.Add(record); 
+                    if (userName != username)
+                    {
+                        var record = new
+                        {
+                            foid = foid.FundingOpportunityInternalUserId,
+                            username = userName,
+                            fundingOpportunityName = foName
+                        };
+                        foiu.Add(record);
+                    }
+                   
+                    
                 }
             }
 

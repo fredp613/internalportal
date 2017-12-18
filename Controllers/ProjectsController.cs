@@ -96,33 +96,62 @@ namespace InternalPortal.Controllers
             return projects;
         }
 
-        [HttpPost("GetUserOwnerProjects")]
+        [HttpGet("GetUserNotClaimedProjects/{lang}/{username}")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public IEnumerable<Project> GetUserOwnerProjects([FromBody] InternalUser internalUser)
+        public IEnumerable<Project> GetUserNotClaimedProjects([FromRoute] string username, [FromRoute] string lang)
         {
-          
-            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId);
+
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsNotClaimed(lang, currentUser.InternalUserId);
+
+        }
+
+        [HttpGet("GetUserOwnerProjects/{lang}/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserOwnerProjects([FromRoute] string username, [FromRoute] string lang)
+        {
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsAssigned(lang, currentUser.InternalUserId);
            
         }
 
-        [HttpPost("GetUserIncompleteProjects")]
+        [HttpGet("GetUserIncompleteProjects/{lang}/{username}")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public IEnumerable<Project> GetUserIncompleteProjects([FromBody] InternalUser internalUser)
+        public IEnumerable<Project> GetUserIncompleteProjects([FromRoute] string username, [FromRoute] string lang)
         {
-           
-            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId && u.ProjectStatus == Status.Incomplete);
- 
+
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsIncomplete(lang, currentUser.InternalUserId);
+
         }
 
-        [HttpPost("GetUserWithdrawnProjects")]
+        [HttpGet("GetUserWithdrawnProjects/{lang}/{username}")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
-        public IEnumerable<Project> GetUserWithdrawnProjects([FromBody] InternalUser internalUser)
+        public IEnumerable<Project> GetUserWithdrawnProjects([FromRoute] string username, [FromRoute] string lang)
         {
-          
-            return _context.Project.Where(u => u.CurrentOwner == internalUser.InternalUserId && u.ProjectStatus == Status.Withdrawn);
-            
+
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsWithdrawn(lang, currentUser.InternalUserId);
+
+        }
+        [HttpGet("GetUserPreScreenedProjects/{lang}/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserPreScreenedProjects([FromRoute] string username, [FromRoute] string lang)
+        {
+
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsPreScreened(lang, currentUser.InternalUserId);
+
         }
 
+        [HttpGet("GetUserRejectedProjects/{lang}/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
+        public IEnumerable<Project> GetUserRejectedProjects([FromRoute] string username, [FromRoute] string lang)
+        {
+            var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
+            return _unitOfWork.Projects.GetSubmissionReviewerSubmittedProjectsRejected(lang, currentUser.InternalUserId);
+        }
+        
         [HttpGet("GetWorkloadManagerSubmissions/{lang}/{username}")]
         [ProducesResponseType(typeof(IEnumerable<Project>), 200)]
         public IEnumerable<Project> GetWorkloadManagerSubmissions([FromRoute] string userName, [FromRoute] string lang)
@@ -286,27 +315,7 @@ namespace InternalPortal.Controllers
             return Ok(project.ProjectStatus);
         }
 
-        //public async Task<Project> UpdateProject(Project project)
-        //{
-        //    _context.Entry(project).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _unitOfWork.SaveChangesAsync();
-        //        return project;
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!_unitOfWork.Projects.ProjectExists(project.ProjectId))
-        //        {
-        //            return null;
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-        //}
+    
 
         // PUT: api/Projects/5
         [HttpPut("{id}")]
@@ -398,13 +407,46 @@ namespace InternalPortal.Controllers
         {
 
             var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
-            project.ExternalUpdatedOn = DateTime.Now;
+            project.ExternalUpdatedOn = DateTime.Now;            
             project.CurrentOwner = proj.CurrentOwner;
  
             _context.Entry(project).Property(s => s.ExternalUpdatedOn).IsModified = true;
             _context.Entry(project).Property(s => s.CurrentOwner).IsModified = true;
            
           
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_unitOfWork.Projects.ProjectExists(proj.ProjectId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(project);
+        }
+        [HttpPost("SetOwnerByName")]
+        [ProducesResponseType(typeof(Project), 200)]
+        public async Task<IActionResult> SetOwnerByName([FromBody] Project proj)
+        {
+
+            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
+            project.ExternalUpdatedOn = DateTime.Now;
+            var user = _context.InternalUser.SingleOrDefault(u => u.UserName == proj.GCIMSUserName);
+            project.CurrentOwner = user.InternalUserId;
+
+            _context.Entry(project).Property(s => s.ExternalUpdatedOn).IsModified = true;
+            _context.Entry(project).Property(s => s.CurrentOwner).IsModified = true;
+
+
 
             try
             {

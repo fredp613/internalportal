@@ -36,7 +36,18 @@ namespace InternalPortal.Controllers
         [HttpGet("GetBusinessUsers")]
         public IEnumerable<InternalUser> GetBusinessUsers()
         {
-            return _context.InternalUser.Where(u => u.IsSubmissionReviewer || u.IsWorkloadManager).OrderByDescending(u => u.UpdatedOn);          
+          
+            return _context.InternalUser.Where(u => u.IsSubmissionReviewer).OrderByDescending(u => u.UpdatedOn);          
+        }
+        // GET: api/InternalUsers
+        [HttpGet("GetAssignmentList/{username}")]
+        public IEnumerable<InternalUser> GetAssignmentList([FromRoute] string username)
+        {
+            List<InternalUser> users = new List<InternalUser>();
+            users.AddRange(_context.InternalUser.Where(u => u.IsSubmissionReviewer).OrderByDescending(u => u.UpdatedOn));
+            users.Add(_context.InternalUser.SingleOrDefault(u => u.UserName == username));
+           
+            return users;
         }
 
         // GET: api/InternalUsers/5

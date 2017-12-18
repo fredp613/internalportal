@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using InternalPortal.Models.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,7 +17,9 @@ namespace InternalPortal.Models.Portal
         public Project Project { get; set; }
         public string Title { get; set; }
         public string ResponsibleParty { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime StartDate { get; set; }
+        [JsonConverter(typeof(OnlyDateConverter))]
         public DateTime EndDate { get; set; }
         public string Output { get; set; }
         public DateTime CreatedOn { get; set; }
