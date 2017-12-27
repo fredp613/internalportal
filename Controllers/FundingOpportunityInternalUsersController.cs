@@ -56,7 +56,7 @@ namespace InternalPortal.Controllers
                 {
                     var user = _context.InternalUser.SingleOrDefault(x => x.InternalUserId == foid.InternalUserId);
                     var userName = user.UserName;
-                    if (userName != username)
+                    if (userName != username && user.IsSubmissionReviewer)
                     {
                         var record = new
                         {

@@ -57,6 +57,11 @@ namespace InternalPortal.Controllers
             return _context.Project.Where(c => c.ContactId == user.ContactId).OrderByDescending(c => c.ExternalUpdatedOn);
 
         }
+        [HttpGet("IsBucket/{id}")]
+        public bool IsBucket([FromRoute] Guid Id)
+        {
+            return _unitOfWork.Projects.IsBucket(Id);
+        }
 
 
         [HttpPost("GetContactProjects")]

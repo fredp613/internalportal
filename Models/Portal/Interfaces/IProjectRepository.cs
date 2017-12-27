@@ -15,6 +15,7 @@ namespace InternalPortal.Models.Portal.Interfaces
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsPreScreened(string lang, Guid UserId);
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsWithdrawn(string lang, Guid UserId);
         IEnumerable<Project> GetWorkloadManagerSubmittedProjectsRejected(string lang, Guid UserId);
+        bool IsBucket(Guid Id);
 
         IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsNotClaimed(string lang, Guid UserId);
         IEnumerable<Project> GetSubmissionReviewerSubmittedProjectsAssigned(string lang, Guid UserId);

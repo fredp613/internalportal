@@ -56,6 +56,8 @@ namespace InternalPortal.Models
         public string LanguageMinority { get; set; }
         public string Communication { get; set; }
         public string Evaluation { get; set; }
+        [NotMapped]
+        public string Jurisdiction { get; set; }
         public Status ProjectStatus { get; set; }   
         [NotMapped]
         public string StatusDesc

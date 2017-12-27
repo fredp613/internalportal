@@ -38,6 +38,26 @@ namespace InternalPortal.Models.Portal.Implementations
             return projects;
         }
 
+        public bool IsBucket(Guid Id)
+        {
+            var projectFo = PortalContext.Project.SingleOrDefault(p => p.ProjectId == Id);
+            var foiu = PortalContext.FundingOpportunityInternalUser.Where(fo => fo.FundingOpportunityId == projectFo.FundingOpportunityID); 
+            foreach(var iu in foiu)
+            {
+                var userId = iu.InternalUserId;
+                var sub = PortalContext.InternalUser.SingleOrDefault(u => u.InternalUserId == userId);
+                if (sub.IsSubmissionReviewer)
+                {
+                    return true;
+                }
+
+            }
+          
+
+            return false;
+
+        }
+
         public IEnumerable<Project> GetWorkloadManagerSubmittedProjects(string lang, Guid UserId)
         {
             var projs = PortalContext.Project.Where(p => p.ProjectStatus == Status.Submitted && p.GcimsProjectID == 0 && p.CurrentOwner == null);
@@ -46,6 +66,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
             return projs;
         }
@@ -63,6 +84,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs.Where(x => !GetWorkloadManagerSubmittedProjectsNotClaimed("en", UserId).ToList().Select(p => p.ProjectId).Contains(x.ProjectId)));
             }
@@ -102,6 +124,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -125,6 +148,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.CurrentOwnerName = PortalContext.InternalUser.SingleOrDefault(u => u.InternalUserId == proj.CurrentOwner).FullName;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -145,6 +169,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -164,6 +189,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -183,6 +209,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -202,6 +229,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -243,6 +271,7 @@ namespace InternalPortal.Models.Portal.Implementations
                     proj.Lang = lang;
                     proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                     proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                    proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
                 }
                 projects.AddRange(projs);
             }
@@ -263,6 +292,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
 
             return projects;
@@ -278,6 +308,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
 
             return projects;
@@ -292,6 +323,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
 
             return projects;
@@ -306,6 +338,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
 
             return projects;            
@@ -319,6 +352,7 @@ namespace InternalPortal.Models.Portal.Implementations
                 proj.Lang = lang;
                 proj.ContactName = PortalContext.Contact.SingleOrDefault(c => c.ContactId == proj.ContactId).FullName;
                 proj.FundingOpportunityName = PortalContext.FundingOpportunity.SingleOrDefault(f => f.FundingOpportunityId == proj.FundingOpportunityID).TitleE;
+                proj.Jurisdiction = PortalContext.Account.SingleOrDefault(j => j.AccountId == proj.AccountId).PrimaryState;
             }
             return projects;
 
