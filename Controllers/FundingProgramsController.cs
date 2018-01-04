@@ -30,23 +30,23 @@ namespace InternalPortal.Controllers
                 //.Include(c => c.FundingProgramInternalUsers)
                                             //.ThenInclude(ec => ec.InternalUser).ToList();
 
-            foreach(var fp in fundingPrograms)
-            {
-                var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Draft));
-                fp.DraftFundingOpportunities = relatedDraftFO.ToList();
+            //foreach(var fp in fundingPrograms)
+            //{
+            //    var relatedDraftFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Draft));
+            //    fp.DraftFundingOpportunities = relatedDraftFO.ToList();
 
-                var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate <= DateTime.Now && p.ActivationEndDate >= DateTime.Now));
-                fp.OpenFundingOpportunities = relatedOpenFO.ToList();
+            //    var relatedOpenFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate <= DateTime.Now && p.ActivationEndDate >= DateTime.Now));
+            //    fp.OpenFundingOpportunities = relatedOpenFO.ToList();
 
-                var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate > DateTime.Now));
-                fp.ScheduledFundingOpportunities = relatedScheduledFO.ToList();
+            //    var relatedScheduledFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Published && p.ActivationStartDate > DateTime.Now));
+            //    fp.ScheduledFundingOpportunities = relatedScheduledFO.ToList();
 
-                var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
-                fp.ClosedFundingOpportunities = relatedClosedFO.ToList();
+            //    var relatedClosedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Closed || (p.ActivationEndDate < DateTime.Now && p.Status != FOStatus.Archived)));
+            //    fp.ClosedFundingOpportunities = relatedClosedFO.ToList();
 
-                var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Archived));
-                fp.ArchivedFundingOpportunities = relatedArchivedFO.ToList();
-            }
+            //    var relatedArchivedFO = _context.FundingOpportunity.Where(p => p.FundingProgramId == fp.FundingProgramId && (p.Status == FOStatus.Archived));
+            //    fp.ArchivedFundingOpportunities = relatedArchivedFO.ToList();
+            //}
 
             return fundingPrograms;
         }

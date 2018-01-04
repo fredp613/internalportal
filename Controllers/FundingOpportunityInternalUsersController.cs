@@ -6,12 +6,18 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
+using InternalPortal.Models.Portal;
+using System.Diagnostics;
+using InternalPortal.Models.Helpers;
 using InternalPortal.Models.Portal.Program;
+using Microsoft.AspNetCore.Cors;
 
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
     [Route("api/FundingOpportunityInternalUsers")]
+   [EnableCors("CorsPolicy")]
+    
     public class FundingOpportunityInternalUsersController : Controller
     {
         private readonly PortalContext _context;
@@ -28,17 +34,23 @@ namespace InternalPortal.Controllers
 
             return _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).Include(fo => fo.FundingOpportunity);
         }
-        [HttpGet("GetWorkloadManagerFundingOpportunities/{username}")]
-        public IEnumerable<FundingOpportunity> GetWorkloadManagerFundingOpportunities([FromRoute] string username)
+      
+        [HttpGet]
+        [Route("GetWorkloadManagerFundingOpportunities/{username}")]
+        [ProducesResponseType(typeof(IEnumerable<FundingOpportunityInternalUser>), 200)]
+        public async Task<IActionResult> GetWorkloadManagerFundingOpportunities([FromRoute] string username)
+        //public IEnumerable<FundingOpportunity> GetWorkloadManagerFundingOpportunities([FromRoute] string username)
         {
             var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
 
             var fos = _context.FundingOpportunityInternalUser.Where(u => u.InternalUserId == currentUser.InternalUserId).Select(x=>x.FundingOpportunityId);
-            return _context.FundingOpportunity.Where(x => fos.Contains(x.FundingOpportunityId));
+            return Ok(_context.FundingOpportunity.Where(x => fos.Contains(x.FundingOpportunityId)));
 
         }
       
-        [HttpGet("GetWorkloadManagerSubmissionReviewers/{username}")]
+       
+        [HttpGet]
+        [Route("GetWorkloadManagerSubmissionReviewers/{username}")]
         public IEnumerable<Object> GetWorkloadManagerSubmissionReviewers([FromRoute] string username)
         {
             var currentUser = _context.InternalUser.SingleOrDefault(u => u.UserName == username);
@@ -74,6 +86,7 @@ namespace InternalPortal.Controllers
             return foiu;
         }
 
+    
         // GET: api/FundingOpportunityInternalUsers/5
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(FundingOpportunityInternalUser), 200)]

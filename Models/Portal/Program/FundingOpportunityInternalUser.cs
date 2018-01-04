@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using InternalPortal.Models.Portal.Program;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

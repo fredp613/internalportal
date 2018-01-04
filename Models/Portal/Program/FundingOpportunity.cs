@@ -31,16 +31,55 @@ namespace InternalPortal.Models.Portal.Program
         [NotMapped]
         public string Lang { get; set; }
         [NotMapped]
+     
         public string Title
         {
-            get { return Lang == "EN" ? TitleE : TitleF; }
-            set { Title = Lang == "EN" ? TitleE : TitleF; }
+            get
+            {
+                if (Lang != null)
+                {
+                    return Lang.ToUpper() == "EN" ? TitleE : TitleF;
+                }
+                return TitleE;
+            }
+
+            set
+            {
+                if (Lang != null)
+                {
+                    Title = Lang.ToUpper() == "EN" ? TitleE : TitleF;
+                }
+                else
+                {
+                    Title = TitleE;
+                }
+
+            }
         }
         [NotMapped]
         public string Description
         {
-            get { return Lang == "EN" ? DescriptionE : DescriptionF; }
-            set { Description = Lang == "EN" ? DescriptionE : DescriptionF; }
+            get
+            {
+                if (Lang != null)
+                {
+                    return Lang.ToUpper() == "EN" ? DescriptionE : DescriptionF;
+                }
+                return DescriptionE;
+            }
+
+            set
+            {
+                if (Lang != null)
+                {
+                    Description = Lang.ToUpper() == "EN" ? DescriptionE : DescriptionF;
+                }
+                else
+                {
+                    Description = DescriptionE;
+                }
+
+            }
         }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }

@@ -17,8 +17,8 @@ namespace InternalPortal.Models.Portal.Program
         [NotMapped]
         public string Title
         {
-            get { return Lang == "EN" ? TitleE : TitleF; }
-            set { Description = Lang == "EN" ? TitleE : TitleF; }
+            get; /*{ return Lang == "EN" ? TitleE : TitleF; }*/
+            set; /*{ Description = Lang == "EN" ? TitleE : TitleF; }*/
         }
         public string TitleE { get; set; }
         public string TitleF { get; set; }
@@ -26,8 +26,8 @@ namespace InternalPortal.Models.Portal.Program
         [NotMapped]
         public string Description
         {
-            get { return Lang == "EN" ? DescriptionE : DescriptionF; }
-            set { Description = Lang == "EN" ? DescriptionE : DescriptionF; }
+            get; /*{ return Lang == "EN" ? DescriptionE : DescriptionF; }*/
+            set; /* { Description = Lang == "EN" ? DescriptionE : DescriptionF; }*/
         }
         public string DescriptionE { get; set; }
         public string DescriptionF { get; set; }

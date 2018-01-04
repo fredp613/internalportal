@@ -85,6 +85,62 @@ namespace InternalPortal.Models.Portal.Implementations
 
             return fos;
         }
+
+
+        public IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities()
+        {
+     
+
+          // var fos =  PortalContext.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published && f.ActivationStartDate <= DateTime.Now.Date).ToList();
+            var fos = PortalContext.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published && f.ActivationStartDate <= DateTime.Now.Date)
+                                   .Include(o => o.FundingOpportunityObjectives)
+                                           .ThenInclude(fo => fo.Objective)
+                                   .Include(foer => foer.FundingOpportunityExpectedResults)
+                                            .ThenInclude(er => er.ExpectedResult)
+                                   .Include(foec => foec.FundingOpportunityEligibilityCriterias)
+                                            .ThenInclude(ec => ec.EligibilityCriteria)
+                                  .Include(fas => fas.EligibleClientTypes)
+                                   .Include(c => c.EligibleCostCategories)
+                                            .ThenInclude(cc => cc.CostCategory)
+                                   //  .Include(c => c.FundingProgram)
+                                   .Include(c => c.FundingOpportunityConsiderations)
+                                            .ThenInclude(ec => ec.Consideration)
+                                   .Include(c => c.FundingOpportunityResources)
+                                   .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
+                                            .ThenInclude(ec => ec.FrequentlyAskedQuestion)
+                                   // .Include(c => c.FundingOpportunityInternalUsers)
+                                   //         .ThenInclude(ec => ec.InternalUser)
+                                   .ToList();
+
+            foreach (var x in fos)
+            {
+                x.Lang = _Language;
+                foreach (var y in x.FundingOpportunityEligibilityCriterias)
+                {
+                    y.EligibilityCriteria.Lang = _Language;
+                }
+                foreach (var y in x.FundingOpportunityExpectedResults)
+                {
+                    y.ExpectedResult.Lang = _Language;
+                }
+                foreach (var y in x.FundingOpportunityObjectives)
+                {
+                    y.Objective.Lang = _Language;
+                }
+                foreach (var y in x.EligibleCostCategories)
+                {
+                    y.CostCategory.Lang = _Language;
+                    y.Lang = _Language;
+                }
+                foreach (var y in x.EligibleClientTypes)
+                {
+                    y.Lang = _Language;
+                }
+            }
+
+            return fos;
+        }
+
         public IEnumerable<FundingOpportunity> GetActiveFundingOpportunities()
         {
             //test

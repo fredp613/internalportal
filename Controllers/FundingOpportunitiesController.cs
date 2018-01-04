@@ -13,6 +13,7 @@ using InternalPortal.Models.Portal.Implementations;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.Net.Http.Headers;
 using System.Net.Http;
+using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace InternalPortal.Controllers
 {
@@ -27,9 +28,19 @@ namespace InternalPortal.Controllers
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
-            // string Lang = RouteData.Values["lang"].ToString();
-            _unitOfWork = new UnitOfWork(_context, "EN");
+           
+            
+            _unitOfWork = new UnitOfWork(_context, "FR");
         }
+
+        public override void OnActionExecuting(ActionExecutingContext context)
+        {
+            var currentLang = RouteData.Values["lang"].ToString();
+            _unitOfWork = new UnitOfWork(_context, currentLang);
+            base.OnActionExecuting(context);
+
+        }
+      
 
         [HttpGet("GetByNameAsync/{title}")]
         public Task<FundingOpportunity> GetByNameAsync([FromRoute] string title)
@@ -40,6 +51,8 @@ namespace InternalPortal.Controllers
         [HttpGet]
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()
         {
+            var Lang = RouteData.Values["lang"].ToString();
+           
             return _unitOfWork.FundingOpportunities.GetAll();
         }
         [HttpGet]
@@ -61,8 +74,9 @@ namespace InternalPortal.Controllers
         [Route("GetOpenClosedFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities()
         {
-            //this.Response.Cookies.Append("asdf", "asdf");
-            return _context.FundingOpportunity.Where(f => f.Status == FOStatus.Closed || f.Status == FOStatus.Published && f.ActivationStartDate <= DateTime.Now.Date);
+           
+          //  var currentLang = RouteData.Values["lang"].ToString();
+            return _unitOfWork.FundingOpportunities.GetOpenClosedFundingOpportunities();
         }
 
         // GET: api/FundingOpportunities/GetActiveFundingOpportunities
@@ -201,8 +215,7 @@ namespace InternalPortal.Controllers
         [ProducesResponseType(typeof(FundingOpportunity), 200)]
         public async Task<IActionResult> PostFundingOpportunity([FromBody] FundingOpportunity fundingOpportunity)
         {
-            
-           
+                      
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -212,10 +225,35 @@ namespace InternalPortal.Controllers
             await _unitOfWork.SaveChangesAsync();
 
            
-            //  return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
-            //return Ok(fundingOpportunity);
-           
+            // return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
             return Ok(fundingOpportunity);
+          
+        }
+        // POST: api/FundingOpportunities
+        [HttpPost("copy/{id}")]
+        [ProducesResponseType(typeof(FundingOpportunity), 200)]
+        public async Task<IActionResult> CopyFundingOpportunity([FromRoute] Guid id)
+        {
+
+            
+            FundingOpportunity currentFO = _unitOfWork.FundingOpportunities.Get(id);
+
+
+            FundingOpportunity newFO = new FundingOpportunity
+            {
+                TitleE = currentFO.TitleE + " - Copy",
+                TitleF = currentFO.TitleF + " - Copie",
+                ActivationEndDate = currentFO.ActivationEndDate,
+                ActivationStartDate = currentFO.ActivationStartDate,
+                FundingProgramId = currentFO.FundingProgramId
+
+            };
+
+            _context.Add(newFO);
+            await _context.SaveChangesAsync();
+            // return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
+            return Ok(newFO);
+
         }
 
         // DELETE: api/FundingOpportunities/5

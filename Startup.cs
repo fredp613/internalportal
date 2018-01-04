@@ -53,7 +53,7 @@ namespace InternalPortal
                     .AllowAnyHeader()
                     .AllowCredentials());
             });
-            
+
             services.AddSwaggerGen(options =>
             {
                 
@@ -112,9 +112,15 @@ namespace InternalPortal
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-           
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
+            app.UseCors("CorsPolicy");
+            //app.UseCors(builder =>
+            //  builder.AllowAnyOrigin()
+            //        .AllowAnyMethod()
+            //        .AllowAnyHeader()
+            //        .AllowCredentials()
+            //);
+            //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
+            //loggerFactory.AddDebug();
            
             
 	      //  app.UseJwtBearerAuthentication(new JwtBearerOptions
@@ -130,7 +136,7 @@ namespace InternalPortal
 		  //          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
 	      //          }
 	      //  });
-            app.UseCors("CorsPolicy");            
+                    
             app.UseMvc();
 
             app.UseSwagger(c =>

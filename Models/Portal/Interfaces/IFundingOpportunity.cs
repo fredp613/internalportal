@@ -10,6 +10,7 @@ namespace InternalPortal.Models.Portal.Interfaces
     {
         Task<FundingOpportunity> GetByNameAsync(string name);
         IEnumerable<FundingOpportunity> GetAllFundingOpportunities();
+        IEnumerable<FundingOpportunity> GetOpenClosedFundingOpportunities();
         IEnumerable<FundingOpportunity> GetActiveFundingOpportunities();
         IEnumerable<FundingOpportunity> GetAwaitingPublishedFundingOpportunities();
         IEnumerable<FundingOpportunity> GetDraftFundingOpportunities();
