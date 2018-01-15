@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20180114160511_qcquestions")]
+    partial class qcquestions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -1069,32 +1070,6 @@ namespace InternalPortal.Migrations
                     b.ToTable("ProjectObjective");
                 });
 
-            modelBuilder.Entity("InternalPortal.Models.Portal.ProjectTargetPopulation", b =>
-                {
-                    b.Property<Guid>("ProjectTargetPopulationId")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<DateTime>("CreatedOn");
-
-                    b.Property<bool>("IsOther");
-
-                    b.Property<Guid>("ProjectId");
-
-                    b.Property<string>("TargetPopulationEn");
-
-                    b.Property<string>("TargetPopulationFr");
-
-                    b.Property<string>("TargetPopulationOther");
-
-                    b.Property<DateTime>("UpdatedOn");
-
-                    b.HasKey("ProjectTargetPopulationId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("ProjectTargetPopulation");
-                });
-
             modelBuilder.Entity("InternalPortal.Models.Project", b =>
                 {
                     b.Property<Guid>("ProjectId")
@@ -1601,14 +1576,6 @@ namespace InternalPortal.Migrations
                     b.HasOne("InternalPortal.Models.Project")
                         .WithMany("Objectives")
                         .HasForeignKey("ProjectID")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("InternalPortal.Models.Portal.ProjectTargetPopulation", b =>
-                {
-                    b.HasOne("InternalPortal.Models.Project", "Project")
-                        .WithMany()
-                        .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

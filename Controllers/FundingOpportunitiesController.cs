@@ -47,6 +47,7 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.FundingOpportunities.GetByNameAsync(title);
         }
+
         // GET: api/FundingOpportunities
         [HttpGet]
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()
@@ -55,6 +56,21 @@ namespace InternalPortal.Controllers
            
             return _unitOfWork.FundingOpportunities.GetAll();
         }
+
+        // GET: api/FundingOpportunities
+        [HttpGet("CanBeDestroyed/{id}")]
+        public bool CanBeDestroyed([FromRoute] Guid id)
+        {
+            var projects = _context.Project.Where(f => f.FundingOpportunityID == id); 
+
+            if (projects.Count() > 0)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
         [HttpGet]
         [Route("GetAllFundingOpportunities")]
         public IEnumerable<FundingOpportunity> GetAllFundingOpportunities()
@@ -238,18 +254,125 @@ namespace InternalPortal.Controllers
             
             FundingOpportunity currentFO = _unitOfWork.FundingOpportunities.Get(id);
 
-
             FundingOpportunity newFO = new FundingOpportunity
             {
+                FundingOpportunityId = new Guid(),
                 TitleE = currentFO.TitleE + " - Copy",
                 TitleF = currentFO.TitleF + " - Copie",
+                DescriptionE = currentFO.DescriptionE, 
+                DescriptionF = currentFO.DescriptionF, 
                 ActivationEndDate = currentFO.ActivationEndDate,
                 ActivationStartDate = currentFO.ActivationStartDate,
-                FundingProgramId = currentFO.FundingProgramId
-
+                FundingProgramId = currentFO.FundingProgramId, 
+                GcimsCommitmentItemId = currentFO.GcimsCommitmentItemId, 
+                FormName = currentFO.FormName,
+                ContactEmail = currentFO.ContactEmail
+                
             };
-
+            
             _context.Add(newFO);
+
+            var considerations = _context.FundingOpportunityConsideration.Where(f => f.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var objectives = _context.FundingOpportunityObjective.Where(f => f.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var ecs = _context.FundingOpportunityEligibilityCriteria.Where(f => f.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var faqs = _context.FundingOpportunityFrequentlyAskedQuestion.Where(faq => faq.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var ius = _context.FundingOpportunityInternalUser.Where(iu => iu.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var eccs = _context.EligibleCostCategory.Where(ec => ec.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var ers = _context.FundingOpportunityExpectedResult.Where(er => er.FundingOpportunityId == currentFO.FundingOpportunityId);
+            var ects = _context.EligibleClientType.Where(f => f.FundingOpportunityId == currentFO.FundingOpportunityId);
+           
+
+            foreach (var ect in ects)
+            {
+                EligibleClientType fo = new EligibleClientType
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    EligibleClientTypeStaticId = ect.EligibleClientTypeStaticId,
+                    TitleE = ect.TitleE,
+                    TitleF = ect.TitleF, 
+                    DescriptionE = ect.DescriptionE, 
+                    DescriptionF = ect.DescriptionF
+                };
+                _context.Add(fo);
+
+            }
+
+            foreach (var er in ers)
+            {
+                FundingOpportunityExpectedResult fo = new FundingOpportunityExpectedResult
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    ExpectedResultId = er.ExpectedResultId
+                };
+                _context.Add(fo);
+
+            }
+
+            foreach (var ecc in eccs)
+            {
+                EligibleCostCategory fo = new EligibleCostCategory
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    CostCategoryId = ecc.CostCategoryId, 
+                    TitleE = ecc.TitleE, 
+                    TitleF = ecc.TitleF, 
+                    TooltipE = ecc.TooltipE, 
+                    TooltipF = ecc.TooltipF
+                };
+                _context.Add(fo);
+
+            }
+
+
+            foreach (var iu in ius)
+            {
+                FundingOpportunityInternalUser fo = new FundingOpportunityInternalUser
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    InternalUserId = iu.InternalUserId
+                };
+                _context.Add(fo);
+            }
+
+            foreach (var faq in faqs)
+            {
+                FundingOpportunityFrequentlyAskedQuestion fo = new FundingOpportunityFrequentlyAskedQuestion
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    FrequentlyAskedQuestionId = faq.FrequentlyAskedQuestionId
+                };
+                _context.Add(fo);
+            }
+
+            foreach (var ec in ecs)
+            {
+                FundingOpportunityEligibilityCriteria fo = new FundingOpportunityEligibilityCriteria
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    EligibilityCriteriaId = ec.EligibilityCriteriaId
+                };
+                _context.Add(fo);
+            }
+            foreach (var o in objectives)
+            {
+                FundingOpportunityObjective fo = new FundingOpportunityObjective
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    ObjectiveId = o.ObjectiveId
+                };
+                _context.Add(fo);
+            }
+
+            foreach (var c in considerations)
+            {
+                FundingOpportunityConsideration fo = new FundingOpportunityConsideration
+                {
+                    FundingOpportunityId = newFO.FundingOpportunityId,
+                    ConsiderationId = c.ConsiderationId
+                };
+                _context.Add(fo);
+            }
+
             await _context.SaveChangesAsync();
             // return CreatedAtAction("GetFundingOpportunity", new { id = fundingOpportunity.FundingOpportunityId }, fundingOpportunity);
             return Ok(newFO);

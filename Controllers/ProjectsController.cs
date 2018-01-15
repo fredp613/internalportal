@@ -479,10 +479,12 @@ namespace InternalPortal.Controllers
 
             var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
             project.ExternalUpdatedOn = DateTime.Now;
-            project.SubmittedOn = DateTime.Now;
             project.ProjectStatus = Status.Withdrawn;
 
-            _context.Entry(project).State = EntityState.Modified;
+
+            _context.Entry(project).Property(s => s.ProjectStatus).IsModified = true;
+            _context.Entry(project).Property(s => s.ExternalUpdatedOn).IsModified = true;
+           
 
             try
             {

@@ -39,6 +39,58 @@ namespace InternalPortal.Controllers
           
             return _context.InternalUser.Where(u => u.IsSubmissionReviewer).OrderByDescending(u => u.UpdatedOn);          
         }
+
+        // GET: api/InternalUsers/CanBeDestroyed/1
+        [HttpGet("CanBeDestroyed/{id}")]
+        public bool CanBeDestroyed([FromRoute] Guid id)
+        {
+
+            //user has one or more apps assigned
+            var projects = _context.Project.Where(c => c.CurrentOwner == id);
+
+            if (projects.Count() > 0)
+            {
+                return false;
+            }
+
+            //user is the only wm on a F.O
+            var currentUser = _context.InternalUser.Find(id); 
+
+            if (currentUser.IsWorkloadManager)
+            {
+                //select FOs that current user is a wm
+                var foid = _context.FundingOpportunityInternalUser.Where(x => x.InternalUserId == id);
+                //for each FOs count the number of WM
+                foreach (var f in foid)
+                {
+                    var foius = _context.FundingOpportunityInternalUser.Where(x => x.FundingOpportunityId == f.FundingOpportunityId);
+                    if (foius.Count() == 1)
+                    {
+
+                        return false;
+
+                    }
+                }
+
+            }
+
+            return true;
+            
+
+            
+        }
+
+        // GET: api/InternalUsers
+        [HttpGet("GetWorkloadManagers")]
+        public IEnumerable<InternalUser> GetWorkloadManagers()
+        {
+            //var test = _context.FundingOpportunityInternalUser.Where(iu => _context.InternalUser.Any(i => i.IsWorkloadManager && i.InternalUserId == iu.InternalUserId)); //.Select(u => u.InternalUserId);
+            //var wms = _context.InternalUser.Where(iu => test.Any(x => x.InternalUserId == iu.InternalUserId));
+
+            //return wms; /*_context.InternalUser.Where(u => _context.FundingOpportunityInternalUser.Any(i => i.InternalUserId == u.InternalUserId) && u.IsWorkloadManager);*/
+            return _context.InternalUser.Where(iu => iu.IsWorkloadManager);
+        }
+
         // GET: api/InternalUsers
         [HttpGet("GetAssignmentList/{username}")]
         public IEnumerable<InternalUser> GetAssignmentList([FromRoute] string username)

@@ -71,8 +71,6 @@ namespace InternalPortal
                 //options.DescribeAllEnumsAsStrings();
                 
             });
-            
-      
 
             // Add framework services.
             services.AddMvc()
@@ -82,13 +80,10 @@ namespace InternalPortal
             
             services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
-
-           // services.AddDbContext<PortalContext>(options =>
-             //       options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+            
 
             services.AddDbContext<PortalContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext2")));
-
+                    options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
 
             //	    services.AddDbContext<PortalContext>(options =>
             //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
@@ -136,6 +131,8 @@ namespace InternalPortal
 		  //          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
 	      //          }
 	      //  });
+
+            
                     
             app.UseMvc();
 

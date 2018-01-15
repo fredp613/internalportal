@@ -84,5 +84,7 @@ namespace InternalPortal.Models
         public DbSet<InternalPortal.Models.Portal.Feedback> Feedback { get; set; }
 
         public DbSet<InternalPortal.Models.Portal.Country> Country { get; set; }
+
+        public DbSet<InternalPortal.Models.Portal.ProjectTargetPopulation> ProjectTargetPopulation { get; set; }
     }
 }

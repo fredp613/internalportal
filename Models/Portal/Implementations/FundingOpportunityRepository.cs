@@ -738,7 +738,7 @@ namespace InternalPortal.Models.Portal.Implementations
                                    .Include(c => c.FundingOpportunityResources)
                                    .Include(c => c.FundingOpportunityFrequentlyAskedQuestions)
                                     .ThenInclude(ec=>ec.FrequentlyAskedQuestion)
-                                   //.Include(c => c.FundingOpportunityInternalUsers)
+                                   .Include(c => c.FundingOpportunityInternalUsers)
                 // .ThenInclude(ec => ec.InternalUser) 
                 .SingleOrDefaultAsync(i=>i.FundingOpportunityId == id);
 

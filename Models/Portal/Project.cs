@@ -127,16 +127,17 @@ namespace InternalPortal.Models
 
                 else
                 {
-                    if (Lang == null)
-                    {
-                        Lang = "EN";
 
-                    }
-                    if (Lang.ToUpper() == "EN")
+                    if (Lang != null)
                     {
-                        return StatusDesc = Enum.GetName(typeof(Status), Status.Rejected);
+                        if (Lang.ToUpper() == "EN")
+                        {
+                            return StatusDesc = Enum.GetName(typeof(Status), Status.Rejected);
+                        }
+                        return StatusDesc = "Rejete";
                     }
-                    return StatusDesc = "Rejete";
+                    return StatusDesc = Enum.GetName(typeof(Status), Status.Rejected);
+
                 }
             }
             set { }

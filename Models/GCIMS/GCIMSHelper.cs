@@ -147,7 +147,7 @@ namespace InternalPortal.Models.GCIMS
                 tblContacts newGcimsContact = new tblContacts
                 {
                     Firstname = projectContact.FirstName,
-                    ContactID = projectContact.GCIMSContactID,
+                    ContactID = (int)contactId.Value,
                     Lastname = projectContact.LastName,
                     SalutationID = "Unkn",
                     LanguageID = "E",
@@ -158,7 +158,7 @@ namespace InternalPortal.Models.GCIMS
                     //AddressLine3 = Address.AddressLine3,
                     //AddressLine4 = Address.AddressLine4,
                     Email = projectContact.Email,
-                    Phone = (projectContact.PhoneNumber == null ? "6132222222" : projectContact.PhoneNumber),
+                    Phone = (projectContact.PhoneNumber == null ? "6132222222" : new String(projectContact.PhoneNumber.Where(Char.IsDigit).ToArray())),
                     // PostalCode = projectContact.Pos,
                     CreatedBy = "GCIMSUnit",
                     UpdatedBy = "GCIMSUnit",
@@ -184,11 +184,26 @@ namespace InternalPortal.Models.GCIMS
                 var eligibleCostCategory = _portalContext.EligibleCostCategory.SingleOrDefault(e => e.EligibleCostCategoryId == bi.CostCategoryID);
                 var gcimsCostCategoryId = _portalContext.CostCategory.SingleOrDefault(c => c.CostCategoryId == eligibleCostCategory.CostCategoryId).GcimsCostCategoryID;
 
+                string expDescription = "";
+                if (bi.Description.Length > 59 && bi.FiscalYear != null)
+                {
+                    expDescription = bi.FiscalYear + " - " + bi.Description.Substring(0, 59);
+                } else if (bi.Description.Length < 59 && bi.FiscalYear != null)
+                {
+                    expDescription = bi.FiscalYear + " - " + bi.Description;
+                } else
+                {
+                    expDescription = bi.FiscalYear;
+                }
+
+
+
                 if (gcimsCostCategoryId != null)
                 {
                     var tblProjectExpenseLineItem = new tblProjectExpenseLineItems
                     {
-                        ExpenseLineItemDescription = bi.FiscalYear != null ? bi.FiscalYear + " - " + bi.Description.Substring(0,60) : bi.Description.Substring(0, 90),
+                        
+                        ExpenseLineItemDescription = expDescription,
                         ExpenseLineItemID = i,                         
                         ProjectID = projectId, 
                         ExpenseCategoryID = int.Parse(gcimsCostCategoryId),

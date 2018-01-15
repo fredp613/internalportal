@@ -58,7 +58,11 @@ namespace InternalPortal.Controllers
             foreach (var a in accountIds)
             {
                 var account = _context.Account.SingleOrDefault(x => x.AccountId == (Guid)a);
-                accounts.Add(account);
+                if (account != null)
+                {
+                    accounts.Add(account);
+                }
+               
             }
             return accounts;
         }

@@ -49,6 +49,15 @@ namespace InternalPortal.Models.Portal
         public Guid? CreatedByContactId { get; set; }
         public Guid? CreatedByUserId { get; set; }
         public Guid? UpdatedByUserId { get; set; }
+        public string AccountSubType { get; set; }
+        public string CharityRegistrationNumber { get; set; }
+
+        //QC only orgs
+        public bool PublicSectorMember { get; set; }
+        public bool PublicServiceAct { get; set; }
+        public bool PublicFunds { get; set; }
+        //QC END
+
         public Guid? UpdatedByInternalUserId { get; set; }
         public DateTime CreatedOn { get; set; }
         public DateTime UpdatedOn { get; set; }
