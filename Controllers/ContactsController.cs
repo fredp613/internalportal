@@ -92,7 +92,7 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == contact1.DateOfBirth)
+            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == (DateTime)contact1.DateOfBirth)
             {
                 var user = await _context.User.SingleOrDefaultAsync(u => u.UserId == contact1.UpdatedByUserId);
                 user.ContactId = contact.ContactId;
@@ -138,6 +138,14 @@ namespace InternalPortal.Controllers
             }
 
             var contact = await _context.Contact.SingleOrDefaultAsync(m => m.ContactId == id);
+            var pais = _context.User.Where(c => c.ContactId == id).Select(c => c.PAI);
+            var paiStr = ""; 
+            foreach (var pai in pais)
+            {
+                paiStr += (pai + " ");
+            }
+
+            contact.PAI = paiStr;
 
             if (contact == null)
             {

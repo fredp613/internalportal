@@ -36,47 +36,47 @@ namespace InternalPortal.Models.Portal.Implementations
             var ngo = new ClientTypeStatic
             {
                 Id = 1,
-                Title = "ngo / ngo",
-                TitleE = "ngo",
-                TitleF = "ngo",
-                DescriptionE = "ngo",
-                DescriptionF = "ngo"
+                Title = "Non-Governmental Organizations / Organisations non gouvernementales",
+                TitleE = "Non-Governmental Organizations",
+                TitleF = "Organisations non gouvernementales",
+                DescriptionE = "Organisations non gouvernementales ",
+                DescriptionF = "Organisations non gouvernementales"
             };
             var pt = new ClientTypeStatic
             {
                 Id = 2,
-                Title = "pt / pt",
-                TitleE = "pt",
-                TitleF = "pt",
-                DescriptionE = "pt",
-                DescriptionF = "pt"
+                Title = "Provincial and Territorial Governments / Gouvernements provinciaux et territoriaux",
+                TitleE = "Provincial and Territorial Governments",
+                TitleF = "Gouvernements provinciaux et territoriaux",
+                DescriptionE = "Provincial and Territorial Governments",
+                DescriptionF = "Gouvernements provinciaux et territoriaux"
             };
             var priv = new ClientTypeStatic
             {
                 Id = 3,
-                Title = "for profit / for profit",
-                TitleE = "for profit",
-                TitleF = "for profit",
-                DescriptionE = "for profit",
-                DescriptionF = "for profit"
+                Title = "For Profit Organizations / Organisations à but lucratif",
+                TitleE = "For Profit Organizations",
+                TitleF = "Organisations à but lucratif",
+                DescriptionE = "For Profit Organizations",
+                DescriptionF = "Organisations à but lucratif"
             };
             var ind = new ClientTypeStatic
             {
                 Id = 4,
-                Title = "individual / individual",
-                TitleE = "individual",
-                TitleF = "individual",
-                DescriptionE = "individual",
-                DescriptionF = "individual"
+                Title = "Individuals / Individus",
+                TitleE = "Individuals",
+                TitleF = "Individus",
+                DescriptionE = "Individuals",
+                DescriptionF = "Individus"
             };
             var indig = new ClientTypeStatic
             {
                 Id = 5,
-                Title = "Indigenous / Indigenous",
-                TitleE = "Indigenous",
-                TitleF = "Indigenous",
-                DescriptionE = "Indigenous",
-                DescriptionF = "Indigenous"
+                Title = "Indigenous Organizations / Organisations indigène",
+                TitleE = "Indigenous Organizations",
+                TitleF = "Organisations indigène",
+                DescriptionE = "Indigenous Organizations",
+                DescriptionF = "Organisations indigène"
             };
             objs.AddRange(new List<ClientTypeStatic>() { ngo, pt, priv, ind, indig });            
             return objs;

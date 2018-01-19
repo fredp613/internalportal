@@ -11,7 +11,6 @@ using InternalPortal.Models.Helpers;
 using InternalPortal.Models.Portal.Implementations;
 using InternalPortal.Models.Portal.Interfaces;
 using InternalPortal.Models.Portal;
-using System.Linq;
 using System.Diagnostics;
 
 namespace InternalPortal.Controllers
@@ -337,6 +336,13 @@ namespace InternalPortal.Controllers
             }
             project.ExternalUpdatedOn = DateTime.Now;
 
+            if (project.ProjectStatus == Status.Submitted)
+            {
+
+                project.SubmittedOn = DateTime.Now;
+
+            }
+
             _context.Entry(project).State = EntityState.Modified;
 
             
@@ -349,6 +355,8 @@ namespace InternalPortal.Controllers
                 project.GcimsClientId = newGCIMSProject.Result.ClientID;
                 project.GcimsContactId = newGCIMSProject.Result.tblApplication.ContactID;
             }
+
+            
 
             try
             {

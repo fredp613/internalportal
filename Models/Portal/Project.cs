@@ -142,6 +142,7 @@ namespace InternalPortal.Models
             }
             set { }
         }
+        public string targetPopulations { get; set; }
         public string AdditionalInformation { get; set; }
         public bool Audited { get; set; }
         public bool TaxRebate { get; set; }

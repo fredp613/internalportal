@@ -9,6 +9,7 @@ using InternalPortal.Models;
 using InternalPortal.Models.Portal;
 using System.Diagnostics;
 using InternalPortal.Models.Helpers;
+using InternalPortal.Models.Portal.Program;
 
 namespace InternalPortal.Controllers
 {
@@ -32,11 +33,19 @@ namespace InternalPortal.Controllers
              
             return users;           
         }
+
+        [HttpGet("GetInternalUsersExcludingRequester/{username}")]
+        public IEnumerable<InternalUser> GetInternalUsersExcludingRequester([FromRoute] string userName)
+        {
+            var users = _context.InternalUser.Where(u => u.UserName != userName).OrderByDescending(u => u.UpdatedOn);
+
+            return users;
+        }
+
         // GET: api/InternalUsers
         [HttpGet("GetBusinessUsers")]
         public IEnumerable<InternalUser> GetBusinessUsers()
-        {
-          
+        {          
             return _context.InternalUser.Where(u => u.IsSubmissionReviewer).OrderByDescending(u => u.UpdatedOn);          
         }
 
@@ -170,6 +179,21 @@ namespace InternalPortal.Controllers
             try
             {
                 await _context.SaveChangesAsync();
+
+                if (internalUser.DefaultFundingOpportunity != null)
+                {
+
+                    var foiu = new FundingOpportunityInternalUser
+                    {
+                        FundingOpportunityId = internalUser.DefaultFundingOpportunity,
+                        InternalUserId = internalUser.InternalUserId
+
+                    };
+
+                    _context.FundingOpportunityInternalUser.Add(foiu);
+                    await _context.SaveChangesAsync();
+
+                }
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -201,6 +225,20 @@ namespace InternalPortal.Controllers
             _context.InternalUser.Add(internalUser);
            
             await _context.SaveChangesAsync();
+
+            if (internalUser.DefaultFundingOpportunity != null)
+            {
+                var foiu = new FundingOpportunityInternalUser
+                {
+                    FundingOpportunityId = internalUser.DefaultFundingOpportunity, 
+                    InternalUserId = internalUser.InternalUserId
+                    
+                };
+
+                _context.FundingOpportunityInternalUser.Add(foiu);
+                await _context.SaveChangesAsync();
+
+            }
 
             return Ok(internalUser);
         }

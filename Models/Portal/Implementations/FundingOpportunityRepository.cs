@@ -37,7 +37,7 @@ namespace InternalPortal.Models.Portal.Implementations
         }
         public IEnumerable<FundingOpportunity> GetAllFundingOpportunities()
         {
-            var fos = PortalContext.FundingOpportunity.Where(f => f.Status != FOStatus.Archived)
+            var fos = PortalContext.FundingOpportunity//.Where(f => f.Status != FOStatus.Archived)
                                    .Include(o => o.FundingOpportunityObjectives)
                                            .ThenInclude(fo => fo.Objective)
                                    .Include(foer => foer.FundingOpportunityExpectedResults)

@@ -33,5 +33,7 @@ namespace InternalPortal.Models
                 .HasKey(e => new { e.ProjectID, e.RevenueLineItemID });
         }
 
+        public DbSet<tblUsers> tblUsers { get; set; }
+
     }
 }

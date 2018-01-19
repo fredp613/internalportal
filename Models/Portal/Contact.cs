@@ -38,6 +38,8 @@ namespace InternalPortal.Models
         public bool IsBlocked { get; set; }
         public string BlockJustification { get; set; }
 
+        [NotMapped]
+        public string PAI { get; set; }
 
         public string PrimaryAddressLine1 { get; set; }
         public string PrimaryAddressLine2 { get; set; }

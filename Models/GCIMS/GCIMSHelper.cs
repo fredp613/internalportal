@@ -28,11 +28,15 @@ namespace InternalPortal.Models.GCIMS
             //var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
             var primaryContact = _portalContext.ProjectContact.SingleOrDefault(c => c.ProjectContactId == _project.PrimaryProjectContactId);
             var contactId = CreateOrUpdateContact(primaryContact);
+            var currentOwner = _portalContext.InternalUser.Find(_project.CurrentOwner);
+            var gcimsUserName = "GCIMSUnit";
+
+          
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
 
-            var GCIMSUserName = new SqlParameter("@GCIMSUserName", "GCIMSUnit");
+            var GCIMSUserName = new SqlParameter("@GCIMSUserName", gcimsUserName);
             var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
             var ContactID = new SqlParameter("@ContactID", contactId);
             var Lang = new SqlParameter("@Lang", _project.Lang);

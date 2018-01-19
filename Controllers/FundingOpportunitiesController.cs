@@ -24,12 +24,12 @@ namespace InternalPortal.Controllers
         private readonly PortalContext _context;
         private UnitOfWork _unitOfWork;
 
-     
+
         public FundingOpportunitiesController(PortalContext context)
         {
             _context = context;
-           
-            
+
+
             _unitOfWork = new UnitOfWork(_context, "FR");
         }
 
@@ -40,7 +40,6 @@ namespace InternalPortal.Controllers
             base.OnActionExecuting(context);
 
         }
-      
 
         [HttpGet("GetByNameAsync/{title}")]
         public Task<FundingOpportunity> GetByNameAsync([FromRoute] string title)
@@ -53,7 +52,7 @@ namespace InternalPortal.Controllers
         public IEnumerable<FundingOpportunity> GetFundingOpportunity()
         {
             var Lang = RouteData.Values["lang"].ToString();
-           
+
             return _unitOfWork.FundingOpportunities.GetAll();
         }
 
@@ -61,7 +60,7 @@ namespace InternalPortal.Controllers
         [HttpGet("CanBeDestroyed/{id}")]
         public bool CanBeDestroyed([FromRoute] Guid id)
         {
-            var projects = _context.Project.Where(f => f.FundingOpportunityID == id); 
+            var projects = _context.Project.Where(f => f.FundingOpportunityID == id);
 
             if (projects.Count() > 0)
             {
@@ -70,6 +69,40 @@ namespace InternalPortal.Controllers
 
             return true;
         }
+
+        [HttpGet("WorkloadManagerCount/{id}")]
+        public int? WorkloadManagerCount([FromRoute] Guid id)
+        {
+            var fo = _context.FundingOpportunity.Find(id);
+            var foiu = _context.FundingOpportunityInternalUser.Where(f => f.FundingOpportunityId == fo.FundingOpportunityId);
+            int count = 0;
+            foreach (var iu in foiu) {
+                var user = _context.InternalUser.Find(iu.InternalUserId); 
+                if (user.IsWorkloadManager)
+                {
+                    count += 1;
+                }
+
+            }
+            return count;
+
+        }
+
+        [HttpGet("CanBeArchived/{id}")]
+        public bool CanBeArchived([FromRoute] Guid id)
+        {
+            var fo = _context.FundingOpportunity.Find(id);
+            var projects = _context.Project.Where(f => f.FundingOpportunityID == fo.FundingOpportunityId);
+            foreach (var p in projects)
+            {
+                if (p.ProjectStatus == Status.Submitted || p.ProjectStatus == Status.Draft || p.ProjectStatus == Status.Incomplete)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
 
         [HttpGet]
         [Route("GetAllFundingOpportunities")]
@@ -394,6 +427,9 @@ namespace InternalPortal.Controllers
             {
                 return NotFound();
             }
+
+            var foius = _context.FundingOpportunityInternalUser.Where(f => f.FundingOpportunityId == fundingOpportunity.FundingOpportunityId);
+            _context.RemoveRange(foius);
 
             _context.FundingOpportunity.Remove(fundingOpportunity);
             await _unitOfWork.SaveChangesAsync();

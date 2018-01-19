@@ -42,6 +42,7 @@ namespace InternalPortal.Controllers
             return _context.FundingOpportunityInternalUser.Include(iu => iu.InternalUser).Include(fo => fo.FundingOpportunity).Where(f=>f.FundingOpportunityId == id);
         }
 
+      
         [HttpGet("GetWorkloadManagersForFundingOpportunity/{id}")]
         public IEnumerable<FundingOpportunityInternalUser> GetWorkloadManagersForFundingOpportunity([FromRoute] Guid id)
         {
@@ -97,6 +98,8 @@ namespace InternalPortal.Controllers
                     
                 }
             }
+
+            
 
             return foiu;
         }

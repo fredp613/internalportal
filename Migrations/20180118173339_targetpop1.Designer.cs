@@ -9,9 +9,10 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    partial class PortalContextModelSnapshot : ModelSnapshot
+    [Migration("20180118173339_targetpop1")]
+    partial class targetpop1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -383,8 +384,6 @@ namespace InternalPortal.Migrations
                     b.Property<DateTime>("UpdatedOn");
 
                     b.Property<string>("UserName");
-
-                    b.Property<string>("gcimsUserName");
 
                     b.HasKey("InternalUserId");
 
