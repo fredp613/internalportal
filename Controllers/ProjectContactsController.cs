@@ -105,6 +105,11 @@ namespace InternalPortal.Controllers
             _context.ProjectContact.Add(projectContact);
             await _context.SaveChangesAsync();
 
+            var project = _context.Project.Find(projectContact.ProjectId);
+            project.PrimaryProjectContactId = projectContact.ProjectContactId;
+            _context.Entry(project).Property(s => s.PrimaryProjectContactId).IsModified = true;
+            await _context.SaveChangesAsync();
+
             //return CreatedAtAction("GetProjectContact", new { id = projectContact.ProjectContactId }, projectContact);
             return Ok(projectContact);
         }

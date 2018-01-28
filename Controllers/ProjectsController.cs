@@ -572,6 +572,7 @@ namespace InternalPortal.Controllers
             project.Lang = "EN";
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
             project.GcimsClientId = proj.GcimsClientId;
+            
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
             var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
