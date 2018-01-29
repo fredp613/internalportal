@@ -226,13 +226,13 @@ namespace InternalPortal.Controllers
            
             await _context.SaveChangesAsync();
 
-            if (internalUser.DefaultFundingOpportunity != null)
+            if (internalUser.DefaultFundingOpportunity != Guid.Empty)
             {
                 var foiu = new FundingOpportunityInternalUser
                 {
-                    FundingOpportunityId = internalUser.DefaultFundingOpportunity, 
+                    FundingOpportunityId = internalUser.DefaultFundingOpportunity,
                     InternalUserId = internalUser.InternalUserId
-                    
+
                 };
 
                 _context.FundingOpportunityInternalUser.Add(foiu);
