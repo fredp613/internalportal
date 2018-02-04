@@ -90,12 +90,18 @@ public class Startup
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextTest")));
 
+                services.AddDbContext<ExternalUserContext>(options =>
+                       options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
+
             } else if (Configuration["environment"].ToString() == "Production") {
                 services.AddDbContext<GcimsContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
+
+                services.AddDbContext<ExternalUserContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContext")));
 
             } else
             {
@@ -104,6 +110,8 @@ public class Startup
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextDev")));
+                services.AddDbContext<ExternalUserContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
 
             }
         
