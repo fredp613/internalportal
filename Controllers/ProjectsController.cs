@@ -414,6 +414,39 @@ namespace InternalPortal.Controllers
             return Ok(project);
         }
 
+        [HttpPost("SetPrimaryContact")]
+        [ProducesResponseType(typeof(Project), 200)]
+        public async Task<IActionResult> SetPrimaryContact([FromBody] Project proj)
+        {
+
+            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
+            project.ExternalUpdatedOn = DateTime.Now;
+            project.PrimaryProjectContactId = proj.PrimaryProjectContactId;
+
+            _context.Entry(project).Property(s => s.ExternalUpdatedOn).IsModified = true;
+            _context.Entry(project).Property(s => s.PrimaryProjectContactId).IsModified = true;
+
+
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!_unitOfWork.Projects.ProjectExists(proj.ProjectId))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return Ok(project);
+        }
+
         [HttpPost("SetOwner")]
         [ProducesResponseType(typeof(Project), 200)]
         public async Task<IActionResult> SetOwner([FromBody] Project proj)

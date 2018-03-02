@@ -26,6 +26,7 @@ namespace InternalPortal.Models
             set { }
         }
         public string Email { get; set; }
+        public string Eamil2 { get; set;  }
         public string PhoneNumber { get; set; }     
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
