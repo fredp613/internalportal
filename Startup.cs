@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -19,6 +19,7 @@ using System.IO;
 using Microsoft.Extensions.PlatformAbstractions;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Http;
 
 namespace InternalPortal
 {
@@ -50,9 +51,11 @@ public class Startup
         {
             options.AddPolicy("CorsPolicy",
                 builder => builder.AllowAnyOrigin()
+             //   builder => builder.WithOrigins("http://otvcrm01:4507")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                .AllowCredentials()
+                );
         });
 
         services.AddSwaggerGen(options =>
@@ -79,96 +82,56 @@ public class Startup
                     options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore;
                 });
 
-       
-
-
-            if (Configuration["environment"].ToString() == "Test") {
+            if (Configuration["environment"].ToString() == "Test")
+            {
 
                 services.AddDbContext<GcimsContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("GcimsContextDev")));
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextTest")));
+              
 
-                services.AddDbContext<ExternalUserContext>(options =>
-                       options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
-
-            } else if (Configuration["environment"].ToString() == "Production") {
+            }
+            else if (Configuration["environment"].ToString() == "Production")
+            {
                 services.AddDbContext<GcimsContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GcimsContext")));
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
-
-                services.AddDbContext<ExternalUserContext>(options =>
-                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContext")));
-
-            } else
+                
+            }
+            else if (Configuration["environment"].ToString() == "Development")
             {
                 services.AddDbContext<GcimsContext>(options =>
                    options.UseSqlServer(Configuration.GetConnectionString("GcimsContextDev")));
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextDev")));
-                services.AddDbContext<ExternalUserContext>(options =>
-                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
 
             }
-        
-            
+            else if (Configuration["environment"].ToString() == "Local")
+            {
+                services.AddDbContext<GcimsContext>(options =>
+                   options.UseSqlServer(Configuration.GetConnectionString("GcimsContextDev")));
 
-            
+                services.AddDbContext<PortalContext>(options =>
+                        options.UseSqlServer(Configuration.GetConnectionString("PortalContextLocal")));
 
-        //	    services.AddDbContext<PortalContext>(options =>
-        //				options.UseNpgsql(Configuration.GetConnectionString("PortalContextPsql")));
+            } 
 
-        // services.AddAuthorization(options =>
-        // {
-        //     options.AddPolicy(
-        //         "InternalUser",
-        //         policy => policy.Requirements.Add(new InternalUserRequirement()));
-        // });
-        // services.AddSingleton<IAuthorizationHandler, InternalUserHandler>();
-        //  services.Configure<IISOptions>(options => options.ForwardWindowsAuthentication = true);
-        //  services.AddMvc();
-            
-        //services.Configure<IISOptions>(options => options.AutomaticAuthentication = true);
-
-
-    }
+        }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
 
     public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
     {
-        app.UseCors("CorsPolicy");
-        //app.UseCors(builder =>
-        //  builder.AllowAnyOrigin()
-        //        .AllowAnyMethod()
-        //        .AllowAnyHeader()
-        //        .AllowCredentials()
-        //);
-        //loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-        //loggerFactory.AddDebug();
-           
             
-	    //  app.UseJwtBearerAuthentication(new JwtBearerOptions
-	    //  {
-	    //      AutomaticAuthenticate = true,
-	    //      AutomaticChallenge = true,
-	    //      TokenValidationParameters = new TokenValidationParameters
-	    //      {
-		//          IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppConfiguration:Key").Value)),
-		//          ValidAudience = Configuration.GetSection("AppConfiguration:SiteUrl").Value,
-		//          ValidateIssuerSigningKey = true,
-		//          ValidateLifetime = true,
-		//          ValidIssuer = Configuration.GetSection("AppConfiguration:SiteUrl").Value
-	    //          }
-	    //  });
-
-            
-                    
-        app.UseMvc();
+            app.UseCors("CorsPolicy");
+  
+            app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMvc();
 
         app.UseSwagger(c =>
         {
@@ -193,4 +156,53 @@ public class TestFilter : IDocumentFilter
 
     }
 }
+
+    public class AuthenticationMiddleware
+    {
+        private readonly RequestDelegate _next;
+        public static IConfigurationRoot Configuration { get; set; }
+        public AuthenticationMiddleware(RequestDelegate next, IHostingEnvironment env)
+        {
+            _next = next;
+
+            var builder = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("Env.json");
+
+            Configuration = builder.Build();
+        }
+
+        public async Task Invoke(HttpContext context)
+        {
+            
+
+            string authHeader = context.Request.Headers["Authorization"];
+            if (authHeader != null && authHeader.StartsWith("Basic"))
+            {
+                //Extract credentials
+                string encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
+                Encoding encoding = Encoding.GetEncoding("iso-8859-1");
+                string usernamePassword = encoding.GetString(Convert.FromBase64String(encodedUsernamePassword));
+
+                int seperatorIndex = usernamePassword.IndexOf(':');
+
+                var username = usernamePassword.Substring(0, seperatorIndex);
+                var password = usernamePassword.Substring(seperatorIndex + 1);
+                
+                if (username == Configuration["username"] && password == Configuration["password"])
+                {
+                    await _next.Invoke(context);
+                }
+                else
+                {
+                    context.Response.StatusCode = 401; //Unauthorized
+                    return;
+                }
+            }
+            else
+            {
+                // no authorization header
+                context.Response.StatusCode = 401; //Unauthorized
+                return;
+            }
+        }
+    }
 }

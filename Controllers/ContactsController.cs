@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using InternalPortal.Models;
 using System.Collections;
+using Microsoft.AspNetCore.Cors;
+using Microsoft.AspNetCore.Authorization;
 
 namespace InternalPortal.Controllers
 {
     [Produces("application/json")]
     [Route("api/Contacts")]
+    //[Authorize]
     public class ContactsController : Controller
     {
         private readonly PortalContext _context;
