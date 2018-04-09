@@ -91,7 +91,6 @@ public class Startup
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextTest")));
               
-
             }
             else if (Configuration["environment"].ToString() == "Production")
             {
@@ -130,7 +129,7 @@ public class Startup
             
             app.UseCors("CorsPolicy");
   
-           // app.UseMiddleware<AuthenticationMiddleware>();
+            app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMvc();
 
         app.UseSwagger(c =>
@@ -172,14 +171,15 @@ public class TestFilter : IDocumentFilter
 
         public async Task Invoke(HttpContext context)
         {
-            
 
+            
             string authHeader = context.Request.Headers["Authorization"];
             if (authHeader != null && authHeader.StartsWith("Basic"))
             {
                 //Extract credentials
                 string encodedUsernamePassword = authHeader.Substring("Basic ".Length).Trim();
-                Encoding encoding = Encoding.GetEncoding("iso-8859-1");
+              //  Encoding encoding = Encoding.GetEncoding("iso-8859-1");
+		        Encoding encoding = Encoding.GetEncoding("utf-8");
                 string usernamePassword = encoding.GetString(Convert.FromBase64String(encodedUsernamePassword));
 
                 int seperatorIndex = usernamePassword.IndexOf(':');
@@ -187,7 +187,7 @@ public class TestFilter : IDocumentFilter
                 var username = usernamePassword.Substring(0, seperatorIndex);
                 var password = usernamePassword.Substring(seperatorIndex + 1);
                 
-                if (username != Configuration["username"] /** && password == Configuration["password"] **/)
+                if (username == Configuration["username"] && password == Configuration["password"])
                 {
                     await _next.Invoke(context);
                 }
@@ -199,6 +199,16 @@ public class TestFilter : IDocumentFilter
             }
             else
             {
+
+                //context.Request.Host.Host.ToString().Contains("swagger")
+             
+
+                if (context.Request.Path.ToString().Contains("swagger"))
+                {
+                    await _next.Invoke(context);
+                    return;
+                }
+
                 // no authorization header
                 context.Response.StatusCode = 401; //Unauthorized
                 return;
