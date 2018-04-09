@@ -187,7 +187,7 @@ public class TestFilter : IDocumentFilter
                 var username = usernamePassword.Substring(0, seperatorIndex);
                 var password = usernamePassword.Substring(seperatorIndex + 1);
                 
-                if (username == Configuration["username"] && password == Configuration["password"])
+                if (username != Configuration["username"] /** && password == Configuration["password"] **/)
                 {
                     await _next.Invoke(context);
                 }
