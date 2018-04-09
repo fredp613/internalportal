@@ -130,7 +130,7 @@ public class Startup
             
             app.UseCors("CorsPolicy");
   
-            app.UseMiddleware<AuthenticationMiddleware>();
+           // app.UseMiddleware<AuthenticationMiddleware>();
             app.UseMvc();
 
         app.UseSwagger(c =>
