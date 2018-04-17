@@ -38,6 +38,21 @@ namespace InternalPortal.Controllers
         {
             return _unitOfWork.EligibleClientTypes.GetAll();
         }
+        [HttpGet]
+        [Route("GetEligibleClientTypesByFundingOpportunity/{id}")]
+        public IEnumerable<ClientTypeStatic> GetEligibleClientTypesByFundingOpportunity([FromRoute] Guid id)
+        {
+            var ecIds = _context.EligibleClientType.Where(f => f.FundingOpportunityId == id).Select(x => x.EligibleClientTypeStaticId).Distinct();
+            var ecs = new List<ClientTypeStatic>();
+            foreach (var e in ecIds)
+            {
+
+                var ec = _unitOfWork.EligibleClientTypes.GetEligibleClientType(e);
+                ecs.Add(ec);
+                
+            }
+            return ecs;
+        }
 
         [HttpGet]
         [Route("GetEligibleClientTypeList")]

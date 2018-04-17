@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 
 namespace InternalPortal.Models.Portal.Implementations
 {
+    
+
     public class ClientTypeStatic
     {
         public int Id { get; set; }
@@ -36,20 +38,20 @@ namespace InternalPortal.Models.Portal.Implementations
             var ngo = new ClientTypeStatic
             {
                 Id = 1,
-                Title = "Non-Governmental Organizations / Organisations non gouvernementales",
-                TitleE = "Non-Governmental Organizations",
-                TitleF = "Organisations non gouvernementales",
-                DescriptionE = "Organisations non gouvernementales ",
-                DescriptionF = "Organisations non gouvernementales"
+                Title = "Not-for-profit organization / Organismes à but non lucratif",
+                TitleE = "Not-for-profit organization",
+                TitleF = "Organismes à but non lucratif",
+                DescriptionE = "Not-for-profit organization",
+                DescriptionF = "Organismes à but non lucratif"
             };
             var pt = new ClientTypeStatic
             {
                 Id = 2,
-                Title = "Provincial and Territorial Governments / Gouvernements provinciaux et territoriaux",
-                TitleE = "Provincial and Territorial Governments",
-                TitleF = "Gouvernements provinciaux et territoriaux",
-                DescriptionE = "Provincial and Territorial Governments",
-                DescriptionF = "Gouvernements provinciaux et territoriaux"
+                Title = "Charity registered with the Canada Revenue Agency / Organismes de bienfaisance inscrits auprès de l'Agence du revenu du Canada",
+                TitleE = "Charity registered with the Canada Revenue Agency",
+                TitleF = "Organismes de bienfaisance inscrits auprès de l'Agence du revenu du Canada",
+                DescriptionE = "Charity registered with the Canada Revenue Agency",
+                DescriptionF = "Organismes de bienfaisance inscrits auprès de l'Agence du revenu du Canada"
             };
             var priv = new ClientTypeStatic
             {
@@ -63,22 +65,58 @@ namespace InternalPortal.Models.Portal.Implementations
             var ind = new ClientTypeStatic
             {
                 Id = 4,
-                Title = "Individuals / Individus",
-                TitleE = "Individuals",
-                TitleF = "Individus",
-                DescriptionE = "Individuals",
-                DescriptionF = "Individus"
+                Title = "Individual or sole proprietorships / Particuliers ou entreprises à propriétaire unique",
+                TitleE = "Individual or sole proprietorships",
+                TitleF = "Particuliers ou entreprises à propriétaire unique",
+                DescriptionE = "Individual or sole proprietorships",
+                DescriptionF = "Particuliers ou entreprises à propriétaire unique"
             };
             var indig = new ClientTypeStatic
             {
                 Id = 5,
-                Title = "Indigenous Organizations / Organisations indigène",
-                TitleE = "Indigenous Organizations",
-                TitleF = "Organisations indigène",
-                DescriptionE = "Indigenous Organizations",
-                DescriptionF = "Organisations indigène"
+                Title = "Band, First Nation, Tribal Council, or a local, regional or national Indigenous organization / Les bandes, les Premières Nations, les conseils tribaux et les organisations autochtones locales, régionales et nationales",
+                TitleE = "Band, First Nation, Tribal Council, or a local, regional or national Indigenous organization",
+                TitleF = "Les bandes, les Premières Nations, les conseils tribaux et les organisations autochtones locales, régionales et nationales",
+                DescriptionE = "Band, First Nation, Tribal Council, or a local, regional or national Indigenous organization",
+                DescriptionF = "Les bandes, les Premières Nations, les conseils tribaux et les organisations autochtones locales, régionales et nationales"
             };
-            objs.AddRange(new List<ClientTypeStatic>() { ngo, pt, priv, ind, indig });            
+            var Educ = new ClientTypeStatic
+            {
+                Id = 6,
+                Title = "Education institution or School board / Établissements d’enseignement ou commissions scolaires",
+                TitleE = "Education institution or School board",
+                TitleF = "Établissements d’enseignement ou commissions scolaires",
+                DescriptionE = "Education institution or School board",
+                DescriptionF = "Établissements d’enseignement ou commissions scolaires"
+            };
+            var Gov = new ClientTypeStatic
+            {
+                Id = 7,
+                Title = "Government (municipal, provincial, territorial or international) / Gouvernements (municipaux, provinciaux, territoriaux ou internationaux)",
+                TitleE = "Government (municipal, provincial, territorial or international)",
+                TitleF = "Gouvernements (municipaux, provinciaux, territoriaux ou internationaux)",
+                DescriptionE = "Government (municipal, provincial, territorial or international)",
+                DescriptionF = "Gouvernements (municipaux, provinciaux, territoriaux ou internationaux)"
+            };
+            var Inter = new ClientTypeStatic
+            {
+                Id = 8,
+                Title = "International non-governmental organization / Gouvernements (municipaux, provinciaux, territoriaux ou internationaux)",
+                TitleE = "International non-governmental organization",
+                TitleF = "Organisations internationales non gouvernementales",
+                DescriptionE = "International non-governmental organization",
+                DescriptionF = "Organisations internationales non gouvernementales"
+            };
+            var Other = new ClientTypeStatic
+            {
+                Id = 9,
+                Title = "Other / Autres",
+                TitleE = "Other",
+                TitleF = "Autres",
+                DescriptionE = "Other",
+                DescriptionF = "Autres"
+            };
+            objs.AddRange(new List<ClientTypeStatic>() { ngo, pt, priv, ind, indig, Educ,Gov,Inter, Other});            
             return objs;
         }
 

@@ -90,7 +90,9 @@ public class Startup
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextTest")));
-              
+                services.AddDbContext<PortalContext>(options =>
+                       options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
+
             }
             else if (Configuration["environment"].ToString() == "Production")
             {
@@ -99,7 +101,9 @@ public class Startup
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContext")));
-                
+                services.AddDbContext<PortalContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContext")));
+
             }
             else if (Configuration["environment"].ToString() == "Development")
             {
@@ -108,6 +112,8 @@ public class Startup
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextDev")));
+                services.AddDbContext<PortalContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
 
             }
             else if (Configuration["environment"].ToString() == "Local")
@@ -117,6 +123,8 @@ public class Startup
 
                 services.AddDbContext<PortalContext>(options =>
                         options.UseSqlServer(Configuration.GetConnectionString("PortalContextLocal")));
+                services.AddDbContext<PortalContext>(options =>
+                      options.UseSqlServer(Configuration.GetConnectionString("ExternalUserContextTest")));
 
             } 
 

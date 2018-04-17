@@ -14,30 +14,31 @@ namespace InternalPortal.Models.GCIMS
         private readonly GcimsContext _context;
         private readonly PortalContext _portalContext;
         private readonly Project _project;
+      
+        
         public GCIMSHelper(GcimsContext context, PortalContext portalContext, Project project)
         {
             _portalContext = portalContext;
             _context = context;
             _project = project;
-
+           
+            
         }
 
-        public async Task<tblProjects> CreateGCIMSproject()
+        public async Task<tblProjects> CreateGCIMSproject(string gcimsClientId)
         {
             // var clientId = CreateOrUpdateClient(_project.Account);
             //var contactId = CreateOrUpdateContact(_project.Account,_project.PrimaryContact, _project.PrimaryContactAddress.Address, _project.Account.GcimsClientID);
             var primaryContact = _portalContext.ProjectContact.SingleOrDefault(c => c.ProjectContactId == _project.PrimaryProjectContactId);
             var contactId = CreateOrUpdateContact(primaryContact);
             var currentOwner = _portalContext.InternalUser.Find(_project.CurrentOwner);
-            var gcimsUserName = "GCIMSUnit";
-
-          
+            var gcimsUserName = currentOwner.gcimsUserName;
 
             Random rnd = new Random();
             int projectId = rnd.Next(50000, 100000);
 
             var GCIMSUserName = new SqlParameter("@GCIMSUserName", gcimsUserName);
-            var ClientID = new SqlParameter("@ClientID", _project.GcimsClientId);
+            var ClientID = new SqlParameter("@ClientID", gcimsClientId);
             var ContactID = new SqlParameter("@ContactID", contactId);
             var Lang = new SqlParameter("@Lang", _project.Lang);
             var FiscalYear = new SqlParameter("@FiscalYear", _project.FiscalYear);
@@ -54,7 +55,7 @@ namespace InternalPortal.Models.GCIMS
             ContactID.SqlDbType = System.Data.SqlDbType.Int;
             var newproject = _context.Database.ExecuteSqlCommand("exec web_sp_createProject @GCIMSUserName,@ClientID,@ContactID,@Lang," +
                 "@FiscalYear,@RequestedAmount,@CorporateFileNumber, @CommitmentItemID, @Title, " +
-                "@Description, @StartDate, @EndDate, @projectID OUT",
+                "@Description, @StartDate, @EndDate, @ProjectID OUT",
              GCIMSUserName,
              ClientID,
              ContactID,
@@ -126,6 +127,9 @@ namespace InternalPortal.Models.GCIMS
         {
 
             var GcimsContact = _context.tblContacts.Find(projectContact.GCIMSContactID);
+
+            var currentOwner = _portalContext.InternalUser.Find(_project.CurrentOwner);
+            var gcimsUserName = currentOwner.gcimsUserName;
             //update
             if (GcimsContact != null)
             {
@@ -164,8 +168,8 @@ namespace InternalPortal.Models.GCIMS
                     Email = projectContact.Email,
                     Phone = (projectContact.PhoneNumber == null ? "6132222222" : new String(projectContact.PhoneNumber.Where(Char.IsDigit).ToArray())),
                     // PostalCode = projectContact.Pos,
-                    CreatedBy = "GCIMSUnit",
-                    UpdatedBy = "GCIMSUnit",
+                    CreatedBy = gcimsUserName,
+                    UpdatedBy = gcimsUserName,
                     CreatedDate = DateTime.Now,
                     UpdatedDate = DateTime.Now
                 };
@@ -180,8 +184,9 @@ namespace InternalPortal.Models.GCIMS
         {
             var budgetItems = _portalContext.ProjectBudget.Where(p => p.ProjectID == _project.ProjectId);
             var gcimsApplication = _context.tblApplications.SingleOrDefault(p => p.ProjectID == projectId);
-     
-        
+            var currentOwner = _portalContext.InternalUser.Find(_project.CurrentOwner);
+            var gcimsUserName = currentOwner.gcimsUserName;
+
             for (var i = 0; i <= budgetItems.Count() - 1; i ++)
             {
                 var bi = budgetItems.ToList()[i];
@@ -212,7 +217,7 @@ namespace InternalPortal.Models.GCIMS
                         ProjectID = projectId, 
                         ExpenseCategoryID = int.Parse(gcimsCostCategoryId),
                         CreatedDate = DateTime.Now, 
-                        CreatedBy = "GCIMSUnit"
+                        CreatedBy = gcimsUserName
                        
                     };
                     //create gcims expense item
@@ -220,7 +225,7 @@ namespace InternalPortal.Models.GCIMS
                     {
                         ProjectID = projectId,
                         ApplicationID = gcimsApplication.ApplicationID,                        
-                        CreatedBy = "GCIMSUnit",
+                        CreatedBy = gcimsUserName,
                         CreatedDate = DateTime.Now,
                         ExpenseAmount = (decimal)bi.Amount,
                         ExpenseLineItemID = i,  //int.Parse(gcimsCostCategoryId), 
@@ -241,6 +246,10 @@ namespace InternalPortal.Models.GCIMS
 
         public void CreateRevenueItems(int projectId)
         {
+
+            var currentOwner = _portalContext.InternalUser.Find(_project.CurrentOwner);
+            var gcimsUserName = currentOwner.gcimsUserName;
+
             var revenueItems = _portalContext.ProjectBudget.Where(p => p.ProjectID == _project.ProjectId).GroupBy(x => x.FundingOrganization).Select(s => new
             {
                 Item = s.Key, 
@@ -257,7 +266,7 @@ namespace InternalPortal.Models.GCIMS
                 {
                     ProjectID = projectId,
                     RevenueLineItemID = i,
-                    CreatedBy = "GCIMSUnit",
+                    CreatedBy = gcimsUserName,
                     CreatedDate = DateTime.Now, 
                     RevenueCategoryID = ri.Item == "Justice Canada" ? 10 : 34, 
                     RevenueLineItemDescription = ri.Item
@@ -269,7 +278,7 @@ namespace InternalPortal.Models.GCIMS
                     RevenueLineItemID = i,
                     CashRevenueAmount = (decimal)ri.Amount,
                     RevenueAmount = (decimal)ri.Amount,
-                    CreatedBy = "GCIMSUnit",
+                    CreatedBy = gcimsUserName,
                     CreatedDate = DateTime.Now
                 };
                 _context.Add(tblProjectRevenueLineItem);

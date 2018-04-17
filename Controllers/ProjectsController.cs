@@ -350,7 +350,7 @@ namespace InternalPortal.Controllers
             if (project.SubmitGcims)
             {
                 GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
-                var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
+                var newGCIMSProject = gcimsHelper.CreateGCIMSproject(project.GcimsClientId);
                 project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
                 project.GcimsClientId = newGCIMSProject.Result.ClientID;
                 project.GcimsContactId = newGCIMSProject.Result.tblApplication.ContactID;
@@ -587,8 +587,10 @@ namespace InternalPortal.Controllers
             return Ok(project);
         }
 
+     
+
         // POST: api/Projects/PostGCIMS 
-      
+
         [HttpPost("PostGCIMS")]
         [ProducesResponseType(typeof(tblProjects), 200)]
         public async Task<IActionResult> PostGCIMS([FromBody] Project proj)
@@ -599,16 +601,17 @@ namespace InternalPortal.Controllers
             }
 
            var project = await _context.Project.SingleOrDefaultAsync(p => p.ProjectId == proj.ProjectId);
-          //  var project = await _context.Project.FindAsync(proj.ProjectId);
+            var gcimsClientId = proj.GcimsClientId;
+            //  var project = await _context.Project.FindAsync(proj.ProjectId);
             var fo = await _context.FundingOpportunity.FindAsync(project.FundingOpportunityID);
             project.GCIMSCommitmentItemID = fo.GcimsCommitmentItemId;
             project.Lang = "EN";
             project.FiscalYear = FiscalYear.GetFiscalYearByDateTime(DateTime.Now);
-            project.GcimsClientId = proj.GcimsClientId;
+            project.GcimsClientId = gcimsClientId;
             
 
             GCIMSHelper gcimsHelper = new GCIMSHelper(_gcimsContext, _context, project);
-            var newGCIMSProject = gcimsHelper.CreateGCIMSproject();
+            var newGCIMSProject = gcimsHelper.CreateGCIMSproject(gcimsClientId);
 
             project.GcimsProjectID = newGCIMSProject.Result.ProjectID;
 
