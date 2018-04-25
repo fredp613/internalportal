@@ -226,7 +226,7 @@ namespace InternalPortal.Controllers
            
             await _context.SaveChangesAsync();
 
-            if (internalUser.DefaultFundingOpportunity != Guid.Empty)
+            if (internalUser.DefaultFundingOpportunity != Guid.Empty && internalUser.IsWorkloadManager)
             {
                 var foiu = new FundingOpportunityInternalUser
                 {

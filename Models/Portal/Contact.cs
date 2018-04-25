@@ -30,7 +30,7 @@ namespace InternalPortal.Models
         public string SalutationID { get; set; }
         public string PreferredLanguageID { get; set; }
         [JsonConverter(typeof(OnlyDateConverter))]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime MemorableDate { get; set; }
         public string ShareSecretQuestion { get; set; }
         public string SharedSecretAnswer { get; set; }
         public bool IsPrimary { get; set; }

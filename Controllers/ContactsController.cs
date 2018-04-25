@@ -95,7 +95,7 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.DateOfBirth == (DateTime)contact1.DateOfBirth)
+            if (contact.SharedSecretAnswer == contact1.SharedSecretAnswer && contact.MemorableDate == (DateTime)contact1.MemorableDate)
             {
                 var user = await _context.User.SingleOrDefaultAsync(u => u.UserId == contact1.UpdatedByUserId);
                 user.ContactId = contact.ContactId;
@@ -106,6 +106,7 @@ namespace InternalPortal.Controllers
             }
             return NotFound();
         }
+        //later, destroy this route
         [HttpGet("dob/{id}/{dob}")]
         [ProducesResponseType(typeof(Contact), 200)]
         public async Task<IActionResult> ConfirmDob([FromRoute] Guid id, [FromRoute] DateTime dob)
@@ -121,13 +122,34 @@ namespace InternalPortal.Controllers
                 return NotFound();
             }
 
-            if (contact.DateOfBirth == dob)
+            if (contact.MemorableDate == dob)
             {
                 return Ok(contact);
             }
             return NotFound();
         }
 
+        [HttpGet("memorabledate/{id}/{memorabledate}")]
+        [ProducesResponseType(typeof(Contact), 200)]
+        public async Task<IActionResult> ConfirmMemorableDate([FromRoute] Guid id, [FromRoute] DateTime memorableDate)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var contact = await _context.Contact.SingleOrDefaultAsync(c => c.ContactId == id);
+
+            if (contact == null)
+            {
+                return NotFound();
+            }
+
+            if (contact.MemorableDate == memorableDate)
+            {
+                return Ok(contact);
+            }
+            return NotFound();
+        }
 
 
         // GET: api/Contacts/5
