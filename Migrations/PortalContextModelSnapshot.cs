@@ -122,6 +122,8 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("ContactId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AboutMe");
+
                     b.Property<int>("Attempts");
 
                     b.Property<string>("BlockJustification");

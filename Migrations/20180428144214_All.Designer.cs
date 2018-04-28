@@ -9,8 +9,8 @@ using InternalPortal.Models.Portal.Program;
 namespace InternalPortal.Migrations
 {
     [DbContext(typeof(PortalContext))]
-    [Migration("20180118174648_gcimsusername")]
-    partial class gcimsusername
+    [Migration("20180428144214_All")]
+    partial class All
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -123,6 +123,8 @@ namespace InternalPortal.Migrations
                     b.Property<Guid>("ContactId")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("AboutMe");
+
                     b.Property<int>("Attempts");
 
                     b.Property<string>("BlockJustification");
@@ -130,8 +132,6 @@ namespace InternalPortal.Migrations
                     b.Property<Guid?>("CreatedByUserId");
 
                     b.Property<DateTime?>("CreatedOn");
-
-                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("Email");
 
@@ -144,6 +144,8 @@ namespace InternalPortal.Migrations
                     b.Property<bool>("IsPrimary");
 
                     b.Property<string>("LastName");
+
+                    b.Property<DateTime>("MemorableDate");
 
                     b.Property<Guid?>("PaymentAccountAddressId");
 
